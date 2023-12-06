@@ -20,6 +20,29 @@
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
+         
+     
+         </activity>
+
+          <activity
+  
+    android:name="net.openid.appauth.RedirectUriReceiverActivity"
+     
+    android:exported="true"
+   
+    >
+    <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+      
+              <data
+                    android:host="com.taxleaf"
+                    android:path="/VzSiQcXRmi2kyjzcA+mYLEtbGVs="
+                   android:scheme="msauth"/>
+    </intent-filter>
+
       </activity>
+      
     </application>
 </manifest>

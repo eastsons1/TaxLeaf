@@ -6,7 +6,7 @@ import {
   ScrollView,
   Platform,
 } from 'react-native';
-import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
 import {
   widthPercentageToDP as wp,
@@ -14,11 +14,11 @@ import {
 } from 'react-native-responsive-screen';
 import HomeScreen from '../screens/Home';
 import ClientInfo from '../screens/ClientInfo';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {createStackNavigator} from '@react-navigation/stack';
-import {NavigationContainer} from '@react-navigation/native';
-import {createDrawerNavigator} from '@react-navigation/drawer';
-import {enableScreens} from 'react-native-screens';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { enableScreens } from 'react-native-screens';
 import Splash from '../screens/Splash';
 import Drawer from './Drawer';
 import Request from '../screens/Request';
@@ -29,10 +29,10 @@ import CreateNewAction from '../screens/CreateNewAction';
 import FileCabinet from '../screens/FileCabinet';
 import Manager from '../screens/Manager';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import CustomHeader from '../Component/CustomHeader';
-import {Color} from '../Style';
-import {Provider} from 'react-redux';
+import { Color } from '../Style';
+import { Provider } from 'react-redux';
 import store from '../Redux/Store/index';
 import Login from '../screens/Login';
 import ContactUs from '../screens/ContactUs';
@@ -97,7 +97,7 @@ enableScreens();
 
 const Drawer3 = createDrawerNavigator();
 
-function MyDrawer3({navigation, route}) {
+function MyDrawer3({ navigation, route }) {
   return (
     <Drawer3.Navigator
       defaultStatus="closed"
@@ -117,7 +117,7 @@ function MyDrawer3({navigation, route}) {
         navigation={navigation}
         name="Payments"
         component={PaymentScreenStack}
-        
+
       />
       <Drawer3.Screen
         navigation={navigation}
@@ -141,7 +141,7 @@ function MyDrawer3({navigation, route}) {
   );
 }
 
-function MyTabBar({state, descriptors, navigation}) {
+function MyTabBar({ state, descriptors, navigation }) {
   return (
     <View
       style={{
@@ -153,19 +153,19 @@ function MyTabBar({state, descriptors, navigation}) {
         borderTopWidth: 1,
         width: wp(112),
         //   justifyContent: 'space-between',
-        backgroundColor:Color.darkGreen,    
+        backgroundColor: Color.darkGreen,
         height: 60,
-        color:'#fff',
-        paddingHorizontal:22
+        color: '#fff',
+        paddingHorizontal: 22
       }}>
       {state.routes.map((route, index) => {
-        const {options} = descriptors[route.key];
+        const { options } = descriptors[route.key];
         const label =
           options.tabBarLabel !== undefined
             ? options.tabBarLabel
             : options.title !== undefined
-            ? options.title
-            : route.name;
+              ? options.title
+              : route.name;
 
         const isFocused = state.index === index;
         let showlabel = '';
@@ -284,7 +284,7 @@ function MyTabBar({state, descriptors, navigation}) {
             testID={options.tabBarTestID}
             onPress={onPress}
             onLongPress={onLongPress}
-            style={{flex: 1, justifyContent: 'center'}}
+            style={{ flex: 1, justifyContent: 'center' }}
             key={route.key}>
             {/* <Icon size={24} name={iconNm} color={isFocused ? '#FFFFFF' : '#d3d3d3'} />  */}
             <View
@@ -295,7 +295,7 @@ function MyTabBar({state, descriptors, navigation}) {
                 alignItems: 'center',
                 alignSelf: 'center',
               }}>
-              <Image source={iconNm} style={{width: 25, height: 25}} />
+              <Image source={iconNm} style={{ width: 25, height: 25 }} />
 
               <Text
                 style={{
@@ -382,8 +382,8 @@ function SignInScreen() {
           headerShown: false,
         }}
       />
-      
-       
+
+
     </SignStack.Navigator>
   );
 }
@@ -434,8 +434,8 @@ function ClientScreenStack() {
           headerShown: false,
         }}
       />
-      
-    
+
+
     </ClientStack.Navigator>
   );
 }
@@ -475,7 +475,7 @@ function RequestScreenStack() {
           headerShown: false,
         }}
       />
-     
+
     </RequestStack.Navigator>
   );
 }
@@ -486,7 +486,7 @@ function PaymentScreenStack() {
     <PaymentStack.Navigator
     //  initialRouteName='AuthCheck'
     >
-       <Stack.Screen
+      <Stack.Screen
         name="Payments"
         component={Payments}
         options={{
@@ -507,8 +507,8 @@ function PaymentScreenStack() {
           header: () => <CustomHeader />, // Include the custom header
         }}
       />
-      
-     
+
+
     </PaymentStack.Navigator>
   );
 }

@@ -77,6 +77,9 @@ android {
     namespace "com.taxleaf"
     defaultConfig {
         applicationId "com.taxleaf"
+        manifestPlaceholders = [
+      appAuthRedirectScheme: 'com.taxleaf'
+    ]
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -107,6 +110,10 @@ android {
 dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
+     //implementation 'com.microsoft.identity.client:msal:4.0.0'
+  //implementation 'ccom.microsoft.identity.client.PublicClientApplication'
+//implementation 'com.microsoft.identity.client:msal:2.2.3'
+
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}")
     debugImplementation("com.facebook.flipper:flipper-network-plugin:${FLIPPER_VERSION}") {
@@ -122,6 +129,7 @@ dependencies {
 }
 project.ext.react = [
    bundleInRelease: false
+   // enableHermes: false,
 ]
 
 
