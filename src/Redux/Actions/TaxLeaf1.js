@@ -182,7 +182,7 @@ export const ManagerInfo = (clientId, clientType, navigation) => dispatch => {
       },
     };
     const response = await logistical.post('/Staff/GetManagerInfo', data);
-    console.log(response.managerInfo, 'managerInfomanagerInfomanagerInfo');
+    //console.log(response.managerInfo, 'managerInfomanagerInfomanagerInfo');
 
     if (response) {
       // AsyncStorage.setItem('login', JSON.stringify(response.token));

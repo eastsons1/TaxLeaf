@@ -8,6 +8,9 @@ import {
   Button,
   Alert
 } from 'react-native';
+import { jwtDecode } from "jwt-decode";
+import { decode } from 'base-64';
+
 import { LoginUser } from '../Redux/Actions/TaxLeaf';
 import AsyncStorage from '@react-native-community/async-storage';
 // import AzureAuth from 'react-native-azure-auth';
@@ -21,7 +24,7 @@ import {
 } from 'react-native-responsive-screen';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { Loader } from '../Component/Loader';
-import { authorize } from 'react-native-app-auth';
+import { authorize, revoke } from 'react-native-app-auth';
 
 
 // import { authorize, refresh, prefetchConfiguration } from 'react-native-app-auth';
@@ -75,7 +78,7 @@ const Login = () => {
     //appId: '766090b1-948f-4eb3-ad69-9fc723b4e7d8',
 
     tenantId: "9728fcf8-f04b-4271-b352-022a33fbfcc4",
-    scopes: ['openid', 'profile', 'email'], // Include 'email' scope to request user's email
+    scopes: ['openid', 'profile', 'email', 'offline_access', 'User.Read.All', 'User.ReadWrite'], // Include 'email' scope to request user's email
     responseType: 'id_token token',
   };
 
@@ -87,11 +90,11 @@ const Login = () => {
     // redirectUrl: Platform.OS === 'ios' ? 'urn:ietf:wg:oauth:2.0:oob' : 'msauth://com.taxleaf/VzSiQcXRmi2kyjzcA%2BmYLEtbGVs%3D',
     redirectUrl: 'msauth://com.taxleaf/VzSiQcXRmi2kyjzcA%2BmYLEtbGVs%3D',
     //redirectUrl: 'https://stagingclientportal.taxleaf.com/MicrosoftConnect',
-    scopes: AuthConfig.appScopes,
-    response_mode: 'query',
-    responseType: 'id_token token',
+    scopes: AuthConfig.scopes,
+    //response_mode: 'query',
+    //responseType: 'id_token token',
     additionalParameters: {
-      prompt: 'select_account',
+      prompt: 'login',
       // login_hint: 'user@example.com',
       //state: 'random-state-value',
       //nonce: 'random-nonce-value',
@@ -99,9 +102,16 @@ const Login = () => {
     },
     dangerouslyAllowInsecureHttpRequests: true,
     // serviceConfiguration: {
-    //   authorizationEndpoint: 'https://login.microsoftonline.com/' + AuthConfig.tenantId + '/oauth2/v2.0/authorize',
-    //   tokenEndpoint: 'https://login.microsoftonline.com/' + AuthConfig.tenantId + '/oauth2/v2.0/token',
-    //   responseType: 'id_token token',
+    //   authorizationEndpoint: 'https://your-oidc-provider.com/oauth2/authorize',
+    //   tokenEndpoint: 'https://your-oidc-provider.com/oauth2/token',
+    //   revocationEndpoint: 'https://your-oidc-provider.com/oauth2/revoke',
+    // },
+    serviceConfiguration: {
+      authorizationEndpoint: 'https://login.microsoftonline.com/' + AuthConfig.tenantId + '/oauth2/v2.0/authorize',
+      revocationEndpoint: 'https://login.microsoftonline.com/' + AuthConfig.tenantId + '/revoke',
+      tokenEndpoint: 'https://login.microsoftonline.com/' + AuthConfig.tenantId + '/oauth2/v2.0/token',
+      responseType: 'id_token token',
+    }
 
   }
 
@@ -138,47 +148,86 @@ const Login = () => {
 
 
   const loginWithOffice365 = async () => {
-
-    if (email) {
-
-
-
-      console.log("Before authorize");
-      try {
-        console.log('LLLLLLLLLLJJJJJJJJJJJJJ')
-        let tempResult = await authorize(config);
-        const userEmail = tempResult.additionalParameters?.id_token?.email;
-        console.log('User email:', userEmail);
-        console.log("After authorize", tempResult);
-
-        if (tempResult) {
-          setLoader(true)
-          dispatch(LoginUser(email, navigation));
-          // dispatch(LoginUser(email, navigation));
-          // AsyncStorage.setItem('login', JSON.stringify(tempResult.accessToken));
-          // navigation.navigate('Auth');
-          setTimeout(() => {
-            setLoader(false)
-          }, 2000);
-
-        }
-        else {
-          console.log('LLLLL')
-        }
+    console.log(config, 'OOOOOOOO')
+    //if (email) {
 
 
-        setResult(tempResult);
-        // ...
-      } catch (error) {
-        console.error('Authentication failed:', error);
+
+    console.log("Before authorize");
+    try {
+      console.log('LLLLLLLLLLJJJJJJJJJJJJJ')
+      let tempResult = await authorize(config);
+      const idToken = tempResult.idToken;
+
+
+
+      const decodedToken = JSON.parse(decode(idToken.split('.')[1]));
+
+      //const decodedToken = jwtDecode(name);
+
+      // Extract user's email
+      const userEmail = decodedToken.email;
+
+      console.log('User Email:', userEmail, decodedToken);
+
+      //  const userEmail = tempResult.additionalParameters;
+      //  console.log('User email:', userEmail);
+      console.log("After authorize", tempResult);
+
+      if (tempResult) {
+        setLoader(true)
+        dispatch(LoginUser(userEmail, navigation));
+        // dispatch(LoginUser(email, navigation));
+        // AsyncStorage.setItem('login', JSON.stringify(tempResult.accessToken));
+        // navigation.navigate('Auth');
+        setTimeout(() => {
+          setLoader(false)
+        }, 2000);
+
+
+      }
+      else {
+        console.log('LLLLL')
       }
 
-    }
-    else {
-      Alert.alert('Please Enter Email Address')
+
+      setResult(tempResult);
+      // ...
+    } catch (error) {
+      console.error('Authentication failed:', error);
     }
 
+    // }
+    // else {
+    //   Alert.alert('Please Enter Email Address')
+    // }
+
   }
+
+
+  const signOut = async () => {
+
+    console.log(name, 'IIIIIIIIIIIII')
+    const decodedToken = JSON.parse(decode(name.split('.')[1]));
+
+    //const decodedToken = jwtDecode(name);
+
+    // Extract user's email
+    const userEmail = decodedToken.email;
+
+    console.log('User Email:', userEmail);
+    // try {
+    //   // Revoke the token(s) and perform any additional sign-out actions
+    //   let logoutToken = await revoke(config, { tokenToRevoke: 'accessToken' });
+    //   console.log(logoutToken, 'JJJJJJJJJJJJJJJJJJJJ')
+    //   // Navigate to your app's sign-in screen or perform any other action
+    //   // For example, you can use React Navigation to navigate to the login screen
+    //   //  navigation.navigate('Login');
+    // } catch (error) {
+    //   console.error('Sign-out error:', error);
+    // }
+  };
+
   //   let scopes = ['User.Read', 'User.ReadWrite']
   //   const azureAuth = new AzureAuth({
   //     //clientId: '17f808bd-072c-4b60-8ca9-e86199b17f79',
@@ -236,49 +285,49 @@ const Login = () => {
   //   //     console.error('Sign Out Error', error);
   //   //   }
   //   // };
-  //   const authenticate = async () => {
-  //     // try {
-  //     // Try to get cached token or refresh an expired ones
-  //     //   let tokens = await azureAuth.auth.acquireTokenSilent({ scope: scopes.join(' '), userId: this.state.userId })
-  //     //   if (!tokens) {
-  //     //     // No cached tokens or the requested scope defines new not yet consented permissions
-  //     //     // Open a window for user interaction
-  //     //     tokens = await azureAuth.webAuth.authorize({ scope: 'Mail.Read' })
-  //     //   }
-  //     //   let mails = await azureAuth.auth.msGraphRequest({ token: tokens.accessToken, path: '/me/mailFolders/Inbox/messages' })
-  //     // } catch (error) {
-  //     //   console.log(error)
-  //     // }
+  const authenticate = async () => {
+    // try {
+    // Try to get cached token or refresh an expired ones
+    //   let tokens = await azureAuth.auth.acquireTokenSilent({ scope: scopes.join(' '), userId: this.state.userId })
+    //   if (!tokens) {
+    //     // No cached tokens or the requested scope defines new not yet consented permissions
+    //     // Open a window for user interaction
+    //     tokens = await azureAuth.webAuth.authorize({ scope: 'Mail.Read' })
+    //   }
+    //   let mails = await azureAuth.auth.msGraphRequest({ token: tokens.accessToken, path: '/me/mailFolders/Inbox/messages' })
+    // } catch (error) {
+    //   console.log(error)
+    // }
 
-  //     // try {
-  //     //   // Try to get cached token or refresh an expired ones
-  //     //   let tokens = await azureAuth.auth.acquireTokenSilent({ scope: 'User.Read', userId:  })
-  //     //   if (!tokens) {
-  //     //     // No cached tokens or the requested scope defines new not yet consented permissions
-  //     //     // Open a window for user interaction
-  //     //     tokens = await azureAuth.webAuth.authorize({ scope: 'User.Read' })
-  //     //   }
-  //     //   let mails = await azureAuth.auth.msGraphRequest({ token: tokens.accessToken, path: '/me/mailFolders/Inbox/messages' })
-  //     // } catch (error) {
-  //     //   console.log(error)
-  //     // }
+    //     // try {
+    //     //   // Try to get cached token or refresh an expired ones
+    //     //   let tokens = await azureAuth.auth.acquireTokenSilent({ scope: 'User.Read', userId:  })
+    //     //   if (!tokens) {
+    //     //     // No cached tokens or the requested scope defines new not yet consented permissions
+    //     //     // Open a window for user interaction
+    //     //     tokens = await azureAuth.webAuth.authorize({ scope: 'User.Read' })
+    //     //   }
+    //     //   let mails = await azureAuth.auth.msGraphRequest({ token: tokens.accessToken, path: '/me/mailFolders/Inbox/messages' })
+    //     // } catch (error) {
+    //     //   console.log(error)
+    //     // }
 
-  //     // try {
-  //     //   console.log("OUUUUUUUUUUUUUUU")
-  //     //   let tokens = await azureAuth.webAuth.authorize({ scope: scopes.join(' ') })
-  //     //   console.log(token, 'PPPPPPPP')
-  //     //   setResult(tokens.accessToken)
-  //     //   console.log(result, 'LLLLLLLLLL')
-  //     //   // this.setState({ accessToken: tokens.accessToken });
-  //     //   let info = await azureAuth.auth.msGraphRequest({ token: tokens.accessToken, path: '/me' })
-  //     //   setName(info.displayName)
-  //     //   setId(tokens.userId)
-  //     //   console.log(id, name, 'KKKKKKKKKKK')
+    // try {
+    //   console.log("OUUUUUUUUUUUUUUU")
+    //   let tokens = await azureAuth.webAuth.authorize({ scope: scopes.join(' ') })
+    //   console.log(token, 'PPPPPPPP')
+    //   setResult(tokens.accessToken)
+    //   console.log(result, 'LLLLLLLLLL')
+    //   // this.setState({ accessToken: tokens.accessToken });
+    //   let info = await azureAuth.auth.msGraphRequest({ token: tokens.accessToken, path: '/me' })
+    //   setName(info.displayName)
+    //   setId(tokens.userId)
+    //   console.log(id, name, 'KKKKKKKKKKK')
 
-  //     //   // this.setState({ user: info.displayName, userId: tokens.userId })
-  //     // } catch (error) {
-  //     //   console.log(error, 'OOOOOO')
-  //     // }
+    //     //   // this.setState({ user: info.displayName, userId: tokens.userId })
+    //     // } catch (error) {
+    //     //   console.log(error, 'OOOOOO')
+  }
 
 
 
@@ -391,7 +440,8 @@ const Login = () => {
               />
 
               <TouchableOpacity
-                onPress={() => onLogin()}
+                // onPress={() => onLogin()}loginWithOffice365
+                onPress={() => loginWithOffice365()}
                 // onPress={() => authenticate()}
                 style={[styles.button, styles.buttonClose]}
               // onPress={() => setModalVisible(!modalVisible)}
@@ -410,11 +460,18 @@ const Login = () => {
             }}>
 
 
-              <TouchableOpacity
+              {/* <TouchableOpacity
                 style={[styles.buttonContainer, styles.loginButton]}
                 onPress={() => loginWithOffice365()}>
                 <Text style={styles.loginText}>Login with Office365</Text>
-              </TouchableOpacity>
+              </TouchableOpacity> */}
+
+
+              {/* <TouchableOpacity
+                style={[styles.buttonContainer, styles.loginButton]}
+                onPress={() => signOut()}>
+                <Text style={styles.loginText}>Logout</Text>
+              </TouchableOpacity> */}
             </View>
           </View>
         </View>

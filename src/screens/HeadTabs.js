@@ -44,11 +44,11 @@ const HeadTabs = () => {
 
     const showwhatfunc1 = data => {
         setshowwhat1(data);
-        console.log(data);
+        // console.log(data);
     };
     const showwhatfunc2 = data => {
         setshowwhat2(data);
-        console.log(data);
+        // console.log(data);
     };
     useEffect(() => {
         if (showwhat1) {
@@ -66,7 +66,7 @@ const HeadTabs = () => {
     const [loader, setLoader] = useState(false);
     useEffect(() => {
         setLoader(true);
-        dispatch(clientInfo(LOGIN_DATA.staffview.user, navigation));
+        dispatch(clientInfo(LOGIN_DATA.staffview?.user, navigation));
         dispatch(ManagerInfo(jsonData?.clientId, jsonData?.clientType, navigation));
         dispatch(
             dashboardlist(

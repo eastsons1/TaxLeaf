@@ -1,10 +1,10 @@
-import {GET_PAYMENT_LIST,GET_ORDER_DETAILS} from './types';
+import { GET_PAYMENT_LIST, GET_ORDER_DETAILS } from './types';
 
 import AsyncStorage from '@react-native-community/async-storage';
 import axios, * as others from 'axios';
-import {Alert} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
-import {logistical} from '../../utils';
+import { Alert } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { logistical } from '../../utils';
 
 export const GetPaymentList =
   (clientId, clientType, navigation) => dispatch => {
@@ -13,11 +13,11 @@ export const GetPaymentList =
     //   payload: true,
     // });
 
-    console.log(
-      clientId,
-      clientType,
-      'clientId, clientTypeclientId, clientType',
-    );
+    // console.log(
+    //   clientId,
+    //   clientType,
+    //   'clientId, clientTypeclientId, clientType',
+    // );
 
     return new Promise(async (resolve, reject) => {
       let data = {
@@ -29,11 +29,11 @@ export const GetPaymentList =
         //   "clientId": 684,
         //   "clientType": "company"
         // }
-      
+
       };
-      console.log(data,'payloadPaymentInfo')
+      //console.log(data, 'payloadPaymentInfo')
       const response = await logistical.post('/Staff/PaymentInfo', data);
-       console.log(response, 'PaymentListPaymentListPaymentListPaymentList');
+      //console.log(response, 'PaymentListPaymentListPaymentListPaymentList');
 
       if (response.failureStatus == false) {
         // console.log(
@@ -69,23 +69,23 @@ export const GetPaymentList =
     });
   };
 
-  export const GetDetailsbyOrderId =
-  (clientId, clientType,orderId, navigation) => dispatch => {
+export const GetDetailsbyOrderId =
+  (clientId, clientType, orderId, navigation) => dispatch => {
     // dispatch({
     //   type: 'LOADING',
     //   payload: true,
     // });
 
-    console.log(
-      clientId,
-      clientType,
-      orderId,
-      'clientId,clientType,orderId',
-    );
+    // console.log(
+    //   clientId,
+    //   clientType,
+    //   orderId,
+    //   'clientId,clientType,orderId',
+    // );
 
     return new Promise(async (resolve, reject) => {
       let data = {
-      
+
         collectionView: {
           // orderId: orderId,
           // clientType: clientType,
@@ -95,9 +95,9 @@ export const GetPaymentList =
           "client": 769
         }
       };
-      console.log(data,'payloadOrderInfo')
+      //console.log(data, 'payloadOrderInfo')
       const response = await logistical.post('/Staff/IndividualOrderInfo', data);
-       console.log(response, 'orderInfoResponse');
+      //console.log(response, 'orderInfoResponse');
 
       if (response.failureStatus == false) {
         // console.log(

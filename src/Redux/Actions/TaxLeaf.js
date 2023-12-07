@@ -34,12 +34,14 @@ export const LoginUser = (email, navigation) => dispatch => {
 
     const response = await logistical.postlogin('/Staff/LoginStaff', data);
     console.log(response.token, 'responseresponseresponseresponse');
+    // console.log(response, 'responseresponseresponseresponse2222222222222222');
 
     if (response.statusCode == 200) {
       AsyncStorage.setItem('login', JSON.stringify(response.token));
-      console.log(response.token, 'token');
+      AsyncStorage.setItem('response', JSON.stringify(response));
+      // console.log(response.token, 'token');
       console.log(
-        response.staffview,
+        response,
         'staffviewinfostaffviewinfostaffviewinfostaffviewinfo',
       );
 
@@ -71,6 +73,9 @@ export const LoginUser = (email, navigation) => dispatch => {
 };
 
 export const clientInfo = (email, navigation) => dispatch => {
+  //console.log(email, 'clientInfoclientInfoclientInfoclientInfoclientInfoLLLLLLLLLLLLL')
+
+
   // dispatch({
   //   type: 'LOADING',
   //   payload: true,
@@ -83,13 +88,13 @@ export const clientInfo = (email, navigation) => dispatch => {
       },
     };
     const response = await logistical.post('/Staff/GetStaffById', data);
-    console.log(response, 'respppClientInforespppClientInfo');
+    //console.log(response, 'respppClientInforespppClientInfo');
 
     if (response.failureStatus == false) {
-      console.log(
-        response.guestInfo,
-        'guestInfoguestInfoguestInfoguestInfoguestInfoguestInfoguestInfoguestInfoguestInfo',
-      );
+      // console.log(
+      //   response,
+      //   'guestInfoguestInfoguestInfoguestInfoguestInfoguestInfoguestInfoguestInfoguestInfo',
+      // );
       // AsyncStorage.setItem('login', JSON.stringify(response.token));
 
       dispatch({
@@ -188,6 +193,7 @@ export const ManagerInfo = (clientId, clientType, navigation) => dispatch => {
 
     if (response) {
       // AsyncStorage.setItem('login', JSON.stringify(response.token));
+      console.log(response, 'managerInfomanagerInfomanagerInfo');
 
       dispatch({
         type: MANAGER_INFO,

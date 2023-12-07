@@ -1,10 +1,10 @@
-import {DASHBOARD_LIST, DASHBOARD_MESSAGE_LIST} from './types';
+import { DASHBOARD_LIST, DASHBOARD_MESSAGE_LIST } from './types';
 
 import AsyncStorage from '@react-native-community/async-storage';
 import axios, * as others from 'axios';
-import {Alert} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
-import {logistical} from '../../utils';
+import { Alert } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { logistical } from '../../utils';
 
 export const dashboardlist =
   (clientId, clientType, OfficeId, navigation) => dispatch => {
@@ -13,12 +13,12 @@ export const dashboardlist =
     //   payload: true,
     // });
 
-    console.log(
-      clientId,
-      clientType,
-      OfficeId,
-      'clientId, clientTypeclientId, clientType',
-    );
+    // console.log(
+    //   clientId,
+    //   clientType,
+    //   OfficeId,
+    //   'clientId, clientTypeclientId, clientType',
+    // );
 
     return new Promise(async (resolve, reject) => {
       let data = {
@@ -30,13 +30,13 @@ export const dashboardlist =
         StartDate: "2023-04-27T09:22:46.571Z",
         EndDate: "2023-11-27T09:22:46.571Z",
       };
-      console.log(data, 'payloadDashboard');
+      // console.log(data, 'payloadDashboard');
 
       const response = await logistical.post('/Staff/DashboardInfo', data);
       //  console.log(response, 'PaymentListPaymentListPaymentListPaymentList');
 
       if (response.failureStatus == false) {
-        console.log(response, 'dashboarddashboarddashboard');
+        //console.log(response, 'dashboarddashboarddashboard');
         // AsyncStorage.setItem('login', JSON.stringify(response.token));
 
         dispatch({

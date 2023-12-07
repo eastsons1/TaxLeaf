@@ -1,5 +1,8 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
+import { authorize, revoke } from 'react-native-app-auth';
+import { LOGIN_DATA } from "../Redux/Actions/types";
+import AsyncStorage from "@react-native-community/async-storage";
 import {
   SafeAreaView,
   StyleSheet,
@@ -10,27 +13,99 @@ import {
   Button,
   TouchableOpacity,
 } from 'react-native';
+import { Loader } from '../Component/Loader';
 import AppIntroSlider from 'react-native-app-intro-slider';
-import {TextInput} from 'react-native-gesture-handler';
+import { TextInput } from 'react-native-gesture-handler';
 // import { useIsFocused, useNavigation } from '@react-navigation/native';
+import { useDispatch, useSelector } from "react-redux";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import {useDispatch, useSelector} from 'react-redux';
-import {useIsFocused, useNavigation} from '@react-navigation/native';
+
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Icon1 from 'react-native-vector-icons/FontAwesome';
 import Icon2 from 'react-native-vector-icons/MaterialIcons';
 
 const Drawer = () => {
+  const dispatch = useDispatch();
   const navigation = useNavigation();
-  const {MY_INFO} = useSelector(state => state.TaxLeafReducer);
+  const [loader, setLoader] = useState(false);
+  const { MY_INFO } = useSelector(state => state.TaxLeafReducer);
   const jsonData = MY_INFO.staffview;
   const jsonData1 = MY_INFO.officeInfo;
 
+
+  const AuthConfig = {
+
+
+    appId: "17f808bd-072c-4b60-8ca9-e86199b17f79",
+    //appId: '766090b1-948f-4eb3-ad69-9fc723b4e7d8',
+
+    tenantId: "9728fcf8-f04b-4271-b352-022a33fbfcc4",
+    scopes: ['openid', 'profile', 'email', 'user.read', 'user.write'], // Include 'email' scope to request user's email
+    responseType: 'id_token token',
+  };
+
+
+  const config = {
+    //warmAndPrefetchChrome: true,
+    issuer: 'https://login.microsoftonline.com/9728fcf8-f04b-4271-b352-022a33fbfcc4', // Replace with your Azure AD tenant ID
+
+    clientId: AuthConfig.appId,
+    // redirectUrl: Platform.OS === 'ios' ? 'urn:ietf:wg:oauth:2.0:oob' : 'msauth://com.taxleaf/VzSiQcXRmi2kyjzcA%2BmYLEtbGVs%3D',
+    redirectUrl: 'msauth://com.taxleaf/VzSiQcXRmi2kyjzcA%2BmYLEtbGVs%3D',
+    //redirectUrl: 'https://stagingclientportal.taxleaf.com/MicrosoftConnect',
+    scopes: AuthConfig.appScopes,
+    response_mode: 'query',
+    responseType: 'id_token token',
+    additionalParameters: {
+      prompt: 'login',
+
+    },
+    dangerouslyAllowInsecureHttpRequests: true,
+    serviceConfiguration: {
+      authorizationEndpoint: 'https://login.microsoftonline.com/' + AuthConfig.tenantId + '/oauth2/v2.0/authorize',
+      revocationEndpoint: 'https://login.microsoftonline.com/' + AuthConfig.tenantId + '/revoke',
+      tokenEndpoint: 'https://login.microsoftonline.com/' + AuthConfig.tenantId + '/oauth2/v2.0/token',
+      responseType: 'id_token token',
+    }
+
+
+  }
+
+
+
+  const signOut = async () => {
+    setLoader(true)
+    try {
+      // Revoke the token(s) and perform any additional sign-out actions
+      let logoutToken = await revoke(config, { tokenToRevoke: 'accessToken' });
+      console.log(logoutToken, 'JJJJJJJJJJJJJJJJJJJJ')
+      AsyncStorage.clear();
+      let obj = "";
+      dispatch({
+        type: LOGIN_DATA,
+        payload: obj,
+      });
+
+      // Navigate to your app's sign-in screen or perform any other action
+      // For example, you can use React Navigation to navigate to the login screen
+      navigation.navigate('home');
+    } catch (error) {
+      console.error('Sign-out error:', error);
+    }
+
+    setTimeout(() => {
+      setLoader(false)
+    }, 2000);
+  };
+
+
   return (
     <View style={styles.container}>
+      <Loader flag={loader} />
       <View style={styles.headImg}>
         <Image source={require('../Assets/img/logo.png')} style={styles.logo} />
       </View>
@@ -46,7 +121,7 @@ const Drawer = () => {
         <Text style={styles.headText}>{jsonData1?.officeId}</Text>
       </View> */}
 
-      <View style={{marginTop: 0}}>
+      <View style={{ marginTop: 0 }}>
         <View style={styles.part}></View>
         <TouchableOpacity
           style={styles.screenName}
@@ -154,6 +229,22 @@ const Drawer = () => {
           />
 
           <Text style={styles.screenNameText}>Contact</Text>
+        </TouchableOpacity>
+        <View style={styles.part}></View>
+      </View>
+      <View>
+        <View style={styles.part}></View>
+        <TouchableOpacity
+          style={styles.screenName}
+          onPress={() => signOut()}>
+          <Icon2
+            style={styles.icon}
+            name="request-quote"
+            size={20}
+            color="#fff"
+          />
+
+          <Text style={styles.screenNameText}>Logout</Text>
         </TouchableOpacity>
         <View style={styles.part}></View>
       </View>

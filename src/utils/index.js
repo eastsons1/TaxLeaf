@@ -1,9 +1,9 @@
 import logError from 'react-native/Libraries/Utilities/logError';
-import {Globals} from '../Config/index';
+import { Globals } from '../Config/index';
 import AsyncStorage from '@react-native-community/async-storage';
 
 const getApiKey = async () => {
-  console.log(AsyncStorage.getItem('login'), 'tokentokentokentokentokentoken');
+  // console.log(AsyncStorage.getItem('login'), 'tokentokentokentokentokentoken');
   return await AsyncStorage.getItem('login');
 };
 
@@ -25,12 +25,12 @@ class Logistical {
     let token = JSON.parse(login);
     authtoken = 'Bearer ' + token;
     let uri = `${Globals.baseUrl}${url}`;
-    console.log(
-      '>>>>>>>>>>>login%%%%%%%%%%%%%%%%%%%%%%%%%5',
-      uri,
-      data,
-      authtoken,
-    );
+    // console.log(
+    //   '>>>>>>>>>>>login%%%%%%%%%%%%%%%%%%%%%%%%%5',
+    //   uri,
+    //   data,
+    //   authtoken,
+    // );
 
     const headers = {
       Accept: 'application/json',
@@ -41,7 +41,7 @@ class Logistical {
     };
 
     return new Promise((resolve, reject) => {
-      fetch(uri, {method, headers})
+      fetch(uri, { method, headers })
         .then(response => response.json())
         .then(responseJson => {
           // console.log('??????????????? ===>',responseJson);
@@ -63,12 +63,12 @@ class Logistical {
     // console.log(token, 'UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU');
 
     authtoken = 'bearer ' + token;
-    console.log(authtoken, 'LLLLLLLLLLLLLLLLLLLLLLLLLLLLLL');
+    //console.log(authtoken, 'LLLLLLLLLLLLLLLLLLLLLLLLLLLLLL');
     let uri = `${Globals.baseUrl}${url}`;
-    console.log('>>>>>>>>>>>', uri, data);
+    //console.log('LLLLLLLLLLLLLLLLLLLLLLLLLLLLLL>>>>>>>>>>>', uri, data);
 
     const headers = {
-      Accept: 'application/json',
+      // Accept: 'application/json',
       // 'Content-Length': '285',
       // 'Host': '192.168.1.214',
       'Content-Type': 'application/json',
@@ -77,10 +77,10 @@ class Logistical {
     };
 
     return new Promise((resolve, reject) => {
-      fetch(uri, {method, headers, body: JSON.stringify(data)})
+      fetch(uri, { method, headers, body: JSON.stringify(data) })
         .then(response => response.json())
         .then(responseJson => {
-          console.log('???????????????', responseJson);
+          //  console.log('Prince???????????????', responseJson);
           resolve(responseJson);
         })
         .catch(error => {
@@ -98,7 +98,7 @@ class Logistical {
     // authtoken = 'Bearer ' + token;
 
     let uri = `${Globals.baseUrl}${url}`;
-    console.log('>>>>>>>>>>>', uri, data);
+    // console.log('>>>>>>>>>>>', uri, data);
 
     const headers = {
       Accept: 'application/json',
@@ -110,10 +110,10 @@ class Logistical {
     };
 
     return new Promise((resolve, reject) => {
-      fetch(uri, {method, headers, body: JSON.stringify(data)})
+      fetch(uri, { method, headers, body: JSON.stringify(data) })
         .then(response => response.json())
         .then(responseJson => {
-          console.log('???????????????', responseJson);
+          //  console.log('???????????????', responseJson);
           resolve(responseJson);
         })
         .catch(error => {

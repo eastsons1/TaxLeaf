@@ -21,16 +21,16 @@ const initialstate = {
   REQUEST_INFO: {},
   REQUEST_INFO_BY_ID: {},
   FOLDER_LIST: {},
-  DOCUMENT_INFO_FOLDER:{},
-  FILE_UPLOAD_TOKEN:{},
-  FILE_INFO:{}
+  DOCUMENT_INFO_FOLDER: {},
+  FILE_UPLOAD_TOKEN: {},
+  FILE_INFO: {}
 };
 
 const TaxLeafReducer = (state = initialstate, action) => {
-  console.log(
-    'action.payloadaction.payloadaction.payloadaction.payload',
-    action.payload,
-  );
+  // console.log(
+  //   'action.payloadaction.payloadaction.payloadaction.payload',
+  //   action.payload,
+  // );
   switch (action.type) {
     case LOGIN_DATA:
       return { ...state, LOGIN_DATA: action.payload };
@@ -54,15 +54,15 @@ const TaxLeafReducer = (state = initialstate, action) => {
         action.payload,
       );
       return { ...state, FOLDER_LIST: action.payload };
-      case DOCUMENT_INFO_FOLDER:
-        
-        return { ...state, DOCUMENT_INFO_FOLDER: action.payload };
-        case FILE_UPLOAD_TOKEN:
-        
-        return { ...state, FILE_UPLOAD_TOKEN: action.payload };
-        case FILE_INFO:
+    case DOCUMENT_INFO_FOLDER:
 
-        return { ...state, FILE_INFO: action.payload };
+      return { ...state, DOCUMENT_INFO_FOLDER: action.payload };
+    case FILE_UPLOAD_TOKEN:
+
+      return { ...state, FILE_UPLOAD_TOKEN: action.payload };
+    case FILE_INFO:
+
+      return { ...state, FILE_INFO: action.payload };
   }
 
   return state;

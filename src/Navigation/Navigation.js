@@ -39,6 +39,7 @@ import ContactUs from '../screens/ContactUs';
 import ViewOrder from '../screens/ViewOrder';
 import InvoiceView from '../screens/InvoiceView';
 import ViewRequest from '../screens/ViewRequest';
+import SplashScreen from '../screens/SplashScreen';
 
 enableScreens();
 
@@ -370,7 +371,7 @@ function SignInScreen() {
     >
       <Stack.Screen
         name="SplashScreen"
-        component={Splash}
+        component={SplashScreen}
         options={{
           headerShown: false,
         }}

@@ -48,8 +48,11 @@ const HomeScreen = () => {
   const navigation = useNavigation();
   const jsonData = MY_INFO.guestInfo;
   const officeInfo = MY_INFO.officeInfo;
+  //const LoginUser = LOGIN_DATA.staffview;
 
-  console.log(dashboardMessageList?.length, 'messageList')
+  //console.log(LOGIN_DATA, 'HOMELOGIN_DATALOGIN_DATALOGIN_DATALOGIN_DATALOGIN_DATAHOMELOGIN_DATALOGIN_DATALOGIN_DATALOGIN_DATALOGIN_DATAHOMELOGIN_DATALOGIN_DATALOGIN_DATALOGIN_DATALOGIN_DATA')
+  //console.log(jsonData, 'jsonDatajsonDatajsonDatajsonDatajsonDatajsonDatajsonData')
+  // console.log(MANAGER_INFO, 'MANAGER_INFOMANAGER_INFOMANAGER_INFOMANAGER_INFOMANAGER_INFO')
 
   const data = [
     {
@@ -101,7 +104,7 @@ const HomeScreen = () => {
   const [loader, setLoader] = useState(false);
   useEffect(() => {
     setLoader(true);
-    dispatch(clientInfo(LOGIN_DATA.staffview.user, navigation));
+    dispatch(clientInfo(LOGIN_DATA.staffview?.user, navigation));
     dispatch(ManagerInfo(jsonData?.clientId, jsonData?.clientType, navigation));
     dispatch(
       dashboardlist(
@@ -119,6 +122,10 @@ const HomeScreen = () => {
       setLoader(false);
     }, 2000);
   }, []);
+
+
+
+
   useEffect(() => {
     setInfoData(MANAGER_INFO);
     setDashboardList(DASHBOARD_LIST);
@@ -150,7 +157,8 @@ const HomeScreen = () => {
     // setTimeout(() => {
     //   setLoader(false);
     // }, 2000);
-  }, [MY_INFO, MANAGER_INFO, DASHBOARD_LIST, DASHBOARD_MESSAGE_LIST]);
+  }, []);
+  //}, [MY_INFO, MANAGER_INFO, DASHBOARD_LIST, DASHBOARD_MESSAGE_LIST]);
 
   // console.log(
   //   dashboardList,
