@@ -19,7 +19,7 @@ const initialstate = {
   REQUEST_INFO: {},
   REQUEST_INFO_BY_ID: {},
   FOLDER_LIST: {},
-  DOCUMENT_INFO_FOLDER:{}
+  DOCUMENT_INFO_FOLDER: {}
 };
 
 const TaxLeafReducer = (state = initialstate, action) => {
@@ -45,14 +45,14 @@ const TaxLeafReducer = (state = initialstate, action) => {
 
       return { ...state, REQUEST_INFO_BY_ID: action.payload };
     case FOLDER_LIST:
-      console.log(
-        'himmmm',
-        action.payload,
-      );
+      // console.log(
+      //   'himmmm',
+      //   action.payload,
+      // );
       return { ...state, FOLDER_LIST: action.payload };
-      case DOCUMENT_INFO_FOLDER:
-        ;
-        return { ...state, DOCUMENT_INFO_FOLDER: action.payload };
+    case DOCUMENT_INFO_FOLDER:
+      ;
+      return { ...state, DOCUMENT_INFO_FOLDER: action.payload };
   }
 
   return state;

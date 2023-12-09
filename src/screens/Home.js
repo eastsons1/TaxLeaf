@@ -38,21 +38,38 @@ const HomeScreen = () => {
 
   const [infoData, setInfoData] = useState({});
   const [dashboardList, setDashboardList] = useState([]);
+  const [userDetail, setUserDETAIL] = useState([]);
   const [dashboardMessageList, setDashboardMessageList] = useState([]);
   const { MY_INFO } = useSelector(state => state.TaxLeafReducer);
   const { DASHBOARD_LIST } = useSelector(state => state.DashboardReducer);
   const { DASHBOARD_MESSAGE_LIST } = useSelector(state => state.DashboardReducer);
   const { MANAGER_INFO } = useSelector(state => state.TaxLeafReducer);
+  const { OFFICE_INFO } = useSelector(state => state.TaxLeafReducer);
+  const { PARTNER_INFO } = useSelector(state => state.TaxLeafReducer);
   const { LOGIN_DATA } = useSelector(state => state.TaxLeafReducer);
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const jsonData = MY_INFO.guestInfo;
+  const jsonData = MY_INFO.guestInfo
   const officeInfo = MY_INFO.officeInfo;
-  //const LoginUser = LOGIN_DATA.staffview;
+  const manager = MANAGER_INFO;
+  const manageroffice = OFFICE_INFO
 
-  //console.log(LOGIN_DATA, 'HOMELOGIN_DATALOGIN_DATALOGIN_DATALOGIN_DATALOGIN_DATAHOMELOGIN_DATALOGIN_DATALOGIN_DATALOGIN_DATALOGIN_DATAHOMELOGIN_DATALOGIN_DATALOGIN_DATALOGIN_DATALOGIN_DATA')
-  //console.log(jsonData, 'jsonDatajsonDatajsonDatajsonDatajsonDatajsonDatajsonData')
-  // console.log(MANAGER_INFO, 'MANAGER_INFOMANAGER_INFOMANAGER_INFOMANAGER_INFOMANAGER_INFO')
+  //console.log(dashboardMessageList?.length, 'messageList')
+  // console.log(jsonData, 'jsonDatajsonDatajsonDatajsonDatajsonData')
+  // console.log(officeInfo?.id, 'officeInfoofficeInfoofficeInfoofficeInfo')
+  //console.log(manager, 'MANAGER_INFOMANAGER_INFOMANAGER_INFOMANAGER_INFO')
+  //console.log(manageroffice, 'HOMEHOMEHOMEHOMEHOMEHOMEHOME')
+
+  //console.log(jsonData?.clientId, jsonData?.clientType)
+  //console.log(MY_INFO, 'MY_INFOMY_INFOMY_INFO')
+
+
+  //console.log(LOGIN_DATA, 'LOGIN_DATALOGIN_DATALOGIN_DATA')
+  const jsonString = LOGIN_DATA;
+  const Login = jsonString;
+  // console.log(jsonString.user, 'jsonStringjsonStringjsonString')
+  // console.log(Login, 'LoginLoginLogin')
+
 
   const data = [
     {
@@ -67,7 +84,7 @@ const HomeScreen = () => {
       Title: 'Bring a friend!',
       subHead:
         'Earn $50 In Your Next Order By Referring Friend To Us ByUsing The Code FRIEND50OFF',
-      footHead: 'Call Us To Learn More!',
+      footHead: 'Call Us to Learn More!',
       img: require('../Assets/img/gdb-img2.png'),
     },
     {
@@ -95,70 +112,79 @@ const HomeScreen = () => {
       id: 6,
       Title: 'Need Bookkeeping?',
       subHead: 'Add A Bookkeeping Plan To Your Business!',
-      footHead: 'Contact Us TO Book It!',
+      footHead: 'Contact Us to Book It!',
       img: require('../Assets/img/gdb-img6.png'),
     },
   ];
   const bgImage = require('../Assets/img/guest_shape.png');
 
   const [loader, setLoader] = useState(false);
-  useEffect(() => {
-    setLoader(true);
-    dispatch(clientInfo(LOGIN_DATA.staffview?.user, navigation));
-    dispatch(ManagerInfo(jsonData?.clientId, jsonData?.clientType, navigation));
-    dispatch(
-      dashboardlist(
-        jsonData?.clientId,
-        jsonData?.clientType,
-        officeInfo?.id,
-        navigation,
-      ),
-    );
-
-    setInfoData(MANAGER_INFO);
-    setDashboardList(DASHBOARD_LIST);
-    setDashboardMessageList(DASHBOARD_MESSAGE_LIST);
-    setTimeout(() => {
-      setLoader(false);
-    }, 2000);
-  }, []);
 
 
 
-
-  useEffect(() => {
-    setInfoData(MANAGER_INFO);
-    setDashboardList(DASHBOARD_LIST);
-    setDashboardMessageList(DASHBOARD_MESSAGE_LIST);
-    dispatch(
-      dashboardlist(
-        jsonData?.clientId,
-        jsonData?.clientType,
-        officeInfo?.id,
-        navigation,
-      ),
-    );
-    dispatch(ManagerInfo(jsonData?.clientId, jsonData?.clientType, navigation));
-  }, [LOGIN_DATA]);
-
-  useEffect(() => {
-    setInfoData(MANAGER_INFO);
-    setDashboardList(DASHBOARD_LIST);
-    setDashboardMessageList(DASHBOARD_MESSAGE_LIST);
-  }, []);
+  // useEffect(() => {
+  //   setLoader(true);
 
 
+  //   dispatch(clientInfo(Login, navigation));
+  //   dispatch(ManagerInfo(jsonData?.clientId, jsonData?.clientType, navigation));
+  //   dispatch(
+  //     dashboardlist(
+  //       jsonData?.clientId,
+  //       jsonData?.clientType,
+  //       officeInfo?.id,
+  //       navigation,
+  //     ),
+  //   );
 
-  useEffect(() => {
-    // setLoader(true);
-    setInfoData(MANAGER_INFO);
-    setDashboardList(DASHBOARD_LIST);
-    setDashboardMessageList(DASHBOARD_MESSAGE_LIST);
-    // setTimeout(() => {
-    //   setLoader(false);
-    // }, 2000);
-  }, []);
-  //}, [MY_INFO, MANAGER_INFO, DASHBOARD_LIST, DASHBOARD_MESSAGE_LIST]);
+  //   setInfoData(MANAGER_INFO);
+  //   setDashboardList(DASHBOARD_LIST);
+  //   setDashboardMessageList(DASHBOARD_MESSAGE_LIST);
+  //   setTimeout(() => {
+  //     setLoader(false);
+  //   }, 2000);
+  // }, []);
+
+
+  // console.log(userDetail, 'userDetailuserDetailuserDetailuserDetail')
+
+
+  // useEffect(() => {
+  //   setInfoData(MANAGER_INFO);
+  //   setDashboardList(DASHBOARD_LIST);
+  //   setDashboardMessageList(DASHBOARD_MESSAGE_LIST);
+  //   dispatch(
+  //     dashboardlist(
+  //       jsonData?.clientId,
+  //       jsonData?.clientType,
+  //       officeInfo?.id,
+  //       navigation,
+  //     ),
+  //   );
+  //   dispatch(ManagerInfo(jsonData?.clientId, jsonData?.clientType, navigation));
+  // }, []);
+
+
+
+
+  // useEffect(() => {
+  //   setInfoData(MANAGER_INFO);
+  //   setDashboardList(DASHBOARD_LIST);
+  //   setDashboardMessageList(DASHBOARD_MESSAGE_LIST);
+  // }, []);
+
+
+
+
+  // useEffect(() => {
+  //   // setLoader(true);
+  //   setInfoData(MANAGER_INFO);
+  //   setDashboardList(DASHBOARD_LIST);
+  //   setDashboardMessageList(DASHBOARD_MESSAGE_LIST);
+  //   // setTimeout(() => {
+  //   //   setLoader(false);
+  //   // }, 2000);
+  // }, [MY_INFO, OFFICE_INFO, DASHBOARD_LIST, DASHBOARD_MESSAGE_LIST]);
 
   // console.log(
   //   dashboardList,
@@ -196,13 +222,13 @@ const HomeScreen = () => {
       <View>
         <Text style={styles.postText}>{item.Title}</Text>
       </View>
-      <View style={{ padding: 1 }}>
+      <View style={{ padding: 0 }}>
         <Text style={styles.sliderText}>
           {item.subHead}
         </Text>
         <Text style={styles.info}>{item.footHead}</Text>
         <TouchableOpacity style={styles.btn}>
-          <View style={{ width: wp(10), }}>
+          <View style={{ width: wp(7) }}>
             <Icon1
               style={[
                 styles.icon,
@@ -211,12 +237,12 @@ const HomeScreen = () => {
                 },
               ]}
               name="phone-in-talk"
-              size={25}
+              size={22}
               color="#fff"
             />
           </View>
 
-          <Text style={{ color: '#fff', fontWeight: '700', width: wp(30), fontSize: 14 }}>888-Y-TAXLEAF</Text>
+          <Text style={{ color: '#fff', fontFamily: 'Poppins-SemiBold', width: wp(27), fontSize: 12 }}>888-Y-TAXLEAF</Text>
         </TouchableOpacity>
       </View>
     </TouchableOpacity>
@@ -238,7 +264,7 @@ const HomeScreen = () => {
 
         <HeadTabs />
 
-        <View style={{ flex: 1, marginTop: 20, marginLeft: 20 }}>
+        <View style={{ flex: 1, marginTop: 0, marginLeft: 20 }}>
 
           <Carousel
             loop
@@ -266,45 +292,61 @@ const HomeScreen = () => {
             style={styles.profileImg}
           />
           <Text style={styles.headText}>
-            {MANAGER_INFO?.managerInfo?.firstName}{' '}
-            {MANAGER_INFO?.managerInfo?.lastName}
+            {manager?.firstName}{' '}
+            {manager?.lastName}
           </Text>
           <Text style={styles.headText1}>Get in Touch!</Text>
           <ScrollView nestedScrollEnabled={true}>
             <View style={styles.infoHead}>
               <Text style={styles.infoHeadText}> Office Information</Text>
             </View>
-            <Text style={styles.ofcInfotxt1}>
-              {' '}
+            <View style={{ marginBottom: 5, marginTop: 5, flexDirection: "row", width: wp(80), alignSelf: "center" }}>
               <Icon
                 style={styles.icon}
                 name="phone"
                 size={20}
                 color="#000"
-              />{' '}
-              {MANAGER_INFO?.officeInfo?.phone}
-            </Text>
-            <Text style={styles.ofcInfotxt}>
-              <Icon style={styles.icon} name="mail" size={20} color="#000" />{' '}
-              {MANAGER_INFO?.officeInfo?.email}
-            </Text>
+              />
+              <Text style={styles.ofcInfotxt1}>
+
+
+                {officeInfo?.phone}
+              </Text>
+            </View>
+
+
+            <View style={{ flexDirection: "row", width: wp(80), alignSelf: "center" }}>
+              <Icon style={styles.icon} name="mail" size={20} color="#000" />
+              <Text style={styles.ofcInfotxt1}>
+
+                {officeInfo?.email}
+              </Text>
+            </View>
+
+
             <View style={styles.infoHead}>
               <Text style={styles.infoHeadText}> Staff Information</Text>
             </View>
-            <Text style={styles.ofcInfotxt1}>
-              {' '}
+            <View style={{ marginBottom: 5, marginTop: 5, flexDirection: "row", width: wp(80), alignSelf: "center" }}>
               <Icon
                 style={styles.icon}
                 name="phone"
                 size={20}
                 color="#000"
-              />{' '}
-              {MANAGER_INFO?.managerInfo?.phone ? MANAGER_INFO?.managerInfo?.phone : 'N/A'}
-            </Text>
-            <Text style={styles.ofcInfotxt}>
-              <Icon style={styles.icon} name="mail" size={20} color="#000" />{' '}
-              {MANAGER_INFO?.managerInfo?.user}
-            </Text>
+              />
+              <Text style={styles.ofcInfotxt1}>
+
+
+                {manager?.phone ? manager?.phone : 'N/A'}
+              </Text>
+            </View>
+            <View style={{ flexDirection: "row", width: wp(80), alignSelf: "center" }}>
+              <Icon style={styles.icon} name="mail" size={20} color="#000" />
+              <Text style={styles.ofcInfotxt1}>
+
+                {manager?.user}
+              </Text>
+            </View>
           </ScrollView>
         </View>
         <View style={{ height: wp(5) }}></View>
@@ -348,7 +390,7 @@ const styles = StyleSheet.create({
     opacity: 2,
     paddingBottom: 20,
     borderRadius: 20,
-    // marginTop: 1,
+    marginTop: 20,
     // width:'62%'
   },
   tabsContainer: {
@@ -376,7 +418,9 @@ const styles = StyleSheet.create({
     width: wp(60),
     height: wp(40),
     marginTop: 10,
-
+    justifyContent: "center",
+    alignSelf: "center",
+    //backgroundColor: "red",
     resizeMode: 'contain',
     // marginLeft: 20,
     alignSelf: 'center',
@@ -384,34 +428,48 @@ const styles = StyleSheet.create({
   postText: {
     alignSelf: 'center',
     color: Color.green,
-    fontSize: 21,
-    fontWeight: '700',
+    width: wp(90),
+    textAlign: "center",
+    fontSize: 20,
+    //backgroundColor: 'red',
+    fontFamily: 'Poppins-Bold',
     // marginTop: 20,
   },
   sliderText: {
     color: Color.headerIconBG,
     fontSize: 12,
-    textAlign: 'center',
-    marginTop: 2,
-    fontWeight: '700'
+    alignSelf: "center",
+    textAlign: "center",
+    //textAlign: 'center',
+    //marginTop: 2,
+    width: wp(80),
+    // backgroundColor: 'orange',
+    fontFamily: 'Poppins-SemiBold'
   },
   cardSlider: {
-    // flex: 1,
+    flex: 1,
     //borderWidth: 1,
     borderRadius: 20,
     backgroundColor: '#fff',
     width: wp(90),
+    // height: hp(50),
     justifyContent: 'center',
   },
   info: {
     color: Color.green,
-    alignSelf: 'center',
+    // alignSelf: 'center',
+    // backgroundColor: 'yellow',
+    alignSelf: "center",
+    justifyContent: "center",
+    // height: wp(15),
+    width: wp(80),
+    textAlign: "center",
     fontSize: 16,
     marginTop: 2,
-    fontWeight: '700'
+    fontFamily: 'Poppins-SemiBold'
   },
   btn: {
-    width: wp(45),
+    width: wp(40),
     alignSelf: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
@@ -435,22 +493,25 @@ const styles = StyleSheet.create({
     // marginLeft:110,
     color: Color.darkGreen,
     marginTop: 10,
-    fontWeight: '600',
+    fontFamily: 'Poppins-SemiBold'
   },
   headText1: {
     color: Color.green,
     marginTop: 10,
-    fontWeight: '700',
+    // fontWeight: '700',
     fontSize: 20,
     textAlign: "center",
+    fontFamily: 'Poppins-Bold'
+
     //marginLeft: 30,
   },
   infoHead: {
-    backgroundColor: Color.geen,
+    backgroundColor: Color.green,
     padding: 7,
-    marginTop: 20,
-    width: '82%',
-    marginLeft: 30,
+    marginTop: 10,
+    width: wp(80),
+    alignSelf: "center",
+
     // alignSelf: 'center',
     marginBottom: 12,
   },
@@ -458,18 +519,20 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 14,
     padding: 5,
-    fontWeight: '600',
+    fontFamily: 'Poppins-SemiBold',
   },
   ofcInfotxt: {
     color: Color.darkGreen,
     marginLeft: 30,
     fontSize: 14,
+    fontFamily: 'Poppins-SemiBold',
   },
   ofcInfotxt1: {
     color: '#1F3E50',
-    marginLeft: 30,
+    marginLeft: 10,
     justifyContent: 'center',
-    margin: 10,
+    //margin: 10,
+    fontFamily: 'Poppins-SemiBold'
   },
   moblieSec: {
     // backgroundColor: "lightgrey",
@@ -541,11 +604,15 @@ const styles = StyleSheet.create({
     marginLeft: 30,
     marginTop: 20,
   },
-  icon: { alignSelf: 'center', marginTop: 5 },
+  icon: {
+    // alignSelf: 'center',
+    //marginTop: 0
+  },
   cardShadow: {
-    // backgroundColor: 'red',
-    // height: 300,
-    paddingTop: 0,
+    //backgroundColor: 'red',
+    // height: hp(20),
+    // justifyContent: "center"
+
   },
   bgImg: {
     height: hp(85)

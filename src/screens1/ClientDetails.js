@@ -66,11 +66,11 @@ const ClientDetails = ({ route }) => {
     // }, 2000);
   }, [CLIENT_DETAIL]);
 
-  console.log(
-    infoData,
-    'infoDatainfoDatainfoDatainfoDatainfoData',
-    infoData?.individualInfo?.lastName,
-  );
+  // console.log(
+  //   infoData,
+  //   'infoDatainfoDatainfoDatainfoDatainfoData',
+  //   infoData?.individualInfo?.lastName,
+  // );
 
   const showwhatfunc1 = data => {
     setshowwhat1(data);
@@ -200,175 +200,175 @@ const ClientDetails = ({ route }) => {
         </View>
 
         <Text style={styles.subheading}>Hello Welcome To TaxLeaf</Text>
-       
-          <View style={styles.slideContainer}>
-            <View style={styles.contentView}>
-              <Text style={styles.subHead1}>Status:</Text>
 
-              <Text style={styles.LIstText21}>Active</Text>
-            </View>
-            <View style={styles.contentView}>
-              <Text style={styles.subHead1}>ClientId:</Text>
+        <View style={styles.slideContainer}>
+          <View style={styles.contentView}>
+            <Text style={styles.subHead1}>Status:</Text>
 
-              <Text style={styles.LIstText2}>
-                {ClientData.subClientInfo.subClientPracticeId}
-              </Text>
-            </View>
-            <View style={styles.contentView}>
-              <Text style={styles.subHead1}>OfficeId:</Text>
-
-              <Text style={styles.LIstText2}>{ClientData.officeInfo.name}</Text>
-            </View>
-            <View style={styles.contentView}>
-              <Text style={styles.subHead1}>Manager:</Text>
-
-              <Text style={styles.LIstText2}>
-                {ClientData.partnerInfo.firstName}{' '}
-                {ClientData.partnerInfo.lastName}
-              </Text>
-            </View>
+            <Text style={styles.LIstText21}>Active</Text>
           </View>
-          <View style={styles.slideContainer}>
-            <View style={styles.contentView}>
-              <Text style={styles.subHead1}>Total Orders:</Text>
+          <View style={styles.contentView}>
+            <Text style={styles.subHead1}>ClientId:</Text>
 
-              <Text style={styles.LIstText2}>55 </Text>
-            </View>
-            <View style={styles.contentView}>
-              <Text style={styles.subHead1}>Pending Amount:</Text>
-
-              <Text style={styles.LIstText2}>$66</Text>
-            </View>
+            <Text style={styles.LIstText2}>
+              {ClientData.subClientInfo.subClientPracticeId}
+            </Text>
           </View>
-          <View style={styles.slideContainerClient}>
-            <Text style={styles.headingClient}>Client Information</Text>
-            <View style={styles.contentView}>
-              <Text style={styles.subHead}>Client Id:</Text>
+          <View style={styles.contentView}>
+            <Text style={styles.subHead1}>OfficeId:</Text>
 
-              <Text style={styles.LIstText2}>
-                {' '}
-                {ClientData.subClientInfo.subClientPracticeId}
-              </Text>
-            </View>
-            <View style={styles.contentView}>
-              <Text style={styles.subHead}>Individual Name:</Text>
-
-              <Text style={styles.LIstText2}>
-                {' '}
-                {infoData?.individualInfo?.lastName},{' '}
-                {infoData?.individualInfo?.firstName}
-              </Text>
-            </View>
-            <View style={styles.contentView}>
-              <Text style={styles.subHead}>SSN/ITIN:</Text>
-
-              <Text style={styles.LIstText2}>
-                {' '}
-                {infoData?.individualInfo?.ssnItin}
-              </Text>
-            </View>
-            <View style={styles.contentView}>
-              <Text style={styles.subHead}>Date of Birth:</Text>
-
-              <Text style={styles.LIstText2}>
-                {' '}
-                {infoData?.individualInfo?.birthDate}
-              </Text>
-            </View>
-            <View style={styles.contentView}>
-              <Text style={styles.subHead}>Language:</Text>
-
-              <Text style={styles.LIstText2}>
-                {' '}
-                {infoData?.languageInfo?.language1}
-              </Text>
-            </View>
-
-            <View style={styles.contentView}>
-              <Text style={styles.subHead}>Residency:</Text>
-
-              <Text style={styles.LIstText2}>
-                {' '}
-                {infoData?.residenseInfo?.countryName}
-              </Text>
-            </View>
-
-            <View style={styles.contentView}>
-              <Text style={styles.subHead}>Citizenship:</Text>
-
-              <Text style={styles.LIstText2}>
-                {' '}
-                {infoData?.citizenInfo?.countryName}
-              </Text>
-            </View>
+            <Text style={styles.LIstText2}>{ClientData.officeInfo.name}</Text>
           </View>
-          <View style={styles.slideContainerClient}>
-            <Text style={styles.headingClient}>Contact Information</Text>
-            <View style={[styles.contentView,{height:hp(6)}]}>
-              <Text style={styles.subHead}>Email:</Text>
-              <Text
-                style={styles.LIstText2}
-                onPress={() =>
-                  Linking.openURL(
-                    `mailto:${ClientData.officeInfo.email}?subject=SendMail&body=Description`,
-                  )
-                }
-                title={ClientData.officeInfo.email}>
-                {' '}
-                {ClientData.officeInfo.email}
-              </Text>
-            </View>
-            <View style={styles.contentView}>
-              <Text style={styles.subHead}>Phone Number:</Text>
+          <View style={styles.contentView}>
+            <Text style={styles.subHead1}>Manager:</Text>
 
-              <Text
-                style={styles.LIstText2}
-                onPress={() =>
-                  Linking.openURL(`tel:${ClientData.officeInfo.phone}`)
-                }>
-                {' '}
-                {ClientData.officeInfo.phone}
-              </Text>
-            </View>
+            <Text style={styles.LIstText2}>
+              {ClientData.partnerInfo.firstName}{' '}
+              {ClientData.partnerInfo.lastName}
+            </Text>
+          </View>
+        </View>
+        <View style={styles.slideContainer}>
+          <View style={styles.contentView}>
+            <Text style={styles.subHead1}>Total Orders:</Text>
 
-            <View style={styles.contentView}>
-              <Text style={styles.subHead}>Address:</Text>
+            <Text style={styles.LIstText2}>55 </Text>
+          </View>
+          <View style={styles.contentView}>
+            <Text style={styles.subHead1}>Pending Amount:</Text>
 
-              <Text style={styles.LIstText2}>
-                {' '}
-                {ClientData.officeInfo.address}
-              </Text>
-            </View>
+            <Text style={styles.LIstText2}>$66</Text>
+          </View>
+        </View>
+        <View style={styles.slideContainerClient}>
+          <Text style={styles.headingClient}>Client Information</Text>
+          <View style={styles.contentView}>
+            <Text style={styles.subHead}>Client Id:</Text>
+
+            <Text style={styles.LIstText2}>
+              {' '}
+              {ClientData.subClientInfo.subClientPracticeId}
+            </Text>
+          </View>
+          <View style={styles.contentView}>
+            <Text style={styles.subHead}>Individual Name:</Text>
+
+            <Text style={styles.LIstText2}>
+              {' '}
+              {infoData?.individualInfo?.lastName},{' '}
+              {infoData?.individualInfo?.firstName}
+            </Text>
+          </View>
+          <View style={styles.contentView}>
+            <Text style={styles.subHead}>SSN/ITIN:</Text>
+
+            <Text style={styles.LIstText2}>
+              {' '}
+              {infoData?.individualInfo?.ssnItin}
+            </Text>
+          </View>
+          <View style={styles.contentView}>
+            <Text style={styles.subHead}>Date of Birth:</Text>
+
+            <Text style={styles.LIstText2}>
+              {' '}
+              {infoData?.individualInfo?.birthDate}
+            </Text>
+          </View>
+          <View style={styles.contentView}>
+            <Text style={styles.subHead}>Language:</Text>
+
+            <Text style={styles.LIstText2}>
+              {' '}
+              {infoData?.languageInfo?.language1}
+            </Text>
           </View>
 
-          <View style={styles.slideContainerClient}>
-            <Text style={styles.headingClient}>Internal Data</Text>
-            <View style={[styles.contentView,{height:hp(6)}]}>
-              <Text style={styles.subHead}>Office:</Text>
-              <Text style={styles.LIstText2}>
-                {' '}
-                {ClientData.officeInfo.email}
-              </Text>
-            </View>
-            <View style={styles.contentView}>
-              <Text style={styles.subHead}>Client Partner:</Text>
+          <View style={styles.contentView}>
+            <Text style={styles.subHead}>Residency:</Text>
 
-              <Text style={styles.LIstText2}>
-                {' '}
-                {ClientData.partnerInfo.firstName}{' '}
-                {ClientData.partnerInfo.lastName}
-              </Text>
-            </View>
-            <TouchableOpacity style={styles.contentView} onPress={() => navigation.navigate('Manager')}>
-              <Text style={styles.subHead}>Client Manager:</Text>
-
-              <Text style={styles.LIstText2}>
-                {' '}
-                {ClientData.managerInfo.firstName}{' '}
-                {ClientData.managerInfo.lastName}
-              </Text>
-            </TouchableOpacity>
+            <Text style={styles.LIstText2}>
+              {' '}
+              {infoData?.residenseInfo?.countryName}
+            </Text>
           </View>
+
+          <View style={styles.contentView}>
+            <Text style={styles.subHead}>Citizenship:</Text>
+
+            <Text style={styles.LIstText2}>
+              {' '}
+              {infoData?.citizenInfo?.countryName}
+            </Text>
+          </View>
+        </View>
+        <View style={styles.slideContainerClient}>
+          <Text style={styles.headingClient}>Contact Information</Text>
+          <View style={[styles.contentView, { height: hp(6) }]}>
+            <Text style={styles.subHead}>Email:</Text>
+            <Text
+              style={styles.LIstText2}
+              onPress={() =>
+                Linking.openURL(
+                  `mailto:${ClientData.officeInfo.email}?subject=SendMail&body=Description`,
+                )
+              }
+              title={ClientData.officeInfo.email}>
+              {' '}
+              {ClientData.officeInfo.email}
+            </Text>
+          </View>
+          <View style={styles.contentView}>
+            <Text style={styles.subHead}>Phone Number:</Text>
+
+            <Text
+              style={styles.LIstText2}
+              onPress={() =>
+                Linking.openURL(`tel:${ClientData.officeInfo.phone}`)
+              }>
+              {' '}
+              {ClientData.officeInfo.phone}
+            </Text>
+          </View>
+
+          <View style={styles.contentView}>
+            <Text style={styles.subHead}>Address:</Text>
+
+            <Text style={styles.LIstText2}>
+              {' '}
+              {ClientData.officeInfo.address}
+            </Text>
+          </View>
+        </View>
+
+        <View style={styles.slideContainerClient}>
+          <Text style={styles.headingClient}>Internal Data</Text>
+          <View style={[styles.contentView, { height: hp(6) }]}>
+            <Text style={styles.subHead}>Office:</Text>
+            <Text style={styles.LIstText2}>
+              {' '}
+              {ClientData.officeInfo.email}
+            </Text>
+          </View>
+          <View style={styles.contentView}>
+            <Text style={styles.subHead}>Client Partner:</Text>
+
+            <Text style={styles.LIstText2}>
+              {' '}
+              {ClientData.partnerInfo.firstName}{' '}
+              {ClientData.partnerInfo.lastName}
+            </Text>
+          </View>
+          <TouchableOpacity style={styles.contentView} onPress={() => navigation.navigate('Manager')}>
+            <Text style={styles.subHead}>Client Manager:</Text>
+
+            <Text style={styles.LIstText2}>
+              {' '}
+              {ClientData.managerInfo.firstName}{' '}
+              {ClientData.managerInfo.lastName}
+            </Text>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     </View>
   );
@@ -709,8 +709,8 @@ const styles = StyleSheet.create({
   },
   LIstText2: {
     color: '#000',
-    width:wp(40),
-    height:hp(10)
+    width: wp(40),
+    height: hp(10)
   },
   LIstText21: {
     color: '#fff',

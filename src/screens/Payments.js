@@ -233,15 +233,14 @@ const Payments = () => {
               style={{
                 color: '#fff',
                 textAlign: 'center',
-                marginTop: 4,
-                paddingTop: 3,
+
                 width: wp(15),
                 // backgroundColor: '#2F5597',
                 borderTopLeftRadius: 10,
                 borderTopRightRadius: 10,
                 height: wp(10),
-                fontSize: 12,
-                fontWeight: '700',
+                fontSize: 11,
+                fontFamily: 'Poppins-SemiBold',
                 justifyContent: 'center',
               }}>
               Category
@@ -251,16 +250,16 @@ const Payments = () => {
               style={{
                 color: '#fff',
                 textAlign: 'center',
-                marginTop: 4,
-                paddingTop: 3,
+
                 width: wp(20),
 
                 // backgroundColor: '#2F5597',
                 borderTopLeftRadius: 10,
                 borderTopRightRadius: 10,
                 height: wp(10),
-                fontSize: 12,
-                fontWeight: '700',
+                fontSize: 11,
+                //fontSize: 10,
+                fontFamily: 'Poppins-SemiBold',
                 justifyContent: 'center',
               }}>
               Service Name
@@ -270,16 +269,16 @@ const Payments = () => {
               style={{
                 color: '#fff',
                 textAlign: 'center',
-                marginTop: 4,
-                paddingTop: 3,
+
+
                 width: wp(17),
 
                 // backgroundColor: '#2F5597',
                 borderTopLeftRadius: 10,
                 borderTopRightRadius: 10,
-                height: wp(10),
-                fontSize: 12,
-                fontWeight: '700',
+                height: wp(11),
+                fontSize: 11,
+                fontFamily: 'Poppins-SemiBold',
                 justifyContent: 'center',
               }}>
               Retail Price
@@ -289,16 +288,15 @@ const Payments = () => {
               style={{
                 color: '#fff',
                 textAlign: 'center',
-                marginTop: 4,
-                paddingTop: 3,
+
                 width: wp(18),
 
                 // backgroundColor: '#2F5597',
                 borderTopLeftRadius: 10,
                 borderTopRightRadius: 10,
                 height: wp(10),
-                fontSize: 12,
-                fontWeight: '700',
+                fontSize: 11,
+                fontFamily: 'Poppins-SemiBold',
                 justifyContent: 'center',
               }}>
               Quantity
@@ -317,8 +315,8 @@ const Payments = () => {
                 // borderTopRightRadius: 10,
                 height: wp(15),
                 paddingTop: 15,
-                fontSize: 12,
-                fontWeight: '700',
+                fontSize: 10,
+                fontFamily: 'Poppins-SemiBold',
                 justifyContent: 'center',
               }}>
               Total Price
@@ -335,21 +333,21 @@ const Payments = () => {
                   isActive ? styles.active : styles.inactive,
                   {
                     width: wp(90),
-                    // backgroundColor: '#fff',
-                    alignItems: 'center',
+                    // backgroundColor: 'red',
+                    //  alignItems: 'center',
                     // marginBottom: 10,
                     flexDirection: 'row',
-                    // height: wp(15),
-
-
-                    alignSelf: 'center',
+                    height: wp(15),
+                    alignItems: "center",
+                    justifyContent: "center",
+                    // alignSelf: 'center',
 
                     opacity: 10,
-                    paddingLeft: 10,
-                    paddingRight: 10,
-                    paddingBottom: 10,
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
+                    // paddingLeft: 10,
+                    //paddingRight: 10,
+                    //  paddingBottom: 10,
+
+                    //  justifyContent: 'space-between',
                   },
                 ]}
                 transition="backgroundColor">
@@ -364,7 +362,8 @@ const Payments = () => {
                     borderTopLeftRadius: 10,
                     borderTopRightRadius: 10,
                     height: wp(10),
-                    fontSize: 12,
+                    fontSize: 10,
+                    fontFamily: 'Poppins-SemiBold',
                     justifyContent: 'center',
                   }}>
                   {item?.serviceInfo?.category?.name}
@@ -380,7 +379,8 @@ const Payments = () => {
                     borderTopLeftRadius: 10,
                     borderTopRightRadius: 10,
                     height: wp(10),
-                    fontSize: 12,
+                    fontSize: 10,
+                    fontFamily: 'Poppins-SemiBold',
                     justifyContent: 'center',
                   }}>
                   {item?.serviceInfo?.description}
@@ -396,7 +396,8 @@ const Payments = () => {
                     borderTopLeftRadius: 10,
                     borderTopRightRadius: 10,
                     height: wp(10),
-                    fontSize: 12,
+                    fontSize: 10,
+                    fontFamily: 'Poppins-SemiBold',
                     justifyContent: 'center',
                   }}>
                   ${item?.reqInfo?.retailPrice}
@@ -412,7 +413,8 @@ const Payments = () => {
                     borderTopLeftRadius: 10,
                     borderTopRightRadius: 10,
                     height: wp(10),
-                    fontSize: 12,
+                    fontSize: 10,
+                    fontFamily: 'Poppins-SemiBold',
                     justifyContent: 'center',
                   }}>
                   {item?.reqInfo?.quantity}
@@ -428,7 +430,8 @@ const Payments = () => {
                     borderTopLeftRadius: 10,
                     borderTopRightRadius: 10,
                     height: wp(10),
-                    fontSize: 12,
+                    fontSize: 10,
+                    fontFamily: 'Poppins-SemiBold',
                     justifyContent: 'center',
                   }}>
                   ${item?.reqInfo?.priceCharged}
@@ -470,7 +473,8 @@ const Payments = () => {
                 //borderTopRightRadius: 10,
                 height: wp(10),
                 fontSize: 8,
-                fontWeight: '700',
+
+                fontFamily: 'Poppins-SemiBold',
                 justifyContent: 'center',
               }}>
               Order ID #{section?.collectionInfo?.orderId}
@@ -488,6 +492,7 @@ const Payments = () => {
                     fontSize: 10,
                     backgroundColor: '#1c84c6',
 
+                    fontFamily: 'Poppins-SemiBold',
 
                     padding: 5,
                     textAlign: 'center',
@@ -499,7 +504,8 @@ const Payments = () => {
                 <Text
                   style={{
                     color: Color.white,
-                    fontSize: 8,
+                    fontSize: 10,
+                    fontFamily: 'Poppins-SemiBold',
                     backgroundColor: '#1c84c6',
                     padding: 5,
                     textAlign: 'center',
@@ -527,24 +533,26 @@ const Payments = () => {
                 }}
                 style={{
                   // backgroundColor: '#8AB645',
-                  padding: 5,
+                  paddingTop: 5,
                   textAlign: 'center',
                   width: wp(22),
-                  marginLeft: 10,
+                  marginLeft: 0,
                   flexDirection: 'row',
                   // borderRadius: 3
                 }}
               >
                 <Icon
                   name="eye"
-                  size={17}
+                  size={20}
                   color="#8AB645"
                 />
                 <Text style={{
                   color: "#000",
-                  fontSize: 11,
+                  fontSize: 9,
+
+                  fontFamily: 'Poppins-SemiBold',
                   // marginTop: 2,
-                  marginLeft: 4
+                  margin: 2
 
                 }}>
 
@@ -554,7 +562,7 @@ const Payments = () => {
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate('ViewOrder', {
+                  navigation.navigate('InvoiceDetails', {
                     orderId: section?.collectionInfo?.orderId
                   })
                 }}
@@ -570,14 +578,15 @@ const Payments = () => {
               >
                 <Icon
                   name="eye"
-                  size={17}
+                  size={20}
                   color="#8AB645"
                 />
                 <Text style={{
                   color: "#000",
-                  fontSize: 11,
+                  fontSize: 9,
+                  fontFamily: 'Poppins-SemiBold',
                   // marginTop: 2,
-                  marginLeft: 4
+                  margin: 2
 
                 }}>
 
@@ -600,10 +609,10 @@ const Payments = () => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: Color.backgroundcolor }}>
       <Loader flag={loader} />
       <CustomHeader />
-      <View style={{ height: hp(80), backgroundColor: '#d5e3e5' }}>
+      <View style={{}}>
 
         {/* <ImageBackground
 
@@ -611,16 +620,17 @@ const Payments = () => {
           style={styles.bgImg}
           resizeMode="cover"> */}
 
-        <ScrollView nestedScrollEnabled={true}
-
+        <ScrollView
+          //nestedScrollEnabled={true}
+          style={{ height: hp(77), }}
         >
 
           <HeadTabs />
           {/* <View style={styles.headerView}>
           <Text style={styles.header}>Plan Invoices</Text>
         </View> */}
-          <Text style={{ fontSize: 19, marginLeft: 20, color: Color.headerIconBG, fontWeight: 700, marginTop: 5 }}>Payments</Text>
-          <View style={{ width: wp(95), alignSelf: 'center', height: hp(46) }}>
+          <Text style={{ fontSize: 20, marginLeft: 20, color: Color.headerIconBG, fontFamily: 'Poppins-Bold', }}>Payments</Text>
+          <View style={{ width: wp(95), alignSelf: 'center', height: hp(50) }}>
             {(() => {
               if (showwhat == 'Experience') {
                 return (
@@ -632,20 +642,30 @@ const Payments = () => {
                           backgroundColor:
                             showwhat == 'Experience' ? Color.green : '#fff',
                           flexDirection: 'row',
-                          paddingTop: 12,
+                          // paddingTop: 12,
 
                         },
                       ]}
                       onPress={() => showwhatfunc('Experience')}>
-                      <Icon
-                        style={[
-                          { marginRight: 5 }
+                      <View
+                        style={{
 
-                        ]}
-                        name="clockcircle"
-                        size={20}
-                        color="#fff"
-                      />
+                          // backgroundColor:
+                          //   showwhat == 'My Schools' ? Color.geen : '#fff',
+                          // borderRadius: 15
+                        }}
+                      >
+                        <Icon
+                          style={[
+                            { marginRight: 5 }
+
+                          ]}
+                          name="clockcircle"
+                          size={20}
+                          color="#fff"
+                        />
+                      </View>
+
                       <Text style={showwhat == 'My Schools' ? styles.ButtonText1 : styles.ButtonTextW}>
                         Pending ({infoData.length})
                       </Text>
@@ -657,16 +677,30 @@ const Payments = () => {
                           backgroundColor:
                             showwhat == 'My Schools' ? Color.geen : '#fff',
                           flexDirection: 'row',
-                          paddingTop: 12
+                          // paddingTop: 12
                         },
                       ]}
                       onPress={() => showwhatfunc('My Schools')}>
-                      <IconF
-                        style={{ backgroundColor: showwhat == 'My Schools' ? 'lightgray' : Color.geen, width: wp(6), borderRadius: 15, paddingLeft: 7, height: hp(2.8), marginRight: 4, color: showwhat == 'My Schools' ? Color.geen : '#fff' }}
-                        name="dollar"
-                        size={20}
-                        color={Color.geen}
-                      />
+                      <View
+                        style={{
+                          backgroundColor: showwhat == 'My Schools' ? 'lightgray' : Color.geen,
+                          height: wp(5), width: wp(5),
+
+                          alignItems: "center",
+                          borderRadius: 15, marginRight: 4,
+                        }}
+                      >
+                        <IconF
+                          style={{
+
+                            color: showwhat == 'My Schools' ? Color.geen : '#fff'
+                          }}
+                          name="dollar"
+                          size={20}
+                          color={Color.geen}
+                        />
+                      </View>
+
                       <Text style={showwhat == 'My Schools' ? styles.ButtonTextW : styles.ButtonText1}>Paid (0)</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -676,19 +710,22 @@ const Payments = () => {
                           backgroundColor:
                             showwhat == 'Reviews' ? Color.geen : '#fff',
                           flexDirection: 'row',
-                          paddingTop: 12
+                          //  paddingTop: 12
                         },
                       ]}
                       onPress={() => showwhatfunc('Reviews')}>
-                      <Icon
-                        style={[
-                          { marginRight: 5 }
+                      <View>
+                        <Icon
+                          style={[
+                            { marginRight: 5 }
 
-                        ]}
-                        name="checkcircle"
-                        size={18}
-                        color={Color.geen}
-                      />
+                          ]}
+                          name="checkcircle"
+                          size={20}
+                          color={Color.geen}
+                        />
+                      </View>
+
                       <Text style={showwhat == 'My Schools' ? styles.ButtonTextW : styles.ButtonText1}>Plan</Text>
                     </TouchableOpacity>
                   </View>
@@ -703,7 +740,7 @@ const Payments = () => {
                           backgroundColor:
                             showwhat == 'Experience' ? Color.geen : '#fff',
                           flexDirection: 'row',
-                          paddingTop: 12
+                          // paddingTop: 12
 
                         },
                       ]}
@@ -728,16 +765,22 @@ const Payments = () => {
                           backgroundColor:
                             showwhat == 'My Schools' ? Color.geen : '#fff',
                           flexDirection: 'row',
-                          paddingTop: 12
+                          //   paddingTop: 12
                         },
                       ]}
                       onPress={() => showwhatfunc('My Schools')}>
-                      <IconF
-                        style={{ backgroundColor: showwhat == 'My Schools' ? '#fff' : '#fff', width: wp(6), borderRadius: 15, paddingLeft: 7, height: hp(2.8), marginRight: 4, color: showwhat == 'My Schools' ? Color.geen : 'lightgray' }}
-                        name="dollar"
-                        size={20}
-                        color="#fff"
-                      />
+                      <View
+                        style={{ alignItems: 'center', backgroundColor: showwhat == 'My Schools' ? '#fff' : '#fff', width: wp(5), borderRadius: 15, height: wp(5), marginRight: 4, }}
+
+                      >
+                        <IconF
+                          style={{ color: showwhat == 'My Schools' ? Color.geen : 'lightgray' }}
+                          name="dollar"
+                          size={20}
+                          color="#fff"
+                        />
+                      </View>
+
                       <Text style={showwhat == 'My Schools' ? styles.ButtonTextW : styles.ButtonText1}>Paid (0)</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -747,7 +790,7 @@ const Payments = () => {
                           backgroundColor:
                             showwhat == 'Reviews' ? Color.geen : '#fff',
                           flexDirection: 'row',
-                          paddingTop: 12
+                          // paddingTop: 12
                         },
                       ]}
                       onPress={() => showwhatfunc('Reviews')}>
@@ -773,7 +816,7 @@ const Payments = () => {
                           backgroundColor:
                             showwhat == 'Experience' ? Color.geen : '#fff',
                           flexDirection: 'row',
-                          paddingTop: 12
+                          //  paddingTop: 12
 
                         },
                       ]}
@@ -798,16 +841,22 @@ const Payments = () => {
                           backgroundColor:
                             showwhat == 'My Schools' ? Color.geen : '#fff',
                           flexDirection: 'row',
-                          paddingTop: 12
+                          // paddingTop: 12
                         },
                       ]}
                       onPress={() => showwhatfunc('My Schools')}>
-                      <IconF
-                        style={{ backgroundColor: showwhat == 'My Schools' ? 'lightgray' : Color.geen, width: wp(6), borderRadius: 15, paddingLeft: 7, height: hp(2.8), marginRight: 4, color: showwhat == 'My Schools' ? Color.geen : '#fff' }}
-                        name="dollar"
-                        size={20}
-                        color="#fff"
-                      />
+                      <View
+                        style={{ alignItems: "center", backgroundColor: showwhat == 'My Schools' ? 'lightgray' : Color.geen, width: wp(5), borderRadius: 15, height: wp(5), marginRight: 4, color: showwhat == 'My Schools' ? Color.geen : '#fff' }}
+
+                      >
+                        <IconF
+                          style={{ color: showwhat == 'My Schools' ? Color.geen : '#fff' }}
+                          name="dollar"
+                          size={20}
+                          color="#fff"
+                        />
+                      </View>
+
                       <Text style={showwhat == 'My Schools' ? styles.ButtonTextW : styles.ButtonText1}>Paid (0)</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -817,7 +866,7 @@ const Payments = () => {
                           backgroundColor:
                             showwhat == 'Reviews' ? Color.geen : '#fff',
                           flexDirection: 'row',
-                          paddingTop: 12
+                          // paddingTop: 12
                         },
                       ]}
                       onPress={() => showwhatfunc('Reviews')}>
@@ -845,7 +894,9 @@ const Payments = () => {
                     Pending Invoices ({infoData.length})
                     </Text> */}
 
-                    <ScrollView style={{ height: hp(40), paddingBottom: 30 }}>
+                    <ScrollView
+                      nestedScrollEnabled={true}
+                      style={{}}>
 
 
                       <Accordion
@@ -861,6 +912,8 @@ const Payments = () => {
                         //Duration for Collapse and expand
                         onChange={setSections}
                       />
+
+                      <View style={{ height: wp(20), }}></View>
                     </ScrollView>
                   </View>
                 );
@@ -1031,9 +1084,9 @@ const Payments = () => {
 
         {/* </ImageBackground> */}
 
-      </View>
+      </View >
       <CustomBottomTab />
-    </SafeAreaView>
+    </SafeAreaView >
   );
 };
 
@@ -1097,18 +1150,20 @@ const styles = StyleSheet.create({
   },
   emailtoch1: {
     //  backgroundColor: "lightgray",
-    width: wp(32),
+    width: wp(30),
     height: 50,
     justifyContent: 'center',
     // borderRadius: 10,
+    alignItems: "center",
     borderTopLeftRadius: 20,
     borderBottomLeftRadius: 20,
     paddingHorizontal: 20
   },
   emailtoch2: {
     //  backgroundColor: "lightgray",
-    width: wp(28),
+    width: wp(30),
     height: 50,
+    alignItems: "center",
     justifyContent: 'center',
     // borderRadius: 10,
     borderTopRightRadius: 20,
@@ -1116,13 +1171,14 @@ const styles = StyleSheet.create({
   },
   ButtonText1: {
     color: '#000',
+    fontSize: 10,
     textAlign: 'center',
-    fontWeight: '700',
+    fontFamily: 'Poppins-SemiBold',
   },
   ButtonTextW: {
     color: '#fff',
-    fontWeight: '700',
-
+    fontFamily: 'Poppins-SemiBold',
+    fontSize: 10,
     textAlign: 'center',
   },
   mobiletochP: {
@@ -1130,14 +1186,16 @@ const styles = StyleSheet.create({
     width: wp(30),
     height: 50,
     // borderRadius: 10,
+    alignItems: "center",
     justifyContent: 'center',
   },
   subContainer: {
     // backgroundColor: '#fff',
-    width: wp(90),
+    //width: wp(90),
+
     alignSelf: 'center',
     marginTop: 10,
-    // height: hp(75),
+    //height: hp(75),
 
     // alignItems: 'center',
   },

@@ -85,10 +85,10 @@ const ClientInfo = () => {
   const { MY_INFO } = useSelector(state => state.TaxLeafReducer);
   const { CLIENT_LIST } = useSelector(state => state.TaxLeafReducer);
   const { LOGIN_DATA } = useSelector(state => state.TaxLeafReducer);
-  console.log(LOGIN_DATA.staffview.user, 'Login_DataLogin_DataLogin_Data');
+  //console.log(LOGIN_DATA.staffview?.user, 'Login_DataLogin_DataLogin_Data');
   // console.log(MY_INFO.guestInfo, 'CLIENT_LISTCLIENT_LISTCLIENT_LIST');
   // console.log(MY_INFO.guestInfo, 'CLIENT_LISTCLIENT_LISTCLIENT_LIST');
-  console.log(CLIENT_LIST, 'CLIENT_LISTCLIENT_LISTCLIENT_LIST');
+  // console.log(CLIENT_LIST, 'CLIENT_LISTCLIENT_LISTCLIENT_LIST');
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const jsonData = MY_INFO?.guestInfo;
@@ -102,7 +102,7 @@ const ClientInfo = () => {
 
   useEffect(() => {
     setLoader(true);
-    dispatch(clientInfo(LOGIN_DATA.staffview.user, navigation));
+    dispatch(clientInfo(LOGIN_DATA, navigation));
 
     setInfoData(CLIENT_LIST);
     setTimeout(() => {
@@ -125,7 +125,7 @@ const ClientInfo = () => {
     // }, 2000);
   }, [MY_INFO, CLIENT_LIST]);
 
-  console.log(infoData, 'infoDatainfoDatainfoDatainfoData');
+  // console.log(infoData, 'infoDatainfoDatainfoDatainfoData');
 
   // infoData.forEach(item => {
   //   if (

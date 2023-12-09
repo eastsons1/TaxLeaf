@@ -1,11 +1,11 @@
 import React from 'react';
-import {View, Text, Image, TouchableOpacity} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import {Color} from '../Style';
+import { Color } from '../Style';
 const CustomHeader = () => {
   const navigation = useNavigation();
   let iconNm = require('../Assets/img/icons/hamburger-green.png');
@@ -18,8 +18,8 @@ const CustomHeader = () => {
       style={{
         backgroundColor: Color.white,
         // backgroundColor: '',
-        borderBottomWidth: 1,
-        borderBottomColor: 'orange',
+        //borderBottomWidth: 1,
+        // borderBottomColor: 'orange',
         justifyContent: 'center',
         padding: 15,
       }}>
@@ -39,7 +39,7 @@ const CustomHeader = () => {
           }}>
           <TouchableOpacity onPress={() => navigation.openDrawer()}>
             {/* Hamburger icon or any other icon you prefer */}
-            <Image source={iconNm} style={{width: 25, height: 25}} />
+            <Image source={iconNm} style={{ width: 25, height: 25 }} />
           </TouchableOpacity>
         </View>
         <View
@@ -50,7 +50,7 @@ const CustomHeader = () => {
           }}>
           <Image
             source={logo}
-            style={{width: 200, height: 40}}
+            style={{ width: 200, height: 45 }}
             resizeMode="contain"
           />
         </View>
@@ -64,14 +64,14 @@ const CustomHeader = () => {
           }}>
           <TouchableOpacity onPress={() => navigation.navigate('MyInfo')}>
             {/* Hamburger icon or any other icon you prefer */}
-            <Image source={profile} style={{width: 20, height: 20}} />
+            <Image source={profile} style={{ width: 25, height: 25 }} />
           </TouchableOpacity>
           <TouchableOpacity
-            style={{marginLeft: 10}}
+            style={{ marginLeft: 10 }}
             onPress={() => navigation.openDrawer()}>
             {/* Hamburger icon or any other icon you prefer */}
 
-            <Image source={bell} style={{width: 20, height: 20}} />
+            <Image source={bell} style={{ width: 25, height: 25 }} />
           </TouchableOpacity>
           <View
             style={{
@@ -84,7 +84,7 @@ const CustomHeader = () => {
               justifyContent: 'center',
               borderWidth: 1,
               borderColor: Color.white,
-              backgroundColor: Color.geen,
+              backgroundColor: 'red',
               borderRadius: 50,
             }}>
             <Text

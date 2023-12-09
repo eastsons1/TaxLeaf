@@ -26,6 +26,7 @@ import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+
 const HeadTabs = () => {
     const [showwhat1, setshowwhat1] = useState('');
     const [showwhat2, setshowwhat2] = useState('');
@@ -39,16 +40,20 @@ const HeadTabs = () => {
     const { LOGIN_DATA } = useSelector(state => state.TaxLeafReducer);
     const dispatch = useDispatch();
     const navigation = useNavigation();
+
     const jsonData = MY_INFO.guestInfo;
     const officeInfo = MY_INFO.officeInfo;
 
+
+    //console.log(jsonData?.clientId, jsonData?.clientType, 'jsonDatajsonDatajsonDatajsonData')
+
     const showwhatfunc1 = data => {
         setshowwhat1(data);
-        // console.log(data);
+        console.log(data);
     };
     const showwhatfunc2 = data => {
         setshowwhat2(data);
-        // console.log(data);
+        console.log(data);
     };
     useEffect(() => {
         if (showwhat1) {
@@ -66,8 +71,7 @@ const HeadTabs = () => {
     const [loader, setLoader] = useState(false);
     useEffect(() => {
         setLoader(true);
-        dispatch(clientInfo(LOGIN_DATA.staffview?.user, navigation));
-        dispatch(ManagerInfo(jsonData?.clientId, jsonData?.clientType, navigation));
+        dispatch(clientInfo(LOGIN_DATA, navigation));
         dispatch(
             dashboardlist(
                 jsonData?.clientId,
@@ -77,15 +81,21 @@ const HeadTabs = () => {
             ),
         );
 
-        setInfoData(MANAGER_INFO);
+
         setDashboardList(DASHBOARD_LIST);
         setDashboardMessageList(DASHBOARD_MESSAGE_LIST);
+        // dispatch(ManagerInfo(jsonData?.clientId, jsonData?.clientType, navigation));
+
         setTimeout(() => {
             setLoader(false);
         }, 2000);
     }, []);
+
+
     useEffect(() => {
-        setInfoData(MANAGER_INFO);
+        console.log('ManagerInfo111', jsonData?.clientId, jsonData?.clientType)
+        dispatch(ManagerInfo(jsonData?.clientId, jsonData?.clientType, navigation));
+
         setDashboardList(DASHBOARD_LIST);
         setDashboardMessageList(DASHBOARD_MESSAGE_LIST);
         dispatch(
@@ -96,16 +106,15 @@ const HeadTabs = () => {
                 navigation,
             ),
         );
-        dispatch(ManagerInfo(jsonData?.clientId, jsonData?.clientType, navigation));
     }, [LOGIN_DATA]);
 
     useEffect(() => {
-        setInfoData(MANAGER_INFO);
+
         setDashboardList(DASHBOARD_LIST);
         setDashboardMessageList(DASHBOARD_MESSAGE_LIST);
     }, []);
     useEffect(() => {
-        setInfoData(MANAGER_INFO);
+
         setDashboardList(DASHBOARD_LIST);
         setDashboardMessageList(DASHBOARD_MESSAGE_LIST);
         dispatch(
@@ -116,6 +125,9 @@ const HeadTabs = () => {
                 navigation,
             ),
         );
+
+        console.log('ManagerInfo2222', jsonData?.clientId, jsonData?.clientType)
+
         dispatch(ManagerInfo(jsonData?.clientId, jsonData?.clientType, navigation));
 
     }, [showwhat1]);
@@ -123,7 +135,7 @@ const HeadTabs = () => {
 
     useEffect(() => {
         // setLoader(true);
-        setInfoData(MANAGER_INFO);
+
         setDashboardList(DASHBOARD_LIST);
         setDashboardMessageList(DASHBOARD_MESSAGE_LIST);
         // setTimeout(() => {
@@ -142,7 +154,7 @@ const HeadTabs = () => {
 
     // console.log(TaxfilteredList, 'TaxfilteredListt')
     return (
-        <View>
+        <View style={{ marginTop: 5 }}>
             <View style={styles.tabsContainer}>
                 <View style={styles.mainTab}>
                     {(() => {
@@ -150,7 +162,7 @@ const HeadTabs = () => {
                             return (
                                 <View style={styles.moblieSec}>
                                     {/* <View style={{ flexDirection: "column", justifyContent: 'space-between' }}> */}
-                                    <View>
+                                    <View style={styles.TabsContainer}>
                                         <TouchableOpacity
                                             style={[
                                                 styles.emailtoch,
@@ -177,18 +189,7 @@ const HeadTabs = () => {
                                             />
 
 
-                                            {/* <Text
-                        style={[
-                          styles.ButtonText,
-                          {
-                            color:
-                              showwhat1 == 'Message'
-                                ? Color.white
-                                : Color.headerIconBG,
-                          },
-                        ]}>
-                        (1)
-                      </Text> */}
+
                                         </TouchableOpacity>
                                         <Text
                                             style={[
@@ -203,7 +204,8 @@ const HeadTabs = () => {
                                             Tax Deadlines
                                         </Text>
                                     </View>
-                                    <View>
+                                    <View style={styles.TabsContainer}>
+
                                         <TouchableOpacity
                                             style={[
                                                 styles.mobiletoch1,
@@ -259,7 +261,8 @@ const HeadTabs = () => {
                                             Messages
                                         </Text>
                                     </View>
-                                    <View>
+                                    <View style={styles.TabsContainer}>
+
                                         <TouchableOpacity
                                             style={[
                                                 styles.mobiletoch1,
@@ -315,7 +318,8 @@ const HeadTabs = () => {
                                             Events
                                         </Text>
                                     </View>
-                                    <View>
+                                    <View style={styles.TabsContainer}>
+
                                         <TouchableOpacity
                                             style={[
                                                 styles.mobiletoch1,
@@ -378,7 +382,8 @@ const HeadTabs = () => {
                             return (
                                 <View style={styles.moblieSec}>
                                     {/* <View style={{ flexDirection: "column", justifyContent: 'space-between' }}> */}
-                                    <View>
+                                    <View style={styles.TabsContainer}>
+
                                         <TouchableOpacity
                                             style={[
                                                 styles.emailtoch,
@@ -429,7 +434,8 @@ const HeadTabs = () => {
                                             Tax Deadlines
                                         </Text>
                                     </View>
-                                    <View>
+                                    <View style={styles.TabsContainer}>
+
                                         <TouchableOpacity
                                             style={[
                                                 styles.mobiletoch1,
@@ -482,7 +488,8 @@ const HeadTabs = () => {
                                             Messages
                                         </Text>
                                     </View>
-                                    <View>
+                                    <View style={styles.TabsContainer}>
+
                                         <TouchableOpacity
                                             style={[
                                                 styles.mobiletoch1,
@@ -530,7 +537,8 @@ const HeadTabs = () => {
                                             Events
                                         </Text>
                                     </View>
-                                    <View>
+                                    <View style={styles.TabsContainer}>
+
                                         <TouchableOpacity
                                             style={[
                                                 styles.mobiletoch1,
@@ -587,7 +595,8 @@ const HeadTabs = () => {
                             return (
                                 <View style={styles.moblieSec}>
                                     {/* <View style={{ flexDirection: "column", justifyContent: 'space-between' }}> */}
-                                    <View>
+                                    <View style={styles.TabsContainer}>
+
                                         <TouchableOpacity
                                             style={[
                                                 styles.emailtoch,
@@ -614,15 +623,7 @@ const HeadTabs = () => {
                                             />
 
 
-                                            {/* <Text
-                        style={[
-                          styles.ButtonText,
-                          {
-                            color: showwhat1 == 'Message' ? '#fff' : '#000',
-                          },
-                        ]}>
-                        (1)
-                      </Text> */}
+
                                         </TouchableOpacity>
                                         <Text
                                             style={[
@@ -634,10 +635,10 @@ const HeadTabs = () => {
                                                             : Color.headerIconBG,
                                                 },
                                             ]}>
-                                            Tax Deadlines
+                                            Tax Deadlines1
                                         </Text>
                                     </View>
-                                    <View>
+                                    <View style={styles.TabsContainer}>
                                         <TouchableOpacity
                                             style={[
                                                 styles.mobiletoch1,
@@ -664,15 +665,7 @@ const HeadTabs = () => {
                                             />
 
 
-                                            {/* <Text
-                        style={[
-                          styles.ButtonText,
-                          {
-                            color: showwhat1 == 'Proposal' ? '#fff' : '#000',
-                          },
-                        ]}>
-                        ({dashboardMessageList.length})
-                      </Text> */}
+
                                         </TouchableOpacity>
                                         <Text
                                             style={[
@@ -687,7 +680,7 @@ const HeadTabs = () => {
                                             Messages
                                         </Text>
                                     </View>
-                                    <View>
+                                    <View style={styles.TabsContainer}>
                                         <TouchableOpacity
                                             style={[
                                                 styles.mobiletoch1,
@@ -712,18 +705,7 @@ const HeadTabs = () => {
                                             />
 
 
-                                            {/* <Text
-                        style={[
-                          styles.ButtonText,
-                          {
-                            color:
-                              showwhat1 == 'Signature'
-                                ? Color.white
-                                : Color.headerIconBG,
-                          },
-                        ]}>
-                        (0)
-                      </Text> */}
+
                                         </TouchableOpacity>
                                         <Text
                                             style={[
@@ -738,7 +720,7 @@ const HeadTabs = () => {
                                             Events
                                         </Text>
                                     </View>
-                                    <View>
+                                    <View style={styles.TabsContainer}>
                                         <TouchableOpacity
                                             style={[
                                                 styles.mobiletoch1,
@@ -795,7 +777,7 @@ const HeadTabs = () => {
                             return (
                                 <View style={styles.moblieSec}>
                                     {/* <View style={{ flexDirection: "column", justifyContent: 'space-between' }}> */}
-                                    <View>
+                                    <View style={styles.TabsContainer}>
                                         <TouchableOpacity
                                             style={[
                                                 styles.emailtoch,
@@ -822,15 +804,7 @@ const HeadTabs = () => {
                                             />
 
 
-                                            {/* <Text
-                        style={[
-                          styles.ButtonText,
-                          {
-                            color: showwhat1 == 'Message' ? '#fff' : '#000',
-                          },
-                        ]}>
-                        (1)
-                      </Text> */}
+
                                         </TouchableOpacity>
                                         <Text
                                             style={[
@@ -845,7 +819,7 @@ const HeadTabs = () => {
                                             Tax Deadlines
                                         </Text>
                                     </View>
-                                    <View>
+                                    <View style={styles.TabsContainer}>
                                         <TouchableOpacity
                                             style={[
                                                 styles.mobiletoch1,
@@ -891,7 +865,7 @@ const HeadTabs = () => {
                                             Messages
                                         </Text>
                                     </View>
-                                    <View>
+                                    <View style={styles.TabsContainer}>
                                         <TouchableOpacity
                                             style={[
                                                 styles.mobiletoch1,
@@ -939,7 +913,7 @@ const HeadTabs = () => {
                                             Events
                                         </Text>
                                     </View>
-                                    <View>
+                                    <View style={styles.TabsContainer}>
                                         <TouchableOpacity
                                             style={[
                                                 styles.mobiletoch1,
@@ -1004,7 +978,7 @@ const HeadTabs = () => {
                             return (
                                 <View style={styles.moblieSec}>
                                     {/* <View style={{ flexDirection: "column", justifyContent: 'space-between' }}> */}
-                                    <View>
+                                    <View style={styles.TabsContainer}>
                                         <TouchableOpacity
                                             style={[
                                                 styles.emailtochO,
@@ -1031,18 +1005,6 @@ const HeadTabs = () => {
                                             />
 
 
-                                            {/* <Text
-                      style={[
-                        styles.ButtonText,
-                        {
-                          color:
-                            showwhat1 == 'Message'
-                              ? Color.white
-                              : Color.headerIconBG,
-                        },
-                      ]}>
-                      (1)
-                    </Text> */}
                                         </TouchableOpacity>
                                         <Text
                                             style={[
@@ -1057,7 +1019,7 @@ const HeadTabs = () => {
                                             Orders
                                         </Text>
                                     </View>
-                                    <View>
+                                    <View style={styles.TabsContainer}>
                                         <TouchableOpacity
                                             style={[
                                                 styles.mobiletoch,
@@ -1113,7 +1075,7 @@ const HeadTabs = () => {
                                             Tax Returns
                                         </Text>
                                     </View>
-                                    <View>
+                                    <View style={styles.TabsContainer}>
                                         <TouchableOpacity
                                             style={[
                                                 styles.mobiletoch,
@@ -1144,17 +1106,17 @@ const HeadTabs = () => {
 
 
                                             {/* <Text
-                      style={[
-                        styles.ButtonText,
-                        {
-                          color:
-                            showwhat1 == 'Signature'
-                              ? Color.white
-                              : Color.headerIconBG,
-                        },
-                      ]}>
-                      (0)
-                    </Text> */}
+                                                style={[
+                                                    styles.ButtonText,
+                                                    {
+                                                    color:
+                                                        showwhat1 == 'Signature'
+                                                        ? Color.white
+                                                        : Color.headerIconBG,
+                                                    },
+                                                ]}>
+                                                (0)
+                                                </Text> */}
                                         </TouchableOpacity>
                                         <Text
                                             style={[
@@ -1164,12 +1126,13 @@ const HeadTabs = () => {
                                                         showwhat1 == 'Message'
                                                             ? Color.headerIconBG
                                                             : Color.headerIconBG,
+                                                    marginLeft: 5
                                                 },
                                             ]}>
                                             BookKeeping
                                         </Text>
                                     </View>
-                                    <View>
+                                    <View style={styles.TabsContainer}>
                                         <TouchableOpacity
                                             style={[
                                                 styles.mobiletoch,
@@ -1191,6 +1154,7 @@ const HeadTabs = () => {
                                                             showwhat2 == 'Gov'
                                                                 ? Color.white
                                                                 : Color.white,
+
                                                     },
                                                 ]}
                                                 name="hand-holding-dollar"
@@ -1200,17 +1164,17 @@ const HeadTabs = () => {
 
 
                                             {/* <Text
-                      style={[
-                        styles.ButtonText,
-                        {
-                          color:
-                            showwhat1 == 'Reminders'
-                              ? Color.white
-                              : Color.headerIconBG,
-                        },
-                      ]}>
-                      (1)
-                    </Text> */}
+                                                style={[
+                                                    styles.ButtonText,
+                                                    {
+                                                    color:
+                                                        showwhat1 == 'Reminders'
+                                                        ? Color.white
+                                                        : Color.headerIconBG,
+                                                    },
+                                                ]}>
+                                                (1)
+                                                </Text> */}
                                         </TouchableOpacity>
                                         <Text
                                             style={[
@@ -1232,7 +1196,7 @@ const HeadTabs = () => {
                             return (
                                 <View style={styles.moblieSec}>
                                     {/* <View style={{ flexDirection: "column", justifyContent: 'space-between' }}> */}
-                                    <View>
+                                    <View style={styles.TabsContainer}>
                                         <TouchableOpacity
                                             style={[
                                                 styles.emailtochO,
@@ -1259,18 +1223,7 @@ const HeadTabs = () => {
                                             />
 
 
-                                            {/* <Text
-                      style={[
-                        styles.ButtonText,
-                        {
-                          color:
-                            showwhat1 == 'Message'
-                              ? Color.white
-                              : Color.headerIconBG,
-                        },
-                      ]}>
-                      (1)
-                    </Text> */}
+
                                         </TouchableOpacity>
                                         <Text
                                             style={[
@@ -1282,10 +1235,10 @@ const HeadTabs = () => {
                                                             : Color.headerIconBG,
                                                 },
                                             ]}>
-                                            Orders
+                                            Orders1
                                         </Text>
                                     </View>
-                                    <View>
+                                    <View style={styles.TabsContainer}>
                                         <TouchableOpacity
                                             style={[
                                                 styles.mobiletoch,
@@ -1315,18 +1268,7 @@ const HeadTabs = () => {
                                             />
 
 
-                                            {/* <Text
-                      style={[
-                        styles.ButtonText,
-                        {
-                          color:
-                            showwhat1 == 'Proposal'
-                              ? Color.white
-                              : Color.headerIconBG,
-                        },
-                      ]}>
-                      ({dashboardMessageList.length})
-                    </Text> */}
+
                                         </TouchableOpacity>
                                         <Text
                                             style={[
@@ -1341,7 +1283,7 @@ const HeadTabs = () => {
                                             Tax Returns
                                         </Text>
                                     </View>
-                                    <View>
+                                    <View style={styles.TabsContainer}>
                                         <TouchableOpacity
                                             style={[
                                                 styles.mobiletoch,
@@ -1392,12 +1334,13 @@ const HeadTabs = () => {
                                                         showwhat1 == 'Message'
                                                             ? Color.headerIconBG
                                                             : Color.headerIconBG,
+                                                    marginLeft: 5
                                                 },
                                             ]}>
                                             Bookkeeping
                                         </Text>
                                     </View>
-                                    <View>
+                                    <View style={styles.TabsContainer}>
                                         <TouchableOpacity
                                             style={[
                                                 styles.mobiletoch,
@@ -1460,7 +1403,7 @@ const HeadTabs = () => {
                             return (
                                 <View style={styles.moblieSec}>
                                     {/* <View style={{ flexDirection: "column", justifyContent: 'space-between' }}> */}
-                                    <View>
+                                    <View style={styles.TabsContainer}>
                                         <TouchableOpacity
                                             style={[
                                                 styles.emailtochO,
@@ -1487,18 +1430,6 @@ const HeadTabs = () => {
                                             />
 
 
-                                            {/* <Text
-                      style={[
-                        styles.ButtonText,
-                        {
-                          color:
-                            showwhat1 == 'Message'
-                              ? Color.white
-                              : Color.headerIconBG,
-                        },
-                      ]}>
-                      (1)
-                    </Text> */}
                                         </TouchableOpacity>
                                         <Text
                                             style={[
@@ -1510,10 +1441,10 @@ const HeadTabs = () => {
                                                             : Color.headerIconBG,
                                                 },
                                             ]}>
-                                            Orders
+                                            Orders2
                                         </Text>
                                     </View>
-                                    <View>
+                                    <View style={styles.TabsContainer}>
                                         <TouchableOpacity
                                             style={[
                                                 styles.mobiletoch,
@@ -1542,18 +1473,7 @@ const HeadTabs = () => {
                                                 color="#fff"
                                             />
 
-                                            {/* <Text
-                      style={[
-                        styles.ButtonText,
-                        {
-                          color:
-                            showwhat1 == 'Proposal'
-                              ? Color.white
-                              : Color.headerIconBG,
-                        },
-                      ]}>
-                      ({dashboardMessageList.length})
-                    </Text> */}
+
                                         </TouchableOpacity>
                                         <Text
                                             style={[
@@ -1568,7 +1488,7 @@ const HeadTabs = () => {
                                             Tax Returns
                                         </Text>
                                     </View>
-                                    <View>
+                                    <View style={styles.TabsContainer}>
                                         <TouchableOpacity
                                             style={[
                                                 styles.mobiletoch,
@@ -1598,18 +1518,7 @@ const HeadTabs = () => {
                                             />
 
 
-                                            {/* <Text
-                      style={[
-                        styles.ButtonText,
-                        {
-                          color:
-                            showwhat1 == 'Signature'
-                              ? Color.white
-                              : Color.headerIconBG,
-                        },
-                      ]}>
-                      (0)
-                    </Text> */}
+
                                         </TouchableOpacity>
                                         <Text
                                             style={[
@@ -1619,12 +1528,13 @@ const HeadTabs = () => {
                                                         showwhat1 == 'Message'
                                                             ? Color.headerIconBG
                                                             : Color.headerIconBG,
+                                                    marginLeft: 5
                                                 },
                                             ]}>
                                             Bookkeeping
                                         </Text>
                                     </View>
-                                    <View>
+                                    <View style={styles.TabsContainer}>
                                         <TouchableOpacity
                                             style={[
                                                 styles.mobiletoch,
@@ -1687,7 +1597,7 @@ const HeadTabs = () => {
                             return (
                                 <View style={styles.moblieSec}>
                                     {/* <View style={{ flexDirection: "column", justifyContent: 'space-between' }}> */}
-                                    <View>
+                                    <View style={styles.TabsContainer}>
                                         <TouchableOpacity
                                             style={[
                                                 styles.emailtochO,
@@ -1714,18 +1624,7 @@ const HeadTabs = () => {
                                             />
 
 
-                                            {/* <Text
-                      style={[
-                        styles.ButtonText,
-                        {
-                          color:
-                            showwhat1 == 'Message'
-                              ? Color.white
-                              : Color.headerIconBG,
-                        },
-                      ]}>
-                      (1)
-                    </Text> */}
+
                                         </TouchableOpacity>
                                         <Text
                                             style={[
@@ -1740,7 +1639,7 @@ const HeadTabs = () => {
                                             Orders
                                         </Text>
                                     </View>
-                                    <View>
+                                    <View style={styles.TabsContainer}>
                                         <TouchableOpacity
                                             style={[
                                                 styles.mobiletoch,
@@ -1770,18 +1669,7 @@ const HeadTabs = () => {
                                             />
 
 
-                                            {/* <Text
-                      style={[
-                        styles.ButtonText,
-                        {
-                          color:
-                            showwhat1 == 'Proposal'
-                              ? Color.white
-                              : Color.headerIconBG,
-                        },
-                      ]}>
-                      ({dashboardMessageList.length})
-                    </Text> */}
+
                                         </TouchableOpacity>
                                         <Text
                                             style={[
@@ -1796,7 +1684,7 @@ const HeadTabs = () => {
                                             Tax Returns
                                         </Text>
                                     </View>
-                                    <View>
+                                    <View style={styles.TabsContainer}>
                                         <TouchableOpacity
                                             style={[
                                                 styles.mobiletoch,
@@ -1847,12 +1735,13 @@ const HeadTabs = () => {
                                                         showwhat1 == 'Message'
                                                             ? Color.headerIconBG
                                                             : Color.headerIconBG,
+                                                    marginLeft: 5
                                                 },
                                             ]}>
                                             Bookkeeping
                                         </Text>
                                     </View>
-                                    <View>
+                                    <View style={styles.TabsContainer}>
                                         <TouchableOpacity
                                             style={[
                                                 styles.mobiletoch,
@@ -2136,25 +2025,33 @@ const styles = StyleSheet.create({
         width: '90%',
         alignSelf: 'center',
     },
+    TabsContainer: {
+        justifyContent: 'center',
+        alignItems: "center",
+        width: wp(22),
+        backgroundColor: "",
+        height: wp(20)
+    },
     moblieSec: {
-        // backgroundColor: "lightgrey",
+        // backgroundColor: "red",
         // height: 20,
-        width: wp(85),
+        width: wp(90),
         // backgroundColor: 'red',
         //backgroundColor: 'red',
-        justifyContent: 'space-between',
+        //  justifyContent: 'space-between',
         alignSelf: 'center',
         borderRadius: 50,
-        // justifyContent: "center",
+
+        justifyContent: "center",
         // alignItems: "center",
-        marginTop: 20,
+        marginTop: 0,
         // marginBottom: 30,
 
         flexDirection: 'row',
         // alignSelf: "center",
     },
     emailtoch: {
-        //  backgroundColor: "lightgray",
+        //  backgroundColor: "yellow",
         width: wp(12),
         height: wp(12),
         paddingTop: 5,
@@ -2177,8 +2074,9 @@ const styles = StyleSheet.create({
     ButtonText: {
 
         textAlign: 'center',
-
-        fontSize: 9,
+        paddingTop: 3,
+        fontSize: 8,
+        fontFamily: 'Poppins-SemiBold',
     },
     mobiletoch: {
         // backgroundColor: showwhat == "My Schools" ? "#2F5597" : "lightgray",
@@ -2190,7 +2088,7 @@ const styles = StyleSheet.create({
         paddingTop: 5,
         borderRadius: 50,
         // justifyContent: 'center',
-        marginLeft: 5
+        // marginLeft: 10
     },
     mobiletoch1: {
         // backgroundColor: showwhat == "My Schools" ? "#2F5597" : "lightgray",
@@ -2202,7 +2100,7 @@ const styles = StyleSheet.create({
         paddingTop: 5,
         borderRadius: 50,
         // justifyContent: 'center',
-        marginRight: 5,
+        // marginRight: 5,
     },
     subHead: {
         marginLeft: 30,

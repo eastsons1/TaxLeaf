@@ -2,6 +2,8 @@ import {
   LOGIN_DATA,
   MY_INFO,
   MANAGER_INFO,
+  OFFICE_INFO,
+  PARTNER_INFO,
   CLIENT_LIST,
   CLIENT_DETAIL,
   REQUEST_INFO,
@@ -16,6 +18,8 @@ const initialstate = {
   LOGIN_DATA: {},
   MY_INFO: {},
   MANAGER_INFO: {},
+  OFFICE_INFO: {},
+  PARTNER_INFO: {},
   CLIENT_LIST: {},
   CLIENT_DETAIL: {},
   REQUEST_INFO: {},
@@ -38,6 +42,10 @@ const TaxLeafReducer = (state = initialstate, action) => {
       return { ...state, MY_INFO: action.payload };
     case MANAGER_INFO:
       return { ...state, MANAGER_INFO: action.payload };
+    case OFFICE_INFO:
+      return { ...state, OFFICE_INFO: action.payload };
+    case PARTNER_INFO:
+      return { ...state, PARTNER_INFO: action.payload };
     case CLIENT_LIST:
       return { ...state, CLIENT_LIST: action.payload };
     case CLIENT_DETAIL:
@@ -49,10 +57,10 @@ const TaxLeafReducer = (state = initialstate, action) => {
 
       return { ...state, REQUEST_INFO_BY_ID: action.payload };
     case FOLDER_LIST:
-      console.log(
-        'himmmm',
-        action.payload,
-      );
+      // console.log(
+      //   'himmmm',
+      //   action.payload,
+      // );
       return { ...state, FOLDER_LIST: action.payload };
     case DOCUMENT_INFO_FOLDER:
 

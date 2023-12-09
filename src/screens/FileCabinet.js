@@ -45,12 +45,14 @@ const FileCabinet = () => {
   const [value, setValue] = useState(null);
   const [value1, setValue1] = useState(null);
   const [period, setPeriod] = useState(null);
+  const [periodValue, setPeriodValue] = useState(null)
   const [year, setYear] = useState(null);
   const [yearText, setYearText] = useState(null);
   const [description, setDescription] = useState(null);
 
   const [isFocus, setIsFocus] = useState(false);
   const [loader, setLoader] = useState(false);
+  const [FilesInFolder, setFIlesInFolder] = useState()
   const [filteredReq, setFilteredReq] = useState();
   const [docTypeById, setDocTypeById] = useState();
   const [base64File, setBase64File] = useState();
@@ -61,8 +63,8 @@ const FileCabinet = () => {
   const { DOCUMENT_INFO_FOLDER } = useSelector(state => state.TaxLeafReducer)
   const { FILE_UPLOAD_TOKEN } = useSelector(state => state.TaxLeafReducer)
   const { FILE_INFO } = useSelector(state => state.TaxLeafReducer)
-  console.log(FILE_UPLOAD_TOKEN, 'FILE_UPLOAD_TOKEN')
-  console.log(FILE_INFO, 'FILE_INFOFILE_INFOFILE_INFOFILE_INFO')
+  //console.log(FILE_UPLOAD_TOKEN, 'FILE_UPLOAD_TOKEN')
+  //console.log(FILE_INFO, 'FILE_INFO')
 
   const bgImage = require('../Assets/img/guest_shape.png');
   // console.log(docTypeById, 'docTypeById')
@@ -77,7 +79,9 @@ const FileCabinet = () => {
   const isPeriodPresent = value1?.variables.includes("period");
   const isdescriptionPresent = value1?.variables.includes("description");
   const documentsLibraryId = FILE_UPLOAD_TOKEN?.librarylist?.find(library => library?.name === 'Documents')?.id;
-
+  const referenceFiles = FILE_INFO[0]?.referenceFiles
+  const UploadedByName = MY_INFO?.staffview?.firstName + ' ' + MY_INFO?.staffview?.lastName
+  const UploadedBy = MY_INFO?.staffview?.id
   console.log(documentsLibraryId, 'documentsLibraryId')
   // console.log(MY_INFO, 'jsonData')
 
@@ -132,7 +136,7 @@ const FileCabinet = () => {
     return null;
   };
 
-  console.log(filteredReq, 'filteredReq');
+  //console.log(filteredReq, 'filteredReq');
 
   // console.log(selectedData, 'selll');
   const data = [
@@ -316,12 +320,84 @@ const FileCabinet = () => {
     // setInfoData(CLIENT_LIST);
   }, [documentId]);
 
-  const submitUpload = () => {
-    dispatch(
-      uploadFile(MY_INFO, value?.azureFolderName, value1?.documentType, year, period, description, base64File, FILE_UPLOAD_TOKEN?.accessToken, documentsLibraryId, navigation),
+  // const submitUpload = () => {
+  //   setLoader(true);
+  //   dispatch(
+  //     uploadFile(MY_INFO, value?.azureFolderName, value1?.documentType, year, period, description, base64File, FILE_UPLOAD_TOKEN?.accessToken, documentsLibraryId, navigation),
+  //   );
+  //   dispatch(
+  //     getFileInfo(jsonData?.clientId, jsonData?.clientType, navigation),
+  //   );
+  //   cancelModal()
+
+  //   setTimeout(() => {
+  //     setLoader(false);
+  //   }, 2000);
+  //   // cancelModal()
+  // }
+
+
+  // const submitUpload = async () => {
+  //   setLoader(true);
+  //   await dispatch(
+  //     uploadFile(
+  //       MY_INFO,
+  //       value?.azureFolderName,
+  //       value1?.documentType,
+  //       year,
+  //       period,
+  //       description,
+  //       base64File,
+  //       FILE_UPLOAD_TOKEN?.accessToken,
+  //       documentsLibraryId,
+  //       navigation
+  //     )
+  //   );
+
+  //   await dispatch(getFileInfo(jsonData?.clientId, jsonData?.clientType, navigation));
+
+  //   // Access numberOfMatchingResults after getFileInfo has completed
+  //   const numberOfMatchingResults = FILE_INFO[0]?.referenceFiles
+  //     ?.filter(file => file.sharepointFolderName === selectedData?.azureFolderName)?.length;
+
+  //   console.log(numberOfMatchingResults, 'numberOfMatchingResults');
+
+  //   setLoader(false);
+  //   cancelModal();
+  // };
+
+  const submitUpload = async () => {
+    setLoader(true);
+    await dispatch(
+      uploadFile(
+        MY_INFO,
+        value?.azureFolderName,
+        value1?.documentType,
+        year,
+        period,
+        description,
+        base64File,
+        FILE_UPLOAD_TOKEN?.accessToken,
+        documentsLibraryId,
+        periodValue,
+        UploadedByName,
+        UploadedBy,
+        navigation
+      )
     );
-    // cancelModal()
-  }
+
+    await dispatch(getFileInfo(jsonData?.clientId, jsonData?.clientType, navigation));
+
+    // Access numberOfMatchingResults after getFileInfo has completed
+    const numberOfMatchingResults = FILE_INFO[0]?.referenceFiles
+      ?.filter(file => file.sharepointFolderName === selectedData?.azureFolderName)?.length;
+
+    // console.log(numberOfMatchingResults, 'numberOfMatchingResults');
+
+    setLoader(false);
+    cancelModal();
+  };
+
   useEffect(() => {
     documentTypes(value)
   }, [value])
@@ -338,15 +414,45 @@ const FileCabinet = () => {
       generateFileToken()
     )
   }, [])
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      setLoader(true);
+      dispatch(
+        getFileInfo(jsonData?.clientId, jsonData?.clientType, navigation),
+      );
+      setTimeout(() => {
+        setLoader(false);
+      }, 2000);
+
+    });
+    return unsubscribe;
+  }, [navigation]);
+
+  function getFilesByFolder(azureFolderName, referenceFiles) {
+    const matchingFiles = referenceFiles?.filter(file => file.sharepointFolderName === azureFolderName)?.map(file => file?.fileName);
+
+    return matchingFiles;
+  }
+  useEffect(() => {
+    const filesInFolder = getFilesByFolder(selectedData?.azureFolderName, referenceFiles);
+    setFIlesInFolder(filesInFolder)
+    console.log(filesInFolder, 'filesInFolder')
+  }, [selectedData])
+
 
   const renderItem = ({ item }) => {
 
     const referenceFiles = FILE_INFO[0]?.referenceFiles
+
+
     const matchingReferenceFiles = referenceFiles?.filter(
-      (file) => file.sharepointFolderName === item?.azureFolderName
+      (file) => file.sharepointFolderName.trim().toLowerCase() === item?.azureFolderName.trim().toLowerCase()
     );
+
     const numberOfMatchingResults = matchingReferenceFiles?.length;
-    console.log(numberOfMatchingResults, 'numberOfMatchingResults')
+    const matchingLeafCloud = referenceFiles?.filter(file => file.sharepointFolderName.trim().toLowerCase() === item?.azureFolderName.trim().toLowerCase())?.map(file => file?.uploadedFrom);
+
+
     return (
       <>
         {
@@ -359,15 +465,15 @@ const FileCabinet = () => {
                 backgroundColor:
                   idRow == item.id && press == true ? '#fff' : '#fff', borderBottomWidth: 1, borderColor: '#d0e4e6'
               }}>
-              <DataTable.Cell style={{ flex: 3 }}  >
+              <DataTable.Cell style={{ flex: 2 }}  >
                 <Text
                   style={{
                     fontSize: 12,
                     color:
                       idRow == item.id && press == true
                         ? '#2F4050'
-                        : '#676A6C',
-                    fontWeight: '700'
+                        : Color.headerIconBG,
+                    fontFamily: 'Poppins-SemiBold'
                   }}>
                   {item?.azureRenameFolderName1}
                 </Text>
@@ -376,27 +482,31 @@ const FileCabinet = () => {
                 <Text
                   style={{
                     fontSize: 12,
+                    fontFamily: 'Poppins-SemiBold',
                     width: 20,
                     color:
                       idRow == item.id && press == true
                         ? '#2F4050'
                         : '#676A6C',
                   }}>
-                  {numberOfMatchingResults}
+
+                  {/* {item?.status} */}
+                  {matchingLeafCloud?.includes("Admin") ? 1 : 0}
                 </Text>
               </DataTable.Cell>
               <DataTable.Cell style={{ width: wp(30), alignItems: "center", justifyContent: "center" }}>
                 <Text
                   style={{
                     fontSize: 12,
+                    fontFamily: 'Poppins-SemiBold',
                     color:
                       idRow == item.id && press == true
                         ? '#2F4050'
                         : '#676A6C',
                   }}>
                   {/* {idRow == item.id && press == true && DOCUMENT_INFO_FOLDER ? DOCUMENT_INFO_FOLDER.length : '0'} */}
+                  {numberOfMatchingResults}
 
-                  {item?.status}
                 </Text>
               </DataTable.Cell>
             </DataTable.Row>
@@ -432,9 +542,11 @@ const FileCabinet = () => {
 
 
               </DataTable.Header>
+
+
               <FlatList
                 contentContainerStyle={{ paddingBottom: 200 }}
-                data={DOCUMENT_INFO_FOLDER}
+                data={FilesInFolder}
                 // numColumns={5}
                 keyExtractor={(item, index) => index}
                 renderItem={({ item, index }) => (
@@ -445,16 +557,21 @@ const FileCabinet = () => {
                         idRow == item.id && press == true ? '#e8f1f2' : '#e8f1f2',
                     }}>
                     <DataTable.Cell style={{ flex: 3 }}  >
-                      <Image source={require('../Assets/img/icons/smallFile.png')} />&nbsp;&nbsp;
+                      <Image source={require('../Assets/img/icons/smallFile.png')}
+
+                        style={{ height: 10, width: 10, }} />
                       <Text
                         style={{
+
                           fontSize: 12,
+                          fontFamily: 'Poppins-SemiBold',
                           color:
                             idRow == item.id && press == true
                               ? '#2F4050'
                               : '#676A6C',
+
                         }}>
-                        {item?.documentType}
+                        {item}
                       </Text>
                     </DataTable.Cell>
 
@@ -462,7 +579,8 @@ const FileCabinet = () => {
                       <Text
                         style={{
                           fontSize: 12,
-                          width: 20,
+                          fontFamily: 'Poppins-SemiBold',
+
                           color:
                             idRow == item.id && press == true
                               ? '#2F4050'
@@ -503,13 +621,15 @@ const FileCabinet = () => {
                   </Text> */}
             <View
               style={{
-                width: '91%',
+                width: wp(90),
+                // backgroundColor: "red",
+                alignSelf: "center",
                 //     justifyContent: 'center',
                 //  alignSelf: 'center',
                 flexDirection: 'row',
                 justifyContent: 'space-between',
                 // marginBottom: 20,
-                marginTop: 20,
+
               }}>
 
 
@@ -517,13 +637,13 @@ const FileCabinet = () => {
                 style={{
                   flexDirection: 'column',
                   justifyContent: 'flex-end',
-                  width: wp(65),
-                  marginTop: 5,
-                  marginLeft: 10,
+                  width: wp(45),
+                  //  marginTop: 5,
+                  //marginLeft: 10,
                   // marginBottom: wp(5),
                 }}>
                 {/* <Image source={usericon} style={{ width: 20, height: 20 }} /> */}
-                <Text style={{ fontSize: 22, fontWeight: '700', marginBottom: 7 }}>File Cabinet</Text>
+                <Text style={{ fontSize: 20, fontFamily: 'Poppins-Bold', }}>File Cabinet</Text>
                 <Text style={styles.client}>Client ID : EASTSONSPRI</Text>
               </View>
               <TouchableOpacity
@@ -531,31 +651,33 @@ const FileCabinet = () => {
                 style={{
                   flexDirection: 'row',
                   justifyContent: 'center',
-                  // width: wp(27),
-                  padding: 5,
+                  width: wp(30),
+                  // padding: 5,
+                  alignItems: "center",
                   borderRadius: 20,
                   marginLeft: 15,
+
                   // marginBottom: wp(2),
                   backgroundColor: '#fff',
-                  paddingHorizontal: 10,
+                  //paddingHorizontal: 10,
                   height: hp(5),
                   marginTop: 10
                 }}>
-                <Image source={require('../Assets/img/icons/createAction.png')} style={{ width: 20, height: 20, alignSelf: 'center' }} />
-                <Text style={[styles.client, { alignSelf: 'center', marginLeft: 5, fontWeight: '700' }]}>Add File</Text>
+                <Image source={require('../Assets/img/icons/createAction.png')} style={{ width: 25, height: 25, alignSelf: 'center' }} />
+                <Text style={[styles.client, { alignSelf: 'center', fontSize: 12, paddingTop: 3, paddingLeft: 5, fontFamily: 'Poppins-Bold', }]}>Add File</Text>
               </TouchableOpacity>
             </View>
 
-            <View>
-              <DataTable style={styles.container1}>
-                <DataTable.Header style={styles.tableHeader}>
-                  <DataTable.Title style={{ flex: 3 }}>
+            <View style={{ width: wp(90), alignSelf: "center" }}>
+              <DataTable style={{}}>
+                <DataTable.Header style={{ backgroundColor: Color.green }}>
+                  <DataTable.Title style={{ flex: 2, width: wp(40) }}>
                     <Text style={styles.headerText}>Folder Name</Text>
                   </DataTable.Title>
-                  <DataTable.Title>
+                  <DataTable.Title style={{ justifyContent: "center", width: wp(20) }}>
                     <Text style={styles.headerText}>Leafcloud</Text>
                   </DataTable.Title>
-                  <DataTable.Title>
+                  <DataTable.Title style={{ justifyContent: 'flex-end', width: wp(20) }}>
                     <Text style={styles.headerText}>My Files</Text>
                   </DataTable.Title>
                 </DataTable.Header>
@@ -704,6 +826,7 @@ const FileCabinet = () => {
                           onBlur={() => setIsFocus(false)}
                           onChange={item => {
                             setPeriod(item.label);
+                            setPeriodValue(item.value);
                             setIsFocus(false);
                           }}
 
@@ -788,8 +911,8 @@ const FileCabinet = () => {
             </View>
           </Modal>
         </ScrollView>
-      </View>
-    </SafeAreaView>
+      </View >
+    </SafeAreaView >
   );
 };
 
@@ -800,7 +923,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   container1: {
-    width: '95%',
+    width: wp(90),
+    backgroundColor: Color.green,
     alignSelf: 'center'
   },
   popupHead: {
@@ -811,7 +935,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#2F4050',
     padding: 10,
     height: wp(12),
-    fontWeight: '700'
+    fontFamily: 'Poppins-SemiBold'
   },
   Subheading: {
     fontSize: 20,
@@ -841,24 +965,23 @@ const styles = StyleSheet.create({
   },
 
   row: { flexDirection: 'row', alignItems: 'baseline', width: wp(100) },
-  tableHeader: {
-    backgroundColor: '#8fc461',
 
-  },
   tableHeader1: {
     backgroundColor: 'lightblue',
   },
 
   headerText: {
     color: '#fff',
-    fontWeight: '700',
-    width: wp(30),
-    alignItems: 'center',
-    justifyContent: 'center'
+    fontFamily: 'Poppins-SemiBold',
+    fontSize: 14
+    //width: wp(30),
+    // backgroundColor: "red",
+    //alignItems: 'center',
+    // justifyContent: 'center'
   },
   headerText1: {
     color: '#444747',
-    fontWeight: '700'
+    fontFamily: 'Poppins-SemiBold'
   },
   header: {
     fontSize: 28,
@@ -872,7 +995,7 @@ const styles = StyleSheet.create({
 
   client: {
     fontSize: 12,
-    fontWeight: '700'
+    fontFamily: 'Poppins-SemiBold'
   },
 
   centeredView: {

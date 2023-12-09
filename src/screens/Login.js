@@ -151,24 +151,13 @@ const Login = () => {
     console.log(config, 'OOOOOOOO')
     //if (email) {
 
+    setLoader(true)
 
 
     console.log("Before authorize");
     try {
       console.log('LLLLLLLLLLJJJJJJJJJJJJJ')
       let tempResult = await authorize(config);
-      const idToken = tempResult.idToken;
-
-
-
-      const decodedToken = JSON.parse(decode(idToken.split('.')[1]));
-
-      //const decodedToken = jwtDecode(name);
-
-      // Extract user's email
-      const userEmail = decodedToken.email;
-
-      console.log('User Email:', userEmail, decodedToken);
 
       //  const userEmail = tempResult.additionalParameters;
       //  console.log('User email:', userEmail);
@@ -176,6 +165,18 @@ const Login = () => {
 
       if (tempResult) {
         setLoader(true)
+
+        const idToken = tempResult.idToken;
+        const decodedToken = JSON.parse(decode(idToken.split('.')[1]));
+
+        //const decodedToken = jwtDecode(name);
+
+        // Extract user's email
+        const userEmail = decodedToken.email;
+
+        console.log('User Email:', userEmail, decodedToken);
+
+
         dispatch(LoginUser(userEmail, navigation));
         // dispatch(LoginUser(email, navigation));
         // AsyncStorage.setItem('login', JSON.stringify(tempResult.accessToken));

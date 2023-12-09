@@ -229,10 +229,10 @@ export const ClientInfoList =
         },
       };
       const response = await logistical.post('/Staff/GetAssociateList', data);
-      console.log(
-        response.associateListInfo,
-        'ClientLIstClientLIstClientLIstClientLIst',
-      );
+      // console.log(
+      //   response.associateListInfo,
+      //   'ClientLIstClientLIstClientLIstClientLIst',
+      // );
 
       if (response) {
         // AsyncStorage.setItem('login', JSON.stringify(response.token));
@@ -277,9 +277,9 @@ export const RequestInfoList = (clientId, navigation) => dispatch => {
         ClientId: clientId,
       },
     };
-    console.log(data, 'requestPayload')
+    //console.log(data, 'requestPayload')
     const response = await logistical.post('/Staff/GetAllRequest', data);
-    console.log(response, 'GetAllRequestInfo');
+    // console.log(response, 'GetAllRequestInfo');
 
     if (response) {
       // AsyncStorage.setItem('login', JSON.stringify(response.token));

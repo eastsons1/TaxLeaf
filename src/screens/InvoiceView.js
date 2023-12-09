@@ -99,7 +99,7 @@ export default InvoiceView = ({ route }) => {
                 </View>
                 <View style={styles.invoiceInfoContainer}>
                     <View style={styles.invoiceInfo}>
-                        <Text style={styles.label}>Order Id:</Text>
+                        <Text style={styles.label}>Order ID:</Text>
                         <Text style={styles.text}>{collectionInfo?.orderId}</Text>
                     </View>
                     <View style={styles.invoiceInfo}>
@@ -159,7 +159,7 @@ export default InvoiceView = ({ route }) => {
                 </View>
 
                 <View style={styles.slideContainerClient1}>
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '95%', alignSelf: 'center', marginBottom: 10 }}>
+                    <View style={{ paddingLeft: 10, width: wp(90), alignSelf: 'center', marginBottom: 10 }}>
                         <Text style={styles.headingClient}>Invoice Items</Text>
 
                     </View>
@@ -167,23 +167,28 @@ export default InvoiceView = ({ route }) => {
                     <View style={styles.contentView1}>
                         <View style={styles.item} >
                             <Text style={[styles.itemName, {
-                                fontWeight: 'bold', color: '#fff', padding: 8
+                                fontFamily: 'Poppins-Bold', color: '#fff', fontSize: 12,
                             }]}>#Order</Text>
                             <Text style={[styles.itemDetails, {
-                                fontWeight: 'bold', color: '#fff', padding: 8
+                                fontFamily: 'Poppins-Bold', color: '#fff', fontSize: 12,
                             }]}>
                                 Period
                             </Text>
                             <Text style={[styles.Price, {
-                                fontWeight: 'bold', color: '#fff', padding: 8
+                                fontFamily: 'Poppins-Bold', color: '#fff', fontSize: 12,
                             }]}>Price</Text>
                             <Text style={[styles.Quantity, {
-                                fontWeight: 'bold', color: '#fff', padding: 8
+                                fontFamily: 'Poppins-Bold', color: '#fff', fontSize: 12,
                             }]}>Quantity</Text>
-                            <Text style={[styles.Final, {
-                                fontWeight: 'bold', color: '#fff'
+                            <View
+                                style={styles.Final}
+                            >
+                                <Text style={{
+                                    fontFamily: 'Poppins-Bold', color: '#fff', fontSize: 12,
+                                    textAlign: "center"
+                                }}>Final Price</Text>
+                            </View>
 
-                            }]}>Final Price</Text>
 
                         </View>
                     </View>
@@ -208,10 +213,10 @@ export default InvoiceView = ({ route }) => {
                 </View>
 
                 <View style={styles.divider} />
-                <View style={styles.totalContainer}>
+                {/* <View style={styles.totalContainer}>
                     <Text style={styles.label}>Total:</Text>
                     <Text style={styles.total1}>${totalPriceCharged}</Text>
-                </View>
+                </View> */}
                 <View style={{ flexDirection: 'row', alignSelf: 'center', marginTop: 20 }}>
                     <TouchableOpacity
                         style={{
@@ -230,7 +235,14 @@ export default InvoiceView = ({ route }) => {
                     >
                         <Image source={require('../Assets/img/icons/printInvoice.png')} style={{ marginRight: 6 }} />
 
-                        <Text >
+                        <Text
+                            style={{
+
+                                fontSize: 12,
+                                textAlign: "center",
+                                fontFamily: 'Poppins-Bold',
+                            }}
+                        >
                             Print
                         </Text>
                     </TouchableOpacity>
@@ -251,7 +263,15 @@ export default InvoiceView = ({ route }) => {
                     >
                         <Image source={require('../Assets/img/icons/downloadInvoice.png')} style={{ marginRight: 3 }} />
 
-                        <Text style={{ marginTop: 2, color: '#fff' }} >
+                        <Text style={{
+
+
+                            fontSize: 12,
+                            textAlign: "center",
+                            fontFamily: 'Poppins-Bold',
+
+                            marginTop: 2, color: '#fff'
+                        }} >
 
                             Download
                         </Text>
@@ -273,7 +293,14 @@ export default InvoiceView = ({ route }) => {
                     >
                         <Image source={require('../Assets/img/icons/payInvoice.png')} style={{ marginRight: 2 }} />
 
-                        <Text >
+                        <Text
+                            style={{
+                                fontSize: 12,
+                                textAlign: "center",
+                                fontFamily: 'Poppins-Bold',
+
+                            }}
+                        >
                             Pay Now
                         </Text>
                     </TouchableOpacity>
@@ -298,25 +325,28 @@ const styles = StyleSheet.create({
         // alignItems: 'center',
     },
     title: {
-        fontSize: 24,
-        fontWeight: 'bold',
+        fontSize: 20,
+        color: Color.headerIconBG,
+        fontFamily: 'Poppins-Bold',
         padding: 5
 
     },
     invoiceInfoContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginTop: 10,
+        // marginTop: 10,
     },
     invoiceInfo: {
         flexDirection: 'row',
     },
     label: {
-        fontSize: 15,
-        fontWeight: 'bold',
+        fontSize: 14,
+
+        fontFamily: 'Poppins-Bold',
     },
     text: {
         marginLeft: 5,
+        fontFamily: 'Poppins-Bold',
         // marginTop: 4
     },
     divider: {
@@ -341,36 +371,48 @@ const styles = StyleSheet.create({
     },
     item: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        alignItems: "center",
+        paddingLeft: 10
+        // justifyContent: 'space-between',
         // marginVertical: 5,
     },
     itemName: {
-        fontSize: 13,
-        width: wp(20),
+        fontSize: 10,
+        textAlign: "center",
+        fontFamily: 'Poppins-SemiBold',
+        width: wp(17),
         color: Color.darkGreen
     },
     itemDetails: {
-        fontSize: 13,
+        fontSize: 10,
+        textAlign: "center",
+        fontFamily: 'Poppins-SemiBold',
         color: Color.darkGreen,
 
-        width: wp(15)
+        width: wp(17)
     },
     Price: {
-        fontSize: 13,
+        fontSize: 10,
+        textAlign: "center",
+        fontFamily: 'Poppins-SemiBold',
         color: Color.darkGreen,
 
-        width: wp(15)
+        width: wp(17)
 
     },
     Quantity: {
-        fontSize: 13,
+        fontSize: 10,
+        textAlign: "center",
+        fontFamily: 'Poppins-SemiBold',
         color: Color.darkGreen,
 
-        width: wp(19)
+        width: wp(17)
 
     },
     itemTotal: {
-        fontSize: 13,
+        fontSize: 10,
+        textAlign: "center",
+        fontFamily: 'Poppins-SemiBold',
         color: Color.darkGreen,
 
         width: wp(15)
@@ -414,6 +456,8 @@ const styles = StyleSheet.create({
     },
     LIstText2: {
         color: '#6a6a6a',
+        fontSize: 12,
+        fontFamily: 'Poppins-Bold',
     },
 
     subHead: {
@@ -423,7 +467,7 @@ const styles = StyleSheet.create({
         color: '#000'
     },
     headingClient: {
-        fontSize: 17,
+        fontSize: 16,
         fontFamily: 'Poppins-Bold',
         // maxWidth:'80%',
         color: '#fff',
@@ -449,6 +493,7 @@ const styles = StyleSheet.create({
         backgroundColor: Color.geen,
         marginTop: 1,
         // padding: 10,
+        width: wp(90),
         flexDirection: 'row',
         // borderRadius: 20,
         // marginLeft: 10,
@@ -458,7 +503,9 @@ const styles = StyleSheet.create({
         // height: 50,
         backgroundColor: '#fff',
         marginTop: 1,
-        padding: 10,
+        width: wp(100),
+        height: wp(15),
+        // padding: 10,
         flexDirection: 'row',
         // borderRadius: 20,
         // marginLeft: 10,
@@ -466,9 +513,17 @@ const styles = StyleSheet.create({
     },
     Final: {
         backgroundColor: 'gray',
-        height: hp(7),
-        width: wp(25),
-        paddingTop: 8,
-        paddingLeft: 4
+        height: 50,
+        width: wp(20),
+
+
+        //  alignItems: "center",
+        justifyContent: "center"
+
+
+
+
+
+
     }
 });

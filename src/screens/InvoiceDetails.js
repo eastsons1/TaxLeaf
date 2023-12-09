@@ -97,14 +97,14 @@ export default InvoiceDetails = ({ route }) => {
 
 
                 <View style={styles.invoiceInfoContainer}>
-                    <View style={[styles.header, { flexDirection: 'row', justifyContent: 'space-between', width: '100%' }]}>
+                    <View style={[styles.header, { flexDirection: 'row', justifyContent: 'space-between', width: wp(90) }]}>
                         <Text style={styles.title}>Invoice</Text>
                         <View style={styles.invoiceInfo}>
-                            <Text style={{ fontSize: 15, fontWeight: '700', marginTop: 12 }}>Back To Dashboard</Text>
+                            <Text style={{ fontSize: 15, fontFamily: 'Poppins-Bold', marginTop: 12 }}>Back To Dashboard</Text>
                         </View>
                     </View>
                     <View style={styles.invoiceInfo}>
-                        <Text style={[styles.label, { marginLeft: 5 }]}>Order Id:</Text>
+                        <Text style={[styles.label, { marginLeft: 5 }]}>Order ID:</Text>
                         <Text style={styles.text}>{collectionInfo?.orderId}</Text>
                     </View>
 
@@ -112,7 +112,7 @@ export default InvoiceDetails = ({ route }) => {
                 </View>
                 {/* <View style={styles.divider} /> */}
                 <View style={styles.slideContainerClient}>
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '95%', alignSelf: 'center', marginBottom: 10 }}>
+                    <View style={{ width: wp(85), alignSelf: 'center', marginBottom: 10 }}>
                         <Text style={styles.headingClient}>Invoice Details</Text>
 
                     </View>
@@ -222,7 +222,7 @@ export default InvoiceDetails = ({ route }) => {
                             {companyClientContactInfo?.email1}
                         </Text>
                     </View>
-                    <View style={[styles.contentView, { height: hp(8) }]}>
+                    <View style={[styles.contentView, {}]}>
                         <Text style={styles.subHead}>Address:</Text>
 
                         <Text style={styles.LIstText2}>
@@ -251,8 +251,8 @@ const styles = StyleSheet.create({
         // alignItems: 'center',
     },
     title: {
-        fontSize: 24,
-        fontWeight: 'bold',
+        fontSize: 20,
+        fontFamily: 'Poppins-Bold',
         padding: 5
 
     },
@@ -265,15 +265,16 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     label: {
-        fontSize: 15,
-        fontWeight: 'bold',
+        fontSize: 14,
+        fontFamily: 'Poppins-Bold'
     },
     text: {
         marginLeft: 5,
+        fontFamily: 'Poppins-Bold'
         // marginTop: 4
     },
     divider: {
-        borderBottomColor: '#ccc',
+        borderColor: '#d0e4e6',
         borderBottomWidth: 1,
         // marginVertical: 20,
     },
@@ -368,19 +369,27 @@ const styles = StyleSheet.create({
 
     LIstText2: {
         color: 'rgba(106,106,106,255)',
+        fontFamily: 'Poppins-SemiBold',
         width: wp(40),
-        height: hp(10)
+        fontSize: 12,
+
+        alignSelf: "center",
+        // backgroundColor: 'yellow',
+        //height: hp(10)
     },
 
     subHead: {
-        width: 150,
-        fontSize: 15,
-        fontWeight: '600',
+        width: wp(40),
+        fontSize: 12,
+        // backgroundColor: "red",
+        paddingLeft: 10,
+        fontFamily: 'Poppins-SemiBold',
+        //  backgroundColor: "red",
         color: Color.headerIconBG
     },
     headingClient: {
-        fontSize: 15,
-        fontFamily: 'Poppins-Bold',
+        fontSize: 14,
+        fontFamily: 'Poppins-SemiBold',
         // maxWidth:'80%',
         color: '#fff',
         // height:40,
@@ -392,9 +401,15 @@ const styles = StyleSheet.create({
     },
     contentView: {
         height: 40,
+        width: wp(90),
+        borderColor: '#d0e4e6',
+        borderBottomWidth: 0.5,
+        // backgroundColor: "green",
         backgroundColor: '#fff',
-        marginTop: 1,
-        padding: 10,
+        alignItems: 'center',
+        // marginTop: 1,
+        justifyContent: 'space-between',
+        // padding: 10,
         flexDirection: 'row',
         // borderRadius: 20,
         // marginLeft: 10,

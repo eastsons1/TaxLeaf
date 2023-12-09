@@ -40,6 +40,7 @@ import ViewOrder from '../screens/ViewOrder';
 import InvoiceView from '../screens/InvoiceView';
 import ViewRequest from '../screens/ViewRequest';
 import SplashScreen from '../screens/SplashScreen';
+import InvoiceDetails from '../screens/InvoiceDetails';
 
 enableScreens();
 
@@ -209,8 +210,10 @@ function MyTabBar({ state, descriptors, navigation }) {
 
           {
             isFocused
-              ? (iconNm = require('../Assets/img/icons/dots-green.png'))
-              : (iconNm = require('../Assets/img/icons/dots-white.png'));
+              ? (iconNm = require('../Assets/img/icons/product-request-green.png'))
+              // : (iconNm = require('../Assets/img/icons/dots-white.png'));
+              : (iconNm = require('../Assets/img/icons/product-request.png'));
+
           }
         }
         // if (label == "Tab3") {
@@ -504,6 +507,13 @@ function PaymentScreenStack() {
       <Stack.Screen
         name="ViewOrder"
         component={ViewOrder}
+        options={{
+          header: () => <CustomHeader />, // Include the custom header
+        }}
+      />
+      <Stack.Screen
+        name="InvoiceDetails"
+        component={InvoiceDetails}
         options={{
           header: () => <CustomHeader />, // Include the custom header
         }}

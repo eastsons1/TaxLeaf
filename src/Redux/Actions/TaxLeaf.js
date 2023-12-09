@@ -2,6 +2,8 @@ import {
   LOGIN_DATA,
   MY_INFO,
   MANAGER_INFO,
+  OFFICE_INFO,
+  PARTNER_INFO,
   CLIENT_LIST,
   CLIENT_DETAIL,
   REQUEST_INFO,
@@ -38,16 +40,16 @@ export const LoginUser = (email, navigation) => dispatch => {
 
     if (response.statusCode == 200) {
       AsyncStorage.setItem('login', JSON.stringify(response.token));
-      AsyncStorage.setItem('response', JSON.stringify(response));
+      AsyncStorage.setItem('response', response.staffview.user);
       // console.log(response.token, 'token');
       console.log(
-        response,
+        response.staffview.user,
         'staffviewinfostaffviewinfostaffviewinfostaffviewinfo',
       );
 
       dispatch({
         type: LOGIN_DATA,
-        payload: response,
+        payload: response.staffview.user,
       });
 
       //   Alert.alert(response.response[0])
@@ -75,7 +77,7 @@ export const LoginUser = (email, navigation) => dispatch => {
 export const clientInfo = (email, navigation) => dispatch => {
   //console.log(email, 'clientInfoclientInfoclientInfoclientInfoclientInfoLLLLLLLLLLLLL')
 
-
+  console.log(email, 'IIIIIIIIIIIIIIIIII')
   // dispatch({
   //   type: 'LOADING',
   //   payload: true,
@@ -88,13 +90,16 @@ export const clientInfo = (email, navigation) => dispatch => {
       },
     };
     const response = await logistical.post('/Staff/GetStaffById', data);
-    //console.log(response, 'respppClientInforespppClientInfo');
+    // console.log(response, 'respppClientInforespppClientInfo');
 
     if (response.failureStatus == false) {
       // console.log(
-      //   response,
+      //   response.guestInfo,
       //   'guestInfoguestInfoguestInfoguestInfoguestInfoguestInfoguestInfoguestInfoguestInfo',
+
       // );
+
+
       // AsyncStorage.setItem('login', JSON.stringify(response.token));
 
       dispatch({
@@ -138,7 +143,7 @@ export const client_Detail = (ClinetId, ClinetType, navigation) => dispatch => {
       },
     };
     const response = await logistical.post('/Staff/IndividualClientInfo', data);
-    //  console.log(response, 'client_Detailclient_Detailclient_Detail');
+    console.log(response, 'client_Detailclient_Detailclient_Detail');
 
     if (response.failureStatus == false) {
       // console.log(
@@ -176,6 +181,8 @@ export const client_Detail = (ClinetId, ClinetType, navigation) => dispatch => {
 };
 
 export const ManagerInfo = (clientId, clientType, navigation) => dispatch => {
+
+  console.log(clientId, clientType, 'clientId,clientType')
   // dispatch({
   //   type: 'LOADING',
   //   payload: true,
@@ -189,15 +196,27 @@ export const ManagerInfo = (clientId, clientType, navigation) => dispatch => {
       },
     };
     const response = await logistical.post('/Staff/GetManagerInfo', data);
-    console.log(response.managerInfo, 'managerInfomanagerInfomanagerInfo');
+    //console.log(response.managerInfo, 'managerInfomanagerInfomanagerInfomanagerInfo');
+    //console.log(response.officeInfo, 'officeInfoofficeInfoofficeInfo');
+    //console.log(response, 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
 
     if (response) {
       // AsyncStorage.setItem('login', JSON.stringify(response.token));
-      console.log(response, 'managerInfomanagerInfomanagerInfo');
+      //  console.log(response, 'managerInfomanagerInfomanagerInfo');
 
       dispatch({
         type: MANAGER_INFO,
-        payload: response,
+        payload: response.managerInfo,
+      });
+
+      dispatch({
+        type: OFFICE_INFO,
+        payload: response.officeInfo,
+      });
+
+      dispatch({
+        type: PARTNER_INFO,
+        payload: response.partnerInfo,
       });
 
       //   Alert.alert(response.response[0])
@@ -237,10 +256,10 @@ export const ClientInfoList =
         },
       };
       const response = await logistical.post('/Staff/GetAssociateList', data);
-      console.log(
-        response.associateListInfo,
-        'ClientLIstClientLIstClientLIstClientLIst',
-      );
+      // console.log(
+      //   response.associateListInfo,
+      //   'ClientLIstClientLIstClientLIstClientLIst',
+      // );
 
       if (response) {
         // AsyncStorage.setItem('login', JSON.stringify(response.token));
@@ -287,7 +306,7 @@ export const RequestInfoList = (clientId, navigation) => dispatch => {
     };
     console.log(data, 'requestPayload')
     const response = await logistical.post('/Staff/GetAllRequest', data);
-    console.log(response, 'GetAllRequestInfo');
+    //console.log(response, 'GetAllRequestInfo');
 
     if (response) {
       // AsyncStorage.setItem('login', JSON.stringify(response.token));
@@ -510,58 +529,31 @@ export const documentInfobyFolder = (documentId, navigation) => dispatch => {
 };
 
 
-export const uploadFile = (MY_INFO, FolderName, documentType, year, period, description, base64File, accessToken, documentsLibraryId, navigation) => dispatch => {
+export const uploadFile = (MY_INFO, FolderName, documentType, year, period, description, base64File, accessToken, documentsLibraryId, periodValue, UploadedByName, UploadedBy, navigation) => dispatch => {
   // dispatch({
   //   type: 'LOADING',
   //   payload: true,
   // });
   return new Promise(async (resolve, reject) => {
-    // let data = {
-    //   "FileListModel": [
-    //     {
-    //       "FileModel":
-    //       {
-    //         "Brand": MY_INFO?.staffview?.clientBrand,
-    //         "OfficeId": MY_INFO?.officeInfo?.officeId,
-    //         "ClientType": MY_INFO?.guestInfo?.clientType,
-    //         "ClientId": MY_INFO?.guestInfo?.client,
-    //         "SharepointFolderName": FolderName,
-    //         "DocumentType": documentType,
-    //         "FileType": "pdf",
-    //         "Period": "1",
-    //         "PeriodText": period,
-    //         "Year": year,
-    //         "Description": description,
-    //         "UploadedByName": MY_INFO?.staffview?.firstName + ' ' + MY_INFO?.staffview?.lastName,
-    //         "UploadedBy": MY_INFO?.staffview?.id,
-    //       },
-    //       "FileData":base64File
 
-    //     }
-    //   ],
-    //   "result": {
-    //     "accessToken": accessToken,
-    //     "LibraryId": documentsLibraryId
-    //   }
-    // };
 
     let data = {
       "FileListModel": [
         {
           "FileModel": {
             "Brand": MY_INFO?.staffview?.clientBrand,
-            "OfficeId": "CORP",
-            "ClientType": "COMPANY",
-            "ClientId": "MREALESTATE",
-            "SharepointFolderName": "Mailing Correspondence",
-            "DocumentType": "IRS",
+            "OfficeId": MY_INFO?.officeInfo?.officeId,
+            "ClientType": MY_INFO?.guestInfo?.clientType,
+            "ClientId": MY_INFO?.guestInfo?.client,
+            "SharepointFolderName": FolderName,
+            "DocumentType": documentType,
             "FileType": "pdf",
-            "Period": "1",
+            "Period": periodValue,
             "PeriodText": period,
             "Year": year,
             "Description": description,
-            "UploadedByName": "Karla Pereira",
-            "UploadedBy": "520"
+            "UploadedByName": UploadedByName,
+            "UploadedBy": UploadedBy.toString()
           },
           "FileData": base64File
         }
@@ -570,7 +562,7 @@ export const uploadFile = (MY_INFO, FolderName, documentType, year, period, desc
         "accessToken": accessToken,
         "LibraryId": documentsLibraryId
       }
-    };
+    }
 
     console.log(data?.FileListModel[0]?.FileModel, 'uplaodPayload')
     const response = await logistical.post('/FileCabinet/UploadFiles', data);
@@ -595,7 +587,7 @@ export const uploadFile = (MY_INFO, FolderName, documentType, year, period, desc
       //   payload: false,
       // });
     } else {
-      Alert.alert('No data found');
+      Alert.alert('Folder does not exist');
       //Alert.alert(response.massage);
       // dispatch({
       //   type: 'LOADING',
@@ -605,6 +597,102 @@ export const uploadFile = (MY_INFO, FolderName, documentType, year, period, desc
     }
   });
 };
+
+// export const uploadFile = (MY_INFO, FolderName, documentType, year, period, description, base64File, accessToken, documentsLibraryId, navigation) => dispatch => {
+//   // dispatch({
+//   //   type: 'LOADING',
+//   //   payload: true,
+//   // });
+//   return new Promise(async (resolve, reject) => {
+//     // let data = {
+//     //   "FileListModel": [
+//     //     {
+//     //       "FileModel":
+//     //       {
+//     //         "Brand": MY_INFO?.staffview?.clientBrand,
+//     //         "OfficeId": MY_INFO?.officeInfo?.officeId,
+//     //         "ClientType": MY_INFO?.guestInfo?.clientType,
+//     //         "ClientId": MY_INFO?.guestInfo?.client,
+//     //         "SharepointFolderName": FolderName,
+//     //         "DocumentType": documentType,
+//     //         "FileType": "pdf",
+//     //         "Period": "1",
+//     //         "PeriodText": period,
+//     //         "Year": year,
+//     //         "Description": description,
+//     //         "UploadedByName": MY_INFO?.staffview?.firstName + ' ' + MY_INFO?.staffview?.lastName,
+//     //         "UploadedBy": MY_INFO?.staffview?.id,
+//     //       },
+//     //       "FileData":base64File
+
+//     //     }
+//     //   ],
+//     //   "result": {
+//     //     "accessToken": accessToken,
+//     //     "LibraryId": documentsLibraryId
+//     //   }
+//     // };
+
+//     let data = {
+//       "FileListModel": [
+//         {
+//           "FileModel": {
+//             "Brand": "TAXLEAF",
+//             "OfficeId": "TL MDADE",
+//             "ClientType": "individual",
+//             "ClientId": "EASTSONSPRI",
+//             "SharepointFolderName": FolderName,
+//             "DocumentType": documentType,
+//             "FileType": "pdf",
+//             "Period": "1",
+//             "PeriodText": "FEB",
+//             "Year": "23",
+//             "Description": "Example",
+//             "UploadedByName": "Prince Eastsons",
+//             "UploadedBy": "973"
+//           },
+//           "FileData": base64File
+//         }
+//       ],
+//       "result": {
+//         "accessToken": accessToken,
+//         "LibraryId": documentsLibraryId
+//       }
+//     }
+
+//     console.log(data?.FileListModel[0]?.FileModel, 'uplaodPayload')
+//     const response = await logistical.post('/FileCabinet/UploadFiles', data);
+//     // console.log(response, 'UploadFilesResp');
+
+//     if (response && response?.statusCode == 200) {
+//       // AsyncStorage.setItem('login', JSON.stringify(response.token));
+
+//       // dispatch({
+//       //   type: DOCUMENT_INFO_FOLDER,
+//       //   payload: response.documentInfo,
+//       // });
+
+
+//       resolve(response);
+
+//       Alert.alert(response.massage)
+//       navigation.navigate('FileCabinet');
+
+//       // dispatch({
+//       //   type: 'LOADING',
+//       //   payload: false,
+//       // });
+//     } else {
+//       Alert.alert('No data found');
+//       //Alert.alert(response.massage);
+//       // dispatch({
+//       //   type: 'LOADING',
+//       //   payload: false,
+//       // });
+//       reject(response);
+//     }
+//   });
+// };
 
 
 export const generateFileToken = (documentId, navigation) => dispatch => {

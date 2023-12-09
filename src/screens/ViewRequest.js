@@ -37,7 +37,7 @@ const ViewRequest = ({ route }) => {
                 showsHorizontalScrollIndicator={false}
             >
                 <HeadTabs />
-                <Text style={{ fontSize: 22, marginLeft: 30, marginVertical: 10, fontWeight: '700', color: Color.headerIconBG }}>Requests</Text>
+                <Text style={{ fontSize: 20, marginLeft: 30, marginBottom: 10, fontFamily: 'Poppins-Bold', color: Color.headerIconBG }}>Requests</Text>
                 <View style={{ flexDirection: 'row', marginBottom: 10, justifyContent: "center", }}>
                     <TouchableOpacity
                         onPress={() => navigation.navigate('CreateNewAction')}
@@ -61,7 +61,7 @@ const ViewRequest = ({ route }) => {
                             fontSize: 12,
                             marginTop: 2,
                             marginLeft: 4,
-                            fontWeight: '700'
+                            fontFamily: 'Poppins-Bold',
 
                         }}>
 
@@ -92,7 +92,7 @@ const ViewRequest = ({ route }) => {
                             fontSize: 12,
                             marginTop: 2,
                             marginLeft: 4,
-                            fontWeight: '700'
+                            fontFamily: 'Poppins-Bold',
 
                         }}>
 
@@ -102,8 +102,8 @@ const ViewRequest = ({ route }) => {
                     </TouchableOpacity>
                 </View>
                 <View style={{ flexDirection: "row", justifyContent: 'space-between', width: '90%', alignSelf: 'center' }}>
-                    <Text style={{ color: Color.darkGreen, fontSize: 13, fontWeight: '500' }}>Action Id #{REQUEST_INFO_BY_ID?.actionModel?.id}</Text>
-                    <Text style={{ color: Color.darkGreen, fontSize: 13, fontWeight: '500' }}>Client ID: {REQUEST_INFO_BY_ID?.actionModel?.clientId}</Text>
+                    <Text style={{ color: Color.darkGreen, fontSize: 12, fontFamily: 'Poppins-SemiBold', }}>Action ID #{REQUEST_INFO_BY_ID?.actionModel?.id}</Text>
+                    <Text style={{ color: Color.darkGreen, fontSize: 12, fontFamily: 'Poppins-SemiBold', }}>Client ID: {REQUEST_INFO_BY_ID?.actionModel?.clientId}</Text>
 
                 </View>
 
@@ -117,7 +117,7 @@ const ViewRequest = ({ route }) => {
 
                         <View style={styles.slideContainerClient}>
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '95%', alignSelf: 'center', marginBottom: 10 }}>
-                                <Text style={styles.headingClient}>MARIO RUIZ</Text>
+                                <Text style={styles.headingClient}>Mario Ruiz</Text>
                                 <Text style={styles.headingClient}>assign</Text>
 
                             </View>
@@ -138,29 +138,32 @@ const ViewRequest = ({ route }) => {
 
                         <View style={{ backgroundColor: '#fff', paddingBottom: 20, width: wp(90), alignSelf: 'center', marginTop: 20 }}>
                             <View style={styles.slideContainerClient1}>
-                                <View style={{ flexDirection: 'row', marginLeft: 15, marginTop: 10 }}>
+                                <View style={{
+                                    flexDirection: 'row', marginLeft: 15,
+                                    //marginTop: 10
+                                }}>
                                     <View style={{ flexDirection: 'row' }}>
-                                        <Text style={{ color: '#fff', fontWeight: '600', marginTop: 5 }}>Notes</Text>
+                                        <Text style={{ color: '#fff', fontFamily: 'Poppins-SemiBold', marginTop: 5 }}>Notes</Text>
                                         <Text style={styles.notes}>2</Text>
                                     </View>
                                     <View style={{ flexDirection: 'row' }}>
-                                        <Text style={{ color: '#fff', fontWeight: '600', marginTop: 5 }}>SOS</Text>
+                                        <Text style={{ color: '#fff', fontFamily: 'Poppins-SemiBold', marginTop: 5 }}>SOS</Text>
                                         <Text style={styles.sos}>+</Text>
                                     </View>
                                     <View style={{ flexDirection: 'row' }}>
-                                        <Text style={{ color: '#fff', fontWeight: '600', marginTop: 5 }}>Action Files</Text>
+                                        <Text style={{ color: '#fff', fontFamily: 'Poppins-SemiBold', marginTop: 5 }}>Action Files</Text>
                                         <Text style={styles.action}>0</Text>
                                     </View>
 
                                 </View>
                             </View>
-                            <View style={{ marginLeft: 20, marginBottom: 10, marginTop: 10 }}>
-                                <Text style={{ fontSize: 12, color: '#000', marginBottom: 10 }}>Subject: <Text style={{ fontSize: 12, color: Color.darkGreen }}>{REQUEST_INFO_BY_ID?.actionModel?.subject}</Text> </Text>
+                            <View style={{ marginLeft: 15, marginBottom: 10, marginTop: 10 }}>
+                                <Text style={{ fontSize: 12, fontFamily: 'Poppins-SemiBold', color: Color.headerIconBG, }}>Subject: <Text style={{ fontSize: 12, color: Color.darkGreen }}>{REQUEST_INFO_BY_ID?.actionModel?.subject}</Text> </Text>
 
                             </View>
                             <View style={styles.part}></View>
-                            <View style={{ marginLeft: 20, justifyContent: "center", marginTop: 10 }}>
-                                <Text style={{ fontSize: 12, color: '#000', }}>Message:  <Text style={{ fontSize: 12, color: Color.darkGreen }}>{REQUEST_INFO_BY_ID?.actionModel?.message}</Text></Text>
+                            <View style={{ marginLeft: 15, justifyContent: "center", marginTop: 10 }}>
+                                <Text style={{ fontSize: 12, fontFamily: 'Poppins-SemiBold', color: Color.headerIconBG, }}>Message:  <Text style={{ fontSize: 12, color: Color.darkGreen }}>{REQUEST_INFO_BY_ID?.actionModel?.message}</Text></Text>
 
 
                             </View>
@@ -169,15 +172,15 @@ const ViewRequest = ({ route }) => {
 
                         <View style={{ backgroundColor: '#fff', paddingBottom: 20, width: wp(90), alignSelf: 'center', marginTop: 20 }}>
                             <View style={[styles.slideContainerClient1, { backgroundColor: '#254768' }]}>
-                                <View style={{ flexDirection: 'row', marginLeft: 15, marginTop: 10 }}>
-                                    <Text style={{ fontSize: 15, color: '#fff', fontWeight: '600' }}>Action Notification</Text>
+                                <View style={{ marginLeft: 15, }}>
+                                    <Text style={{ fontSize: 14, color: '#fff', fontFamily: 'Poppins-SemiBold', }}>Action Notification</Text>
 
 
                                 </View>
                             </View>
-                            <View style={{ marginLeft: 20, marginBottom: 10, marginTop: 20 }}>
+                            <View style={{ marginLeft: 15, marginTop: 10 }}>
                                 <View style={{ flexDirection: 'row' }}>
-                                    <Text style={{ fontSize: 15, color: '#000', marginBottom: 10, marginTop: 6 }}>Tracking</Text>
+                                    <Text style={{ fontSize: 14, fontFamily: 'Poppins-SemiBold', color: Color.headerIconBG, marginBottom: 10, }}>Tracking</Text>
                                     <TouchableOpacity
                                         onPress={() => {
                                             // navigation.navigate('ViewRequest', {
@@ -203,6 +206,7 @@ const ViewRequest = ({ route }) => {
                                         <Text style={{
                                             color: Color.white,
                                             fontSize: 12,
+                                            fontFamily: 'Poppins-SemiBold',
                                             // marginTop: 2,
                                             marginLeft: 4,
                                             // fontWeight: '700'
@@ -210,15 +214,15 @@ const ViewRequest = ({ route }) => {
                                         }}>
 
 
-                                            New
+                                            NEW
                                         </Text>
                                     </TouchableOpacity>
                                 </View>
                             </View>
                             <View style={styles.part}></View>
-                            <View style={{ marginLeft: 20 }}>
-                                <View style={{ flexDirection: 'row', marginTop: 10 }}>
-                                    <Text style={{ fontSize: 15, color: '#000', marginBottom: 10, marginTop: 6 }}>Priority</Text>
+                            <View style={{ marginLeft: 15, marginTop: 10 }}>
+                                <View style={{ flexDirection: 'row', }}>
+                                    <Text style={{ fontSize: 14, fontFamily: 'Poppins-SemiBold', color: Color.headerIconBG, }}>Priority</Text>
                                     <TouchableOpacity
                                         onPress={() => {
                                             // navigation.navigate('ViewRequest', {
@@ -226,13 +230,13 @@ const ViewRequest = ({ route }) => {
                                         }}
                                         style={{
                                             backgroundColor: '#e00101',
-                                            padding: 5,
+                                            //padding: 5,
                                             textAlign: 'center',
                                             width: wp(20),
                                             marginLeft: 30,
                                             flexDirection: 'row',
                                             borderRadius: 3,
-                                            height: hp(4),
+                                            //  height: hp(4),
                                             justifyContent: 'center'
                                         }}
                                     >
@@ -246,18 +250,19 @@ const ViewRequest = ({ route }) => {
                                             fontSize: 12,
                                             marginTop: 2,
                                             marginLeft: 4,
+                                            fontFamily: 'Poppins-SemiBold',
                                             // fontWeight: '700'
 
                                         }}>
                                             {
                                                 REQUEST_INFO_BY_ID?.actionModel?.priority === 1 ?
-                                                    'Urgent'
+                                                    'URGENT'
                                                     :
                                                     REQUEST_INFO_BY_ID?.actionModel?.priority === 2 ?
-                                                        'Important'
+                                                        'IMPORTANT'
                                                         :
                                                         REQUEST_INFO_BY_ID?.actionModel?.priority === 3 ?
-                                                            'Regular'
+                                                            'REGULAR'
                                                             : null
                                             }
 
@@ -294,13 +299,15 @@ const styles = StyleSheet.create({
     },
     LIstText2: {
         color: '#000',
+        fontFamily: 'Poppins-SemiBold',
+        fontSize: 12
     },
 
     subHead: {
         width: 100,
-        fontSize: 15,
-        fontWeight: '600',
-        color: '#000'
+        fontSize: 12,
+        fontFamily: 'Poppins-SemiBold',
+        color: Color.headerIconBG
     },
     headingClient: {
         fontSize: 15,
@@ -347,24 +354,26 @@ const styles = StyleSheet.create({
     slideContainerClient1: {
         backgroundColor: Color.headerIconBG,
         width: wp(90),
+        height: wp(10),
         justifyContent: 'center',
-        alignSelf: 'center',
+        // alignSelf: 'center',
+        //alignItems: "center",
         /// height: 420,
-        opacity: 2,
-        paddingBottom: 20,
+        // opacity: 2,
+        // paddingBottom: 20,
         // marginTop: 20,
     },
     sos: {
-        backgroundColor: '#1AB394', color: '#fff', borderRadius: 3, marginLeft: 10, marginRight: 10, width: wp(6), alignSelf: 'center', marginTop: 5, height: hp(3),
-        paddingLeft: 6
+        backgroundColor: Color.green, color: '#fff', borderRadius: 3, marginLeft: 10, marginRight: 10, width: wp(6), alignSelf: 'center', marginTop: 5, height: hp(3),
+        fontFamily: 'Poppins-Bold', textAlign: "center"
     },
     notes: {
-        backgroundColor: '#ED5565', color: '#fff', borderRadius: 3, marginLeft: 10, marginRight: 10, width: wp(6), alignSelf: 'center', marginTop: 5, height: hp(3),
-        paddingLeft: 6
+        fontFamily: 'Poppins-Bold', textAlign: "center", backgroundColor: '#ED5565', color: '#fff', borderRadius: 3, marginLeft: 10, marginRight: 10, width: wp(6), alignSelf: 'center', marginTop: 5, height: hp(3),
+
     },
     action: {
         backgroundColor: '#F8AC59', color: '#fff', borderRadius: 3, marginLeft: 10, marginRight: 4, width: wp(6), alignSelf: 'center', marginTop: 5, height: hp(3),
-        paddingLeft: 6
+        fontFamily: 'Poppins-Bold', textAlign: "center",
     },
     bgImg: {
         paddingBottom: 140

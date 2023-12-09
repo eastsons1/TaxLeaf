@@ -12,6 +12,10 @@ export const REQUEST_INFO_BY_ID = 'REQUEST_INFO_BY_ID'
 export const FOLDER_LIST = 'FOLDER_LIST'
 export const DOCUMENT_INFO_FOLDER = 'DOCUMENT_INFO_FOLDER'
 export const FILE_INFO = 'FILE_INFO'
+export const OFFICE_INFO = 'OFFICE_INFO'
+export const PARTNER_INFO = 'PARTNER_INFO'
+export const MY_OFFICE_INFO = 'MY_OFFICE_INFO'
+
 
 
 

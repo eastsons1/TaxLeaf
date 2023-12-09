@@ -32,9 +32,9 @@ const Drawer = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const [loader, setLoader] = useState(false);
-  const { MY_INFO } = useSelector(state => state.TaxLeafReducer);
-  const jsonData = MY_INFO.staffview;
-  const jsonData1 = MY_INFO.officeInfo;
+  // const { MY_INFO } = useSelector(state => state.TaxLeafReducer);
+  // const jsonData = MY_INFO.staffview;
+  // const jsonData1 = MY_INFO.officeInfo;
 
 
   const AuthConfig = {
@@ -84,11 +84,11 @@ const Drawer = () => {
       let logoutToken = await revoke(config, { tokenToRevoke: 'accessToken' });
       console.log(logoutToken, 'JJJJJJJJJJJJJJJJJJJJ')
       AsyncStorage.clear();
-      let obj = "";
-      dispatch({
-        type: LOGIN_DATA,
-        payload: obj,
-      });
+      // let obj = "";
+      // dispatch({
+      //   type: LOGIN_DATA,
+      //   payload: obj,
+      // });
 
       // Navigate to your app's sign-in screen or perform any other action
       // For example, you can use React Navigation to navigate to the login screen
