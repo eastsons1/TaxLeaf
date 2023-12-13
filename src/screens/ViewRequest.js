@@ -19,14 +19,58 @@ const ViewRequest = ({ route }) => {
     const { REQUEST_INFO_BY_ID } = useSelector(state => state.TaxLeafReducer);
     console.log(REQUEST_INFO_BY_ID, 'REQUEST_INFO_BY_ID')
     const bgImage = require('../Assets/img/guest_shape.png');
-    useEffect(() => {
-        setLoader(true);
-        dispatch(RequestInfoById(actionId, navigation));
+    console.log(actionId, 'LLLLLL')
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         try {
+    //             setLoader(true);
+    //             await dispatch(RequestInfoById(actionId, navigation));
+    //         } finally {
+    //             setLoader(false);
+    //         }
+    //     };
 
-        setTimeout(() => {
-            setLoader(false);
-        }, 2000);
-    }, [actionId]);
+    //     fetchData();
+    // }, [REQUEST_INFO_BY_ID, navigation]);
+
+
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                console.log('Fetching data...');
+                setLoader(true);
+                await dispatch(RequestInfoById(actionId, navigation));
+                console.log('Data fetched successfully');
+
+                setTimeout(() => {
+                    setLoader(false);
+                }, 1000);
+
+            }
+            catch (error) {
+                console.error('Error fetching data:', error);
+                // setTimeout(() => {
+                //     setLoader(false);
+                // }, 1000);
+            }
+
+        };
+
+        fetchData();
+    }, []);
+
+
+
+
+    // useEffect(() => {
+    //     setLoader(true);
+    //     dispatch(RequestInfoById(actionId, navigation));
+
+    //     setTimeout(() => {
+    //         setLoader(false);
+    //     }, 2000);
+    // }, [REQUEST_INFO_BY_ID]);
     return (
 
         <View style={{ backgroundColor: '#d5e3e5' }}>

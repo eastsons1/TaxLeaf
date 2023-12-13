@@ -30,6 +30,7 @@ import {
 const HeadTabs = () => {
     const [showwhat1, setshowwhat1] = useState('');
     const [showwhat2, setshowwhat2] = useState('');
+    const [loader, setLoader] = useState(false);
     const [infoData, setInfoData] = useState({});
     const [dashboardList, setDashboardList] = useState([]);
     const [dashboardMessageList, setDashboardMessageList] = useState([]);
@@ -55,93 +56,121 @@ const HeadTabs = () => {
         setshowwhat2(data);
         console.log(data);
     };
-    useEffect(() => {
-        if (showwhat1) {
-            setshowwhat2('')
 
-        }
-    }, [showwhat1])
-    useEffect(() => {
-        if (showwhat2) {
-            setshowwhat1('')
-
-        }
-    }, [showwhat2])
-
-    const [loader, setLoader] = useState(false);
     useEffect(() => {
         setLoader(true);
-        dispatch(clientInfo(LOGIN_DATA, navigation));
-        dispatch(
-            dashboardlist(
-                jsonData?.clientId,
-                jsonData?.clientType,
-                officeInfo?.id,
-                navigation,
-            ),
-        );
 
+        dispatch(clientInfo(LOGIN_DATA, navigation))
+            .then(() => dispatch(dashboardlist(jsonData?.clientId, jsonData?.clientType, officeInfo?.id, navigation)))
+            .then(() => dispatch(ManagerInfo(jsonData?.clientId, jsonData?.clientType, navigation)))
+            .finally(() => {
+                setLoader(false);
+            });
+    }, [LOGIN_DATA, jsonData?.clientId, jsonData?.clientType, officeInfo?.id]);
 
-        setDashboardList(DASHBOARD_LIST);
-        setDashboardMessageList(DASHBOARD_MESSAGE_LIST);
-        // dispatch(ManagerInfo(jsonData?.clientId, jsonData?.clientType, navigation));
-
-        setTimeout(() => {
-            setLoader(false);
-        }, 2000);
-    }, []);
-
+    // useEffect(() => {
+    //     // dispatch(ManagerInfo(jsonData?.clientId, jsonData?.clientType, navigation));
+    // }, [MY_INFO, MANAGER_INFO]);
 
     useEffect(() => {
-        console.log('ManagerInfo111', jsonData?.clientId, jsonData?.clientType)
-        dispatch(ManagerInfo(jsonData?.clientId, jsonData?.clientType, navigation));
-
         setDashboardList(DASHBOARD_LIST);
         setDashboardMessageList(DASHBOARD_MESSAGE_LIST);
-        dispatch(
-            dashboardlist(
-                jsonData?.clientId,
-                jsonData?.clientType,
-                officeInfo?.id,
-                navigation,
-            ),
-        );
-    }, [LOGIN_DATA]);
-
-    useEffect(() => {
-
-        setDashboardList(DASHBOARD_LIST);
-        setDashboardMessageList(DASHBOARD_MESSAGE_LIST);
-    }, []);
-    useEffect(() => {
-
-        setDashboardList(DASHBOARD_LIST);
-        setDashboardMessageList(DASHBOARD_MESSAGE_LIST);
-        dispatch(
-            dashboardlist(
-                jsonData?.clientId,
-                jsonData?.clientType,
-                officeInfo?.id,
-                navigation,
-            ),
-        );
-
-        console.log('ManagerInfo2222', jsonData?.clientId, jsonData?.clientType)
-
-        dispatch(ManagerInfo(jsonData?.clientId, jsonData?.clientType, navigation));
-
-    }, [showwhat1]);
+    }, [DASHBOARD_LIST, DASHBOARD_MESSAGE_LIST]);
 
 
-    useEffect(() => {
-        // setLoader(true);
 
-        setDashboardList(DASHBOARD_LIST);
-        setDashboardMessageList(DASHBOARD_MESSAGE_LIST);
-        // setTimeout(() => {
-        //   setLoader(false);
-        // }, 2000);
-    }, [MY_INFO, MANAGER_INFO, DASHBOARD_LIST, DASHBOARD_MESSAGE_LIST]);
+
+    // useEffect(() => {
+    //     if (showwhat1) {
+    //         setshowwhat2('')
+
+    //     }
+    // }, [showwhat1])
+    // useEffect(() => {
+    //     if (showwhat2) {
+    //         setshowwhat1('')
+
+    //     }
+    // }, [showwhat2])
+
+
+    // useEffect(() => {
+    //     setLoader(true);
+    //     dispatch(clientInfo(LOGIN_DATA, navigation));
+    //     dispatch(
+    //         dashboardlist(
+    //             jsonData?.clientId,
+    //             jsonData?.clientType,
+    //             officeInfo?.id,
+    //             navigation,
+    //         ),
+    //     );
+
+
+    //     setDashboardList(DASHBOARD_LIST);
+    //     setDashboardMessageList(DASHBOARD_MESSAGE_LIST);
+    //     // dispatch(ManagerInfo(jsonData?.clientId, jsonData?.clientType, navigation));
+
+    //     setTimeout(() => {
+    //         setLoader(false);
+    //     }, 2000);
+    // }, []);
+
+
+    // useEffect(() => {
+    //     console.log('ManagerInfo111', jsonData?.clientId, jsonData?.clientType)
+    //     dispatch(ManagerInfo(jsonData?.clientId, jsonData?.clientType, navigation));
+
+    //     setDashboardList(DASHBOARD_LIST);
+    //     setDashboardMessageList(DASHBOARD_MESSAGE_LIST);
+    //     dispatch(
+    //         dashboardlist(
+    //             jsonData?.clientId,
+    //             jsonData?.clientType,
+    //             officeInfo?.id,
+    //             navigation,
+    //         ),
+    //     );
+    // }, [LOGIN_DATA]);
+
+    // useEffect(() => {
+
+    //     setDashboardList(DASHBOARD_LIST);
+    //     setDashboardMessageList(DASHBOARD_MESSAGE_LIST);
+    // }, []);
+    // useEffect(() => {
+
+    //     setDashboardList(DASHBOARD_LIST);
+    //     setDashboardMessageList(DASHBOARD_MESSAGE_LIST);
+    //     dispatch(
+    //         dashboardlist(
+    //             jsonData?.clientId,
+    //             jsonData?.clientType,
+    //             officeInfo?.id,
+    //             navigation,
+    //         ),
+    //     );
+
+    //     console.log('ManagerInfo2222', jsonData?.clientId, jsonData?.clientType)
+
+    //     dispatch(ManagerInfo(jsonData?.clientId, jsonData?.clientType, navigation));
+
+    // }, [showwhat1]);
+
+
+    // useEffect(() => {
+    //     // setLoader(true);
+
+    //     setDashboardList(DASHBOARD_LIST);
+    //     setDashboardMessageList(DASHBOARD_MESSAGE_LIST);
+    //     // setTimeout(() => {
+    //     //   setLoader(false);
+    //     // }, 2000);
+    // }, [MY_INFO, MANAGER_INFO, DASHBOARD_LIST, DASHBOARD_MESSAGE_LIST]);
+
+
+
+
     const desiredNewsType = 'Holidays ';
     const TaxNewsType = 'Tax Deadlines';
     const filteredList =
@@ -173,8 +202,8 @@ const HeadTabs = () => {
                                             ]}
                                             onPress={() =>
                                                 showwhat1 == 'Message'
-                                                    ? setshowwhat1('')
-                                                    : showwhatfunc1('Message')
+                                                    ? (setshowwhat1(''), setshowwhat2(''))
+                                                    : (showwhatfunc1('Message'), showwhatfunc2(''))
                                             }>
                                             <Icon3
                                                 style={[
@@ -216,8 +245,8 @@ const HeadTabs = () => {
                                             ]}
                                             onPress={() =>
                                                 showwhat1 == 'Proposal'
-                                                    ? setshowwhat1('')
-                                                    : showwhatfunc1('Proposal')
+                                                    ? (setshowwhat1(''), setshowwhat2(''))
+                                                    : (showwhatfunc1('Proposal'), showwhatfunc2(''))
                                             }>
                                             <Icon
                                                 style={[
@@ -235,18 +264,7 @@ const HeadTabs = () => {
                                             />
 
 
-                                            {/* <Text
-                        style={[
-                          styles.ButtonText,
-                          {
-                            color:
-                              showwhat1 == 'Proposal'
-                                ? Color.white
-                                : Color.headerIconBG,
-                          },
-                        ]}>
-                        ({dashboardMessageList.length})
-                      </Text> */}
+
                                         </TouchableOpacity>
                                         <Text
                                             style={[
@@ -273,8 +291,8 @@ const HeadTabs = () => {
                                             ]}
                                             onPress={() =>
                                                 showwhat1 == 'Signature'
-                                                    ? setshowwhat1('')
-                                                    : showwhatfunc1('Signature')
+                                                    ? (setshowwhat1(''), setshowwhat2(''))
+                                                    : (showwhatfunc1('Signature'), showwhatfunc2(''))
                                             }>
                                             <Icon1
                                                 style={[
@@ -330,8 +348,8 @@ const HeadTabs = () => {
                                             ]}
                                             onPress={() =>
                                                 showwhat1 == 'Reminders'
-                                                    ? setshowwhat1('')
-                                                    : showwhatfunc1('Reminders')
+                                                    ? (setshowwhat1(''), setshowwhat2(''))
+                                                    : (showwhatfunc1('Reminders'), showwhatfunc2(''))
                                             }>
                                             <Icon2
                                                 style={[
@@ -396,8 +414,8 @@ const HeadTabs = () => {
                                             ]}
                                             onPress={() =>
                                                 showwhat1 == 'Message'
-                                                    ? setshowwhat1('')
-                                                    : showwhatfunc1('Message')
+                                                    ? (setshowwhat1(''), setshowwhat2(''))
+                                                    : (showwhatfunc1('Message'), showwhatfunc2(''))
                                             }>
                                             <Icon3
                                                 style={[
@@ -446,8 +464,8 @@ const HeadTabs = () => {
                                             ]}
                                             onPress={() =>
                                                 showwhat1 == 'Proposal'
-                                                    ? setshowwhat1('')
-                                                    : showwhatfunc1('Proposal')
+                                                    ? (setshowwhat1(''), setshowwhat2(''))
+                                                    : (showwhatfunc1('Proposal'), showwhatfunc2(''))
                                             }>
                                             <Icon
                                                 style={[
@@ -500,8 +518,8 @@ const HeadTabs = () => {
                                             ]}
                                             onPress={() =>
                                                 showwhat1 == 'Signature'
-                                                    ? setshowwhat1('')
-                                                    : showwhatfunc1('Signature')
+                                                    ? (setshowwhat1(''), setshowwhat2(''))
+                                                    : (showwhatfunc1('Signature'), showwhatfunc2(''))
                                             }>
                                             <Icon1
                                                 style={[
@@ -549,8 +567,8 @@ const HeadTabs = () => {
                                             ]}
                                             onPress={() =>
                                                 showwhat1 == 'Reminders'
-                                                    ? setshowwhat1('')
-                                                    : showwhatfunc1('Reminders')
+                                                    ? (setshowwhat1(''), setshowwhat2(''))
+                                                    : (showwhatfunc1('Reminders'), showwhatfunc2(''))
                                             }>
                                             <Icon2
                                                 style={[
@@ -607,8 +625,8 @@ const HeadTabs = () => {
                                             ]}
                                             onPress={() =>
                                                 showwhat1 == 'Message'
-                                                    ? setshowwhat1('')
-                                                    : showwhatfunc1('Message')
+                                                    ? (setshowwhat1(''), setshowwhat2(''))
+                                                    : (showwhatfunc1('Message'), showwhatfunc2(''))
                                             }>
                                             <Icon3
                                                 style={[
@@ -649,8 +667,8 @@ const HeadTabs = () => {
                                             ]}
                                             onPress={() =>
                                                 showwhat1 == 'Proposal'
-                                                    ? setshowwhat1('')
-                                                    : showwhatfunc1('Proposal')
+                                                    ? (setshowwhat1(''), setshowwhat2(''))
+                                                    : (showwhatfunc1('Proposal'), showwhatfunc2(''))
                                             }>
                                             <Icon
                                                 style={[
@@ -691,8 +709,8 @@ const HeadTabs = () => {
                                             ]}
                                             onPress={() =>
                                                 showwhat1 == 'Signature'
-                                                    ? setshowwhat1('')
-                                                    : showwhatfunc1('Signature')
+                                                    ? (setshowwhat1(''), setshowwhat2(''))
+                                                    : (showwhatfunc1('Signature'), showwhatfunc2(''))
                                             }>
                                             <Icon1
                                                 style={[
@@ -731,8 +749,8 @@ const HeadTabs = () => {
                                             ]}
                                             onPress={() =>
                                                 showwhat1 == 'Reminders'
-                                                    ? setshowwhat1('')
-                                                    : showwhatfunc1('Reminders')
+                                                    ? (setshowwhat1(''), setshowwhat2(''))
+                                                    : (showwhatfunc1('Reminders'), showwhatfunc2(''))
                                             }>
                                             <Icon2
                                                 style={[
@@ -788,8 +806,8 @@ const HeadTabs = () => {
                                             ]}
                                             onPress={() =>
                                                 showwhat1 == 'Message'
-                                                    ? setshowwhat1('')
-                                                    : showwhatfunc1('Message')
+                                                    ? (setshowwhat1(''), setshowwhat2(''))
+                                                    : (showwhatfunc1('Message'), showwhatfunc2(''))
                                             }>
                                             <Icon3
                                                 style={[
@@ -828,7 +846,11 @@ const HeadTabs = () => {
                                                         showwhat1 == 'Proposal' ? '#2F4050' : Color.headerIconBG,
                                                 },
                                             ]}
-                                            onPress={() => showwhatfunc1('Proposal')}>
+                                            onPress={() =>
+                                                showwhat1 == 'Proposal'
+                                                    ? (setshowwhat1(''), setshowwhat2(''))
+                                                    : (showwhatfunc1('Proposal'), showwhatfunc2(''))
+                                            }>
                                             <Icon
                                                 style={[
                                                     styles.icon,
@@ -876,8 +898,8 @@ const HeadTabs = () => {
                                             ]}
                                             onPress={() =>
                                                 showwhat1 == 'Signature'
-                                                    ? setshowwhat1('')
-                                                    : showwhatfunc1('Signature')
+                                                    ? (setshowwhat1(''), setshowwhat2(''))
+                                                    : (showwhatfunc1('Signature'), showwhatfunc2(''))
                                             }>
                                             <Icon1
                                                 style={[
@@ -924,8 +946,8 @@ const HeadTabs = () => {
                                             ]}
                                             onPress={() =>
                                                 showwhat1 == 'Reminders'
-                                                    ? setshowwhat1('')
-                                                    : showwhatfunc1('Reminders')
+                                                    ? (setshowwhat1(''), setshowwhat2(''))
+                                                    : (showwhatfunc1('Reminders'), showwhatfunc2(''))
                                             }>
                                             <Icon2
                                                 style={[
@@ -988,10 +1010,12 @@ const HeadTabs = () => {
                                                 },
                                             ]}
                                             onPress={() =>
-                                                showwhat2 == 'orders'
-                                                    ? setshowwhat2('')
-                                                    : showwhatfunc2('orders')
+
+                                                showwhat2 === 'orders'
+                                                    ? (setshowwhat2(''), setshowwhat1(''))
+                                                    : (showwhatfunc2('orders'), showwhatfunc1(''))
                                             }>
+
                                             <Icon4
                                                 style={[
                                                     styles.icon,
@@ -1028,11 +1052,14 @@ const HeadTabs = () => {
                                                         showwhat2 == 'taxReturn' ? Color.geen : Color.headerIconBG,
                                                 },
                                             ]}
-                                            onPress={() =>
+                                            onPress={() => {
+                                                // console.log('showwhat2 before:', showwhat2)
                                                 showwhat2 == 'taxReturn'
-                                                    ? setshowwhat2('')
+                                                    ? (setshowwhat2(''), setshowwhat1(''))
                                                     : showwhatfunc2('taxReturn')
-                                            }>
+                                                console.log('showwhat2 after:', showwhat2)
+
+                                            }}>
                                             <Icon4
                                                 style={[
                                                     styles.icon,
@@ -1086,8 +1113,8 @@ const HeadTabs = () => {
                                             ]}
                                             onPress={() =>
                                                 showwhat2 == 'book'
-                                                    ? setshowwhat2('')
-                                                    : showwhatfunc2('book')
+                                                    ? (setshowwhat2(''), setshowwhat1(''))
+                                                    : (showwhatfunc2('book'), showwhatfunc1(''))
                                             }>
                                             <Icon4
                                                 style={[
@@ -1143,8 +1170,8 @@ const HeadTabs = () => {
                                             ]}
                                             onPress={() =>
                                                 showwhat2 == 'Gov'
-                                                    ? setshowwhat2('')
-                                                    : showwhatfunc2('Gov')
+                                                    ? (setshowwhat2(''), setshowwhat1(''))
+                                                    : (showwhatfunc2('Gov'), showwhatfunc1(''))
                                             }>
                                             <Icon4
                                                 style={[
@@ -1207,8 +1234,8 @@ const HeadTabs = () => {
                                             ]}
                                             onPress={() =>
                                                 showwhat2 == 'orders'
-                                                    ? setshowwhat2('')
-                                                    : showwhatfunc2('orders')
+                                                    ? (setshowwhat2(''), setshowwhat1(''))
+                                                    : (showwhatfunc2('orders'), showwhatfunc2(''))
                                             }>
                                             <Icon4
                                                 style={[
@@ -1235,7 +1262,7 @@ const HeadTabs = () => {
                                                             : Color.headerIconBG,
                                                 },
                                             ]}>
-                                            Orders1
+                                            Orders
                                         </Text>
                                     </View>
                                     <View style={styles.TabsContainer}>
@@ -1294,8 +1321,8 @@ const HeadTabs = () => {
                                             ]}
                                             onPress={() =>
                                                 showwhat2 == 'book'
-                                                    ? setshowwhat2('')
-                                                    : showwhatfunc2('book')
+                                                    ? (setshowwhat2(''), setshowwhat1(''))
+                                                    : (showwhatfunc2('book'), showwhatfunc1(''))
                                             }>
                                             <Icon4
                                                 style={[
@@ -1351,8 +1378,8 @@ const HeadTabs = () => {
                                             ]}
                                             onPress={() =>
                                                 showwhat2 == 'Gov'
-                                                    ? setshowwhat2('')
-                                                    : showwhatfunc2('Gov')
+                                                    ? (setshowwhat2(''), setshowwhat1(''))
+                                                    : (showwhatfunc2('Gov'), showwhatfunc1(''))
                                             }>
                                             <Icon4
                                                 style={[
@@ -1441,7 +1468,7 @@ const HeadTabs = () => {
                                                             : Color.headerIconBG,
                                                 },
                                             ]}>
-                                            Orders2
+                                            Orders
                                         </Text>
                                     </View>
                                     <View style={styles.TabsContainer}>
@@ -1499,8 +1526,8 @@ const HeadTabs = () => {
                                             ]}
                                             onPress={() =>
                                                 showwhat2 == 'book'
-                                                    ? setshowwhat2('')
-                                                    : showwhatfunc2('book')
+                                                    ? (setshowwhat2(''), setshowwhat1(''))
+                                                    : (showwhatfunc2('book'), showwhatfunc1(''))
                                             }>
                                             <Icon4
                                                 style={[
@@ -1545,8 +1572,8 @@ const HeadTabs = () => {
                                             ]}
                                             onPress={() =>
                                                 showwhat2 == 'Gov'
-                                                    ? setshowwhat2('')
-                                                    : showwhatfunc2('Gov')
+                                                    ? (setshowwhat2(''), setshowwhat1(''))
+                                                    : (showwhatfunc2('Gov'), showwhatfunc1(''))
                                             }>
                                             <Icon4
                                                 style={[
@@ -1607,9 +1634,9 @@ const HeadTabs = () => {
                                                 },
                                             ]}
                                             onPress={() =>
-                                                showwhat2 == 'orders'
-                                                    ? setshowwhat2('')
-                                                    : showwhatfunc2('orders')
+                                                showwhat2 === 'orders'
+                                                    ? (setshowwhat2(''), setshowwhat1(''))
+                                                    : (showwhatfunc2('orders'), showwhatfunc1(''))
                                             }>
                                             <Icon4
                                                 style={[
@@ -1649,10 +1676,11 @@ const HeadTabs = () => {
                                                 },
                                             ]}
                                             onPress={() =>
-                                                showwhat2 == 'taxReturn'
-                                                    ? setshowwhat2('')
-                                                    : showwhatfunc2('taxReturn')
+                                                showwhat2 === 'taxReturn'
+                                                    ? (setshowwhat2(''), setshowwhat1(''))
+                                                    : (showwhatfunc2('taxReturn'), showwhatfunc1(''))
                                             }>
+                                            {console.log(showwhat1, showwhat2, "LLLLL")}
                                             <Icon4
                                                 style={[
                                                     styles.icon,
@@ -1695,8 +1723,8 @@ const HeadTabs = () => {
                                             ]}
                                             onPress={() =>
                                                 showwhat2 == 'book'
-                                                    ? setshowwhat2('')
-                                                    : showwhatfunc2('book')
+                                                    ? (setshowwhat2(''), setshowwhat1(''))
+                                                    : (showwhatfunc2('book'), showwhatfunc1(''))
                                             }>
                                             <Icon4
                                                 style={[
@@ -1752,8 +1780,8 @@ const HeadTabs = () => {
                                             ]}
                                             onPress={() =>
                                                 showwhat2 == 'Gov'
-                                                    ? setshowwhat2('')
-                                                    : showwhatfunc2('Gov')
+                                                    ? (setshowwhat2(''), setshowwhat1(''))
+                                                    : (showwhatfunc2('Gov'), showwhatfunc1(''))
                                             }>
                                             <Icon4
                                                 style={[
@@ -1904,7 +1932,7 @@ const HeadTabs = () => {
                                     <View style={styles.part}></View>
 
                                     {/* <View style={styles.subContainer}> */}
-                                    <Text style={styles.subHead}>Events not found</Text>
+                                    <Text style={styles.subHead}>No Events</Text>
 
                                     {/* </View> */}
                                 </TouchableOpacity>
@@ -1913,9 +1941,10 @@ const HeadTabs = () => {
                     } else if (showwhat1 == 'Reminders') {
                         return (
                             <TouchableOpacity onPress={() => setshowwhat1('')}>
-                                <View style={{ height: 200 }}>
+                                <View style={{}}>
                                     <View style={styles.part}></View>
-                                    {filteredList &&
+                                    <Text style={styles.subHead}>No Holidays</Text>
+                                    {/* {filteredList &&
                                         filteredList.map(item => (
                                             <View key={item.id} style={{ height: 200, padding: 20 }}>
                                                 <Text
@@ -1943,7 +1972,7 @@ const HeadTabs = () => {
                                                     </Text>
                                                 </Text>
                                             </View>
-                                        ))}
+                                        ))} */}
                                     {/* <View style={styles.subContainer}> */}
                                     {/* <Text style={styles.subHead}>Reminders Not Found1</Text> */}
                                     {/* </View> */}
@@ -1959,10 +1988,10 @@ const HeadTabs = () => {
                             <TouchableOpacity onPress={() => setshowwhat2('')}>
                                 <View style={styles.part}></View>
 
-                                <View style={{ height: 200 }}>
 
-                                    <Text style={{ alignSelf: 'center', marginTop: 20 }}>No Orders</Text>
-                                </View>
+
+                                <Text style={{ alignSelf: 'center', marginTop: 20 }}>No Orders</Text>
+
                             </TouchableOpacity>
                         );
                     } else if (showwhat2 == 'taxReturn') {
@@ -1970,9 +1999,9 @@ const HeadTabs = () => {
                             <TouchableOpacity onPress={() => setshowwhat2('')}>
                                 <View style={styles.part}></View>
 
-                                <View style={{ height: 200 }}>
-                                    <Text style={{ alignSelf: 'center', marginTop: 20 }}>No Tax Returns</Text>
-                                </View>
+
+                                <Text style={{ alignSelf: 'center', marginTop: 20 }}>No Tax Returns</Text>
+
                             </TouchableOpacity>
                         );
                     } else if (showwhat2 == 'book') {
@@ -1980,9 +2009,9 @@ const HeadTabs = () => {
                             <TouchableOpacity onPress={() => setshowwhat2('')}>
                                 <View style={styles.part}></View>
 
-                                <View style={{ height: 200 }}>
-                                    <Text style={{ alignSelf: 'center', marginTop: 20 }}>No Book Keeping</Text>
-                                </View>
+
+                                <Text style={{ alignSelf: 'center', marginTop: 20 }}>No Bookkeeping</Text>
+
                             </TouchableOpacity>
                         );
                     } else if (showwhat2 == 'Gov') {
@@ -1990,16 +2019,16 @@ const HeadTabs = () => {
                             <TouchableOpacity onPress={() => setshowwhat2('')}>
                                 <View style={styles.part}></View>
 
-                                <View style={{ height: 200 }}>
-                                    <Text style={{ alignSelf: 'center', marginTop: 20 }}>No Gov. Payments</Text>
-                                </View>
+
+                                <Text style={{ alignSelf: 'center', marginTop: 20 }}>No Gov. Payments</Text>
+
                             </TouchableOpacity>
                         );
                     }
                 })()}
 
             </View>
-        </View>
+        </View >
     )
 }
 
@@ -2103,8 +2132,9 @@ const styles = StyleSheet.create({
         // marginRight: 5,
     },
     subHead: {
-        marginLeft: 30,
+        //marginLeft: 30,
         marginTop: 20,
+        textAlign: "center"
     },
     icon: { alignSelf: 'center', marginTop: 5 },
 

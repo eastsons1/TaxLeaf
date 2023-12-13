@@ -7,15 +7,18 @@ import {
   Image,
   FlatList,
   TouchableOpacity,
-  ScrollView,
+
   ImageBackground
 } from 'react-native';
+import { ScrollView } from 'react-native-virtualized-view'
 import { DataTable } from 'react-native-paper';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import { useDispatch, useSelector } from 'react-redux';
+import Icon from 'react-native-vector-icons/AntDesign';
+import IconF from 'react-native-vector-icons/Foundation';
 import {
   clientInfo,
   ClientInfoList,
@@ -100,22 +103,45 @@ const ClientInfo = () => {
   const [infoData, setInfoData] = useState({});
   const [loader, setLoader] = useState(false);
 
-  useEffect(() => {
-    setLoader(true);
-    dispatch(clientInfo(LOGIN_DATA, navigation));
 
-    setInfoData(CLIENT_LIST);
-    setTimeout(() => {
-      setLoader(false);
-    }, 2000);
-  }, []);
 
   useEffect(() => {
-    dispatch(
-      ClientInfoList(jsonData?.clientId, jsonData?.clientType, navigation),
-    );
-    setInfoData(CLIENT_LIST);
+    const fetchData = async () => {
+      try {
+        setLoader(true);
+
+        const [myInfoResponse, clientListResponse] = await Promise.all([
+          dispatch(clientInfo(LOGIN_DATA, navigation)),
+          dispatch(ClientInfoList(jsonData?.clientId, jsonData?.clientType, navigation)),
+        ]);
+
+        setInfoData(clientListResponse);
+        setLoader(false);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setLoader(false);
+      }
+    };
+
+    fetchData();
   }, []);
+
+  // useEffect(() => {
+  //   setLoader(true);
+  //   dispatch(clientInfo(LOGIN_DATA, navigation));
+
+  //   setInfoData(CLIENT_LIST);
+  //   setTimeout(() => {
+  //     setLoader(false);
+  //   }, 2000);
+  // }, []);
+
+  // useEffect(() => {
+  //   dispatch(
+  //     ClientInfoList(jsonData?.clientId, jsonData?.clientType, navigation),
+  //   );
+  //   setInfoData(CLIENT_LIST);
+  // }, []);
 
   useEffect(() => {
     // setLoader(true);
@@ -175,102 +201,289 @@ const ClientInfo = () => {
       >
         <HeadTabs />
         <Loader flag={loader} />
+        <Text style={{ fontSize: 20, marginLeft: 20, color: Color.headerIconBG, fontFamily: 'Poppins-Bold', }}>Clients</Text>
+
         {/* <Text
         style={{fontSize: 28, color: '#000', marginTop: 10, marginLeft: 20}}>
         Clients
       </Text> */}
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
-            marginTop: 10,
-            width: wp(100),
-          }}>
-          <View
-            style={{
-              width: wp(30),
-              height: 50,
-              borderWidth: 1,
-              borderRadius: 10,
-              borderColor: Color.geen,
-              justifyContent: 'center',
-              backgroundColor: Color.white,
-              alignItems: 'center',
-            }}>
-            <Text style={[styles.head]}>
-              Total Clients {infoData.length}
-              {/* <View style={[styles.headNum]}>
-              <Text style={[styles.textNum]}>3</Text>
-            </View> */}
-            </Text>
-          </View>
-          <View
-            style={{
-              width: wp(30),
-              height: 50,
-              marginLeft: 10,
-              marginRight: 10,
-              justifyContent: 'center',
-              borderWidth: 1,
-              borderRadius: 10,
-              borderColor: Color.geen,
-              justifyContent: 'center',
-              backgroundColor: Color.white,
-              alignItems: 'center',
-            }}>
-            <Text style={[styles.head]}>
-              Business {countBusiness}
-              {/* <View style={[styles.headNum]}>
-              <Text style={[styles.textNum]}>3</Text>
-            </View> */}
-            </Text>
-          </View>
-          <View
-            style={{
-              width: wp(30),
-              height: 50,
-              justifyContent: 'center',
-              borderWidth: 1,
-              borderRadius: 10,
-              borderColor: Color.geen,
-              justifyContent: 'center',
-              backgroundColor: Color.white,
-              alignItems: 'center',
-            }}>
-            <Text style={[styles.head]}>
-              Individual {countIndividuals}
-              {/* <View style={[styles.headNum]}>
-              <Text style={[styles.textNum]}>3</Text>
-            </View> */}
-            </Text>
-          </View>
+        <View style={{ width: wp(95), alignSelf: 'center', height: hp(50) }}>
 
-          {/* <Text style={[styles.head]}>
-          Business{' '}
-          <View style={[styles.headNum1]}>
-            <Text style={[styles.textNum]}>2</Text>
-          </View>{' '}
-          ||{' '}
-        </Text>
-        <Text style={[styles.head]}>
-          Individual{' '}
-          <View style={[styles.headNum2]}>
-            <Text style={[styles.textNum]}>0</Text>
-          </View>
-        </Text> */}
-        </View>
-        <View
-          style={{
-            width: wp(90),
-            backgroundColor: Color.geen,
-            alignItems: 'center',
-            alignSelf: 'center',
-            elevation: 10,
-            marginTop: 30,
-            flexDirection: 'row',
-            height: wp(10),
-          }}>
-          {/* <View
+          {(() => {
+            if (showwhat == 'Experience') {
+              return (
+                <View style={styles.moblieSec1}>
+                  <TouchableOpacity
+                    style={[
+                      styles.emailtoch1,
+                      {
+                        backgroundColor:
+                          showwhat == 'Experience' ? Color.green : '#fff',
+                        flexDirection: 'row',
+                        // paddingTop: 12,
+
+                      },
+                    ]}
+                    onPress={() => showwhatfunc('Experience')}>
+                    <View
+                      style={{
+
+                        // backgroundColor:
+                        //   showwhat == 'My Schools' ? Color.geen : '#fff',
+                        // borderRadius: 15
+                      }}
+                    >
+                      <Icon
+                        style={[
+                          { marginRight: 5 }
+
+                        ]}
+                        name="clockcircle"
+                        size={20}
+                        color="#fff"
+                      />
+                    </View>
+
+                    <Text style={showwhat == 'My Schools' ? styles.ButtonText1 : styles.ButtonTextW}>
+                      Total ({infoData?.length})
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={[
+                      styles.mobiletochP,
+                      {
+                        backgroundColor:
+                          showwhat == 'My Schools' ? Color.geen : '#fff',
+                        flexDirection: 'row',
+                        // paddingTop: 12
+                      },
+                    ]}
+                    onPress={() => showwhatfunc('My Schools')}>
+                    <View
+                      style={{
+                        backgroundColor: showwhat == 'My Schools' ? 'lightgray' : Color.geen,
+                        height: wp(5), width: wp(5),
+
+                        alignItems: "center",
+                        borderRadius: 15, marginRight: 4,
+                      }}
+                    >
+                      <IconF
+                        style={{
+
+                          color: showwhat == 'My Schools' ? Color.geen : '#fff'
+                        }}
+                        name="dollar"
+                        size={20}
+                        color={Color.geen}
+                      />
+                    </View>
+
+                    <Text style={showwhat == 'My Schools' ? styles.ButtonTextW : styles.ButtonText1}>Bussiness (0)</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={[
+                      styles.emailtoch2,
+                      {
+                        backgroundColor:
+                          showwhat == 'Reviews' ? Color.geen : '#fff',
+                        flexDirection: 'row',
+                        //  paddingTop: 12
+                      },
+                    ]}
+                    onPress={() => showwhatfunc('Reviews')}>
+                    <View>
+                      <Icon
+                        style={[
+                          { marginRight: 5 }
+
+                        ]}
+                        name="checkcircle"
+                        size={20}
+                        color={Color.geen}
+                      />
+                    </View>
+
+                    <Text style={showwhat == 'My Schools' ? styles.ButtonTextW : styles.ButtonText1}>   Individual {countIndividuals}</Text>
+                  </TouchableOpacity>
+                </View>
+              );
+            } else if (showwhat == 'My Schools') {
+              return (
+                <View style={styles.moblieSec1}>
+                  <TouchableOpacity
+                    style={[
+                      styles.emailtoch1,
+                      {
+                        backgroundColor:
+                          showwhat == 'Experience' ? Color.geen : '#fff',
+                        flexDirection: 'row',
+                        // paddingTop: 12
+
+                      },
+                    ]}
+                    onPress={() => showwhatfunc('Experience')}>
+                    <Icon
+                      style={[
+                        { marginRight: 5 }
+
+                      ]}
+                      name="clockcircle"
+                      size={20}
+                      color={showwhat == 'My Schools' ? Color.geen : 'lightgray'}
+                    />
+                    <Text style={showwhat == 'My Schools' ? styles.ButtonText1 : styles.ButtonTextW}>
+                      Total ({infoData.length})
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={[
+                      styles.mobiletochP,
+                      {
+                        backgroundColor:
+                          showwhat == 'My Schools' ? Color.geen : '#fff',
+                        flexDirection: 'row',
+                        //   paddingTop: 12
+                      },
+                    ]}
+                    onPress={() => showwhatfunc('My Schools')}>
+                    <View
+                      style={{ alignItems: 'center', backgroundColor: showwhat == 'My Schools' ? '#fff' : '#fff', width: wp(5), borderRadius: 15, height: wp(5), marginRight: 4, }}
+
+                    >
+                      <IconF
+                        style={{ color: showwhat == 'My Schools' ? Color.geen : 'lightgray' }}
+                        name="dollar"
+                        size={20}
+                        color="#fff"
+                      />
+                    </View>
+
+                    <Text style={showwhat == 'My Schools' ? styles.ButtonTextW : styles.ButtonText1}>Business (0)</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={[
+                      styles.emailtoch2,
+                      {
+                        backgroundColor:
+                          showwhat == 'Reviews' ? Color.geen : '#fff',
+                        flexDirection: 'row',
+                        // paddingTop: 12
+                      },
+                    ]}
+                    onPress={() => showwhatfunc('Reviews')}>
+                    <Icon
+                      style={[
+                        { marginRight: 5 }
+                      ]}
+                      name="checkcircle"
+                      size={18}
+                      color={showwhat == 'My Schools' ? Color.geen : 'lightgray'}
+                    />
+                    <Text style={showwhat == 'My Schools' ? styles.ButtonText1 : styles.ButtonTextW}> Individual {countIndividuals}</Text>
+                  </TouchableOpacity>
+                </View>
+              );
+            } else {
+              return (
+                <View style={styles.moblieSec1}>
+                  <TouchableOpacity
+                    style={[
+                      styles.emailtoch1,
+                      {
+                        backgroundColor:
+                          showwhat == 'Experience' ? Color.geen : '#fff',
+                        flexDirection: 'row',
+                        //  paddingTop: 12
+
+                      },
+                    ]}
+                    onPress={() => showwhatfunc('Experience')}>
+                    <Icon
+                      style={[
+                        { marginRight: 5 }
+
+                      ]}
+                      name="clockcircle"
+                      size={20}
+                      color={showwhat == 'My Schools' ? 'lightgray' : Color.geen}
+                    />
+                    <Text style={showwhat == 'Experience' ? styles.ButtonTextW : styles.ButtonText1}>
+                      Total ({infoData.length})
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={[
+                      styles.mobiletochP,
+                      {
+                        backgroundColor:
+                          showwhat == 'My Schools' ? Color.geen : '#fff',
+                        flexDirection: 'row',
+                        // paddingTop: 12
+                      },
+                    ]}
+                    onPress={() => showwhatfunc('My Schools')}>
+                    <View
+                      style={{ alignItems: "center", backgroundColor: showwhat == 'My Schools' ? 'lightgray' : Color.geen, width: wp(5), borderRadius: 15, height: wp(5), marginRight: 4, color: showwhat == 'My Schools' ? Color.geen : '#fff' }}
+
+                    >
+                      <IconF
+                        style={{ color: showwhat == 'My Schools' ? Color.geen : '#fff' }}
+                        name="dollar"
+                        size={20}
+                        color="#fff"
+                      />
+                    </View>
+
+                    <Text style={showwhat == 'My Schools' ? styles.ButtonTextW : styles.ButtonText1}>Business (0)</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={[
+                      styles.emailtoch2,
+                      {
+                        backgroundColor:
+                          showwhat == 'Reviews' ? Color.geen : '#fff',
+                        flexDirection: 'row',
+                        // paddingTop: 12
+                      },
+                    ]}
+                    onPress={() => showwhatfunc('Reviews')}>
+                    <Icon
+                      style={[
+                        { marginRight: 5 }
+
+                      ]}
+                      name="checkcircle"
+                      size={18}
+                      color="#fff"
+                    />
+                    <Text style={showwhat == 'My Schools' ? styles.ButtonText1 : styles.ButtonTextW}> Individual {countIndividuals}</Text>
+                  </TouchableOpacity>
+                </View>
+              );
+            }
+          })()}
+
+          {(() => {
+            if (showwhat == 'Experience') {
+              return (
+                <View style={styles.subContainer}>
+                  {/* <Text style={styles.subHead}>
+                    Pending Invoices ({infoData.length})
+                    </Text> */}
+
+                  <View
+                    style={{
+                      width: wp(90),
+                      backgroundColor: Color.geen,
+                      alignItems: 'center',
+                      alignSelf: 'center',
+                      elevation: 10,
+                      marginTop: 10,
+                      flexDirection: 'row',
+                      height: wp(10),
+                    }}>
+                    {/* <View
           style={{
             width: wp(15),
 
@@ -286,60 +499,59 @@ const ClientInfo = () => {
             }}
           />
         </View> */}
-          <View
-            style={{
-              width: wp(20),
+                    <View
+                      style={{
+                        width: wp(20),
 
-              alignItems: 'center',
-            }}>
-            <Text style={{ color: '#fff', fontSize: 12 }}>Client ID</Text>
-          </View>
-          <View
-            style={{
-              width: wp(25),
+                        alignItems: 'center',
+                      }}>
+                      <Text style={{ color: '#fff', fontSize: 12, fontFamily: 'Poppins-SemiBold' }}>Client ID</Text>
+                    </View>
+                    <View
+                      style={{
+                        width: wp(25),
 
-              alignItems: 'center',
-            }}>
-            <Text style={{ color: '#fff', fontSize: 12 }}> Client Name</Text>
-          </View>
-          <View
-            style={{
-              width: wp(25),
+                        alignItems: 'center',
+                      }}>
+                      <Text style={{ color: '#fff', fontSize: 12, fontFamily: 'Poppins-SemiBold' }}> Client Name</Text>
+                    </View>
+                    <View
+                      style={{
+                        width: wp(25),
 
-              alignItems: 'center',
-            }}>
-            <Text style={{ color: '#fff', fontSize: 12 }}> Type</Text>
-          </View>
+                        alignItems: 'center',
+                      }}>
+                      <Text style={{ color: '#fff', fontSize: 12, fontFamily: 'Poppins-SemiBold' }}> Type</Text>
+                    </View>
 
-          <View
-            style={{
-              width: wp(20),
+                    <View
+                      style={{
+                        width: wp(20),
 
-              alignItems: 'center',
-            }}>
-            <Text style={{ color: '#fff', fontSize: 12 }}>Client</Text>
-          </View>
-        </View>
+                        alignItems: 'center',
+                      }}>
+                      <Text style={{ color: '#fff', fontSize: 12, fontFamily: 'Poppins-SemiBold' }}>Client</Text>
+                    </View>
+                  </View>
+                  <FlatList
+                    data={infoData}
+                    // numColumns={5}
+                    keyExtractor={(item, index) => index}
+                    renderItem={({ item, index }) => (
+                      <View
+                        style={{
+                          width: wp(90),
+                          backgroundColor: '#fff',
 
-        <FlatList
-          data={infoData}
-          // numColumns={5}
-          keyExtractor={(item, index) => index}
-          renderItem={({ item, index }) => (
-            <View
-              style={{
-                width: wp(90),
-                backgroundColor: '#fff',
+                          alignItems: 'center',
+                          alignSelf: 'center',
+                          elevation: 10,
 
-                alignItems: 'center',
-                alignSelf: 'center',
-                elevation: 10,
-
-                marginBottom: 10,
-                flexDirection: 'row',
-                height: wp(15),
-              }}>
-              {/* <View
+                          marginBottom: 10,
+                          flexDirection: 'row',
+                          height: wp(15),
+                        }}>
+                        {/* <View
               style={{
                 width: wp(15),
 
@@ -355,66 +567,238 @@ const ClientInfo = () => {
                 }}
               />
             </View> */}
-              <View
-                style={{
-                  width: wp(20),
-                  paddingLeft: 10,
-                  //  backgroundColor: 'red',
-                  //   alignItems: 'center',
-                }}>
-                <Text
-                  numberOfLines={1}
-                  style={{ color: Color.darkGreen, fontSize: 10 }}>
-                  {item?.subClientInfo?.subClientPracticeId}
-                </Text>
-              </View>
-              <View
-                style={{
-                  width: wp(25),
+                        <View
+                          style={{
+                            width: wp(20),
+                            paddingLeft: 10,
+                            //  backgroundColor: 'red',
+                            //   alignItems: 'center',
+                          }}>
+                          <Text
+                            numberOfLines={1}
+                            style={{ color: Color.darkGreen, fontSize: 10, fontFamily: 'Poppins-SemiBold' }}>
+                            {item?.subClientInfo?.subClientPracticeId}
+                          </Text>
+                        </View>
+                        <View
+                          style={{
+                            width: wp(25),
 
-                  alignItems: 'center',
-                }}>
-                <Text style={{ color: Color.darkGreen, fontSize: 10 }}>
-                  {item?.subClientInfo?.subClientName}
-                </Text>
-              </View>
+                            alignItems: 'center',
+                          }}>
+                          <Text style={{ color: Color.darkGreen, fontSize: 10, fontFamily: 'Poppins-SemiBold' }}>
+                            {item?.subClientInfo?.subClientName}
+                          </Text>
+                        </View>
 
-              <View
-                style={{
-                  width: wp(25),
+                        <View
+                          style={{
+                            width: wp(25),
 
-                  alignItems: 'center',
-                }}>
-                <Text style={{ color: Color.darkGreen, fontSize: 10 }}>
-                  {item?.subClientInfo?.subClientType}
-                </Text>
-              </View>
+                            alignItems: 'center',
+                          }}>
+                          <Text style={{ color: Color.darkGreen, fontSize: 10, fontFamily: 'Poppins-SemiBold' }}>
+                            {item?.subClientInfo?.subClientType}
+                          </Text>
+                        </View>
 
-              <View
-                style={{
-                  width: wp(20),
+                        <View
+                          style={{
+                            width: wp(20),
 
-                  alignItems: 'center',
-                }}>
-                {/* <Text style={{color: '#2F4050', fontSize: 12}}>
+                            alignItems: 'center',
+                          }}>
+                          {/* <Text style={{color: '#2F4050', fontSize: 12}}>
                 {item.associationType}
               </Text> */}
-                <TouchableOpacity onPress={() => GetClientDetail(item)}>
-                  <Image
-                    source={require('../Assets/img/icons/view.png')}
-                    style={{
-                      width: 20,
-                      height: 20,
-                      alignSelf: 'center',
-                      borderRadius: 50,
-                      //alignSelf: 'center',
-                    }}
+                          <TouchableOpacity onPress={() => GetClientDetail(item)}>
+                            <Image
+                              source={require('../Assets/img/icons/view.png')}
+                              style={{
+                                width: 20,
+                                height: 20,
+                                alignSelf: 'center',
+                                borderRadius: 50,
+                                //alignSelf: 'center',
+                              }}
+                            />
+                          </TouchableOpacity>
+                        </View>
+                      </View>
+                    )}
                   />
-                </TouchableOpacity>
-              </View>
-            </View>
-          )}
-        />
+                </View>
+              );
+            } else if (showwhat == 'My Schools') {
+              return (
+                <View style={styles.subContainer}>
+                  {/* <Text style={styles.subHead}>Paid Invoices (0)</Text> */}
+                  <Text style={{ textAlign: 'center', fontFamily: 'Poppins-SemiBold' }}>No Data Found</Text>
+                  {/* <FlatList
+                  data={data}
+                  // numColumns={5}
+                  keyExtractor={(item, index) => index}
+                  renderItem={({item, index}) => (
+                    <View
+                      style={{
+                        width: wp(90),
+                        backgroundColor: '#fff',
+
+                        alignItems: 'center',
+                        alignSelf: 'center',
+                        elevation: 10,
+
+                        marginBottom: 10,
+                        flexDirection: 'row',
+                        height: wp(15),
+                      }}>
+                      <View
+                        style={{
+                          width: wp(15),
+
+                          alignItems: 'center',
+                        }}>
+                        <Image
+                          source={item.img}
+                          style={{
+                            width: 30,
+                            height: 30,
+                            borderRadius: 50,
+                            //alignSelf: 'center',
+                          }}
+                        />
+                      </View>
+                      <View
+                        style={{
+                          width: wp(30),
+
+                          alignItems: 'center',
+                        }}>
+                        <Text style={{color: '#2F4050', fontSize: 12}}>
+                          {item.clintID}
+                        </Text>
+                      </View>
+                      <View
+                        style={{
+                          width: wp(30),
+
+                          alignItems: 'center',
+                        }}>
+                        <Text style={{color: '#2F4050', fontSize: 12}}>
+                          {item.clintName}
+                        </Text>
+                      </View>
+                      <View
+                        style={{
+                          width: wp(15),
+
+                          alignItems: 'center',
+                        }}>
+                        <Image
+                          source={item.viewicon}
+                          style={{
+                            width: 20,
+                            height: 20,
+                            borderRadius: 50,
+                            //alignSelf: 'center',
+                          }}
+                        />
+                      </View>
+                    </View>
+                  )}
+                /> */}
+                </View>
+              );
+            } else {
+              return (
+                <View style={styles.subContainer}>
+                  {/* <Text style={styles.subHead}>Plan</Text> */}
+                  <Text style={{ textAlign: 'center' }}>No Data Found</Text>
+                  {/* <FlatList
+                  data={data}
+                  // numColumns={5}
+                  keyExtractor={(item, index) => index}
+                  renderItem={({item, index}) => (
+                    <View
+                      style={{
+                        width: wp(90),
+                        backgroundColor: '#fff',
+
+                        alignItems: 'center',
+                        alignSelf: 'center',
+                        elevation: 10,
+
+                        marginBottom: 10,
+                        flexDirection: 'row',
+                        height: wp(15),
+                      }}>
+                      <View
+                        style={{
+                          width: wp(15),
+
+                          alignItems: 'center',
+                        }}>
+                        <Image
+                          source={item.img}
+                          style={{
+                            width: 30,
+                            height: 30,
+                            borderRadius: 50,
+                            //alignSelf: 'center',
+                          }}
+                        />
+                      </View>
+                      <View
+                        style={{
+                          width: wp(30),
+
+                          alignItems: 'center',
+                        }}>
+                        <Text style={{color: '#2F4050', fontSize: 12}}>
+                          {item.clintID}
+                        </Text>
+                      </View>
+                      <View
+                        style={{
+                          width: wp(30),
+
+                          alignItems: 'center',
+                        }}>
+                        <Text style={{color: '#2F4050', fontSize: 12}}>
+                          {item.clintName}
+                        </Text>
+                      </View>
+                      <View
+                        style={{
+                          width: wp(15),
+
+                          alignItems: 'center',
+                        }}>
+                        <Image
+                          source={item.viewicon}
+                          style={{
+                            width: 20,
+                            height: 20,
+                            borderRadius: 50,
+                            //alignSelf: 'center',
+                          }}
+                        />
+                      </View>
+                    </View>
+                  )}
+                /> */}
+                </View>
+              );
+            }
+          })()}
+
+
+
+
+        </View>
+
+
+
 
         {/* {(() => {
         if (showwhat == 'Experience') {
@@ -754,6 +1138,16 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(245,252,255,1)',
     color: '#000',
   },
+  subContainer: {
+    // backgroundColor: '#fff',
+    //width: wp(90),
+
+    alignSelf: 'center',
+    marginTop: 10,
+    //height: hp(75),
+
+    // alignItems: 'center',
+  },
   selectors: {
     marginBottom: 10,
     flexDirection: 'row',
@@ -953,5 +1347,59 @@ const styles = StyleSheet.create({
   },
   bgImg: {
     height: hp(85)
-  }
+  },
+  moblieSec1: {
+    backgroundColor: '#fff',
+    // height: 20,
+    borderRadius: 50,
+    // justifyContent: "center",
+    // alignItems: "center",
+    marginTop: 10,
+    // marginBottom: 30,
+    width: wp(90),
+    marginLeft: 10,
+    flexDirection: 'row',
+    // alignSelf: "center",
+  },
+  emailtoch1: {
+    //  backgroundColor: "lightgray",
+    width: wp(30),
+    height: 50,
+    justifyContent: 'center',
+    // borderRadius: 10,
+    alignItems: "center",
+    borderTopLeftRadius: 20,
+    borderBottomLeftRadius: 20,
+    paddingHorizontal: 20
+  },
+  emailtoch2: {
+    //  backgroundColor: "lightgray",
+    width: wp(30),
+    height: 50,
+    alignItems: "center",
+    justifyContent: 'center',
+    // borderRadius: 10,
+    borderTopRightRadius: 20,
+    borderBottomRightRadius: 20
+  },
+  ButtonText1: {
+    color: '#000',
+    fontSize: 10,
+    textAlign: 'center',
+    fontFamily: 'Poppins-SemiBold',
+  },
+  ButtonTextW: {
+    color: '#fff',
+    fontFamily: 'Poppins-SemiBold',
+    fontSize: 10,
+    textAlign: 'center',
+  },
+  mobiletochP: {
+    // backgroundColor: showwhat == "My Schools" ? "#2F5597" : "lightgray",
+    width: wp(30),
+    height: 50,
+    // borderRadius: 10,
+    alignItems: "center",
+    justifyContent: 'center',
+  },
 });

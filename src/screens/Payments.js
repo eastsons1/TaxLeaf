@@ -89,7 +89,7 @@ const data = [
 const Payments = () => {
   const [showwhat, setshowwhat] = useState('Experience');
   const [infoData, setInfoData] = useState([]);
-
+  const [idRow, setIdRow] = useState();
   const { MY_INFO } = useSelector(state => state.TaxLeafReducer);
   const { GET_PAYMENT_LIST } = useSelector(state => state.PaymentReducer);
   const { DASHBOARD_LIST } = useSelector(state => state.DashboardReducer);
@@ -97,8 +97,8 @@ const Payments = () => {
   const dispatch = useDispatch();
   const [loader, setLoader] = useState(false);
   const [activeSections, setActiveSection] = useState([]);
-  const { GET_ORDER_DETAILS } = useSelector(state => state.PaymentReducer);
-  const serviceListModel = GET_ORDER_DETAILS[0]?.serviceListModel[0]
+  //const { GET_ORDER_DETAILS } = useSelector(state => state.PaymentReducer);
+  //const serviceListModel = GET_ORDER_DETAILS[0]?.serviceListModel[0]
   const bgImage = require('../Assets/img/guest_shape.png');
   const [orderIDAcc, setOrderID] = useState()
   const navigation = useNavigation();
@@ -111,41 +111,79 @@ const Payments = () => {
   const jsonData = MY_INFO.guestInfo;
   const officeInfo = MY_INFO.officeInfo;
 
+  console.log(jsonData?.clientId, jsonData?.clientType, 'jsonData?.clientId, jsonData?.clientType')
+
   //console.log(GET_ORDER_DETAILS, 'orderInfoPAymentScreen')
 
   useEffect(() => {
-    setLoader(true);
-    dispatch(
-      GetPaymentList(jsonData?.clientId, jsonData?.clientType, navigation),
-    );
 
-    setInfoData(GET_PAYMENT_LIST);
-    dispatch(
-      dashboardlist(
-        jsonData?.clientId,
-        jsonData?.clientType,
-        officeInfo?.id,
-        navigation,
-      ),
-    );
+    const fetchData = async () => {
 
-    setTimeout(() => {
-      setLoader(false);
-    }, 2000);
+      try {
+        setLoader(true);
+
+        // Dispatch GetPaymentList and dashboardlist sequentially
+        await dispatch(GetPaymentList(jsonData?.clientId, jsonData?.clientType, navigation));
+
+        // Get the latest state after GetPaymentList is resolved
+        //   const paymentList = GET_PAYMENT_LIST;
+
+        // Dispatch dashboardlist with data from GetPaymentList
+        //  await dispatch(dashboardlist(jsonData?.clientId, jsonData?.clientType, officeInfo?.id, navigation, paymentList));
+
+        setTimeout(() => {
+          setLoader(false);
+        }, 500);
+        // Set infoData based on the latest state
+        // setInfoData(paymentList);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+      // finally {
+      //   setLoader(false);
+      // }
+    };
+
+    fetchData();
   }, []);
-  // console.log(infoData, 'infoData');
-  useEffect(() => {
-    setInfoData(GET_PAYMENT_LIST);
-  }, [GET_PAYMENT_LIST]);
+
+
+  // console.log(infoData[0].serviceListModel, 'infoDatainfoDatainfoDatainfoDatainfoData')
+
+  // useEffect(() => {
+  //   setLoader(true);
+  //   dispatch(
+  //     GetPaymentList(jsonData?.clientId, jsonData?.clientType, navigation),
+  //   );
+
+  //   setInfoData(GET_PAYMENT_LIST);
+  //   dispatch(
+  //     dashboardlist(
+  //       jsonData?.clientId,
+  //       jsonData?.clientType,
+  //       officeInfo?.id,
+  //       navigation,
+  //     ),
+  //   );
+
+  //   setTimeout(() => {
+  //     setLoader(false);
+  //   }, 2000);
+  // }, []);
+  // // console.log(infoData, 'infoData');
+  // useEffect(() => {
+  //   setInfoData(GET_PAYMENT_LIST);
+  // }, [GET_PAYMENT_LIST]);
 
   useEffect(() => {
     // setLoader(true);
     setInfoData(GET_PAYMENT_LIST);
+    //setInfoData(GET_ORDER_DETAILS);
     // setTimeout(() => {
     //   setLoader(false);
     // }, 2000);
-    getorderbyId()
-  }, [GET_PAYMENT_LIST]);
+    // getorderbyId()
+  }, [GET_PAYMENT_LIST,]);
   // useEffect(() => {
   //   infoData?.collectionInfo.map((item)=>{
   //     getorderbyId(item?.orderId)
@@ -153,9 +191,11 @@ const Payments = () => {
   // }, [infoData])
 
 
+
+
   const getorderbyId = (orderId) => {
     // Alert.alert('hii')
-    console.log(orderId, 'orderIDDDD')
+    console.log(jsonData?.clientId, jsonData?.clientType, orderId, 'orderIDDDD')
     // setLoader(true);
 
     dispatch(
@@ -164,6 +204,7 @@ const Payments = () => {
     //   setTimeout(() => {
     //     setLoader(false);
     // }, 2000);
+
   }
   // console.log(
   //   infoData.length,
@@ -188,6 +229,30 @@ const Payments = () => {
     );
   };
 
+
+  const handleRow = item => {
+    console.log(item?.collectionInfo?.orderId, 'KKKKKKKKK')
+
+    setIdRow(item?.collectionInfo?.orderId);
+    setLoader(true)
+
+    // setSelectedData(item);
+
+    dispatch(
+      GetDetailsbyOrderId(jsonData?.clientId, jsonData?.clientType, item?.collectionInfo?.orderId, navigation),
+    );
+    setTimeout(() => {
+      setLoader(false)
+    }, 2000);
+    // getorderbyId(item?.collectionInfo?.orderId)
+
+  };
+  const handleRowOFF = item => {
+    setIdRow();
+    // setSelectedData(item);
+    // getorderbyId(item?.collectionInfo?.orderId)
+  };
+
   const renderHeader = item => {
     return (
       <>
@@ -205,241 +270,386 @@ const Payments = () => {
     return (
       <>
         <Animatable.View style={{ marginBottom: 20, backgroundColor: '#fff' }}>
-          <Animatable.View
-            duration={400}
-            style={[
-              styles.content,
-              isActive ? styles.active : styles.inactive,
-              {
-                width: wp(90),
-                backgroundColor: Color.green,
-                alignItems: 'center',
-                alignSelf: 'center',
-                // marginBottom: 10,
-                flexDirection: 'row',
-                height: wp(15),
+          {/* <TouchableOpacity
+            onPress={() => { handleRow(section) }}>
+            <Animatable.View
+              duration={400}
+              style={[
+                styles.content,
+                isActive ? styles.active : styles.inactive,
+                {
+                  width: wp(90),
+                  backgroundColor: Color.green,
+                  alignItems: 'center',
+                  alignSelf: 'center',
+                  // marginBottom: 10,
+                  flexDirection: 'row',
+                  height: wp(15),
 
 
-                opacity: 10,
-                paddingLeft: 10,
-                paddingRight: 10,
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-              },
-            ]}
-            transition="backgroundColor">
-            <Animatable.Text
-              animation={isActive ? 'bounceIn' : undefined}
-              style={{
-                color: '#fff',
-                textAlign: 'center',
+                  opacity: 10,
+                  paddingLeft: 10,
+                  paddingRight: 10,
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                },
+              ]}
+              transition="backgroundColor">
 
-                width: wp(15),
-                // backgroundColor: '#2F5597',
-                borderTopLeftRadius: 10,
-                borderTopRightRadius: 10,
-                height: wp(10),
-                fontSize: 11,
-                fontFamily: 'Poppins-SemiBold',
-                justifyContent: 'center',
-              }}>
-              Category
-            </Animatable.Text>
-            <Animatable.Text
-              animation={isActive ? 'bounceIn' : undefined}
-              style={{
-                color: '#fff',
-                textAlign: 'center',
+              <Animatable.Text
+                animation={isActive ? 'bounceIn' : undefined}
+                style={{
+                  color: '#fff',
+                  textAlign: 'center',
 
-                width: wp(20),
+                  width: wp(20),
+                  // backgroundColor: '#2F5597',
+                  borderTopLeftRadius: 10,
+                  borderTopRightRadius: 10,
+                  height: wp(10),
+                  fontSize: 11,
+                  fontFamily: 'Poppins-SemiBold',
+                  justifyContent: 'center',
+                }}>
+                Category
+              </Animatable.Text>
 
-                // backgroundColor: '#2F5597',
-                borderTopLeftRadius: 10,
-                borderTopRightRadius: 10,
-                height: wp(10),
-                fontSize: 11,
-                //fontSize: 10,
-                fontFamily: 'Poppins-SemiBold',
-                justifyContent: 'center',
-              }}>
-              Service Name
-            </Animatable.Text>
-            <Animatable.Text
-              animation={isActive ? 'bounceIn' : undefined}
-              style={{
-                color: '#fff',
-                textAlign: 'center',
+              <Animatable.Text
+                animation={isActive ? 'bounceIn' : undefined}
+                style={{
+                  color: '#fff',
+                  textAlign: 'center',
+
+                  width: wp(20),
+
+                  // backgroundColor: '#2F5597',
+                  borderTopLeftRadius: 10,
+                  borderTopRightRadius: 10,
+                  height: wp(10),
+                  fontSize: 11,
+                  //fontSize: 10,
+                  fontFamily: 'Poppins-SemiBold',
+                  justifyContent: 'center',
+                }}>
+                Service Name
+              </Animatable.Text>
+              <Animatable.Text
+                animation={isActive ? 'bounceIn' : undefined}
+                style={{
+                  color: '#fff',
+                  textAlign: 'center',
 
 
-                width: wp(17),
+                  width: wp(15),
 
-                // backgroundColor: '#2F5597',
-                borderTopLeftRadius: 10,
-                borderTopRightRadius: 10,
-                height: wp(11),
-                fontSize: 11,
-                fontFamily: 'Poppins-SemiBold',
-                justifyContent: 'center',
-              }}>
-              Retail Price
-            </Animatable.Text>
-            <Animatable.Text
-              animation={isActive ? 'bounceIn' : undefined}
-              style={{
-                color: '#fff',
-                textAlign: 'center',
+                  // backgroundColor: '#2F5597',
+                  borderTopLeftRadius: 10,
+                  borderTopRightRadius: 10,
+                  height: wp(11),
+                  fontSize: 11,
+                  fontFamily: 'Poppins-SemiBold',
+                  justifyContent: 'center',
+                }}>
+                Retail Price
+              </Animatable.Text>
+              <Animatable.Text
+                animation={isActive ? 'bounceIn' : undefined}
+                style={{
+                  color: '#fff',
+                  textAlign: 'center',
 
-                width: wp(18),
+                  width: wp(15),
 
-                // backgroundColor: '#2F5597',
-                borderTopLeftRadius: 10,
-                borderTopRightRadius: 10,
-                height: wp(10),
-                fontSize: 11,
-                fontFamily: 'Poppins-SemiBold',
-                justifyContent: 'center',
-              }}>
-              Quantity
-            </Animatable.Text>
-            <Animatable.Text
-              animation={isActive ? 'bounceIn' : undefined}
-              style={{
-                color: '#fff',
-                textAlign: 'center',
-                // marginTop: 4,
-                alignSelf: "center",
-                width: wp(17),
+                  // backgroundColor: '#2F5597',
+                  borderTopLeftRadius: 10,
+                  borderTopRightRadius: 10,
+                  height: wp(10),
+                  fontSize: 11,
+                  fontFamily: 'Poppins-SemiBold',
+                  justifyContent: 'center',
+                }}>
+                Quantity
+              </Animatable.Text>
+              <Animatable.Text
+                animation={isActive ? 'bounceIn' : undefined}
+                style={{
+                  color: '#fff',
+                  textAlign: 'center',
+                  // marginTop: 4,
+                  //alignSelf: "center",
+                  width: wp(18),
 
-                backgroundColor: Color.darkGreen,
-                // borderTopLeftRadius: 10,
-                // borderTopRightRadius: 10,
-                height: wp(15),
-                paddingTop: 15,
-                fontSize: 10,
-                fontFamily: 'Poppins-SemiBold',
-                justifyContent: 'center',
-              }}>
-              Total Price
-            </Animatable.Text>
-          </Animatable.View>
-          <FlatList
-            data={GET_ORDER_DETAILS[0]?.serviceListModel}
-            keyExtractor={item => item.id}
+                  backgroundColor: Color.darkGreen,
+                  // borderTopLeftRadius: 10,
+                  // borderTopRightRadius: 10,
+                  height: wp(15),
+                  paddingTop: 15,
+                  fontSize: 10,
+                  fontFamily: 'Poppins-SemiBold',
+                  justifyContent: 'center',
+                }}>
+                Total Price
+              </Animatable.Text>
+            </Animatable.View>
+          </TouchableOpacity> */}
+
+          {/* {
+            idRow == section?.collectionInfo?.orderId ? */}
+          {/* <FlatList
+            //data={GET_ORDER_DETAILS[0]?.serviceListModel}
+            data={infoData}
+            // keyExtractor={item => item?.serviceInfo?.id}
             renderItem={({ item, index }) => (
-              <Animatable.View
-                duration={400}
-                style={[
-                  styles.content,
-                  isActive ? styles.active : styles.inactive,
-                  {
-                    width: wp(90),
-                    // backgroundColor: 'red',
-                    //  alignItems: 'center',
-                    // marginBottom: 10,
-                    flexDirection: 'row',
-                    height: wp(15),
-                    alignItems: "center",
-                    justifyContent: "center",
-                    // alignSelf: 'center',
+              item.serviceListModel.map((service, serviceIndex) => (
+                <>
+                  <TouchableOpacity
+                    onPress={() => { handleRow(section) }}>
+                    <Animatable.View
+                      duration={400}
+                      style={[
+                        styles.content,
+                        isActive ? styles.active : styles.inactive,
+                        {
+                          width: wp(90),
+                          backgroundColor: Color.green,
+                          alignItems: 'center',
+                          alignSelf: 'center',
+                          // marginBottom: 10,
+                          flexDirection: 'row',
+                          height: wp(15),
 
-                    opacity: 10,
-                    // paddingLeft: 10,
-                    //paddingRight: 10,
-                    //  paddingBottom: 10,
 
-                    //  justifyContent: 'space-between',
-                  },
-                ]}
-                transition="backgroundColor">
-                <Animatable.Text
-                  animation={isActive ? 'bounceIn' : undefined}
-                  style={{
-                    color: '#000',
-                    textAlign: 'center',
-                    width: wp(15),
+                          opacity: 10,
+                          paddingLeft: 10,
+                          paddingRight: 10,
+                          flexDirection: 'row',
+                          justifyContent: 'space-between',
+                        },
+                      ]}
+                      transition="backgroundColor">
 
-                    // backgroundColor: '#2F5597',
-                    borderTopLeftRadius: 10,
-                    borderTopRightRadius: 10,
-                    height: wp(10),
-                    fontSize: 10,
-                    fontFamily: 'Poppins-SemiBold',
-                    justifyContent: 'center',
-                  }}>
-                  {item?.serviceInfo?.category?.name}
-                </Animatable.Text>
-                <Animatable.Text
-                  animation={isActive ? 'bounceIn' : undefined}
-                  style={{
-                    color: '#000',
-                    textAlign: 'center',
-                    width: wp(20),
+                      <Animatable.Text
+                        animation={isActive ? 'bounceIn' : undefined}
+                        style={{
+                          color: '#fff',
+                          textAlign: 'center',
 
-                    // backgroundColor: '#2F5597',
-                    borderTopLeftRadius: 10,
-                    borderTopRightRadius: 10,
-                    height: wp(10),
-                    fontSize: 10,
-                    fontFamily: 'Poppins-SemiBold',
-                    justifyContent: 'center',
-                  }}>
-                  {item?.serviceInfo?.description}
-                </Animatable.Text>
-                <Animatable.Text
-                  animation={isActive ? 'bounceIn' : undefined}
-                  style={{
-                    color: '#000',
-                    textAlign: 'center',
-                    width: wp(17),
+                          width: wp(20),
+                          // backgroundColor: '#2F5597',
+                          borderTopLeftRadius: 10,
+                          borderTopRightRadius: 10,
+                          height: wp(10),
+                          fontSize: 11,
+                          fontFamily: 'Poppins-SemiBold',
+                          justifyContent: 'center',
+                        }}>
+                        Category
+                      </Animatable.Text>
 
-                    // backgroundColor: '#2F5597',
-                    borderTopLeftRadius: 10,
-                    borderTopRightRadius: 10,
-                    height: wp(10),
-                    fontSize: 10,
-                    fontFamily: 'Poppins-SemiBold',
-                    justifyContent: 'center',
-                  }}>
-                  ${item?.reqInfo?.retailPrice}
-                </Animatable.Text>
-                <Animatable.Text
-                  animation={isActive ? 'bounceIn' : undefined}
-                  style={{
-                    color: '#000',
-                    textAlign: 'center',
-                    width: wp(18),
+                      <Animatable.Text
+                        animation={isActive ? 'bounceIn' : undefined}
+                        style={{
+                          color: '#fff',
+                          textAlign: 'center',
 
-                    // backgroundColor: '#2F5597',
-                    borderTopLeftRadius: 10,
-                    borderTopRightRadius: 10,
-                    height: wp(10),
-                    fontSize: 10,
-                    fontFamily: 'Poppins-SemiBold',
-                    justifyContent: 'center',
-                  }}>
-                  {item?.reqInfo?.quantity}
-                </Animatable.Text>
-                <Animatable.Text
-                  animation={isActive ? 'bounceIn' : undefined}
-                  style={{
-                    color: '#000',
-                    textAlign: 'center',
-                    width: wp(17),
+                          width: wp(20),
 
-                    // backgroundColor: '#2F5597',
-                    borderTopLeftRadius: 10,
-                    borderTopRightRadius: 10,
-                    height: wp(10),
-                    fontSize: 10,
-                    fontFamily: 'Poppins-SemiBold',
-                    justifyContent: 'center',
-                  }}>
-                  ${item?.reqInfo?.priceCharged}
-                </Animatable.Text>
-              </Animatable.View>
+                          // backgroundColor: '#2F5597',
+                          borderTopLeftRadius: 10,
+                          borderTopRightRadius: 10,
+                          height: wp(10),
+                          fontSize: 11,
+                          //fontSize: 10,
+                          fontFamily: 'Poppins-SemiBold',
+                          justifyContent: 'center',
+                        }}>
+                        Service Name
+                      </Animatable.Text>
+                      <Animatable.Text
+                        animation={isActive ? 'bounceIn' : undefined}
+                        style={{
+                          color: '#fff',
+                          textAlign: 'center',
+
+
+                          width: wp(15),
+
+                          // backgroundColor: '#2F5597',
+                          borderTopLeftRadius: 10,
+                          borderTopRightRadius: 10,
+                          height: wp(11),
+                          fontSize: 11,
+                          fontFamily: 'Poppins-SemiBold',
+                          justifyContent: 'center',
+                        }}>
+                        Retail Price
+                      </Animatable.Text>
+                      <Animatable.Text
+                        animation={isActive ? 'bounceIn' : undefined}
+                        style={{
+                          color: '#fff',
+                          textAlign: 'center',
+
+                          width: wp(15),
+
+                          // backgroundColor: '#2F5597',
+                          borderTopLeftRadius: 10,
+                          borderTopRightRadius: 10,
+                          height: wp(10),
+                          fontSize: 11,
+                          fontFamily: 'Poppins-SemiBold',
+                          justifyContent: 'center',
+                        }}>
+                        Quantity
+                      </Animatable.Text>
+                      <Animatable.Text
+                        animation={isActive ? 'bounceIn' : undefined}
+                        style={{
+                          color: '#fff',
+                          textAlign: 'center',
+                          // marginTop: 4,
+                          //alignSelf: "center",
+                          width: wp(18),
+
+                          backgroundColor: Color.darkGreen,
+                          // borderTopLeftRadius: 10,
+                          // borderTopRightRadius: 10,
+                          height: wp(15),
+                          paddingTop: 15,
+                          fontSize: 10,
+                          fontFamily: 'Poppins-SemiBold',
+                          justifyContent: 'center',
+                        }}>
+                        Total Price
+                      </Animatable.Text>
+                    </Animatable.View>
+                  </TouchableOpacity>
+
+                  <Animatable.View
+
+                    duration={400}
+                    style={[
+                      styles.content,
+
+                      isActive ? styles.active : styles.inactive,
+                      {
+                        width: wp(90),
+                        // backgroundColor: 'red',
+                        //  alignItems: 'center',
+                        // marginBottom: 10,
+                        flexDirection: 'row',
+                        height: wp(15),
+                        alignItems: "center",
+                        justifyContent: "center",
+                        // alignSelf: 'center',
+
+                        opacity: 10,
+                        // paddingLeft: 10,
+                        //paddingRight: 10,
+                        //  paddingBottom: 10,
+
+                        //  justifyContent: 'space-between',
+                      },
+                    ]}
+                    transition="backgroundColor">
+                    <Animatable.Text
+                      animation={isActive ? 'bounceIn' : undefined}
+                      style={{
+                        color: '#000',
+                        textAlign: 'center',
+                        width: wp(20),
+
+                        // backgroundColor: '#2F5597',
+                        borderTopLeftRadius: 10,
+                        borderTopRightRadius: 10,
+                        height: wp(10),
+                        fontSize: 10,
+                        fontFamily: 'Poppins-SemiBold',
+                        justifyContent: 'center',
+                      }}>
+                      {service?.serviceInfo?.category?.name}
+                    </Animatable.Text>
+                    <Animatable.Text
+                      animation={isActive ? 'bounceIn' : undefined}
+                      style={{
+                        color: '#000',
+                        textAlign: 'center',
+                        width: wp(20),
+
+                        // backgroundColor: '#2F5597',
+                        borderTopLeftRadius: 10,
+                        borderTopRightRadius: 10,
+                        height: wp(10),
+                        fontSize: 10,
+                        fontFamily: 'Poppins-SemiBold',
+                        justifyContent: 'center',
+                      }}>
+                      {service?.serviceInfo.description}
+                    </Animatable.Text>
+                    <Animatable.Text
+                      animation={isActive ? 'bounceIn' : undefined}
+                      style={{
+                        color: '#000',
+                        textAlign: 'center',
+                        width: wp(15),
+
+                        // backgroundColor: '#2F5597',
+                        borderTopLeftRadius: 10,
+                        borderTopRightRadius: 10,
+                        height: wp(10),
+                        fontSize: 10,
+                        fontFamily: 'Poppins-SemiBold',
+                        justifyContent: 'center',
+                      }}>
+                      ${service?.reqInfo?.retailPrice}
+                    </Animatable.Text>
+                    <Animatable.Text
+                      animation={isActive ? 'bounceIn' : undefined}
+                      style={{
+                        color: '#000',
+                        textAlign: 'center',
+                        width: wp(15),
+
+                        // backgroundColor: '#2F5597',
+                        borderTopLeftRadius: 10,
+                        borderTopRightRadius: 10,
+                        height: wp(10),
+                        fontSize: 10,
+                        fontFamily: 'Poppins-SemiBold',
+                        justifyContent: 'center',
+                      }}>
+                      {service?.reqInfo?.quantity}
+                    </Animatable.Text>
+                    <Animatable.Text
+                      animation={isActive ? 'bounceIn' : undefined}
+                      style={{
+                        color: '#000',
+                        textAlign: 'center',
+                        width: wp(15),
+
+                        // backgroundColor: '#2F5597',
+                        borderTopLeftRadius: 10,
+                        borderTopRightRadius: 10,
+                        height: wp(10),
+                        fontSize: 10,
+                        fontFamily: 'Poppins-SemiBold',
+                        justifyContent: 'center',
+                      }}>
+                      ${service?.reqInfo?.priceCharged}
+                    </Animatable.Text>
+                  </Animatable.View>
+
+
+
+                </>
+              ))
             )}
-          />
-          <Animatable.View
+          /> */}
+          {/* :
+              null
+          } */}
+
+          {/* <Animatable.View
             duration={400}
             style={[
               styles.content,
@@ -477,7 +687,8 @@ const Payments = () => {
                 fontFamily: 'Poppins-SemiBold',
                 justifyContent: 'center',
               }}>
-              Order ID #{section?.collectionInfo?.orderId}
+              Order ID #{section?.collectionInfo?.invoiceId}
+              {/* Order ID #{section?.collectionInfo?.orderId} 
             </Animatable.Text>
             <View
               style={{
@@ -522,13 +733,13 @@ const Payments = () => {
               width: wp(48),
               // backgroundColor: '#fff',
               // marginBottom: 17
-
             }}>
 
               <TouchableOpacity
                 onPress={() => {
                   navigation.navigate('InvoiceView', {
                     orderId: section?.collectionInfo?.orderId
+                    //  orderId: section?.collectionInfo?.invoiceId
                   })
                 }}
                 style={{
@@ -546,6 +757,7 @@ const Payments = () => {
                   size={20}
                   color="#8AB645"
                 />
+
                 <Text style={{
                   color: "#000",
                   fontSize: 9,
@@ -560,6 +772,7 @@ const Payments = () => {
                   View Invoice
                 </Text>
               </TouchableOpacity>
+
               <TouchableOpacity
                 onPress={() => {
                   navigation.navigate('InvoiceDetails', {
@@ -595,7 +808,7 @@ const Payments = () => {
                 </Text>
               </TouchableOpacity>
             </View>
-          </Animatable.View>
+          </Animatable.View> */}
         </Animatable.View>
       </>
     );
@@ -605,8 +818,10 @@ const Payments = () => {
     console.log('HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH');
     console.log(sections, 'PPPPPPPPPPPPPPPPPPPP');
     setActiveSection(sections.includes(undefined) ? [] : sections);
-    // getorderbyId(sections?.collectionInfo?.orderId)
+    getorderbyId(sections?.collectionInfo?.orderId)
   };
+
+
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: Color.backgroundcolor }}>
@@ -667,7 +882,7 @@ const Payments = () => {
                       </View>
 
                       <Text style={showwhat == 'My Schools' ? styles.ButtonText1 : styles.ButtonTextW}>
-                        Pending ({infoData.length})
+                        Pending ({infoData?.length})
                       </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -899,7 +1114,7 @@ const Payments = () => {
                       style={{}}>
 
 
-                      <Accordion
+                      {/* <Accordion
                         activeSections={activeSections}
                         sections={infoData}
                         //title and content of accordion
@@ -911,6 +1126,421 @@ const Payments = () => {
                         duration={400}
                         //Duration for Collapse and expand
                         onChange={setSections}
+                      /> */}
+
+                      <FlatList
+                        //data={GET_ORDER_DETAILS[0]?.serviceListModel}
+                        data={infoData}
+                        // keyExtractor={item => item?.serviceInfo?.id}
+                        renderItem={({ item, index }) => (
+                          item.serviceListModel.map((service, serviceIndex) => (
+                            <>
+                              <View
+
+                              //</>   onPress = {() => {handleRow(section)}}
+                              >
+                                <Animatable.View
+                                  duration={400}
+                                  style={[
+                                    styles.content,
+                                    //  isActive ? styles.active : styles.inactive,
+                                    {
+                                      width: wp(90),
+                                      backgroundColor: Color.green,
+                                      alignItems: 'center',
+                                      alignSelf: 'center',
+                                      // marginBottom: 10,
+                                      flexDirection: 'row',
+                                      height: wp(15),
+
+
+                                      opacity: 10,
+                                      paddingLeft: 10,
+                                      paddingRight: 10,
+                                      flexDirection: 'row',
+                                      justifyContent: 'space-between',
+                                    },
+                                  ]}
+                                  transition="backgroundColor">
+
+                                  <Animatable.Text
+                                    //animation={isActive ? 'bounceIn' : undefined}
+                                    style={{
+                                      color: '#fff',
+                                      textAlign: 'center',
+
+                                      width: wp(20),
+                                      // backgroundColor: '#2F5597',
+                                      borderTopLeftRadius: 10,
+                                      borderTopRightRadius: 10,
+                                      height: wp(10),
+                                      fontSize: 11,
+                                      fontFamily: 'Poppins-SemiBold',
+                                      justifyContent: 'center',
+                                    }}>
+                                    Category
+                                  </Animatable.Text>
+
+                                  <Animatable.Text
+                                    //   animation={isActive ? 'bounceIn' : undefined}
+                                    style={{
+                                      color: '#fff',
+                                      textAlign: 'center',
+
+                                      width: wp(20),
+
+                                      // backgroundColor: '#2F5597',
+                                      borderTopLeftRadius: 10,
+                                      borderTopRightRadius: 10,
+                                      height: wp(10),
+                                      fontSize: 11,
+                                      //fontSize: 10,
+                                      fontFamily: 'Poppins-SemiBold',
+                                      justifyContent: 'center',
+                                    }}>
+                                    Service Name
+                                  </Animatable.Text>
+                                  <Animatable.Text
+                                    //  animation={isActive ? 'bounceIn' : undefined}
+                                    style={{
+                                      color: '#fff',
+                                      textAlign: 'center',
+
+
+                                      width: wp(15),
+
+                                      // backgroundColor: '#2F5597',
+                                      borderTopLeftRadius: 10,
+                                      borderTopRightRadius: 10,
+                                      height: wp(11),
+                                      fontSize: 11,
+                                      fontFamily: 'Poppins-SemiBold',
+                                      justifyContent: 'center',
+                                    }}>
+                                    Retail Price
+                                  </Animatable.Text>
+                                  <Animatable.Text
+                                    //   animation={isActive ? 'bounceIn' : undefined}
+                                    style={{
+                                      color: '#fff',
+                                      textAlign: 'center',
+
+                                      width: wp(15),
+
+                                      // backgroundColor: '#2F5597',
+                                      borderTopLeftRadius: 10,
+                                      borderTopRightRadius: 10,
+                                      height: wp(10),
+                                      fontSize: 11,
+                                      fontFamily: 'Poppins-SemiBold',
+                                      justifyContent: 'center',
+                                    }}>
+                                    Quantity
+                                  </Animatable.Text>
+                                  <Animatable.Text
+                                    //  animation={isActive ? 'bounceIn' : undefined}
+                                    style={{
+                                      color: '#fff',
+                                      textAlign: 'center',
+                                      // marginTop: 4,
+                                      //alignSelf: "center",
+                                      width: wp(18),
+
+                                      backgroundColor: Color.darkGreen,
+                                      // borderTopLeftRadius: 10,
+                                      // borderTopRightRadius: 10,
+                                      height: wp(15),
+                                      paddingTop: 15,
+                                      fontSize: 10,
+                                      fontFamily: 'Poppins-SemiBold',
+                                      justifyContent: 'center',
+                                    }}>
+                                    Total Price
+                                  </Animatable.Text>
+                                </Animatable.View>
+                              </View>
+
+                              <Animatable.View
+
+                                duration={400}
+                                style={[
+                                  styles.content,
+
+                                  //  isActive ? styles.active : styles.inactive,
+                                  {
+                                    width: wp(90),
+                                    // backgroundColor: 'red',
+                                    //  alignItems: 'center',
+                                    // marginBottom: 10,
+                                    flexDirection: 'row',
+                                    height: wp(15),
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    // alignSelf: 'center',
+
+                                    opacity: 10,
+                                    // paddingLeft: 10,
+                                    //paddingRight: 10,
+                                    //  paddingBottom: 10,
+
+                                    //  justifyContent: 'space-between',
+                                  },
+                                ]}
+                                transition="backgroundColor">
+                                <Animatable.Text
+                                  //   animation={isActive ? 'bounceIn' : undefined}
+                                  style={{
+                                    color: '#000',
+                                    textAlign: 'center',
+                                    width: wp(20),
+
+                                    // backgroundColor: '#2F5597',
+                                    borderTopLeftRadius: 10,
+                                    borderTopRightRadius: 10,
+                                    height: wp(10),
+                                    fontSize: 10,
+                                    fontFamily: 'Poppins-SemiBold',
+                                    justifyContent: 'center',
+                                  }}>
+                                  {service?.serviceInfo?.category?.name}
+                                </Animatable.Text>
+                                <Animatable.Text
+                                  // animation={isActive ? 'bounceIn' : undefined}
+                                  style={{
+                                    color: '#000',
+                                    textAlign: 'center',
+                                    width: wp(20),
+
+                                    // backgroundColor: '#2F5597',
+                                    borderTopLeftRadius: 10,
+                                    borderTopRightRadius: 10,
+                                    height: wp(10),
+                                    fontSize: 10,
+                                    fontFamily: 'Poppins-SemiBold',
+                                    justifyContent: 'center',
+                                  }}>
+                                  {service?.serviceInfo.description}
+                                </Animatable.Text>
+                                <Animatable.Text
+                                  // animation={isActive ? 'bounceIn' : undefined}
+                                  style={{
+                                    color: '#000',
+                                    textAlign: 'center',
+                                    width: wp(15),
+
+                                    // backgroundColor: '#2F5597',
+                                    borderTopLeftRadius: 10,
+                                    borderTopRightRadius: 10,
+                                    height: wp(10),
+                                    fontSize: 10,
+                                    fontFamily: 'Poppins-SemiBold',
+                                    justifyContent: 'center',
+                                  }}>
+                                  ${service?.reqInfo?.retailPrice}
+                                </Animatable.Text>
+                                <Animatable.Text
+                                  // animation={isActive ? 'bounceIn' : undefined}
+                                  style={{
+                                    color: '#000',
+                                    textAlign: 'center',
+                                    width: wp(15),
+
+                                    // backgroundColor: '#2F5597',
+                                    borderTopLeftRadius: 10,
+                                    borderTopRightRadius: 10,
+                                    height: wp(10),
+                                    fontSize: 10,
+                                    fontFamily: 'Poppins-SemiBold',
+                                    justifyContent: 'center',
+                                  }}>
+                                  {service?.reqInfo?.quantity}
+                                </Animatable.Text>
+                                <Animatable.Text
+                                  //   animation={isActive ? 'bounceIn' : undefined}
+                                  style={{
+                                    color: '#000',
+                                    textAlign: 'center',
+                                    width: wp(15),
+
+                                    // backgroundColor: '#2F5597',
+                                    borderTopLeftRadius: 10,
+                                    borderTopRightRadius: 10,
+                                    height: wp(10),
+                                    fontSize: 10,
+                                    fontFamily: 'Poppins-SemiBold',
+                                    justifyContent: 'center',
+                                  }}>
+                                  ${service?.reqInfo?.priceCharged}
+                                </Animatable.Text>
+                              </Animatable.View>
+
+
+                              <Animatable.View
+                                duration={400}
+                                style={[
+                                  styles.content,
+                                  //   isActive ? styles.active : styles.inactive,
+                                  {
+                                    width: wp(90),
+                                    backgroundColor: 'lightgray',
+                                    alignItems: 'center',
+                                    alignSelf: 'center',
+                                    // marginBottom: 10,
+                                    flexDirection: 'row',
+                                    height: wp(10),
+                                    opacity: 10,
+                                    paddingLeft: 10,
+                                    paddingRight: 10,
+                                    flexDirection: 'row',
+                                    justifyContent: 'space-between',
+                                  },
+                                ]}
+                                transition="backgroundColor">
+                                <Animatable.Text
+                                  // animation={isActive ? 'bounceIn' : undefined}
+                                  style={{
+                                    color: '#000',
+                                    // textAlign: 'center',
+                                    marginTop: wp(6),
+                                    //paddingTop: 10,
+                                    //width: wp(18),
+                                    // backgroundColor: '#2F5597',
+                                    borderTopLeftRadius: 10,
+                                    //borderTopRightRadius: 10,
+                                    height: wp(10),
+                                    fontSize: 8,
+
+                                    fontFamily: 'Poppins-SemiBold',
+                                    justifyContent: 'center',
+                                  }}>
+                                  Order ID #{item?.collectionInfo?.invoiceId}
+                                  {/* Order ID #{section?.collectionInfo?.orderId} */}
+                                </Animatable.Text>
+                                <View
+                                  style={{
+                                    width: wp(12),
+
+                                    alignItems: 'center',
+                                  }}>
+                                  {item?.serviceInfo?.isActive == 'y' ? (
+                                    <Text
+                                      style={{
+                                        color: Color.white,
+                                        fontSize: 10,
+                                        backgroundColor: '#1c84c6',
+
+                                        fontFamily: 'Poppins-SemiBold',
+
+                                        padding: 5,
+                                        textAlign: 'center',
+                                        width: wp(12),
+                                      }}>
+                                      Active
+                                    </Text>
+                                  ) : (
+                                    <Text
+                                      style={{
+                                        color: Color.white,
+                                        fontSize: 10,
+                                        fontFamily: 'Poppins-SemiBold',
+                                        backgroundColor: '#1c84c6',
+                                        padding: 5,
+                                        textAlign: 'center',
+                                        width: wp(15),
+                                      }}>
+                                      Active
+                                    </Text>
+
+                                  )}
+                                </View>
+
+                                <View style={{
+                                  flexDirection: 'row',
+                                  width: wp(48),
+                                  // backgroundColor: '#fff',
+                                  // marginBottom: 17
+                                }}>
+
+                                  <TouchableOpacity
+                                    onPress={() => {
+                                      navigation.navigate('InvoiceView', {
+                                        orderId: item?.collectionInfo?.orderId
+                                        //  orderId: section?.collectionInfo?.invoiceId
+                                      })
+                                    }}
+                                    style={{
+                                      // backgroundColor: '#8AB645',
+                                      paddingTop: 5,
+                                      textAlign: 'center',
+                                      width: wp(22),
+                                      marginLeft: 0,
+                                      flexDirection: 'row',
+                                      // borderRadius: 3
+                                    }}
+                                  >
+                                    <Icon
+                                      name="eye"
+                                      size={20}
+                                      color="#8AB645"
+                                    />
+
+                                    <Text style={{
+                                      color: "#000",
+                                      fontSize: 9,
+
+                                      fontFamily: 'Poppins-SemiBold',
+                                      // marginTop: 2,
+                                      margin: 2
+
+                                    }}>
+
+
+                                      View Invoice
+                                    </Text>
+                                  </TouchableOpacity>
+
+                                  <TouchableOpacity
+                                    onPress={() => {
+                                      navigation.navigate('InvoiceDetails', {
+                                        orderId: item?.collectionInfo?.orderId
+                                      })
+                                    }}
+                                    style={{
+                                      // backgroundColor: '#8AB645',
+                                      padding: 5,
+                                      textAlign: 'center',
+                                      width: wp(20),
+                                      marginLeft: 10,
+                                      flexDirection: 'row',
+                                      // borderRadius: 3
+                                    }}
+                                  >
+                                    <Icon
+                                      name="eye"
+                                      size={20}
+                                      color="#8AB645"
+                                    />
+                                    <Text style={{
+                                      color: "#000",
+                                      fontSize: 9,
+                                      fontFamily: 'Poppins-SemiBold',
+                                      // marginTop: 2,
+                                      margin: 2
+
+                                    }}>
+
+
+                                      View Order
+                                    </Text>
+                                  </TouchableOpacity>
+                                </View>
+                              </Animatable.View>
+
+
+
+                            </>
+                          ))
+                        )}
                       />
 
                       <View style={{ height: wp(20), }}></View>
@@ -1080,7 +1710,7 @@ const Payments = () => {
               }
             })()}
           </View>
-        </ScrollView>
+        </ScrollView >
 
         {/* </ImageBackground> */}
 

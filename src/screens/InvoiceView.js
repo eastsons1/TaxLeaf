@@ -21,6 +21,7 @@ export default InvoiceView = ({ route }) => {
     const { MY_INFO } = useSelector(state => state.TaxLeafReducer);
     const { GET_ORDER_DETAILS } = useSelector(state => state.PaymentReducer);
     const { MANAGER_INFO } = useSelector(state => state.TaxLeafReducer);
+    const { OFFICE_INFO } = useSelector(state => state.TaxLeafReducer);
 
     console.log(GET_ORDER_DETAILS, 'orderInfoInvoice')
     console.log(MANAGER_INFO, 'MANAGER_INFO')
@@ -29,10 +30,11 @@ export default InvoiceView = ({ route }) => {
     const orderId = route.params.orderId;
     const jsonData = MY_INFO.guestInfo;
     const collectionInfo = GET_ORDER_DETAILS[0]?.collectionInfo
+    const individualClientContactInfo = GET_ORDER_DETAILS[0]?.individualClientContactInfo
     const companyClientContactInfo = GET_ORDER_DETAILS[0]?.companyClientContactInfo
     const serviceListModel = GET_ORDER_DETAILS[0]?.serviceListModel[0]
-    const managerInfo = MANAGER_INFO?.managerInfo
-    const officeInfo = MANAGER_INFO?.officeInfo
+    const managerInfo = MANAGER_INFO
+    const officeInfo = OFFICE_INFO
     const serviceList = GET_ORDER_DETAILS[0]?.serviceListModel;
 
     // Calculate the sum of "priceCharged" using reduce
@@ -70,20 +72,48 @@ export default InvoiceView = ({ route }) => {
         total: 39.97,
     };
 
-    useEffect(() => {
-        setLoader(true);
 
-        dispatch(
-            GetDetailsbyOrderId(jsonData?.clientId, jsonData?.clientType, orderId, navigation),
-        );
-        setTimeout(() => {
-            setLoader(false);
-        }, 2000);
-    }, [orderId])
     useEffect(() => {
-        dispatch(ManagerInfo(jsonData?.clientId, jsonData?.clientType, navigation));
+        const fetchData = async () => {
+            try {
+                setLoader(true);
 
-    }, [])
+                // Fetch order details
+                await dispatch(GetDetailsbyOrderId(jsonData?.clientId, jsonData?.clientType, orderId, navigation));
+
+                // Fetch manager info
+                //  await dispatch(ManagerInfo(jsonData?.clientId, jsonData?.clientType, navigation));
+                setTimeout(() => {
+                    setLoader(false);
+                }, 1000);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                setTimeout(() => {
+                    setLoader(false);
+                }, 1000);
+            }
+            // finally {
+            //     setLoader(false);
+            // }
+        };
+
+        fetchData();
+    }, []);
+
+    // useEffect(() => {
+    //     setLoader(true);
+
+    //     dispatch(
+    //         GetDetailsbyOrderId(jsonData?.clientId, jsonData?.clientType, orderId, navigation),
+    //     );
+    //     setTimeout(() => {
+    //         setLoader(false);
+    //     }, 2000);
+    // }, [orderId])
+    // useEffect(() => {
+    //     dispatch(ManagerInfo(jsonData?.clientId, jsonData?.clientType, navigation));
+
+    // }, [])
 
     return (
         <View style={styles.container}>
@@ -100,7 +130,7 @@ export default InvoiceView = ({ route }) => {
                 <View style={styles.invoiceInfoContainer}>
                     <View style={styles.invoiceInfo}>
                         <Text style={styles.label}>Order ID:</Text>
-                        <Text style={styles.text}>{collectionInfo?.orderId}</Text>
+                        <Text style={styles.text}>{collectionInfo?.invoiceId}</Text>
                     </View>
                     <View style={styles.invoiceInfo}>
                         <Text style={styles.label}>Invoice Date:</Text>
@@ -121,7 +151,8 @@ export default InvoiceView = ({ route }) => {
                     </View>
                     <View style={styles.contentView}>
                         <Text style={styles.LIstText2}>
-                            {companyClientContactInfo?.phone1}
+                            {individualClientContactInfo?.firstName}   {individualClientContactInfo?.lastName}
+                            {/* {companyClientContactInfo?.phone1} */}
                         </Text>
                     </View>
                     <View style={styles.contentView}>

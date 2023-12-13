@@ -15,6 +15,8 @@ export const FILE_INFO = 'FILE_INFO'
 export const OFFICE_INFO = 'OFFICE_INFO'
 export const PARTNER_INFO = 'PARTNER_INFO'
 export const MY_OFFICE_INFO = 'MY_OFFICE_INFO'
+export const FILE_UPLOAD_TOKEN = 'FILE_UPLOAD_TOKEN'
+export const EDITOR_TEXT = "EDITOR_TEXT"
 
 
 

@@ -527,10 +527,10 @@ const styles = StyleSheet.create({
   modalView: {
     //margin: 20,
 
-    backgroundColor: 'white',
+    backgroundColor: 'red',
     //borderRadius: 20,
     padding: 35,
-
+    width: wp(90),
     shadowColor: '#000',
     shadowOffset: {
       width: 0,

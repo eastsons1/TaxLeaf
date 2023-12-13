@@ -1,17 +1,17 @@
 import React from 'react';
-import {View, Text, Image, TouchableOpacity} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import {Color} from '../Style';
+import { Color } from '../Style';
 
 const CustomBottomTab = () => {
   const iconNm = require('../Assets/img/icons/home.png');
   const iconClint = require('../Assets/img/icons/group.png');
   const iconFile = require('../Assets/img/icons/files-white.png');
-  const iconRe = require('../Assets/img/icons/dots-white.png');
+  const iconRe = require('../Assets/img/icons/product-request.png');
   const navigation = useNavigation();
   return (
     <View
@@ -23,7 +23,7 @@ const CustomBottomTab = () => {
         width: wp(100),
         justifyContent: 'center',
         backgroundColor: Color.darkGreen,
-        paddingHorizontal:22
+        paddingHorizontal: 22
       }}>
       <View
         style={{
@@ -37,7 +37,7 @@ const CustomBottomTab = () => {
           justifyContent: 'space-between',
           backgroundColor: Color.darkGreen,
           height: 65,
-          paddingHorizontal:22
+          paddingHorizontal: 22
 
         }}>
         <TouchableOpacity
@@ -50,7 +50,7 @@ const CustomBottomTab = () => {
             alignSelf: 'center',
             //  backgroundColor: 'red',
           }}>
-          <Image source={iconNm} style={{width: 25, height: 25}} />
+          <Image source={iconNm} style={{ width: 25, height: 25 }} />
 
           <Text
             style={{
@@ -76,7 +76,7 @@ const CustomBottomTab = () => {
             marginLeft: wp(5),
             // backgroundColor: 'yellow',
           }}>
-          <Image source={iconClint} style={{width: 25, height: 25}} />
+          <Image source={iconClint} style={{ width: 25, height: 25 }} />
 
           <Text
             style={{
@@ -103,7 +103,7 @@ const CustomBottomTab = () => {
             left: wp(1),
             // backgroundColor: 'red',
           }}>
-          <Image source={iconFile} style={{width: 25, height: 25}} />
+          <Image source={iconFile} style={{ width: 25, height: 25 }} />
 
           <Text
             style={{
@@ -130,7 +130,7 @@ const CustomBottomTab = () => {
             left: wp(1),
             //    backgroundColor: 'yellow',
           }}>
-          <Image source={iconRe} style={{width: 25, height: 25}} />
+          <Image source={iconRe} style={{ width: 25, height: 25 }} />
 
           <Text
             style={{

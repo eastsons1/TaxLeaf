@@ -16,7 +16,7 @@ const ViewRequest = ({ route }) => {
     const navigation = useNavigation();
     const actionId = route.params.actionId;
     const { REQUEST_INFO_BY_ID } = useSelector(state => state.TaxLeafReducer);
-    console.log(REQUEST_INFO_BY_ID, 'REQUEST_INFO_BY_ID')
+    // console.log(REQUEST_INFO_BY_ID, 'REQUEST_INFO_BY_ID')
     const bgImage = require('../Assets/img/guest_shape.png');
     useEffect(() => {
         setLoader(true);
@@ -27,7 +27,7 @@ const ViewRequest = ({ route }) => {
         }, 2000);
     }, [actionId]);
     return (
-        <View style={{backgroundColor:'#d5e3e5'}}>
+        <View style={{ backgroundColor: '#d5e3e5' }}>
             <Loader flag={loader} />
             <View style={{ marginLeft: 25, marginBottom: 20 }}>
                 <Text style={{ color: 'gray', fontSize: 16 }}>Action Id <Text style={{ color: '#000', fontSize: 18, fontWeight: '600' }}>#{REQUEST_INFO_BY_ID?.actionModel?.id}</Text></Text>
@@ -106,7 +106,7 @@ const ViewRequest = ({ route }) => {
             <View
                 // source={bgImage}
                 style={styles.bgImg}
-               >
+            >
                 <View style={styles.container}>
                     <ScrollView style={{ marginBottom: 140 }}>
 
@@ -127,7 +127,7 @@ const ViewRequest = ({ route }) => {
                                 </Text>
                             </View>
                         </View>
-                        
+
                         <View style={{ backgroundColor: '#fff', paddingBottom: 20, borderRadius: 10, width: wp(90), alignSelf: 'center', marginTop: 20 }}>
                             <View style={styles.slideContainerClient1}>
                                 <View style={{ flexDirection: 'row', marginLeft: 15, marginTop: 10 }}>
@@ -230,25 +230,25 @@ const ViewRequest = ({ route }) => {
                                             marginLeft: 4,
                                             // fontWeight: '700'
 
-                                        }}> 
+                                        }}>
                                             {
-                                            REQUEST_INFO_BY_ID?.actionModel?.priority === 1 ?
-                                            'Urgent' 
-                                            :
-                                            REQUEST_INFO_BY_ID?.actionModel?.priority === 2 ?
-                                            'Important'
-                                            :
-                                            REQUEST_INFO_BY_ID?.actionModel?.priority === 3 ?
-                                            'Regular'
-                                            : null
+                                                REQUEST_INFO_BY_ID?.actionModel?.priority === 1 ?
+                                                    'Urgent'
+                                                    :
+                                                    REQUEST_INFO_BY_ID?.actionModel?.priority === 2 ?
+                                                        'Important'
+                                                        :
+                                                        REQUEST_INFO_BY_ID?.actionModel?.priority === 3 ?
+                                                            'Regular'
+                                                            : null
                                             }
 
                                         </Text>
                                     </TouchableOpacity>
                                 </View>
-                                
+
                             </View>
-                            
+
                         </View>
                         <View style={[styles.slideContainerClient1, { marginTop: 20 }]}>
                             <TouchableOpacity
@@ -394,7 +394,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#F8AC59', color: '#fff', borderRadius: 3, marginLeft: 10, marginRight: 4, width: wp(6), alignSelf: 'center', marginTop: 5, height: hp(3),
         paddingLeft: 6
     },
-    bgImg:{
-        paddingBottom:140
+    bgImg: {
+        paddingBottom: 140
     }
 })

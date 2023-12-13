@@ -47,16 +47,23 @@ const CreateNewAction = () => {
   const [actionMessage, setActionMessage] = useState();
   const [notes, setNotes] = useState();
   const [loader, setLoader] = useState(false);
-
+  const [descriptionText, setDescriptionText] = useState('')
   const { MY_INFO } = useSelector(state => state.TaxLeafReducer);
   const { MANAGER_INFO } = useSelector(state => state.TaxLeafReducer);
+  const { PARTNER_INFO } = useSelector(state => state.TaxLeafReducer);
+  const { EDITOR_TEXT } = useSelector(state => state.TaxLeafReducer);
   const bgImage = require('../Assets/img/guest_shape.png');
 
   const staffview = MY_INFO.staffview;
   const officeInfo = MY_INFO.officeInfo;
-  const managerInfo = MANAGER_INFO.managerInfo;
-  const partnerInfo = MANAGER_INFO.partnerInfo;
+  const managerInfo = MANAGER_INFO;
+  const partnerInfo = PARTNER_INFO;
   const jsonData = MY_INFO.guestInfo;
+  //const contentInsideDiv = EDITOR_TEXT?.replace(/<\/?div>/g, '');
+  const contentInsideDiv = EDITOR_TEXT;
+  console.log(contentInsideDiv, 'contentInsideDivcontentInsideDivcontentInsideDivcontentInsideDiv')
+
+
 
   console.log(MY_INFO, 'MY_INFO')
 
@@ -115,20 +122,22 @@ const CreateNewAction = () => {
   }, [])
 
   const onSubmit = () => {
+
+
     let data = {
       "actionTime": "2023-10-20T05:05:54.895Z",
       "actionModel": {
-        "createdOffice": 17,
+        "createdOffice": MY_INFO?.officeInfo?.id,
         "assignTo": 1,
         "clientId": jsonData?.client,
         "subject": actionSubject,
-        "message": "This Is Test Meassage",
-        "priority": value,
-        "status": jsonData?.status,
-        "addedByUser": 973,
+        "message": descriptionText,
+        "priority": parseInt(value, 10),
+        "status": parseInt(jsonData?.status, 10),
+        "addedByUser": MY_INFO?.staffview?.id,
         "dueDate": moment(date).format('YYYY-MM-DD'),
         "isCreatedFromAction": "n",
-        "clientIdForGuest": "38419",
+        "clientIdForGuest": jsonData?.clientId.toString(),
         "assignWhom": selectedId == 1 ? 'Manager' : 'Partner'
       },
       "actionStaffModel": {
@@ -174,7 +183,7 @@ const CreateNewAction = () => {
     //     }
     //   ]
     // }
-    console.log(data, 'datatatatatatat')
+    console.log(data, 'datatatatatatatdatatatatatatatdatatatatatatat', data1)
     dispatch(RequestSubmit(data, navigation));
 
 
@@ -285,7 +294,18 @@ const CreateNewAction = () => {
             <Text style={{ alignSelf: 'flex-start', padding: 5, color: '#000' }}>
               Action Message *
             </Text>
-            <Editor />
+
+            <TextInput
+              numberOfLines={5}
+              multiline={true}
+              //   placeholder="Enter Email"
+              // placeholderTextColor={'lightgrey'}
+              style={{ paddingTop: 0, textAlignVertical: 'top' }}
+              value={descriptionText}
+              onChangeText={text => {
+                setDescriptionText(text);
+              }}
+            />
           </View>
           <View style={styles.slideContainer}>
             <View style={{}}>

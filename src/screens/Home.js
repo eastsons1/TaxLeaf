@@ -54,13 +54,15 @@ const HomeScreen = () => {
   const manager = MANAGER_INFO;
   const manageroffice = OFFICE_INFO
 
+
+
   //console.log(dashboardMessageList?.length, 'messageList')
   // console.log(jsonData, 'jsonDatajsonDatajsonDatajsonDatajsonData')
   // console.log(officeInfo?.id, 'officeInfoofficeInfoofficeInfoofficeInfo')
-  //console.log(manager, 'MANAGER_INFOMANAGER_INFOMANAGER_INFOMANAGER_INFO')
+  // console.log(manager, 'MANAGER_INFOMANAGER_INFOMANAGER_INFOMANAGER_INFO')
   //console.log(manageroffice, 'HOMEHOMEHOMEHOMEHOMEHOMEHOME')
 
-  //console.log(jsonData?.clientId, jsonData?.clientType)
+  console.log(jsonData?.clientId, jsonData?.clientType)
   //console.log(MY_INFO, 'MY_INFOMY_INFOMY_INFO')
 
 
@@ -72,6 +74,7 @@ const HomeScreen = () => {
 
 
   const data = [
+
     {
       id: 1,
       Title: 'Need Payroll?',
@@ -79,6 +82,7 @@ const HomeScreen = () => {
       footHead: 'Contact Us For More Info!',
       img: require('../Assets/img/gdb-img1.png'),
     },
+
     {
       id: 2,
       Title: 'Bring a friend!',
@@ -87,6 +91,7 @@ const HomeScreen = () => {
       footHead: 'Call Us to Learn More!',
       img: require('../Assets/img/gdb-img2.png'),
     },
+
     {
       id: 3,
       Title: 'You Still Haven’t File Your Taxes?',
@@ -94,6 +99,7 @@ const HomeScreen = () => {
       footHead: 'Call Us For More Information!',
       img: require('../Assets/img/gdb-img3.png'),
     },
+
     {
       id: 4,
       Title: 'Incorporations',
@@ -101,6 +107,7 @@ const HomeScreen = () => {
       footHead: 'Learn The Benefits of Having A US Company',
       img: require('../Assets/img/gdb-img4.png'),
     },
+
     {
       id: 5,
       Title: 'Wanna Move To The USA?',
@@ -108,6 +115,7 @@ const HomeScreen = () => {
       footHead: 'Contact Us For More Info!',
       img: require('../Assets/img/gdb-img5.png'),
     },
+
     {
       id: 6,
       Title: 'Need Bookkeeping?',
@@ -115,10 +123,39 @@ const HomeScreen = () => {
       footHead: 'Contact Us to Book It!',
       img: require('../Assets/img/gdb-img6.png'),
     },
+
+
   ];
   const bgImage = require('../Assets/img/guest_shape.png');
 
   const [loader, setLoader] = useState(false);
+
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       setLoader(true);
+
+  //       // Fetch order details
+  //       // await dispatch(GetDetailsbyOrderId(jsonData?.clientId, jsonData?.clientType, orderId, navigation));
+
+  //       // Fetch manager info
+
+  //       await dispatch(ManagerInfo(jsonData?.clientId, jsonData?.clientType, navigation));
+
+
+  //       setLoader(false);
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //       setLoader(false);
+  //     } finally {
+  //       setLoader(false);
+  //     }
+
+  //   };
+
+  //   fetchData();
+  // }, []);
 
 
 

@@ -32,7 +32,7 @@ export const LoginUser = (email, navigation) => dispatch => {
       },
     };
 
-    console.log(data, 'dataaaaaa');
+    //console.log(data, 'dataaaaaa');
 
     const response = await logistical.postlogin('/Staff/LoginStaff', data);
     console.log(response.token, 'responseresponseresponseresponse');
@@ -42,10 +42,10 @@ export const LoginUser = (email, navigation) => dispatch => {
       AsyncStorage.setItem('login', JSON.stringify(response.token));
       AsyncStorage.setItem('response', response.staffview.user);
       // console.log(response.token, 'token');
-      console.log(
-        response.staffview.user,
-        'staffviewinfostaffviewinfostaffviewinfostaffviewinfo',
-      );
+      // console.log(
+      //   response.staffview.user,
+      //   'staffviewinfostaffviewinfostaffviewinfostaffviewinfo',
+      // );
 
       dispatch({
         type: LOGIN_DATA,
@@ -62,9 +62,16 @@ export const LoginUser = (email, navigation) => dispatch => {
       //   type: 'LOADING',
       //   payload: false,
       // });
-    } else {
+    } else if (response.statusCode == 404) {
+
+      Alert.alert(response.massage);
+      navigation.navigate('home');
+    }
+
+    else {
       // Alert.alert(response.message)
       Alert.alert('Your Account is not Approved');
+      navigation.navigate('home');
       // dispatch({
       //   type: 'LOADING',
       //   payload: false,
@@ -77,7 +84,7 @@ export const LoginUser = (email, navigation) => dispatch => {
 export const clientInfo = (email, navigation) => dispatch => {
   //console.log(email, 'clientInfoclientInfoclientInfoclientInfoclientInfoLLLLLLLLLLLLL')
 
-  console.log(email, 'IIIIIIIIIIIIIIIIII')
+  //console.log(email, 'IIIIIIIIIIIIIIIIII')
   // dispatch({
   //   type: 'LOADING',
   //   payload: true,
@@ -143,7 +150,7 @@ export const client_Detail = (ClinetId, ClinetType, navigation) => dispatch => {
       },
     };
     const response = await logistical.post('/Staff/IndividualClientInfo', data);
-    console.log(response, 'client_Detailclient_Detailclient_Detail');
+    //console.log(response, 'client_Detailclient_Detailclient_Detail');
 
     if (response.failureStatus == false) {
       // console.log(
@@ -182,7 +189,7 @@ export const client_Detail = (ClinetId, ClinetType, navigation) => dispatch => {
 
 export const ManagerInfo = (clientId, clientType, navigation) => dispatch => {
 
-  console.log(clientId, clientType, 'clientId,clientType')
+  //console.log(clientId, clientType, 'clientIdclientIdclientIdclientId,clientType')
   // dispatch({
   //   type: 'LOADING',
   //   payload: true,
@@ -202,7 +209,7 @@ export const ManagerInfo = (clientId, clientType, navigation) => dispatch => {
 
     if (response) {
       // AsyncStorage.setItem('login', JSON.stringify(response.token));
-      //  console.log(response, 'managerInfomanagerInfomanagerInfo');
+      // console.log(response.managerInfo, 'managerInfomanagerInfomanagerInfo');
 
       dispatch({
         type: MANAGER_INFO,
@@ -262,6 +269,7 @@ export const ClientInfoList =
       // );
 
       if (response) {
+
         // AsyncStorage.setItem('login', JSON.stringify(response.token));
 
         dispatch({
@@ -304,7 +312,7 @@ export const RequestInfoList = (clientId, navigation) => dispatch => {
         ClientId: clientId,
       },
     };
-    console.log(data, 'requestPayload')
+    //  console.log(data, 'requestPayload')
     const response = await logistical.post('/Staff/GetAllRequest', data);
     //console.log(response, 'GetAllRequestInfo');
 
@@ -346,9 +354,9 @@ export const RequestSubmit = (data, navigation) => dispatch => {
 
   return new Promise(async (resolve, reject) => {
 
-    console.log(data, 'submitrequestPayload')
+    //console.log(data, 'submitrequestPayload')
     const response = await logistical.post('/Staff/SubmitRequest', data);
-    console.log(response, 'SubmitlRequestInforesponse');
+    //console.log(response, 'SubmitlRequestInforesponse');
 
     if (response) {
       // AsyncStorage.setItem('login', JSON.stringify(response.token));
@@ -383,6 +391,8 @@ export const RequestSubmit = (data, navigation) => dispatch => {
 };
 
 export const RequestInfoById = (id, navigation) => dispatch => {
+
+  // console.log(id, 'UUUUUUUUUUUU')
   // dispatch({
   //   type: 'LOADING',
   //   payload: true,
@@ -396,11 +406,11 @@ export const RequestInfoById = (id, navigation) => dispatch => {
     };
     console.log(data, 'requestIdPayload')
     const response = await logistical.post('/Staff/GetRequestById', data);
-    console.log(response, 'GetRequestById');
 
-    if (response) {
+
+    if (response.statusCode == 200) {
       // AsyncStorage.setItem('login', JSON.stringify(response.token));
-
+      //  console.log(response, 'YYYYYYYYYYYYYYY')
       dispatch({
         type: REQUEST_INFO_BY_ID,
         payload: response,
@@ -439,16 +449,16 @@ export const folderNameList =
     return new Promise(async (resolve, reject) => {
       let data = {
         GuestInfo: {
-          // clientType: clientType,
-          clientType: "Individual"
+          clientType: clientType,
+          //  clientType: "Individual"
 
         },
       };
       const response = await logistical.post('/FileCabinet/GetFolderList', data);
-      console.log(
-        response.azureFoldersInfo,
-        'GetFolderList',
-      );
+      // console.log(
+      //   response.azureFoldersInfo,
+      //   'GetFolderList',
+      // );
 
       if (response) {
         // AsyncStorage.setItem('login', JSON.stringify(response.token));
@@ -704,10 +714,12 @@ export const generateFileToken = (documentId, navigation) => dispatch => {
   return new Promise(async (resolve, reject) => {
 
     const response = await logistical.post('/FileCabinet/GenerateToken');
-    console.log(response, 'AccessToken');
+    //console.log(response, 'AccessToken');
 
     if (response) {
       // AsyncStorage.setItem('login', JSON.stringify(response.token));
+
+      //console.log(response, 'FILE_UPLOAD_TOKENFILE_UPLOAD_TOKENFILE_UPLOAD_TOKENFILE_UPLOAD_TOKEN')
 
       dispatch({
         type: FILE_UPLOAD_TOKEN,
@@ -737,7 +749,7 @@ export const generateFileToken = (documentId, navigation) => dispatch => {
   });
 };
 
-export const getFileInfo = (clientId, clientType, navigation) => dispatch => {
+export const getFileInfo = (client, clientType, navigation) => dispatch => {
   // dispatch({
   //   type: 'LOADING',
   //   payload: true,
@@ -748,16 +760,16 @@ export const getFileInfo = (clientId, clientType, navigation) => dispatch => {
       "fileListViews": [
         {
           "guestInfo": {
-            "client": 'EASTSONSPRI',
-            "clientType": 'individual'
+            "client": client,
+            "clientType": clientType
           }
         }
       ]
     };
 
-    console.log(data, 'ddd')
+    // console.log(data, 'ddd')
     const response = await logistical.post('/FileCabinet/GetFiles', data);
-    console.log(response, 'fileResp');
+    //console.log(response, 'fileResp');
 
     if (response) {
       // AsyncStorage.setItem('login', JSON.stringify(response.token));

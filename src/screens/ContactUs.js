@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView ,ImageBackground} from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, ImageBackground } from 'react-native'
 import React from 'react'
 import { TextInput } from 'react-native-gesture-handler';
 import {
@@ -7,133 +7,147 @@ import {
 } from 'react-native-responsive-screen';
 import { Color } from '../Style';
 import Icon from 'react-native-vector-icons/AntDesign';
-
+import { useDispatch, useSelector } from 'react-redux';
 const ContactUs = () => {
+
+    const { MY_INFO } = useSelector(state => state.TaxLeafReducer);
+    const { DASHBOARD_LIST } = useSelector(state => state.DashboardReducer);
+    const { DASHBOARD_MESSAGE_LIST } = useSelector(state => state.DashboardReducer);
+    const { MANAGER_INFO } = useSelector(state => state.TaxLeafReducer);
+    const { OFFICE_INFO } = useSelector(state => state.TaxLeafReducer);
+    const { PARTNER_INFO } = useSelector(state => state.TaxLeafReducer);
+    const { LOGIN_DATA } = useSelector(state => state.TaxLeafReducer);
+
+    const jsonData = MY_INFO.guestInfo
+    const officeInfo = MY_INFO.officeInfo;
+    const manager = MANAGER_INFO;
+    const manageroffice = OFFICE_INFO
     const bgImage = require("../Assets/img/guest_shape.png")
 
     return (
         <View>
             <ScrollView>
 
-            <View style={{backgroundColor:'#d5e3e5'}}>
-            <Text style={styles.headText1}>Get in Touch !</Text>
+                <View style={{ backgroundColor: '#d5e3e5' }}>
+                    <Text style={styles.headText1}>Get in Touch !</Text>
 
-                <View style={styles.slideContainer}>
-                    <Icon
-                        style={[
-                            styles.icon,
+                    <View style={styles.slideContainer}>
+                        <Icon
+                            style={[
+                                styles.icon,
 
-                        ]}
-                        name="user"
-                        size={50}
-                        color="green"
-                    />
-                    <View style={styles.contentView}>
-                        <Text style={styles.subHead}>Manager:</Text>
-                        <Text style={styles.LIstText2}>
-                           Jhon Smith
-                        </Text>
-                    </View>
-                    <View style={styles.contentView}>
-                        <Text style={styles.subHead}>Email:</Text>
-                        <Text style={styles.LIstText2}>
-                        miamistaff@taxleaf.com
-                        </Text>
-                    </View>
-                </View>
-                <View style={styles.slideContainer}>
-                    <Icon
-                        style={[
-                            styles.icon,
-
-                        ]}
-                        name="phone"
-                        size={50}
-                        color="green"
-                    />
-                    <View style={styles.contentView}>
-                        <Text style={styles.subHead}>Call Us:</Text>
-                        <Text style={styles.LIstText2}>
-                           987654
-                        </Text>
-                    </View>
-                    
-                </View>
-                <Text style={styles.heading}>
-                    Submit Your Request
-                </Text>
-                <View style={styles.formContainer}>
-                    <View >
-
-
-                        <TextInput
-                            placeholder="Name"
-                            placeholderTextColor={'lightgrey'}
-                            style={[styles.input, { height: 50 }]}
-                        // value={email}
-                        // onChangeText={text => {
-                        //   onChangeEmail(text);
-                        // }}
+                            ]}
+                            name="user"
+                            size={50}
+                            color="green"
                         />
+                        <View style={styles.contentView}>
+                            <Text style={styles.subHead}>Manager:</Text>
+                            <Text style={styles.LIstText2}>
+                                {manager?.firstName}  {manager?.lastName}
+                            </Text>
+                        </View>
+                        <View style={styles.contentView}>
+                            <Text style={styles.subHead}>Email:</Text>
+                            <Text style={styles.LIstText2}>
+                                {manager?.user}
+                            </Text>
+                        </View>
                     </View>
-                    <View>
+                    <View style={styles.slideContainer}>
+                        <Icon
+                            style={[
+                                styles.icon,
 
-
-                        <TextInput
-                            placeholder="Phone Number"
-                            placeholderTextColor={'lightgrey'}
-                            style={[styles.input, { height: 50 }]}
-                        // value={email}
-                        // onChangeText={text => {
-                        //   onChangeEmail(text);
-                        // }}
+                            ]}
+                            name="phone"
+                            size={50}
+                            color="green"
                         />
-                    </View>
-                    <View style={{ marginBottom: 10 }}>
-
-
-                        <TextInput
-                            placeholder="Email"
-                            placeholderTextColor={'lightgrey'}
-                            style={[styles.input, { height: 50 }]}
-                        // value={email}
-                        // onChangeText={text => {
-                        //   onChangeEmail(text);
-                        // }}
-                        />
-                    </View>
-                    <View style={{ marginBottom: 15 }}>
-
-                        <TextInput
-                            multiline={true}
-                            placeholder="Message"
-                            numberOfLines={6}
-                            style={styles.textArea}
-                        />
+                        <View style={styles.contentView}>
+                            <Text style={styles.subHead}>Call Us:</Text>
+                            <Text style={styles.LIstText2}>
+                                {officeInfo?.phone}
+                                {/* {manager?.phone ? manager?.phone : "N/A"} */}
+                            </Text>
+                        </View>
 
                     </View>
-                    <View style={{ marginBottom: 10 }}>
+                    <Text style={styles.heading}>
+                        Submit Your Request
+                    </Text>
+                    <View style={styles.formContainer}>
+                        <View >
 
 
-                        <TextInput
-                            placeholder="Country"
-                            placeholderTextColor={'lightgrey'}
-                            style={[styles.input, { height: 50 }]}
-                        // value={email}
-                        // onChangeText={text => {
-                        //   onChangeEmail(text);
-                        // }}
-                        />
+                            <TextInput
+                                placeholder="Name"
+                                placeholderTextColor={'lightgrey'}
+                                style={[styles.input, { height: 50 }]}
+                            // value={email}
+                            // onChangeText={text => {
+                            //   onChangeEmail(text);
+                            // }}
+                            />
+                        </View>
+                        <View>
+
+
+                            <TextInput
+                                placeholder="Phone Number"
+                                placeholderTextColor={'lightgrey'}
+                                style={[styles.input, { height: 50 }]}
+                            // value={email}
+                            // onChangeText={text => {
+                            //   onChangeEmail(text);
+                            // }}
+                            />
+                        </View>
+                        <View style={{ marginBottom: 10 }}>
+
+
+                            <TextInput
+                                placeholder="Email"
+                                placeholderTextColor={'lightgrey'}
+                                style={[styles.input, { height: 50 }]}
+                            // value={email}
+                            // onChangeText={text => {
+                            //   onChangeEmail(text);
+                            // }}
+                            />
+                        </View>
+                        <View style={{ marginBottom: 15 }}>
+
+                            <TextInput
+                                multiline={true}
+                                placeholder="Message"
+                                numberOfLines={6}
+                                style={styles.textArea}
+                            />
+
+                        </View>
+                        <View style={{ marginBottom: 10 }}>
+
+
+                            <TextInput
+                                placeholder="Country"
+                                placeholderTextColor={'lightgrey'}
+                                style={[styles.input, { height: 50 }]}
+                            // value={email}
+                            // onChangeText={text => {
+                            //   onChangeEmail(text);
+                            // }}
+                            />
+                        </View>
+                        <View style={{ marginBottom: 10 }}>
+                            <TouchableOpacity
+                                style={[styles.button, styles.buttonClose]}
+                            // onPress={() => setModalVisible(!modalVisible)}
+                            >
+                                <Text style={styles.textStyle}>Send</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
-                    <View style={{ marginBottom: 10 }}>
-                        <TouchableOpacity
-                            style={[styles.button, styles.buttonClose]}
-                        // onPress={() => setModalVisible(!modalVisible)}
-                        >
-                            <Text style={styles.textStyle}>Send</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
                 </View>
             </ScrollView>
         </View>
@@ -220,14 +234,14 @@ const styles = StyleSheet.create({
         marginTop: 20,
         // width:'62%'
         shadowColor: "#000",
-shadowOffset: {
-	width: 0,
-	height: 2,
-},
-shadowOpacity: 0.25,
-shadowRadius: 3.84,
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
 
-elevation: 5,
+        elevation: 5,
     },
     // icon: {color:'#000'},
     LIstText2: {

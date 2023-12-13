@@ -21,6 +21,7 @@ export default InvoiceDetails = ({ route }) => {
     const { MY_INFO } = useSelector(state => state.TaxLeafReducer);
     const { GET_ORDER_DETAILS } = useSelector(state => state.PaymentReducer);
     const { MANAGER_INFO } = useSelector(state => state.TaxLeafReducer);
+    const { OFFICE_INFO } = useSelector(state => state.TaxLeafReducer);
 
     // console.log(GET_ORDER_DETAILS, 'orderInfoInvoice')
     // console.log(MANAGER_INFO, 'MANAGER_INFO')
@@ -31,8 +32,8 @@ export default InvoiceDetails = ({ route }) => {
     const collectionInfo = GET_ORDER_DETAILS[0]?.collectionInfo
     const companyClientContactInfo = GET_ORDER_DETAILS[0]?.companyClientContactInfo
     const serviceListModel = GET_ORDER_DETAILS[0]?.serviceListModel[0]
-    const managerInfo = MANAGER_INFO?.managerInfo
-    const officeInfo = MANAGER_INFO?.officeInfo
+    const managerInfo = MANAGER_INFO
+    const officeInfo = OFFICE_INFO
     const serviceList = GET_ORDER_DETAILS[0]?.serviceListModel;
 
     // Calculate the sum of "priceCharged" using reduce
@@ -80,6 +81,7 @@ export default InvoiceDetails = ({ route }) => {
             setLoader(false);
         }, 2000);
     }, [orderId])
+
     useEffect(() => {
         dispatch(ManagerInfo(jsonData?.clientId, jsonData?.clientType, navigation));
 
@@ -172,7 +174,7 @@ export default InvoiceDetails = ({ route }) => {
                         </Text>
                     </View>
                     <View style={styles.contentView}>
-                        <Text style={styles.subHead}>Type Of Company:</Text>
+                        <Text style={styles.subHead}>Type of Company:</Text>
 
                         <Text style={styles.LIstText2}>
 
@@ -205,7 +207,7 @@ export default InvoiceDetails = ({ route }) => {
                         <Text style={styles.subHead}>Name:</Text>
 
                         <Text style={styles.LIstText2}>
-                            {companyClientContactInfo?.firstName + ' ' + managerInfo?.lastName}
+                            {managerInfo?.firstName + ' ' + managerInfo?.lastName}
                         </Text>
                     </View>
                     <View style={styles.contentView}>
@@ -370,16 +372,17 @@ const styles = StyleSheet.create({
     LIstText2: {
         color: 'rgba(106,106,106,255)',
         fontFamily: 'Poppins-SemiBold',
-        width: wp(40),
+        width: wp(50),
+        // backgroundColor: "red",
         fontSize: 12,
 
-        alignSelf: "center",
+        //alignSelf: "center",
         // backgroundColor: 'yellow',
         //height: hp(10)
     },
 
     subHead: {
-        width: wp(40),
+        width: wp(30),
         fontSize: 12,
         // backgroundColor: "red",
         paddingLeft: 10,
@@ -400,7 +403,7 @@ const styles = StyleSheet.create({
         // textAlign: 'center',
     },
     contentView: {
-        height: 40,
+        height: wp(10),
         width: wp(90),
         borderColor: '#d0e4e6',
         borderBottomWidth: 0.5,

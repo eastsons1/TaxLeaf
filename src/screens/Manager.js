@@ -42,27 +42,51 @@ const Manager = () => {
   console.log(LOGIN_DATA, 'LOGIN_DATALOGIN_DATALOGIN_DATALOGIN_DATA', MY_INFO);
 
   const [loader, setLoader] = useState(false);
-  useEffect(() => {
-    setLoader(true);
-    dispatch(ManagerInfo(jsonData?.clientId, jsonData?.clientType, navigation));
 
-    setInfoData(MANAGER_INFO);
-    setTimeout(() => {
-      setLoader(false);
-    }, 2000);
-  }, []);
+
+  // useEffect(() => {
+  //   setLoader(true);
+  //   dispatch(ManagerInfo(jsonData?.clientId, jsonData?.clientType, navigation));
+
+  //   setInfoData(MANAGER_INFO);
+  //   setTimeout(() => {
+  //     setLoader(false);
+  //   }, 2000);
+  // }, []);
+
+  // useEffect(() => {
+  //   setInfoData(MANAGER_INFO);
+  // }, []);
+
+  // useEffect(() => {
+  //   // setLoader(true);
+  //   setInfoData(MANAGER_INFO);
+  //   // setTimeout(() => {
+  //   //   setLoader(false);
+  //   // }, 2000);
+  // }, [MANAGER_INFO]);
 
   useEffect(() => {
-    setInfoData(MANAGER_INFO);
-  }, []);
+    const fetchData = async () => {
+      try {
+        setLoader(true);
 
-  useEffect(() => {
-    // setLoader(true);
-    setInfoData(MANAGER_INFO);
-    // setTimeout(() => {
-    //   setLoader(false);
-    // }, 2000);
-  }, [MANAGER_INFO]);
+        // Fetch manager info
+        await dispatch(ManagerInfo(jsonData?.clientId, jsonData?.clientType, navigation));
+
+        // Assuming MANAGER_INFO is updated in the redux store after the API call.
+        setInfoData(MANAGER_INFO);
+      } catch (error) {
+        console.error("Error fetching manager info:", error);
+      } finally {
+        setLoader(false);
+      }
+    };
+
+    fetchData();
+  }, [jsonData?.clientId, jsonData?.clientType]);
+
+
 
   console.log(infoData?.managerInfo?.user, 'MANAGER_INFOMANAGER_INFO');
 
@@ -191,16 +215,18 @@ const Manager = () => {
                   </Text>
                 </Text>
               </View>
+
               <View
                 style={{
                   height: 40,
                   backgroundColor: '#fff',
-
                   padding: 10,
                 }}>
+
                 <Text style={styles.LIstText2}>
                   <Text style={{ fontSize: 14, fontFamily: 'Poppins-Bold' }}>Phone:</Text>{' '}
-                  {infoData?.managerInfo?.cell ? infoData?.managerInfo?.cell : 'N/A'}
+                  {/* {infoData?.managerInfo?.cell ? infoData?.managerInfo?.cell : 'N/A'} */}
+                  {manager?.phone ? manager?.phone : 'N/A'}
                 </Text>
               </View>
               <View style={styles.partition}></View>
@@ -212,7 +238,7 @@ const Manager = () => {
               </View>
               <View style={styles.partition}></View>
 
-              <View style={styles.progress}>
+              {/* <View style={styles.progress}>
                 <Progress.Bar
                   progress={0.3}
                   height={8}
@@ -222,7 +248,7 @@ const Manager = () => {
                   color="#8ab645"
                   borderColor="#fff"
                 />
-              </View>
+              </View> */}
             </View>
             <View
               style={{
@@ -294,7 +320,7 @@ const Manager = () => {
               </View>
               <View style={styles.partition}></View>
 
-              <View style={styles.progress}>
+              {/* <View style={styles.progress}>
                 <Progress.Bar
                   progress={0.5}
                   height={8}
@@ -304,7 +330,7 @@ const Manager = () => {
                   color="#8ab645"
                   borderColor="#fff"
                 />
-              </View>
+              </View> */}
             </View>
             {/* <View>
             <View style={styles.infoSec}>

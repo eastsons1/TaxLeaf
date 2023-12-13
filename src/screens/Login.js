@@ -53,7 +53,12 @@ const Login = () => {
 
 
   const bgImage = require('../Assets/img/login-mainbg.jpg');
-  const [email, setEmail] = useState();
+  //const [email, setEmail] = useState("julietam.geraci@gmail.com");
+  // const [email, setEmail] = useState("aalok@eastsons.com");
+  const [email, setEmail] = useState("princ1e@eastsons.com");
+
+  //const [email, setEmail] = useState("julietam.geraci@gmail.com");
+  //const [email, setEmail] = useState("Julieta.gracias@taxleaf.com");
   const onChangeEmail = text => {
     setEmail(text);
   };
@@ -152,7 +157,7 @@ const Login = () => {
     //if (email) {
 
     setLoader(true)
-
+    // dispatch(LoginUser(email, navigation))
 
     console.log("Before authorize");
     try {
@@ -161,7 +166,7 @@ const Login = () => {
 
       //  const userEmail = tempResult.additionalParameters;
       //  console.log('User email:', userEmail);
-      console.log("After authorize", tempResult);
+      // console.log("After authorize", tempResult);
 
       if (tempResult) {
         setLoader(true)
@@ -196,6 +201,9 @@ const Login = () => {
       // ...
     } catch (error) {
       console.error('Authentication failed:', error);
+
+      setLoader(false)
+
     }
 
     // }
@@ -392,9 +400,9 @@ const Login = () => {
         <Loader flag={loader} />
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <View
+            {/* <View
               style={{
-                marginBottom: 20,
+                // marginBottom: 20,
                 width: wp(90),
                 alignSelf: 'center',
               }}>
@@ -402,7 +410,7 @@ const Login = () => {
                 source={require('../Assets/img/logo.png')}
                 style={styles.logo}
               />
-            </View>
+            </View> */}
             <View>
               {/* <AzureLoginView
                 azureInstance={azureInstance}
@@ -430,25 +438,41 @@ const Login = () => {
 
             </View>
             <View style={styles.formContainer}>
-              <TextInput
-                placeholder="Enter Email"
-                placeholderTextColor={'lightgrey'}
-                style={[styles.input, { height: 50 }]}
-                value={email}
-                onChangeText={text => {
-                  onChangeEmail(text);
-                }}
-              />
+              {/* <TextInput
+              //   placeholder="Enter Email"
+              //   placeholderTextColor={'lightgrey'}
+              //   style={[styles.input, { height: 50 }]}
+              //   value={email}
+              //   onChangeText={text => {
+              //     onChangeEmail(text);
+              //   }}
+              // /> */}
 
+              <View
+                style={{
+                  // marginBottom: 20,
+                  width: wp(90),
+                  alignSelf: 'center',
+                }}>
+                <Image
+                  source={require('../Assets/img/logo.png')}
+                  style={styles.logo}
+                />
+              </View>
               <TouchableOpacity
-                // onPress={() => onLogin()}loginWithOffice365
-                onPress={() => loginWithOffice365()}
+                style={[styles.buttonContainer, styles.loginButton]}
+                onPress={() => loginWithOffice365()}>
+                <Text style={styles.loginText}>Login with Office365</Text>
+              </TouchableOpacity>
+              {/* <TouchableOpacity
+                onPress={() => onLogin()}
+                //  onPress={() => loginWithOffice365()}
                 // onPress={() => authenticate()}
                 style={[styles.button, styles.buttonClose]}
               // onPress={() => setModalVisible(!modalVisible)}
               >
                 <Text style={styles.textStyle}>Login</Text>
-              </TouchableOpacity>
+              </TouchableOpacity> */}
 
 
             </View>
@@ -534,10 +558,13 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   logo: {
-    width: 150,
-    height: 50,
+    marginTop: 20,
+    marginBottom: 20,
+    width: 180,
+    height: 80,
     resizeMode: 'contain',
     alignSelf: 'center',
+    // backgroundColor: "red",
   },
   text: {
     color: '#676A6C',
@@ -552,15 +579,16 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     height: 45,
+
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 20,
     width: 250,
-    borderRadius: 30,
+    borderRadius: 10,
   },
   loginButton: {
-    backgroundColor: '#3659b8',
+    backgroundColor: '#1c84c6',
   },
   loginText: {
     color: 'white',
@@ -573,15 +601,18 @@ const styles = StyleSheet.create({
   },
 
   formContainer: {
-    backgroundColor: '#2F4050',
-    width: wp(90),
-    height: wp(40),
-    justifyContent: 'center',
-    padding: 10,
+    marginTop: 10,
+    //  backgroundColor: '#2F4050',
+    width: wp(80),
+    // height: wp(40),
+    alignSelf: "center",
+    // justifyContent: 'center',
+    alignItems: "center",
+    // padding: 10,
     alignSelf: 'center',
-    borderRadius: 20,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
+    // borderRadius: 20,
+    //borderTopLeftRadius: 20,
+    //borderTopRightRadius: 20,
   },
   input: {
     height: 40,
@@ -609,10 +640,11 @@ const styles = StyleSheet.create({
   },
   modalView: {
     //margin: 20,
-
+    width: wp(80),
+    alignSelf: "center",
     backgroundColor: 'white',
-    //borderRadius: 20,
-    padding: 35,
+    borderRadius: 20,
+    // padding: 35,
 
     shadowColor: '#000',
     shadowOffset: {

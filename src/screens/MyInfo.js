@@ -30,30 +30,59 @@ const MyInfo = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const jsonData = MY_INFO.staffview;
+  const officeInfo = MY_INFO.officeInfo;
 
   // console.log(MY_INFO, 'jsonDatajsonDatajsonDatajsonDatajsonData');
   const [infoData, setInfoData] = useState({});
   const [loader, setLoader] = useState(false);
-  useEffect(() => {
-    setLoader(true);
-    dispatch(clientInfo(LOGIN_DATA, navigation));
-    setInfoData(MY_INFO);
-    setTimeout(() => {
-      setLoader(false);
-    }, 2000);
-  }, []);
+
 
   useEffect(() => {
-    setInfoData(MY_INFO);
-  }, []);
+    const fetchData = async () => {
+      try {
+        setLoader(true);
 
-  useEffect(() => {
-    // setLoader(true);
-    setInfoData(MY_INFO);
-    // setTimeout(() => {
-    //   setLoader(false);
-    // }, 2000);
-  }, [MY_INFO]);
+        // Fetch client info
+        await dispatch(clientInfo(LOGIN_DATA, navigation));
+
+        // Assuming MY_INFO is updated in the redux store after the API call.
+        setInfoData(MY_INFO);
+
+
+        setTimeout(() => {
+          setLoader(false)
+        }, 2000);
+      } catch (error) {
+        console.error("Error fetching client info:", error);
+      }
+      // finally {
+      //   setLoader(false);
+      // }
+    };
+
+    fetchData();
+  }, [LOGIN_DATA]);
+
+  // useEffect(() => {
+  //   setLoader(true);
+  //   dispatch(clientInfo(LOGIN_DATA, navigation));
+  //   setInfoData(MY_INFO);
+  //   setTimeout(() => {
+  //     setLoader(false);
+  //   }, 2000);
+  // }, []);
+
+  // useEffect(() => {
+  //   setInfoData(MY_INFO);
+  // }, []);
+
+  // useEffect(() => {
+  //   // setLoader(true);
+  //   setInfoData(MY_INFO);
+  //   // setTimeout(() => {
+  //   //   setLoader(false);
+  //   // }, 2000);
+  // }, [MY_INFO]);
 
   // console.log(infoData, 'infoDatainfoDatainfoDatainfoDatainfoDatainfoData');
 
@@ -130,7 +159,7 @@ const MyInfo = () => {
 
             <View style={styles.contentView}>
               <Image source={require('../Assets/img/icons/dobProfile.png')} />
-              <Text style={styles.subHead}> Date Of Birth:</Text>
+              <Text style={styles.subHead}>Date Of Birth:</Text>
               <Text style={styles.LIstText2}> </Text>
             </View>
             <View style={styles.partition}></View>
@@ -138,7 +167,7 @@ const MyInfo = () => {
               <Image source={require('../Assets/img/icons/officeProfile.png')} />
               <Text style={styles.subHead}>Office:</Text>
 
-              <Text style={styles.LIstText2}></Text>
+              <Text style={styles.LIstText2}>{officeInfo?.name}</Text>
             </View>
             <View style={styles.partition}></View>
             <View style={styles.contentView}>
@@ -150,7 +179,7 @@ const MyInfo = () => {
             <View style={styles.partition}></View>
             <View style={styles.contentView}>
               <Image source={require('../Assets/img/icons/contactProfile.png')} />
-              <Text style={styles.subHead}> Contact Info:</Text>
+              <Text style={styles.subHead}>Contact Info:</Text>
               <Text style={styles.LIstText2}>
                 {jsonData?.mobileNo ? jsonData?.mobileNo : 'NA'}
               </Text>
@@ -175,7 +204,7 @@ const MyInfo = () => {
             <View style={[styles.contentView,]}>
               <View style={{ flexDirection: 'row' }}>
                 <Image source={require('../Assets/img/icons/securityProfile.png')} />
-                <Text style={styles.subHead}> Social Security:</Text>
+                <Text style={styles.subHead}>Social Security:</Text>
               </View>
 
               <Text style={styles.LIstText2}> </Text>
@@ -183,7 +212,7 @@ const MyInfo = () => {
             <View style={styles.partition}></View>
             <View style={styles.contentView}>
               <Image source={require('../Assets/img/icons/userProfile.png')} />
-              <Text style={styles.subHead}> Username:</Text>
+              <Text style={styles.subHead}>Username:</Text>
 
               <Text style={styles.LIstText2}>{jsonData?.user}</Text>
             </View>
@@ -320,19 +349,23 @@ const styles = StyleSheet.create({
     color: '#000',
     fontFamily: 'Poppins-SemiBold',
     fontSize: 12,
-    marginTop: 6
+    width: wp(40),
+    height: wp(10),
+
+    //  backgroundColor: 'yellow',
+    // marginTop: 6
   },
   subHead: {
-    width: 150,
+    width: wp(30),
     fontSize: 12,
     paddingLeft: 10,
     fontFamily: 'Poppins-SemiBold',
-    color: Color.headerIconBG
+    color: Color.headerIconBG,
     // backgroundColor: 'red',
   },
   contentView: {
-    height: 50,
-    alignItems: "center",
+    height: wp(13),
+    //  alignItems: "center",
     alignSelf: "center",
     //  backgroundColor: 'red',
     // marginTop: 10,

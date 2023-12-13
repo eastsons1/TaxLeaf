@@ -7,11 +7,14 @@ import {
   Dimensions,
   StyleSheet,
   Image,
+
   TouchableOpacity,
   ScrollView,
   FlatList,
   ImageBackground,
 } from 'react-native';
+//import { ScrollView } from 'react-native-virtualized-view'
+
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -49,6 +52,10 @@ const Request = () => {
   const { REQUEST_INFO } = useSelector(state => state.TaxLeafReducer);
   const { MY_INFO } = useSelector(state => state.TaxLeafReducer);
 
+
+  // const ListData = REQUEST_INFO?.requestInfoListModel
+  //const sortedData = [...REQUEST_INFO?.requestInfoListModel].sort((a, b) => b.id.localeCompare(a.id));
+
   const jsonData = MY_INFO.guestInfo;
 
   const showwhatfunc = data => {
@@ -60,31 +67,57 @@ const Request = () => {
     console.log(data);
   };
   // console.log(REQUEST_INFO?.requestInfoListModel, 'REQUEST_INFO')
-  useEffect(() => {
+
+
+  const fetchData = async () => {
     setLoader(true);
-    dispatch(RequestInfoList(jsonData?.clientId, navigation));
-
-    setRequestInfoData(REQUEST_INFO?.requestInfoListModel);
-    setTimeout(() => {
-      setLoader(false);
-    }, 2000);
-  }, []);
-
-  useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', () => {
-      setLoader(true);
-      dispatch(RequestInfoList(jsonData?.clientId, navigation));
-
-      setRequestInfoData(REQUEST_INFO?.requestInfoListModel);
+    try {
+      await dispatch(RequestInfoList(jsonData?.clientId, navigation));
+    } finally {
       setTimeout(() => {
         setLoader(false);
-      }, 2000);
-    });
+      }, 500);
 
-    // Return the function to unsubscribe from the event so it gets removed on unmount
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [dispatch, jsonData?.clientId, navigation]);
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', fetchData);
     return unsubscribe;
-  }, [navigation]);
-  // console.log(requestInfoData, 'requestInfoData')
+  }, [navigation, fetchData]);
+
+  // useEffect(() => {
+  //   setLoader(true);
+  //   dispatch(RequestInfoList(jsonData?.clientId, navigation));
+
+  //   setRequestInfoData(REQUEST_INFO?.requestInfoListModel);
+  //   setTimeout(() => {
+  //     setLoader(false);
+  //   }, 2000);
+  // }, []);
+
+  // useEffect(() => {
+  //   const unsubscribe = navigation.addListener('focus', () => {
+  //     setLoader(true);
+  //     dispatch(RequestInfoList(jsonData?.clientId, navigation));
+
+  //     setRequestInfoData(REQUEST_INFO?.requestInfoListModel);
+  //     setTimeout(() => {
+  //       setLoader(false);
+  //     }, 2000);
+  //   });
+
+  //   // Return the function to unsubscribe from the event so it gets removed on unmount
+  //   return unsubscribe;
+  // }, [navigation]);
+  // // console.log(requestInfoData, 'requestInfoData')
+
+
+
   return (
     <SafeAreaView style={{ backgroundColor: '#d5e3e5' }}>
       <Loader flag={loader} />
@@ -158,6 +191,7 @@ const Request = () => {
                           justifyContent: 'flex-start',
                           // marginBottom: 20,
                         }}>
+
                         <TouchableOpacity
                           style={[
                             styles.emailtoch,
@@ -191,6 +225,8 @@ const Request = () => {
 
                           <Text style={styles.DarkButtonText}>Message</Text>
                         </TouchableOpacity>
+
+
                         <TouchableOpacity
                           disabled={true}
                           style={[
@@ -308,6 +344,7 @@ const Request = () => {
                 } else if (showwhat1 == 'Proposal') {
                   return (
                     <View style={styles.moblieSec}>
+
                       <TouchableOpacity
                         style={[
                           styles.emailtoch,
@@ -319,6 +356,8 @@ const Request = () => {
                         onPress={() => showwhatfunc1('Message')}>
                         <Text style={styles.ButtonText}>Message</Text>
                       </TouchableOpacity>
+
+
                       <TouchableOpacity
                         style={[
                           styles.mobiletoch,
@@ -330,6 +369,8 @@ const Request = () => {
                         onPress={() => showwhatfunc1('Proposal')}>
                         <Text style={styles.ButtonText}>Proposal</Text>
                       </TouchableOpacity>
+
+
                       <TouchableOpacity
                         style={[
                           styles.mobiletoch,
@@ -341,6 +382,8 @@ const Request = () => {
                         onPress={() => showwhatfunc1('Signature')}>
                         <Text style={styles.ButtonText}>Signature Requests</Text>
                       </TouchableOpacity>
+
+
                       <TouchableOpacity
                         style={[
                           styles.mobiletoch,
@@ -352,11 +395,14 @@ const Request = () => {
                         onPress={() => showwhatfunc1('Reminders')}>
                         <Text style={styles.ButtonText}>Reminders</Text>
                       </TouchableOpacity>
+
+
                     </View>
                   );
                 } else if (showwhat1 == 'Signature') {
                   return (
                     <View style={styles.moblieSec}>
+
                       <TouchableOpacity
                         style={[
                           styles.emailtoch,
@@ -368,6 +414,8 @@ const Request = () => {
                         onPress={() => showwhatfunc1('Message')}>
                         <Text style={styles.ButtonText}>Message</Text>
                       </TouchableOpacity>
+
+
                       <TouchableOpacity
                         style={[
                           styles.mobiletoch,
@@ -379,6 +427,8 @@ const Request = () => {
                         onPress={() => showwhatfunc1('Proposal')}>
                         <Text style={styles.ButtonText}>Proposal</Text>
                       </TouchableOpacity>
+
+
                       <TouchableOpacity
                         style={[
                           styles.mobiletoch,
@@ -390,6 +440,8 @@ const Request = () => {
                         onPress={() => showwhatfunc1('Signature')}>
                         <Text style={styles.ButtonText}>Signature Requests</Text>
                       </TouchableOpacity>
+
+
                       <TouchableOpacity
                         style={[
                           styles.mobiletoch,
@@ -401,6 +453,8 @@ const Request = () => {
                         onPress={() => showwhatfunc1('Reminders')}>
                         <Text style={styles.ButtonText}>Reminders</Text>
                       </TouchableOpacity>
+
+
                     </View>
                   );
                 } else {
@@ -730,11 +784,12 @@ const Request = () => {
                         <View style={styles.subContainer}>
 
                           <FlatList
-                            contentContainerStyle={{ paddingBottom: 200 }}
-                            data={REQUEST_INFO?.requestInfoListModel}
+                            // contentContainerStyle={{ paddingBottom: 100 }}
+                            data={REQUEST_INFO && REQUEST_INFO?.requestInfoListModel}
                             showsVerticalScrollIndicator={false}
                             // numColumns={5}
                             keyExtractor={(item, index) => index}
+
                             renderItem={({ item, index }) => (
                               <>
                                 <TouchableOpacity
@@ -799,8 +854,14 @@ const Request = () => {
                                 </TouchableOpacity>
                                 <View style={styles.part}></View>
                               </>
+
                             )}
+
+                          // reverse={true}
                           />
+
+                          <View style={{ height: wp(20), backgroundColor: "red" }}></View>
+
                         </View>
                         {/* </View> */}
                       </View>
@@ -808,15 +869,16 @@ const Request = () => {
                   );
                 } else {
                   return (
-                    <ScrollView>
+                    <View>
                       {/* <View style={styles.subContainer}> */}
                       <Text style={styles.subHead}>0 Results Found</Text>
 
                       {/* </View> */}
-                    </ScrollView>
+                    </View>
                   );
                 }
               })()}
+
             </View>
           </View>
         </ScrollView>
@@ -960,7 +1022,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     // marginTop: 20,
     alignItems: 'center',
-    height: 380,
+    height: 300,
     //borderRadius: 20,
   },
   subHead: {

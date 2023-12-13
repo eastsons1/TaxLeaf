@@ -117,7 +117,7 @@ function MyDrawer3({ navigation, route }) {
       />
       <Drawer3.Screen
         navigation={navigation}
-        name="Payments"
+        name="PaymentsContain"
         component={PaymentScreenStack}
 
       />
@@ -402,6 +402,13 @@ function HomeScreenStack() {
       <Stack.Screen
         name="HomeScreen"
         component={HomeScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="ContactUs"
+        component={ContactUs}
         options={{
           headerShown: false,
         }}

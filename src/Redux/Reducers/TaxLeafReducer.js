@@ -11,7 +11,8 @@ import {
   FOLDER_LIST,
   DOCUMENT_INFO_FOLDER,
   FILE_UPLOAD_TOKEN,
-  FILE_INFO
+  FILE_INFO,
+  EDITOR_TEXT,
 } from '../Actions/types';
 
 const initialstate = {
@@ -27,7 +28,11 @@ const initialstate = {
   FOLDER_LIST: {},
   DOCUMENT_INFO_FOLDER: {},
   FILE_UPLOAD_TOKEN: {},
-  FILE_INFO: {}
+  FILE_INFO: {},
+  EDITOR_TEXT: {}
+
+
+
 };
 
 const TaxLeafReducer = (state = initialstate, action) => {
@@ -71,6 +76,9 @@ const TaxLeafReducer = (state = initialstate, action) => {
     case FILE_INFO:
 
       return { ...state, FILE_INFO: action.payload };
+    case EDITOR_TEXT:
+
+      return { ...state, EDITOR_TEXT: action.payload };
   }
 
   return state;

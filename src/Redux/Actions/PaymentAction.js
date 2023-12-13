@@ -36,10 +36,10 @@ export const GetPaymentList =
       //console.log(response, 'PaymentListPaymentListPaymentListPaymentList');
 
       if (response.failureStatus == false) {
-        // console.log(
-        //   response.paymentListInfoModel,
-        //   'guestInfoguestInfoguestInfoguestInfoguestInfoguestInfoguestInfoguestInfoguestInfo',
-        // );
+        console.log(
+          response.paymentListInfoModel,
+          'GET_PAYMENT_LISTGET_PAYMENT_LISTGET_PAYMENT_LISTGET_PAYMENT_LIST',
+        );
         // AsyncStorage.setItem('login', JSON.stringify(response.token));
 
         dispatch({
@@ -71,6 +71,8 @@ export const GetPaymentList =
 
 export const GetDetailsbyOrderId =
   (clientId, clientType, orderId, navigation) => dispatch => {
+
+    //console.log(clientId, clientType, orderId, "GetDetailsbyOrderIdGetDetailsbyOrderIdGetDetailsbyOrderId")
     // dispatch({
     //   type: 'LOADING',
     //   payload: true,
@@ -90,14 +92,14 @@ export const GetDetailsbyOrderId =
           // orderId: orderId,
           // clientType: clientType,
           // client: clientId
-          "orderId": 197,
-          "clientType": "company",
-          "client": 769
+          orderId: orderId,
+          clientType: clientType,
+          client: clientId
         }
       };
       //console.log(data, 'payloadOrderInfo')
       const response = await logistical.post('/Staff/IndividualOrderInfo', data);
-      //console.log(response, 'orderInfoResponse');
+      // console.log(response, 'orderInfoResponse');
 
       if (response.failureStatus == false) {
         // console.log(

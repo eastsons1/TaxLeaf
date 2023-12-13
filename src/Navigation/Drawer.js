@@ -169,7 +169,7 @@ const Drawer = () => {
         <TouchableOpacity
           style={styles.screenName}
           onPress={() => {
-            navigation.navigate('Payments');
+            navigation.navigate('PaymentsContain');
           }}>
           <Icon2 style={styles.icon} name="payment" size={20} color="#fff" />
 

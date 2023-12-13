@@ -82,11 +82,12 @@ const FileCabinet = () => {
   const referenceFiles = FILE_INFO[0]?.referenceFiles
   const UploadedByName = MY_INFO?.staffview?.firstName + ' ' + MY_INFO?.staffview?.lastName
   const UploadedBy = MY_INFO?.staffview?.id
-  console.log(documentsLibraryId, 'documentsLibraryId')
+  //console.log(documentsLibraryId, 'documentsLibraryId')
   // console.log(MY_INFO, 'jsonData')
 
   // console.log(base64File,'baseeee')
 
+  // console.log(jsonData?.client, jsonData?.clientType, 'KKKKKKKKKK')
 
   // console.log(Array.isArray(dataArray), 'isArray');
   const [fileResponse, setFileResponse] = useState();
@@ -250,13 +251,16 @@ const FileCabinet = () => {
     setSelectedData(item);
     setdocumentId(item?.documentTypeIds)
   };
+
   useEffect(() => {
     setLoader(true);
 
     dispatch(
       folderNameList(jsonData?.clientId, jsonData?.clientType, navigation),
     );
-
+    // dispatch(
+    //   getFileInfo(jsonData?.client, jsonData?.clientType, navigation),
+    // );
     setTimeout(() => {
       setLoader(false);
     }, 2000);
@@ -265,18 +269,19 @@ const FileCabinet = () => {
   }, []);
 
   useEffect(() => {
-    setLoader(true);
+    // setLoader(true);
 
 
     dispatch(
-      getFileInfo(jsonData?.clientId, jsonData?.clientType, navigation),
+      getFileInfo(jsonData?.client, jsonData?.clientType, navigation),
     );
-    setTimeout(() => {
-      setLoader(false);
-    }, 2000);
+    // setTimeout(() => {
+    //   setLoader(false);
+    // }, 2000);
 
     // setInfoData(CLIENT_LIST);
   }, [filteredReq]);
+
   useEffect(() => {
     if (Array.isArray(FOLDER_LIST)) {
       const filteredFolders = FOLDER_LIST.filter(folder => {
@@ -294,31 +299,58 @@ const FileCabinet = () => {
 
   }, [FILE_INFO])
 
-  const documentTypes = (item) => {
-    console.log(item, 'itemitemitemitemitem')
-    setLoader(true);
-    // Alert.alert(item?.documentTypeIds)
-    setdocumentId(item?.documentTypeIds)
-    // dispatch(
-    //   documentInfobyFolder(item?.documentTypeIds, navigation)
-    // )
-    setTimeout(() => {
-      setLoader(false);
-    }, 2000);
-  }
+
 
 
   useEffect(() => {
-    setLoader(true);
+    //  setLoader(true);
 
     dispatch(
       documentInfobyFolder(documentId, navigation),
     );
-    setTimeout(() => {
-      setLoader(false);
-    }, 2000);
+    // setTimeout(() => {
+    //   setLoader(false);
+    // }, 2000);
     // setInfoData(CLIENT_LIST);
   }, [documentId]);
+
+
+  useEffect(() => {
+    documentTypes(value)
+  }, [value])
+
+  useEffect(() => {
+    dispatch(
+      generateFileToken()
+    )
+  }, [])
+
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      // setLoader(true);
+      dispatch(
+        getFileInfo(jsonData?.client, jsonData?.clientType, navigation),
+      );
+      // setTimeout(() => {
+      //   setLoader(false);
+      // }, 2000);
+
+    });
+    return unsubscribe;
+  }, [navigation,]);
+
+
+  //console.log(FILE_UPLOAD_TOKEN, 'QQQQQQQQQQQQQQQQQQQQQQQQQQQQ')
+
+
+  useEffect(() => {
+    const filesInFolder = getFilesByFolder(selectedData?.azureFolderName, referenceFiles);
+    setFIlesInFolder(filesInFolder)
+    console.log(filesInFolder, 'filesInFolder')
+  }, [selectedData, FILE_UPLOAD_TOKEN])
+
+
 
   // const submitUpload = () => {
   //   setLoader(true);
@@ -386,7 +418,7 @@ const FileCabinet = () => {
       )
     );
 
-    await dispatch(getFileInfo(jsonData?.clientId, jsonData?.clientType, navigation));
+    await dispatch(getFileInfo(jsonData?.client, jsonData?.clientType, navigation));
 
     // Access numberOfMatchingResults after getFileInfo has completed
     const numberOfMatchingResults = FILE_INFO[0]?.referenceFiles
@@ -398,9 +430,7 @@ const FileCabinet = () => {
     cancelModal();
   };
 
-  useEffect(() => {
-    documentTypes(value)
-  }, [value])
+
 
   const cancelModal = () => {
     setModalVisible(!modalVisible)
@@ -409,36 +439,27 @@ const FileCabinet = () => {
     setFileResponse()
   }
 
-  useEffect(() => {
-    dispatch(
-      generateFileToken()
-    )
-  }, [])
-  useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', () => {
-      setLoader(true);
-      dispatch(
-        getFileInfo(jsonData?.clientId, jsonData?.clientType, navigation),
-      );
-      setTimeout(() => {
-        setLoader(false);
-      }, 2000);
 
-    });
-    return unsubscribe;
-  }, [navigation]);
+
+  const documentTypes = (item) => {
+    console.log(item, 'itemitemitemitemitem')
+    setLoader(true);
+    // Alert.alert(item?.documentTypeIds)
+    setdocumentId(item?.documentTypeIds)
+    // dispatch(
+    //   documentInfobyFolder(item?.documentTypeIds, navigation)
+    // )
+    setTimeout(() => {
+      setLoader(false);
+    }, 2000);
+  }
+
 
   function getFilesByFolder(azureFolderName, referenceFiles) {
     const matchingFiles = referenceFiles?.filter(file => file.sharepointFolderName === azureFolderName)?.map(file => file?.fileName);
 
     return matchingFiles;
   }
-  useEffect(() => {
-    const filesInFolder = getFilesByFolder(selectedData?.azureFolderName, referenceFiles);
-    setFIlesInFolder(filesInFolder)
-    console.log(filesInFolder, 'filesInFolder')
-  }, [selectedData])
-
 
   const renderItem = ({ item }) => {
 
@@ -644,7 +665,7 @@ const FileCabinet = () => {
                 }}>
                 {/* <Image source={usericon} style={{ width: 20, height: 20 }} /> */}
                 <Text style={{ fontSize: 20, fontFamily: 'Poppins-Bold', }}>File Cabinet</Text>
-                <Text style={styles.client}>Client ID : EASTSONSPRI</Text>
+                <Text style={styles.client}>Client ID : {jsonData?.client}</Text>
               </View>
               <TouchableOpacity
                 onPress={() => setModalVisible(true)}
