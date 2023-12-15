@@ -123,8 +123,8 @@ const ClientDetails = ({ route }) => {
           }}>
           <View style={{ width: wp(50) }}>
             <Text style={styles.heading}>
-              {infoData?.individualInfo?.lastName},{' '}
-              {infoData?.individualInfo?.firstName}
+              {infoData?.companyInfo?.name},{' '}
+              {/* {infoData?.companyInfo?.firstName} */}
             </Text>
           </View>
 
@@ -232,12 +232,19 @@ const ClientDetails = ({ route }) => {
           <View style={styles.contentView}>
             <Text style={styles.subHead1}>Total Orders:</Text>
 
-            <Text style={styles.LIstText2}>55 </Text>
+            <Text style={styles.LIstText2}> {infoData?.paymentDetails?.totalOrders} </Text>
+          </View>
+          <View style={styles.contentView}>
+            <Text style={styles.subHead1}>Billed Amount:</Text>
+
+            <Text style={styles.LIstText2}>${Math.floor(Number(infoData?.paymentDetails?.billedAmount)).toFixed(2)}</Text>
+
           </View>
           <View style={styles.contentView}>
             <Text style={styles.subHead1}>Pending Amount:</Text>
 
-            <Text style={styles.LIstText2}>$66</Text>
+            <Text style={styles.LIstText2}>${Math.floor(Number(infoData?.paymentDetails?.pendingAmount)).toFixed(2)}</Text>
+
           </View>
         </View>
         <View style={styles.slideContainerClient}>
@@ -247,28 +254,27 @@ const ClientDetails = ({ route }) => {
 
             <Text style={styles.LIstText2}>
               {' '}
+              {ClientData.subClientInfo.subClientName}
+            </Text>
+          </View>
+          <View style={styles.contentView}>
+            <Text style={styles.subHead}>Company Name:</Text>
+
+            <Text style={styles.LIstText2}>
+
               {ClientData.subClientInfo.subClientPracticeId}
             </Text>
           </View>
           <View style={styles.contentView}>
-            <Text style={styles.subHead}>Individual Name:</Text>
+            <Text style={styles.subHead}>Type of Company:</Text>
 
             <Text style={styles.LIstText2}>
               {' '}
-              {infoData?.individualInfo?.lastName},{' '}
-              {infoData?.individualInfo?.firstName}
+              {infoData?.companyTypeInfo?.type}
             </Text>
           </View>
           <View style={styles.contentView}>
-            <Text style={styles.subHead}>SSN/ITIN:</Text>
-
-            <Text style={styles.LIstText2}>
-              {' '}
-              {infoData?.individualInfo?.ssnItin}
-            </Text>
-          </View>
-          <View style={styles.contentView}>
-            <Text style={styles.subHead}>Date of Birth:</Text>
+            <Text style={styles.subHead}>Fiscal Year End:</Text>
 
             <Text style={styles.LIstText2}>
               {' '}
@@ -276,31 +282,31 @@ const ClientDetails = ({ route }) => {
             </Text>
           </View>
           <View style={styles.contentView}>
-            <Text style={styles.subHead}>Language:</Text>
+            <Text style={styles.subHead}>Federal ID:</Text>
 
             <Text style={styles.LIstText2}>
               {' '}
-              {infoData?.languageInfo?.language1}
+              {infoData?.companyInfo?.fein}
             </Text>
           </View>
 
           <View style={styles.contentView}>
-            <Text style={styles.subHead}>Residency:</Text>
+            <Text style={styles.subHead}>State of Corporation:</Text>
 
             <Text style={styles.LIstText2}>
               {' '}
-              {infoData?.residenseInfo?.countryName}
+              {infoData?.stateInfo?.stateName}
             </Text>
           </View>
 
-          <View style={styles.contentView}>
+          {/* <View style={styles.contentView}>
             <Text style={styles.subHead}>Citizenship:</Text>
 
             <Text style={styles.LIstText2}>
               {' '}
               {infoData?.citizenInfo?.countryName}
             </Text>
-          </View>
+          </View> */}
         </View>
         <View style={styles.slideContainerClient}>
           <Text style={styles.headingClient}>Contact Information</Text>

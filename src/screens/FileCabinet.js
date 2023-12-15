@@ -85,6 +85,8 @@ const FileCabinet = () => {
   //console.log(documentsLibraryId, 'documentsLibraryId')
   // console.log(MY_INFO, 'jsonData')
 
+
+
   // console.log(base64File,'baseeee')
 
   // console.log(jsonData?.client, jsonData?.clientType, 'KKKKKKKKKK')
@@ -294,6 +296,10 @@ const FileCabinet = () => {
   }, [FOLDER_LIST])
 
 
+  console.log(filteredReq, 'filteredReqfilteredReqfilteredReqfilteredReqfilteredReq')
+
+
+
   useEffect(() => {
 
 
@@ -463,16 +469,41 @@ const FileCabinet = () => {
 
   const renderItem = ({ item }) => {
 
-    const referenceFiles = FILE_INFO[0]?.referenceFiles
-
 
     const matchingReferenceFiles = referenceFiles?.filter(
-      (file) => file.sharepointFolderName.trim().toLowerCase() === item?.azureFolderName.trim().toLowerCase()
+      (file) =>
+        file.sharepointFolderName.trim().toLowerCase() ===
+        item?.azureFolderName.trim().toLowerCase()
     );
 
     const numberOfMatchingResults = matchingReferenceFiles?.length;
-    const matchingLeafCloud = referenceFiles?.filter(file => file.sharepointFolderName.trim().toLowerCase() === item?.azureFolderName.trim().toLowerCase())?.map(file => file?.uploadedFrom);
 
+    // Count occurrences of Admin and Clients
+    const adminCount = matchingReferenceFiles?.filter(
+      (file) => file.uploadedFrom === "Admin"
+    ).length;
+
+    const clientCount = matchingReferenceFiles?.filter(
+      (file) => file.uploadedFrom.trim().toLowerCase() === "client"
+    ).length;
+
+    console.log(clientCount, 'clientCountclientCountclientCountclientCount')
+
+
+    // const referenceFiles = FILE_INFO[0]?.referenceFiles
+
+
+
+
+    // const matchingReferenceFiles = referenceFiles?.filter(
+    //   (file) => file.sharepointFolderName.trim().toLowerCase() === item?.azureFolderName.trim().toLowerCase()
+    // );
+
+    // const numberOfMatchingResults = matchingReferenceFiles?.length;
+    // const matchingLeafCloud = referenceFiles?.filter(file => file.sharepointFolderName.trim().toLowerCase() === item?.azureFolderName.trim().toLowerCase())?.map(file => file?.uploadedFrom);
+
+    //  console.log(referenceFiles, 'numberOfMatchingResultsnumberOfMatchingResultsnumberOfMatchingResults')
+    // console.log(matchingLeafCloud, 'matchingLeafCloudmatchingLeafCloudmatchingLeafCloudmatchingLeafCloud')
 
     return (
       <>
@@ -512,7 +543,8 @@ const FileCabinet = () => {
                   }}>
 
                   {/* {item?.status} */}
-                  {matchingLeafCloud?.includes("Admin") ? 1 : 0}
+                  {/* {matchingLeafCloud?.includes("Admin") ? 0 : 0} */}
+                  {adminCount}
                 </Text>
               </DataTable.Cell>
               <DataTable.Cell style={{ width: wp(30), alignItems: "center", justifyContent: "center" }}>
@@ -526,7 +558,8 @@ const FileCabinet = () => {
                         : '#676A6C',
                   }}>
                   {/* {idRow == item.id && press == true && DOCUMENT_INFO_FOLDER ? DOCUMENT_INFO_FOLDER.length : '0'} */}
-                  {numberOfMatchingResults}
+                  {/* {numberOfMatchingResults} */}
+                  {clientCount}
 
                 </Text>
               </DataTable.Cell>
@@ -623,6 +656,10 @@ const FileCabinet = () => {
       </>
     )
   }
+
+
+
+
 
   return (
     <SafeAreaView style={{ flex: 1 }}>

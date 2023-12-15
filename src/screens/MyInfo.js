@@ -224,6 +224,22 @@ const MyInfo = () => {
               </View>
               <Text style={styles.LIstText2}> </Text>
             </View>
+            <View style={styles.partition}></View>
+            <View style={[styles.contentView, { height: hp(7.5) }]}>
+              <View style={{ flexDirection: 'row' }}>
+                <Image source={require('../Assets/img/icons/timeProfile.png')} />
+                <Text style={styles.subHead}>Status</Text>
+              </View>
+              <Text style={styles.LIstText2}>{jsonData?.status == 1 ? "Active" : "Inactive"} </Text>
+            </View>
+            <View style={styles.partition}></View>
+            <View style={[styles.contentView, { height: hp(7.5) }]}>
+              <View style={{ flexDirection: 'row' }}>
+                <Image source={require('../Assets/img/icons/timeProfile.png')} />
+                <Text style={styles.subHead}>Type:</Text>
+              </View>
+              <Text style={styles.LIstText2}> </Text>
+            </View>
 
           </View>
           {/* <View

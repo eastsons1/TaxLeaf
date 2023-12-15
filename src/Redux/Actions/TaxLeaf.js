@@ -449,7 +449,7 @@ export const folderNameList =
     return new Promise(async (resolve, reject) => {
       let data = {
         GuestInfo: {
-          clientType: clientType,
+          clientType: clientType == "company" ? "Business" : clientType,
           //  clientType: "Individual"
 
         },

@@ -17,8 +17,15 @@ const ViewRequest = ({ route }) => {
     const navigation = useNavigation();
     const actionId = route.params.actionId;
     const { REQUEST_INFO_BY_ID } = useSelector(state => state.TaxLeafReducer);
+    const { MANAGER_INFO } = useSelector(state => state.TaxLeafReducer);
+    const { PARTNER_INFO } = useSelector(state => state.TaxLeafReducer);
+    const { OFFICE_INFO } = useSelector(state => state.TaxLeafReducer);
     console.log(REQUEST_INFO_BY_ID, 'REQUEST_INFO_BY_ID')
     const bgImage = require('../Assets/img/guest_shape.png');
+    const manager = MANAGER_INFO;
+    const partner = PARTNER_INFO;
+    const managerOffice = OFFICE_INFO;
+
     console.log(actionId, 'LLLLLL')
     // useEffect(() => {
     //     const fetchData = async () => {
@@ -161,8 +168,20 @@ const ViewRequest = ({ route }) => {
 
                         <View style={styles.slideContainerClient}>
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '95%', alignSelf: 'center', marginBottom: 10 }}>
-                                <Text style={styles.headingClient}>Mario Ruiz</Text>
-                                <Text style={styles.headingClient}>assign</Text>
+
+
+                                <Text style={styles.headingClient}>
+                                    {/* {manager?.id}
+                                    {REQUEST_INFO_BY_ID?.actionStaffModel?.staffId} {partner?.id} */}
+                                    {REQUEST_INFO_BY_ID?.actionStaffModel?.staffId === manager?.id ?
+
+                                        manager?.firstName + " " + manager?.lastName
+                                        :
+                                        partner?.firstName + " " + partner?.lastName
+
+                                    }
+                                </Text>
+                                <Text style={styles.headingClient}>Assign</Text>
 
                             </View>
 
@@ -174,8 +193,11 @@ const ViewRequest = ({ route }) => {
                             </View>
                             <View style={styles.contentView}>
                                 <Text style={styles.subHead}>Office:</Text>
+                                {/* {REQUEST_INFO_BY_ID?.actionStaffModel?.staffId} */}
                                 <Text style={styles.LIstText2}>
-                                    CORP
+
+                                    {managerOffice?.officeId}
+
                                 </Text>
                             </View>
                         </View>
@@ -186,10 +208,10 @@ const ViewRequest = ({ route }) => {
                                     flexDirection: 'row', marginLeft: 15,
                                     //marginTop: 10
                                 }}>
-                                    <View style={{ flexDirection: 'row' }}>
+                                    {/* <View style={{ flexDirection: 'row' }}>
                                         <Text style={{ color: '#fff', fontFamily: 'Poppins-SemiBold', marginTop: 5 }}>Notes</Text>
                                         <Text style={styles.notes}>2</Text>
-                                    </View>
+                                    </View> */}
                                     <View style={{ flexDirection: 'row' }}>
                                         <Text style={{ color: '#fff', fontFamily: 'Poppins-SemiBold', marginTop: 5 }}>SOS</Text>
                                         <Text style={styles.sos}>+</Text>

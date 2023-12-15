@@ -41,6 +41,7 @@ import InvoiceView from '../screens/InvoiceView';
 import ViewRequest from '../screens/ViewRequest';
 import SplashScreen from '../screens/SplashScreen';
 import InvoiceDetails from '../screens/InvoiceDetails';
+import MainClientDetails from '../screens/MainClientDetail';
 
 enableScreens();
 
@@ -441,6 +442,14 @@ function ClientScreenStack() {
       <Stack.Screen
         name="ClientDetails"
         component={ClientDetails}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="MainClientDetails"
+        component={MainClientDetails}
         options={{
           headerShown: false,
         }}

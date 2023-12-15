@@ -141,7 +141,7 @@ const CreateNewAction = () => {
         "assignWhom": selectedId == 1 ? 'Manager' : 'Partner'
       },
       "actionStaffModel": {
-        "staffId": jsonData?.staffId
+        "staffId": selectedId == 1 ? managerInfo.id : partnerInfo?.id
       },
       "actionClientListModel": {
       },

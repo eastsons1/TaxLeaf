@@ -95,6 +95,7 @@ const ClientInfo = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const jsonData = MY_INFO?.guestInfo;
+  const staffview = MY_INFO?.staffview;
   //const ClinetCount = MY_INFO?.guestInfo;
   let countIndividuals = 0;
   let countBusiness = 0;
@@ -152,6 +153,32 @@ const ClientInfo = () => {
   }, [MY_INFO, CLIENT_LIST]);
 
   // console.log(infoData, 'infoDatainfoDatainfoDatainfoData');
+  let companyCount = 0;
+  let otherCount = 0;
+  if (jsonData && jsonData.clientType) {
+    if (jsonData.clientType === "company") {
+      companyCount++;
+    } else {
+      otherCount++;
+    }
+  }
+
+
+  console.log(companyCount, otherCount, 'companyCountcompanyCountcompanyCountcompanyCount')
+
+  if (Array.isArray(infoData)) {
+    // Iterate through the array using forEach
+    infoData.forEach(item => {
+      if (item.subClientInfo && item.subClientInfo.subClientType === 'individual') {
+        countIndividuals++;
+      } else if (item.subClientInfo && item.subClientInfo.subClientType === 'company') {
+        countBusiness++;
+      }
+    });
+  } else {
+    // Handle the case where infoData is not an array
+    console.log('infoData is not an array');
+  }
 
   // infoData.forEach(item => {
   //   if (
@@ -161,7 +188,7 @@ const ClientInfo = () => {
   //     countIndividuals++;
   //   } else if (
   //     item.subClientInfo &&
-  //     item.subClientInfo.subClientType === 'Business'
+  //     item.subClientInfo.subClientType === 'company'
   //   ) {
   //     countBusiness++;
   //   }
@@ -181,6 +208,9 @@ const ClientInfo = () => {
   };
 
   const GetClientDetail = item => {
+    console.log(item?.subClientInfo.subClientId,
+      item?.subClientInfo.subClientType, 'AAAAAAAAAAAAAAAAA')
+
     navigation.navigate('ClientDetails', {
       clientdetail: item,
     });
@@ -189,6 +219,19 @@ const ClientInfo = () => {
       client_Detail(
         item?.subClientInfo.subClientId,
         item?.subClientInfo.subClientType,
+      ),
+    );
+  };
+
+  const GetClientDetail1 = item => {
+    navigation.navigate('MainClientDetails', {
+      clientdetail: item,
+    });
+
+    dispatch(
+      client_Detail(
+        item?.clientId,
+        item?.clientType,
       ),
     );
   };
@@ -245,7 +288,8 @@ const ClientInfo = () => {
                     </View>
 
                     <Text style={showwhat == 'My Schools' ? styles.ButtonText1 : styles.ButtonTextW}>
-                      Total ({infoData?.length})
+                      Total ({infoData?.length + companyCount + otherCount})
+
                     </Text>
                   </TouchableOpacity>
                   <TouchableOpacity
@@ -279,7 +323,7 @@ const ClientInfo = () => {
                       />
                     </View>
 
-                    <Text style={showwhat == 'My Schools' ? styles.ButtonTextW : styles.ButtonText1}>Bussiness (0)</Text>
+                    <Text style={showwhat == 'My Schools' ? styles.ButtonTextW : styles.ButtonText1}>Bussiness ({companyCount + countBusiness})</Text>
                   </TouchableOpacity>
                   <TouchableOpacity
                     style={[
@@ -333,7 +377,7 @@ const ClientInfo = () => {
                       color={showwhat == 'My Schools' ? Color.geen : 'lightgray'}
                     />
                     <Text style={showwhat == 'My Schools' ? styles.ButtonText1 : styles.ButtonTextW}>
-                      Total ({infoData.length})
+                      Total ({infoData?.length + companyCount + otherCount})
                     </Text>
                   </TouchableOpacity>
                   <TouchableOpacity
@@ -359,7 +403,7 @@ const ClientInfo = () => {
                       />
                     </View>
 
-                    <Text style={showwhat == 'My Schools' ? styles.ButtonTextW : styles.ButtonText1}>Business (0)</Text>
+                    <Text style={showwhat == 'My Schools' ? styles.ButtonTextW : styles.ButtonText1}>Business {companyCount + countBusiness}</Text>
                   </TouchableOpacity>
                   <TouchableOpacity
                     style={[
@@ -435,7 +479,7 @@ const ClientInfo = () => {
                       />
                     </View>
 
-                    <Text style={showwhat == 'My Schools' ? styles.ButtonTextW : styles.ButtonText1}>Business (0)</Text>
+                    <Text style={showwhat == 'My Schools' ? styles.ButtonTextW : styles.ButtonText1}>Business {companyCount + countBusiness}</Text>
                   </TouchableOpacity>
                   <TouchableOpacity
                     style={[
@@ -533,6 +577,81 @@ const ClientInfo = () => {
                       <Text style={{ color: '#fff', fontSize: 12, fontFamily: 'Poppins-SemiBold' }}>Client</Text>
                     </View>
                   </View>
+
+                  <View
+                    style={{
+                      width: wp(90),
+                      backgroundColor: '#fff',
+                      alignItems: 'center',
+                      alignSelf: 'center',
+                      elevation: 10,
+                      marginBottom: 10,
+                      flexDirection: 'row',
+                      height: wp(15),
+                    }}>
+
+                    <View
+                      style={{
+                        width: wp(20),
+                        paddingLeft: 10,
+                        //  backgroundColor: 'red',
+                        //   alignItems: 'center',
+                      }}>
+                      <Text
+                        numberOfLines={1}
+                        style={{ color: Color.darkGreen, fontSize: 10, fontFamily: 'Poppins-SemiBold' }}>
+                        {jsonData?.client}
+                      </Text>
+                    </View>
+
+
+                    <View
+                      style={{
+                        width: wp(25),
+
+                        alignItems: 'center',
+                      }}>
+                      <Text style={{ color: Color.darkGreen, fontSize: 10, fontFamily: 'Poppins-SemiBold' }}>
+                        {staffview?.firstName}  {staffview?.lastName}{staffview.length}
+                      </Text>
+                    </View>
+
+                    <View
+                      style={{
+                        width: wp(25),
+
+                        alignItems: 'center',
+                      }}>
+                      <Text style={{ color: Color.darkGreen, fontSize: 10, fontFamily: 'Poppins-SemiBold' }}>
+                        {jsonData?.clientType == "company" ? "Business" : jsonData?.clientType}
+                      </Text>
+                    </View>
+
+                    <View
+                      style={{
+                        width: wp(20),
+                        alignItems: 'center',
+                      }}>
+                      {/* <Text style={{color: '#2F4050', fontSize: 12}}>
+                {item.associationType}
+              </Text> */}
+                      <TouchableOpacity
+                        onPress={() => GetClientDetail1(jsonData)}
+                      >
+                        <Image
+                          source={require('../Assets/img/icons/view.png')}
+                          style={{
+                            width: 20,
+                            height: 20,
+                            alignSelf: 'center',
+                            borderRadius: 50,
+                            //alignSelf: 'center',
+                          }}
+                        />
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+
                   <FlatList
                     data={infoData}
                     // numColumns={5}
@@ -551,22 +670,7 @@ const ClientInfo = () => {
                           flexDirection: 'row',
                           height: wp(15),
                         }}>
-                        {/* <View
-              style={{
-                width: wp(15),
 
-                alignItems: 'center',
-              }}>
-              <Image
-                source={item.img}
-                style={{
-                  width: 30,
-                  height: 30,
-                  borderRadius: 50,
-                  //alignSelf: 'center',
-                }}
-              />
-            </View> */}
                         <View
                           style={{
                             width: wp(20),
@@ -598,7 +702,7 @@ const ClientInfo = () => {
                             alignItems: 'center',
                           }}>
                           <Text style={{ color: Color.darkGreen, fontSize: 10, fontFamily: 'Poppins-SemiBold' }}>
-                            {item?.subClientInfo?.subClientType}
+                            {item?.subClientInfo?.subClientType == "company" ? "Business" : item?.subClientInfo?.subClientType}
                           </Text>
                         </View>
 

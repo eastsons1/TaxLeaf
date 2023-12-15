@@ -23,11 +23,12 @@ export default InvoiceView = ({ route }) => {
     const { MANAGER_INFO } = useSelector(state => state.TaxLeafReducer);
     const { OFFICE_INFO } = useSelector(state => state.TaxLeafReducer);
 
-    console.log(GET_ORDER_DETAILS, 'orderInfoInvoice')
+    console.log(GET_ORDER_DETAILS, 'orderInfoInvoiceorderInfoInvoiceorderInfoInvoice')
     console.log(MANAGER_INFO, 'MANAGER_INFO')
 
     const [loader, setLoader] = useState(false);
     const orderId = route.params.orderId;
+    const countryname = route.params.countryname;
     const jsonData = MY_INFO.guestInfo;
     const collectionInfo = GET_ORDER_DETAILS[0]?.collectionInfo
     const individualClientContactInfo = GET_ORDER_DETAILS[0]?.individualClientContactInfo
@@ -36,6 +37,8 @@ export default InvoiceView = ({ route }) => {
     const managerInfo = MANAGER_INFO
     const officeInfo = OFFICE_INFO
     const serviceList = GET_ORDER_DETAILS[0]?.serviceListModel;
+
+    //console.log(officeInfo, 'officeInfoofficeInfoofficeInfo')
 
     // Calculate the sum of "priceCharged" using reduce
     const totalPriceCharged = serviceList?.reduce((sum, service) => {
@@ -151,13 +154,19 @@ export default InvoiceView = ({ route }) => {
                     </View>
                     <View style={styles.contentView}>
                         <Text style={styles.LIstText2}>
-                            {individualClientContactInfo?.firstName}   {individualClientContactInfo?.lastName}
-                            {/* {companyClientContactInfo?.phone1} */}
+                            {companyClientContactInfo?.firstName}   {companyClientContactInfo?.lastName}
+
                         </Text>
                     </View>
                     <View style={styles.contentView}>
                         <Text style={styles.LIstText2}>
-                            {companyClientContactInfo?.address1}, {companyClientContactInfo?.city}, {companyClientContactInfo?.zip}
+                            {/* {companyClientContactInfo?.firstName}   {companyClientContactInfo?.lastName} */}
+                            {companyClientContactInfo?.phone1}
+                        </Text>
+                    </View>
+                    <View style={styles.contentView}>
+                        <Text style={styles.LIstText2}>
+                            {companyClientContactInfo?.address1}, {companyClientContactInfo?.city}, {companyClientContactInfo?.zip},{countryname}
                         </Text>
                     </View>
                 </View>

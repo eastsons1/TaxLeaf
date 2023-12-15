@@ -50,6 +50,9 @@ const HomeScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const jsonData = MY_INFO.guestInfo
+  const companyTypeInfo = MY_INFO.companyTypeInfo;
+  const stateInfo = MY_INFO.stateInfo;
+  const companyInfo = MY_INFO.companyInfo;
   const officeInfo = MY_INFO.officeInfo;
   const manager = MANAGER_INFO;
   const manageroffice = OFFICE_INFO
@@ -57,7 +60,9 @@ const HomeScreen = () => {
 
 
   //console.log(dashboardMessageList?.length, 'messageList')
-  // console.log(jsonData, 'jsonDatajsonDatajsonDatajsonDatajsonData')
+  console.log(companyTypeInfo, 'jsonDatajsonDatajsonDatajsonDatajsonData')
+  console.log(stateInfo, 'jsonDatajsonDatajsonDatajsonDatajsonData')
+  console.log(companyInfo, 'jsonDatajsonDatajsonDatajsonDatajsonData')
   // console.log(officeInfo?.id, 'officeInfoofficeInfoofficeInfoofficeInfo')
   // console.log(manager, 'MANAGER_INFOMANAGER_INFOMANAGER_INFOMANAGER_INFO')
   //console.log(manageroffice, 'HOMEHOMEHOMEHOMEHOMEHOMEHOME')

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   StyleSheet,
   Text, Linking,
@@ -25,6 +25,8 @@ import {
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { Loader } from '../Component/Loader';
 import { authorize, revoke } from 'react-native-app-auth';
+import { WebView } from 'react-native-webview';
+
 
 
 // import { authorize, refresh, prefetchConfiguration } from 'react-native-app-auth';
@@ -40,6 +42,7 @@ import { authorize, revoke } from 'react-native-app-auth';
 
 const Login = () => {
 
+  const webViewRef = useRef(null);
 
   //   // console.log('clientId:', 'your-client-id');
   //   // console.log('tenant:', 'your-tenant-id');
@@ -53,9 +56,9 @@ const Login = () => {
 
 
   const bgImage = require('../Assets/img/login-mainbg.jpg');
-  //const [email, setEmail] = useState("julietam.geraci@gmail.com");
+  // const [email, setEmail] = useState("julietam.geraci@gmail.com");
   // const [email, setEmail] = useState("aalok@eastsons.com");
-  const [email, setEmail] = useState("princ1e@eastsons.com");
+  const [email, setEmail] = useState("prince@eastsons.com");
 
   //const [email, setEmail] = useState("julietam.geraci@gmail.com");
   //const [email, setEmail] = useState("Julieta.gracias@taxleaf.com");
@@ -398,6 +401,8 @@ const Login = () => {
     <>
       <ImageBackground source={bgImage} style={styles.bgImg} resizeMode="cover">
         <Loader flag={loader} />
+
+
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             {/* <View
@@ -439,14 +444,14 @@ const Login = () => {
             </View>
             <View style={styles.formContainer}>
               {/* <TextInput
-              //   placeholder="Enter Email"
-              //   placeholderTextColor={'lightgrey'}
-              //   style={[styles.input, { height: 50 }]}
-              //   value={email}
-              //   onChangeText={text => {
-              //     onChangeEmail(text);
-              //   }}
-              // /> */}
+                placeholder="Enter Email"
+                placeholderTextColor={'lightgrey'}
+                style={[styles.input, { height: 50 }]}
+                value={email}
+                onChangeText={text => {
+                  onChangeEmail(text);
+                }}
+              /> */}
 
               <View
                 style={{
@@ -529,6 +534,15 @@ const Login = () => {
         {/* <Text style={styles.footerText}>
           © 2023 taxleaf.com - All Rights Reserved Login
         </Text> */}
+        {/* <WebView
+          ref={webViewRef}
+          source={{ uri: 'https://login.microsoftonline.com' }}
+          style={{ flex: 1, height: 300 }}
+          onNavigationStateChange={(navState) => {
+            // Handle navigation state changes if needed
+            console.log('Navigation State:', navState);
+          }}
+        /> */}
       </ImageBackground >
       {/* <View>
         <Image

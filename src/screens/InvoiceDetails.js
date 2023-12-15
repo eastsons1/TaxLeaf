@@ -35,6 +35,10 @@ export default InvoiceDetails = ({ route }) => {
     const managerInfo = MANAGER_INFO
     const officeInfo = OFFICE_INFO
     const serviceList = GET_ORDER_DETAILS[0]?.serviceListModel;
+    const companyTypeInfo = MY_INFO.companyTypeInfo;
+    const stateInfo = MY_INFO.stateInfo;
+    const companyInfo = MY_INFO.companyInfo;
+
 
     // Calculate the sum of "priceCharged" using reduce
     const totalPriceCharged = serviceList?.reduce((sum, service) => {
@@ -130,7 +134,9 @@ export default InvoiceDetails = ({ route }) => {
 
                         <Text style={styles.LIstText2}>
 
-                            {collectionInfo?.clientType}
+                            {collectionInfo?.clientType == 'company' ? "Bussiness Client"
+                                : collectionInfo?.clientType
+                            }
                         </Text>
                     </View>
                     <View style={styles.contentView}>
@@ -145,8 +151,8 @@ export default InvoiceDetails = ({ route }) => {
                         <Text style={styles.subHead}>Incorporated Date:</Text>
 
                         <Text style={styles.LIstText2}>
+                            {companyInfo?.incorporatedDate}
 
-                            2021-01-01
                         </Text>
                     </View>
                     <View style={styles.contentView}>
@@ -157,20 +163,20 @@ export default InvoiceDetails = ({ route }) => {
                             {collectionInfo?.clientId}
                         </Text>
                     </View>
-                    <View style={styles.contentView}>
+                    {/* <View style={styles.contentView}>
                         <Text style={styles.subHead}>Federal Id:</Text>
 
                         <Text style={styles.LIstText2}>
 
                             81-3900350
                         </Text>
-                    </View>
+                    </View> */}
                     <View style={styles.contentView}>
                         <Text style={styles.subHead}>State of Incorporation:</Text>
 
                         <Text style={styles.LIstText2}>
+                            {stateInfo?.stateName}
 
-                            Florida
                         </Text>
                     </View>
                     <View style={styles.contentView}>
@@ -178,7 +184,7 @@ export default InvoiceDetails = ({ route }) => {
 
                         <Text style={styles.LIstText2}>
 
-                            S Corporation
+                            {companyTypeInfo?.type}
                         </Text>
                     </View>
                     <View style={styles.contentView}>
@@ -186,7 +192,7 @@ export default InvoiceDetails = ({ route }) => {
 
                         <Text style={styles.LIstText2}>
 
-                            December
+
                         </Text>
                     </View>
                 </View>
@@ -207,7 +213,7 @@ export default InvoiceDetails = ({ route }) => {
                         <Text style={styles.subHead}>Name:</Text>
 
                         <Text style={styles.LIstText2}>
-                            {managerInfo?.firstName + ' ' + managerInfo?.lastName}
+                            {companyClientContactInfo?.firstName + ' ' + companyClientContactInfo?.lastName}
                         </Text>
                     </View>
                     <View style={styles.contentView}>
@@ -228,7 +234,7 @@ export default InvoiceDetails = ({ route }) => {
                         <Text style={styles.subHead}>Address:</Text>
 
                         <Text style={styles.LIstText2}>
-                            {companyClientContactInfo?.address1}, {companyClientContactInfo?.city},{companyClientContactInfo?.zip}, {companyClientContactInfo?.zip}
+                            {companyClientContactInfo?.address1}, {companyClientContactInfo?.city},{companyClientContactInfo?.zip}, {route.params.countryname}
                         </Text>
                     </View>
 

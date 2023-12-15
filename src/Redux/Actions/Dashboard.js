@@ -27,8 +27,8 @@ export const dashboardlist =
           ClientType: clientType,
           OfficeId: OfficeId,
         },
-        StartDate: "2023-04-27T09:22:46.571Z",
-        EndDate: "2023-11-27T09:22:46.571Z",
+        StartDate: "2023-12-01T09:22:46.571Z",
+        EndDate: "2023-12-30T09:22:46.571Z",
       };
       // console.log(data, 'payloadDashboard');
 

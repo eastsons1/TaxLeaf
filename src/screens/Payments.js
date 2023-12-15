@@ -253,6 +253,9 @@ const Payments = () => {
     // getorderbyId(item?.collectionInfo?.orderId)
   };
 
+
+  console.log(infoData[0]?.countryName, "infodatainfodatainfodatainfodatainfodatainfodata")
+
   const renderHeader = item => {
     return (
       <>
@@ -1464,7 +1467,8 @@ const Payments = () => {
                                   <TouchableOpacity
                                     onPress={() => {
                                       navigation.navigate('InvoiceView', {
-                                        orderId: item?.collectionInfo?.orderId
+                                        orderId: item?.collectionInfo?.orderId,
+                                        countryname: item.countryName
                                         //  orderId: section?.collectionInfo?.invoiceId
                                       })
                                     }}
@@ -1502,7 +1506,8 @@ const Payments = () => {
                                   <TouchableOpacity
                                     onPress={() => {
                                       navigation.navigate('InvoiceDetails', {
-                                        orderId: item?.collectionInfo?.orderId
+                                        orderId: item?.collectionInfo?.orderId,
+                                        countryname: item.countryName
                                       })
                                     }}
                                     style={{
