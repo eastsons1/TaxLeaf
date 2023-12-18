@@ -180,6 +180,15 @@ const ClientInfo = () => {
     console.log('infoData is not an array');
   }
 
+
+
+  const filteredcompany = infoData && Object.values(infoData).filter(item => item.subClientInfo?.subClientType === "company");
+
+  const filteredindividual = infoData && Object.values(infoData).filter(item => item.subClientInfo?.subClientType === "individual");
+
+  //const filteredindividual = infoData && infoData.filter(item => item.subClientInfo.subClientType === "individual");
+
+
   // infoData.forEach(item => {
   //   if (
   //     item.subClientInfo &&
@@ -348,7 +357,7 @@ const ClientInfo = () => {
                       />
                     </View>
 
-                    <Text style={showwhat == 'My Schools' ? styles.ButtonTextW : styles.ButtonText1}>   Individual {countIndividuals}</Text>
+                    <Text style={showwhat == 'My Schools' ? styles.ButtonTextW : styles.ButtonText1}>   Individual ({countIndividuals})</Text>
                   </TouchableOpacity>
                 </View>
               );
@@ -424,7 +433,7 @@ const ClientInfo = () => {
                       size={18}
                       color={showwhat == 'My Schools' ? Color.geen : 'lightgray'}
                     />
-                    <Text style={showwhat == 'My Schools' ? styles.ButtonText1 : styles.ButtonTextW}> Individual {countIndividuals}</Text>
+                    <Text style={showwhat == 'My Schools' ? styles.ButtonText1 : styles.ButtonTextW}> Individual ({countIndividuals})</Text>
                   </TouchableOpacity>
                 </View>
               );
@@ -453,7 +462,7 @@ const ClientInfo = () => {
                       color={showwhat == 'My Schools' ? 'lightgray' : Color.geen}
                     />
                     <Text style={showwhat == 'Experience' ? styles.ButtonTextW : styles.ButtonText1}>
-                      Total ({infoData.length})
+                      Total ({infoData?.length + companyCount + otherCount})
                     </Text>
                   </TouchableOpacity>
                   <TouchableOpacity
@@ -501,7 +510,7 @@ const ClientInfo = () => {
                       size={18}
                       color="#fff"
                     />
-                    <Text style={showwhat == 'My Schools' ? styles.ButtonText1 : styles.ButtonTextW}> Individual {countIndividuals}</Text>
+                    <Text style={showwhat == 'My Schools' ? styles.ButtonText1 : styles.ButtonTextW}> Individual ({countIndividuals})</Text>
                   </TouchableOpacity>
                 </View>
               );
@@ -728,6 +737,7 @@ const ClientInfo = () => {
                             />
                           </TouchableOpacity>
                         </View>
+
                       </View>
                     )}
                   />
@@ -737,7 +747,228 @@ const ClientInfo = () => {
               return (
                 <View style={styles.subContainer}>
                   {/* <Text style={styles.subHead}>Paid Invoices (0)</Text> */}
-                  <Text style={{ textAlign: 'center', fontFamily: 'Poppins-SemiBold' }}>No Data Found</Text>
+                  <View style={styles.subContainer}>
+                    {/* <Text style={styles.subHead}>
+                    Pending Invoices ({infoData.length})
+                    </Text> */}
+
+                    <View
+                      style={{
+                        width: wp(90),
+                        backgroundColor: Color.geen,
+                        alignItems: 'center',
+                        alignSelf: 'center',
+                        elevation: 10,
+                        marginTop: 10,
+                        flexDirection: 'row',
+                        height: wp(10),
+                      }}>
+                      {/* <View
+          style={{
+            width: wp(15),
+
+            alignItems: 'center',
+          }}>
+          <Image
+            source={require('../Assets/profileBlank.png')}
+            style={{
+              width: 30,
+              height: 30,
+              borderRadius: 50,
+              //alignSelf: 'center',
+            }}
+          />
+        </View> */}
+                      <View
+                        style={{
+                          width: wp(20),
+
+                          alignItems: 'center',
+                        }}>
+                        <Text style={{ color: '#fff', fontSize: 12, fontFamily: 'Poppins-SemiBold' }}>Client ID</Text>
+                      </View>
+                      <View
+                        style={{
+                          width: wp(25),
+
+                          alignItems: 'center',
+                        }}>
+                        <Text style={{ color: '#fff', fontSize: 12, fontFamily: 'Poppins-SemiBold' }}> Client Name</Text>
+                      </View>
+                      <View
+                        style={{
+                          width: wp(25),
+
+                          alignItems: 'center',
+                        }}>
+                        <Text style={{ color: '#fff', fontSize: 12, fontFamily: 'Poppins-SemiBold' }}> Type</Text>
+                      </View>
+
+                      <View
+                        style={{
+                          width: wp(20),
+
+                          alignItems: 'center',
+                        }}>
+                        <Text style={{ color: '#fff', fontSize: 12, fontFamily: 'Poppins-SemiBold' }}>Client</Text>
+                      </View>
+                    </View>
+
+                    <View
+                      style={{
+                        width: wp(90),
+                        backgroundColor: '#fff',
+                        alignItems: 'center',
+                        alignSelf: 'center',
+                        elevation: 10,
+                        marginBottom: 10,
+                        flexDirection: 'row',
+                        height: wp(15),
+                      }}>
+
+                      <View
+                        style={{
+                          width: wp(20),
+                          paddingLeft: 10,
+                          //  backgroundColor: 'red',
+                          //   alignItems: 'center',
+                        }}>
+                        <Text
+                          numberOfLines={1}
+                          style={{ color: Color.darkGreen, fontSize: 10, fontFamily: 'Poppins-SemiBold' }}>
+                          {jsonData?.client}
+                        </Text>
+                      </View>
+
+
+                      <View
+                        style={{
+                          width: wp(25),
+
+                          alignItems: 'center',
+                        }}>
+                        <Text style={{ color: Color.darkGreen, fontSize: 10, fontFamily: 'Poppins-SemiBold' }}>
+                          {staffview?.firstName}  {staffview?.lastName}{staffview.length}
+                        </Text>
+                      </View>
+
+                      <View
+                        style={{
+                          width: wp(25),
+
+                          alignItems: 'center',
+                        }}>
+                        <Text style={{ color: Color.darkGreen, fontSize: 10, fontFamily: 'Poppins-SemiBold' }}>
+                          {jsonData?.clientType == "company" ? "Business" : jsonData?.clientType}
+                        </Text>
+                      </View>
+
+                      <View
+                        style={{
+                          width: wp(20),
+                          alignItems: 'center',
+                        }}>
+                        {/* <Text style={{color: '#2F4050', fontSize: 12}}>
+                {item.associationType}
+              </Text> */}
+                        <TouchableOpacity
+                          onPress={() => GetClientDetail1(jsonData)}
+                        >
+                          <Image
+                            source={require('../Assets/img/icons/view.png')}
+                            style={{
+                              width: 20,
+                              height: 20,
+                              alignSelf: 'center',
+                              borderRadius: 50,
+                              //alignSelf: 'center',
+                            }}
+                          />
+                        </TouchableOpacity>
+                      </View>
+                    </View>
+
+                    <FlatList
+                      data={filteredcompany}
+                      // numColumns={5}
+                      keyExtractor={(item, index) => index}
+                      renderItem={({ item, index }) => (
+                        <View
+                          style={{
+                            width: wp(90),
+                            backgroundColor: '#fff',
+
+                            alignItems: 'center',
+                            alignSelf: 'center',
+                            elevation: 10,
+
+                            marginBottom: 10,
+                            flexDirection: 'row',
+                            height: wp(15),
+                          }}>
+
+                          <View
+                            style={{
+                              width: wp(20),
+                              paddingLeft: 10,
+                              //  backgroundColor: 'red',
+                              //   alignItems: 'center',
+                            }}>
+                            <Text
+                              numberOfLines={1}
+                              style={{ color: Color.darkGreen, fontSize: 10, fontFamily: 'Poppins-SemiBold' }}>
+                              {item?.subClientInfo?.subClientPracticeId}
+                            </Text>
+                          </View>
+                          <View
+                            style={{
+                              width: wp(25),
+
+                              alignItems: 'center',
+                            }}>
+                            <Text style={{ color: Color.darkGreen, fontSize: 10, fontFamily: 'Poppins-SemiBold' }}>
+                              {item?.subClientInfo?.subClientName}
+                            </Text>
+                          </View>
+
+                          <View
+                            style={{
+                              width: wp(25),
+
+                              alignItems: 'center',
+                            }}>
+                            <Text style={{ color: Color.darkGreen, fontSize: 10, fontFamily: 'Poppins-SemiBold' }}>
+                              {item?.subClientInfo?.subClientType == "company" ? "Business" : item?.subClientInfo?.subClientType}
+                            </Text>
+                          </View>
+
+                          <View
+                            style={{
+                              width: wp(20),
+
+                              alignItems: 'center',
+                            }}>
+                            {/* <Text style={{color: '#2F4050', fontSize: 12}}>
+                {item.associationType}
+              </Text> */}
+                            <TouchableOpacity onPress={() => GetClientDetail(item)}>
+                              <Image
+                                source={require('../Assets/img/icons/view.png')}
+                                style={{
+                                  width: 20,
+                                  height: 20,
+                                  alignSelf: 'center',
+                                  borderRadius: 50,
+                                  //alignSelf: 'center',
+                                }}
+                              />
+                            </TouchableOpacity>
+                          </View>
+                        </View>
+                      )}
+                    />
+                  </View>
+                  {/* <Text style={{ textAlign: 'center', fontFamily: 'Poppins-SemiBold' }}>No Data FoundB</Text> */}
                   {/* <FlatList
                   data={data}
                   // numColumns={5}
@@ -817,7 +1048,156 @@ const ClientInfo = () => {
               return (
                 <View style={styles.subContainer}>
                   {/* <Text style={styles.subHead}>Plan</Text> */}
-                  <Text style={{ textAlign: 'center' }}>No Data Found</Text>
+                  <View style={styles.subContainer}>
+                    {/* <Text style={styles.subHead}>
+                    Pending Invoices ({infoData.length})
+                    </Text> */}
+
+                    <View
+                      style={{
+                        width: wp(90),
+                        backgroundColor: Color.geen,
+                        alignItems: 'center',
+                        alignSelf: 'center',
+                        elevation: 10,
+                        marginTop: 10,
+                        flexDirection: 'row',
+                        height: wp(10),
+                      }}>
+                      {/* <View
+          style={{
+            width: wp(15),
+
+            alignItems: 'center',
+          }}>
+          <Image
+            source={require('../Assets/profileBlank.png')}
+            style={{
+              width: 30,
+              height: 30,
+              borderRadius: 50,
+              //alignSelf: 'center',
+            }}
+          />
+        </View> */}
+                      <View
+                        style={{
+                          width: wp(20),
+
+                          alignItems: 'center',
+                        }}>
+                        <Text style={{ color: '#fff', fontSize: 12, fontFamily: 'Poppins-SemiBold' }}>Client ID</Text>
+                      </View>
+                      <View
+                        style={{
+                          width: wp(25),
+
+                          alignItems: 'center',
+                        }}>
+                        <Text style={{ color: '#fff', fontSize: 12, fontFamily: 'Poppins-SemiBold' }}> Client Name</Text>
+                      </View>
+                      <View
+                        style={{
+                          width: wp(25),
+
+                          alignItems: 'center',
+                        }}>
+                        <Text style={{ color: '#fff', fontSize: 12, fontFamily: 'Poppins-SemiBold' }}> Type</Text>
+                      </View>
+
+                      <View
+                        style={{
+                          width: wp(20),
+
+                          alignItems: 'center',
+                        }}>
+                        <Text style={{ color: '#fff', fontSize: 12, fontFamily: 'Poppins-SemiBold' }}>Client</Text>
+                      </View>
+                    </View>
+
+
+
+                    <FlatList
+                      data={filteredindividual}
+                      // numColumns={5}
+                      keyExtractor={(item, index) => index}
+                      renderItem={({ item, index }) => (
+                        <View
+                          style={{
+                            width: wp(90),
+                            backgroundColor: '#fff',
+
+                            alignItems: 'center',
+                            alignSelf: 'center',
+                            elevation: 10,
+
+                            marginBottom: 10,
+                            flexDirection: 'row',
+                            height: wp(15),
+                          }}>
+
+                          <View
+                            style={{
+                              width: wp(20),
+                              paddingLeft: 10,
+                              //  backgroundColor: 'red',
+                              //   alignItems: 'center',
+                            }}>
+                            <Text
+                              numberOfLines={1}
+                              style={{ color: Color.darkGreen, fontSize: 10, fontFamily: 'Poppins-SemiBold' }}>
+                              {item?.subClientInfo?.subClientPracticeId}
+                            </Text>
+                          </View>
+                          <View
+                            style={{
+                              width: wp(25),
+
+                              alignItems: 'center',
+                            }}>
+                            <Text style={{ color: Color.darkGreen, fontSize: 10, fontFamily: 'Poppins-SemiBold' }}>
+                              {item?.subClientInfo?.subClientName}
+                            </Text>
+                          </View>
+
+                          <View
+                            style={{
+                              width: wp(25),
+
+                              alignItems: 'center',
+                            }}>
+                            <Text style={{ color: Color.darkGreen, fontSize: 10, fontFamily: 'Poppins-SemiBold' }}>
+                              {item?.subClientInfo?.subClientType == "company" ? "Business" : item?.subClientInfo?.subClientType}
+                            </Text>
+                          </View>
+
+                          <View
+                            style={{
+                              width: wp(20),
+
+                              alignItems: 'center',
+                            }}>
+                            {/* <Text style={{color: '#2F4050', fontSize: 12}}>
+                {item.associationType}
+              </Text> */}
+                            <TouchableOpacity onPress={() => GetClientDetail(item)}>
+                              <Image
+                                source={require('../Assets/img/icons/view.png')}
+                                style={{
+                                  width: 20,
+                                  height: 20,
+                                  alignSelf: 'center',
+                                  borderRadius: 50,
+                                  //alignSelf: 'center',
+                                }}
+                              />
+                            </TouchableOpacity>
+                          </View>
+                        </View>
+                      )}
+                    />
+                  </View>
+                  {/* <Text style={{ textAlign: 'center' }}>No Data FoundI</Text> */}
                   {/* <FlatList
                   data={data}
                   // numColumns={5}
@@ -1280,6 +1660,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginVertical: 30,
     alignItems: 'center',
+  },
+  subContainer: {
+    // backgroundColor: 'red',
+    width: wp(90),
+    alignSelf: 'center',
+    // marginTop: 20,
+    alignItems: 'center',
+    height: 300,
+    //borderRadius: 20,
   },
   multipleToggle__title: {
     fontSize: 16,

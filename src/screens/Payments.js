@@ -189,7 +189,14 @@ const Payments = () => {
   //     getorderbyId(item?.orderId)
   //   })
   // }, [infoData])
+  let filteredData;
 
+  if (Array.isArray(infoData)) {
+    filteredData = infoData.filter(item => item.collectionInfo.paymentStatus === 1);
+    // Use filteredData as needed
+  } else {
+    console.error('infoData is not an array');
+  }
 
 
 
@@ -206,6 +213,7 @@ const Payments = () => {
     // }, 2000);
 
   }
+
   // console.log(
   //   infoData.length,
   //   'GET_PAYMENT_LISTGET_PAYMENT_LISTGET_PAYMENT_LIST',
@@ -885,7 +893,7 @@ const Payments = () => {
                       </View>
 
                       <Text style={showwhat == 'My Schools' ? styles.ButtonText1 : styles.ButtonTextW}>
-                        Pending ({infoData?.length})
+                        Pending ({filteredData?.length})
                       </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -1131,9 +1139,12 @@ const Payments = () => {
                         onChange={setSections}
                       /> */}
 
+
+
                       <FlatList
                         //data={GET_ORDER_DETAILS[0]?.serviceListModel}
-                        data={infoData}
+                        data={filteredData}
+
                         // keyExtractor={item => item?.serviceInfo?.id}
                         renderItem={({ item, index }) => (
                           item.serviceListModel.map((service, serviceIndex) => (
@@ -1540,7 +1551,6 @@ const Payments = () => {
                                   </TouchableOpacity>
                                 </View>
                               </Animatable.View>
-
 
 
                             </>

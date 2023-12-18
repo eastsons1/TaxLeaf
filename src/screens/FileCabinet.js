@@ -544,7 +544,7 @@ const FileCabinet = () => {
 
                   {/* {item?.status} */}
                   {/* {matchingLeafCloud?.includes("Admin") ? 0 : 0} */}
-                  {adminCount}
+                  {adminCount ? adminCount : 0}
                 </Text>
               </DataTable.Cell>
               <DataTable.Cell style={{ width: wp(30), alignItems: "center", justifyContent: "center" }}>
@@ -559,7 +559,7 @@ const FileCabinet = () => {
                   }}>
                   {/* {idRow == item.id && press == true && DOCUMENT_INFO_FOLDER ? DOCUMENT_INFO_FOLDER.length : '0'} */}
                   {/* {numberOfMatchingResults} */}
-                  {clientCount}
+                  {clientCount ? clientCount : 0}
 
                 </Text>
               </DataTable.Cell>

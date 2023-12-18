@@ -40,6 +40,7 @@ export default InvoiceDetails = ({ route }) => {
     const companyInfo = MY_INFO.companyInfo;
 
 
+
     // Calculate the sum of "priceCharged" using reduce
     const totalPriceCharged = serviceList?.reduce((sum, service) => {
         // Access the "priceCharged" property within "reqInfo"
@@ -140,11 +141,13 @@ export default InvoiceDetails = ({ route }) => {
                         </Text>
                     </View>
                     <View style={styles.contentView}>
-                        <Text style={styles.subHead}>Creted by Staff:</Text>
+                        <Text style={styles.subHead}>Created by Staff:</Text>
 
                         <Text style={styles.LIstText2}>
+                            {/* {serviceList[0]?.requesetedStaffInfo?.firstName && serviceList[0]?.requesetedStaffInfo?.lastName &&
+                                serviceList[0]?.requesetedStaffInfo?.firstName + ' ' + serviceList[0]?.requesetedStaffInfo?.lastName} */}
 
-                            {serviceList[0]?.requesetedStaffInfo?.firstName + ' ' + serviceList[0]?.requesetedStaffInfo?.lastName}
+                            {serviceList && serviceList[0]?.requesetedStaffInfo?.firstName + ' ' + serviceList && serviceList[0]?.requesetedStaffInfo?.lastName}
                         </Text>
                     </View>
                     <View style={styles.contentView}>

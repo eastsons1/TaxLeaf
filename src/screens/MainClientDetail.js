@@ -40,10 +40,12 @@ const MainClientDetails = ({ route }) => {
     const bgImage = require('../Assets/img/guest_shape.png');
     const { MY_INFO } = useSelector(state => state.TaxLeafReducer);
     const { MANAGER_INFO } = useSelector(state => state.TaxLeafReducer);
+    const { PARTNER_INFO } = useSelector(state => state.TaxLeafReducer);
     const { CLIENT_DETAIL } = useSelector(state => state.TaxLeafReducer);
 
     const ClientData = route.params.clientdetail;
-
+    const manager = MANAGER_INFO;
+    const partner = MANAGER_INFO;
     console.log(ClientData, 'ClientDataClientDataClientDataClientData');
 
     const [infoData, setInfoData] = useState({});
@@ -66,11 +68,11 @@ const MainClientDetails = ({ route }) => {
         // }, 2000);
     }, [CLIENT_DETAIL]);
 
-    // console.log(
-    //   infoData,
-    //   'infoDatainfoDatainfoDatainfoDatainfoData',
-    //   infoData?.individualInfo?.lastName,
-    // );
+    console.log(
+        infoData,
+        'XXXXXXXXXXXXXXXXXXXX',
+
+    );
 
     const showwhatfunc1 = data => {
         setshowwhat1(data);
@@ -199,6 +201,8 @@ const MainClientDetails = ({ route }) => {
                     </View>
                 </View>
 
+
+
                 <Text style={styles.subheading}>Hello Welcome To TaxLeaf</Text>
 
                 <View style={styles.slideContainer}>
@@ -211,6 +215,7 @@ const MainClientDetails = ({ route }) => {
                         <Text style={styles.subHead1}>ClientId:</Text>
 
                         <Text style={styles.LIstText2}>
+                            {MY_INFO?.guestInfo?.client}
                             {/* {ClientData.subClientInfo.subClientPracticeId} */}
                         </Text>
                     </View>
@@ -218,6 +223,7 @@ const MainClientDetails = ({ route }) => {
                         <Text style={styles.subHead1}>OfficeId:</Text>
 
                         <Text style={styles.LIstText2}>
+                            {MY_INFO?.officeInfo?.name}
                             {/* {ClientData.officeInfo.name} */}
                         </Text>
                     </View>
@@ -225,6 +231,7 @@ const MainClientDetails = ({ route }) => {
                         <Text style={styles.subHead1}>Manager:</Text>
 
                         <Text style={styles.LIstText2}>
+                            {manager?.firstName}  {manager?.lastName}
                             {/* {ClientData.partnerInfo.firstName}{' '}
                             {ClientData.partnerInfo.lastName} */}
                         </Text>
@@ -233,44 +240,54 @@ const MainClientDetails = ({ route }) => {
                 <View style={styles.slideContainer}>
                     <View style={styles.contentView}>
                         <Text style={styles.subHead1}>Total Orders:</Text>
-
-                        <Text style={styles.LIstText2}> </Text>
+                        <Text style={styles.LIstText2}>{MY_INFO?.paymentDetails?.totalOrders} </Text>
                     </View>
+                    <View style={styles.contentView}>
+                        <Text style={styles.subHead1}>Billed Amount:</Text>
+                        <Text style={styles.LIstText2}>${MY_INFO?.paymentDetails?.billedAmount} </Text>
+                    </View>
+
                     <View style={styles.contentView}>
                         <Text style={styles.subHead1}>Pending Amount:</Text>
 
-                        <Text style={styles.LIstText2}></Text>
+                        <Text style={styles.LIstText2}>${MY_INFO?.paymentDetails?.pendingAmount} </Text>
+
                     </View>
+
                 </View>
+
                 <View style={styles.slideContainerClient}>
                     <Text style={styles.headingClient}>Client Information</Text>
                     <View style={styles.contentView}>
                         <Text style={styles.subHead}>Client Id:</Text>
 
                         <Text style={styles.LIstText2}>
-                            {' '}
+
+                            {MY_INFO?.guestInfo?.client}
                             {/* {ClientData.subClientInfo.subClientPracticeId} */}
                         </Text>
                     </View>
                     <View style={styles.contentView}>
-                        <Text style={styles.subHead}>Individual Name:</Text>
+                        <Text style={styles.subHead}>Company Name:</Text>
 
                         <Text style={styles.LIstText2}>
-                            {' '}
+
+                            {infoData?.companyInfo?.name}
                             {/* {infoData?.individualInfo?.lastName},{' '}
                             {infoData?.individualInfo?.firstName} */}
                         </Text>
                     </View>
                     <View style={styles.contentView}>
-                        <Text style={styles.subHead}>SSN/ITIN:</Text>
+                        <Text style={styles.subHead}>Type of Company:</Text>
 
                         <Text style={styles.LIstText2}>
                             {' '}
+                            {MY_INFO?.companyTypeInfo?.type}
                             {/* {infoData?.individualInfo?.ssnItin} */}
                         </Text>
                     </View>
                     <View style={styles.contentView}>
-                        <Text style={styles.subHead}>Date of Birth:</Text>
+                        <Text style={styles.subHead}>Fiscal Year End:</Text>
 
                         <Text style={styles.LIstText2}>
                             {' '}
@@ -278,19 +295,21 @@ const MainClientDetails = ({ route }) => {
                         </Text>
                     </View>
                     <View style={styles.contentView}>
-                        <Text style={styles.subHead}>Language:</Text>
+                        <Text style={styles.subHead}>Federal ID:</Text>
 
                         <Text style={styles.LIstText2}>
                             {' '}
+                            {MY_INFO?.companyInfo?.fein}
                             {/* {infoData?.languageInfo?.language1} */}
                         </Text>
                     </View>
 
                     <View style={styles.contentView}>
-                        <Text style={styles.subHead}>Residency:</Text>
+                        <Text style={styles.subHead}>State of Corporation:</Text>
 
                         <Text style={styles.LIstText2}>
                             {' '}
+                            {MY_INFO?.stateInfo?.stateName}
                             {/* {infoData?.residenseInfo?.countryName} */}
                         </Text>
                     </View>
@@ -312,13 +331,13 @@ const MainClientDetails = ({ route }) => {
                             style={styles.LIstText2}
                             onPress={() =>
                                 Linking.openURL(
-                                    `mailto:${ClientData.officeInfo.email}?subject=SendMail&body=Description`,
+                                    `mailto:${MY_INFO?.officeInfo?.email}?subject=SendMail&body=Description`,
                                 )
                             }
                         // ÷    title={ClientData.officeInfo.email}
                         >
-                            {' '}
-                            {/* {ClientData.officeInfo.email} */}
+
+                            {MY_INFO?.officeInfo?.email}
                         </Text>
                     </View>
                     <View style={styles.contentView}>
@@ -327,10 +346,11 @@ const MainClientDetails = ({ route }) => {
                         <Text
                             style={styles.LIstText2}
                             onPress={() =>
-                                Linking.openURL(`tel:${ClientData.officeInfo.phone}`)
+                                Linking.openURL(`tel:${MY_INFO.officeInfo?.phone}`)
                             }>
                             {' '}
-                            {/* {ClientData.officeInfo.phone} */}
+                            {MY_INFO.officeInfo?.phone}
+
                         </Text>
                     </View>
 
@@ -338,8 +358,7 @@ const MainClientDetails = ({ route }) => {
                         <Text style={styles.subHead}>Address:</Text>
 
                         <Text style={styles.LIstText2}>
-                            {' '}
-                            {/* {ClientData.officeInfo.address} */}
+                            {MY_INFO.officeInfo?.address}
                         </Text>
                     </View>
                 </View>
@@ -350,7 +369,7 @@ const MainClientDetails = ({ route }) => {
                     <View style={[styles.contentView, { height: hp(6) }]}>
                         <Text style={styles.subHead}>Office:</Text>
                         <Text style={styles.LIstText2}>
-                            {' '}
+                            {MY_INFO.officeInfo?.name}
                             {/* {ClientData.officeInfo.email} */}
                         </Text>
                     </View>
@@ -360,6 +379,7 @@ const MainClientDetails = ({ route }) => {
 
                         <Text style={styles.LIstText2}>
                             {' '}
+                            {partner?.firstName}  {partner?.lastName}
                             {/* {ClientData.partnerInfo.firstName}{' '}
                             {ClientData.partnerInfo.lastName} */}
                         </Text>
@@ -369,6 +389,7 @@ const MainClientDetails = ({ route }) => {
 
                         <Text style={styles.LIstText2}>
                             {' '}
+                            {manager?.firstName}  {manager?.lastName}
                             {/* {ClientData.managerInfo.firstName}{' '}
                             {ClientData.managerInfo.lastName} */}
                         </Text>
@@ -733,7 +754,7 @@ const styles = StyleSheet.create({
         color: '#8AB645',
     },
     contentView: {
-        height: 40,
+        height: 50,
         backgroundColor: '#fff',
         marginTop: 10,
         padding: 10,

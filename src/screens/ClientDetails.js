@@ -123,7 +123,8 @@ const ClientDetails = ({ route }) => {
           }}>
           <View style={{ width: wp(50) }}>
             <Text style={styles.heading}>
-              {infoData?.companyInfo?.name},{' '}
+              {/* {infoData?.companyInfo?.name},{' '} */}
+              {ClientData.subClientInfo.subClientPracticeId}
               {/* {infoData?.companyInfo?.firstName} */}
             </Text>
           </View>
@@ -211,7 +212,7 @@ const ClientDetails = ({ route }) => {
             <Text style={styles.subHead1}>ClientId:</Text>
 
             <Text style={styles.LIstText2}>
-              {ClientData.subClientInfo.subClientPracticeId}
+              {ClientData.subClientInfo.subClientName}
             </Text>
           </View>
           <View style={styles.contentView}>
@@ -223,8 +224,8 @@ const ClientDetails = ({ route }) => {
             <Text style={styles.subHead1}>Manager:</Text>
 
             <Text style={styles.LIstText2}>
-              {ClientData.partnerInfo.firstName}{' '}
-              {ClientData.partnerInfo.lastName}
+              {ClientData.managerInfo.firstName}{' '}
+              {ClientData.managerInfo.lastName}
             </Text>
           </View>
         </View>
@@ -734,7 +735,7 @@ const styles = StyleSheet.create({
     color: '#8AB645',
   },
   contentView: {
-    height: 40,
+    height: 50,
     backgroundColor: '#fff',
     marginTop: 10,
     padding: 10,

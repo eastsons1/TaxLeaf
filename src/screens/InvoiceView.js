@@ -34,8 +34,8 @@ export default InvoiceView = ({ route }) => {
     const individualClientContactInfo = GET_ORDER_DETAILS[0]?.individualClientContactInfo
     const companyClientContactInfo = GET_ORDER_DETAILS[0]?.companyClientContactInfo
     const serviceListModel = GET_ORDER_DETAILS[0]?.serviceListModel[0]
-    const managerInfo = MANAGER_INFO
-    const officeInfo = OFFICE_INFO
+    const managerInfo = MANAGER_INFO;
+    const officeInfo = OFFICE_INFO;
     const serviceList = GET_ORDER_DETAILS[0]?.serviceListModel;
 
     //console.log(officeInfo, 'officeInfoofficeInfoofficeInfo')
