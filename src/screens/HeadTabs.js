@@ -16,7 +16,7 @@ import Icon1 from 'react-native-vector-icons/MaterialIcons';
 import Icon2 from 'react-native-vector-icons/Fontisto';
 import Icon3 from 'react-native-vector-icons/FontAwesome5';
 import Icon4 from 'react-native-vector-icons/FontAwesome6';
-import { dashboardlist } from '../Redux/Actions/Dashboard';
+import { dashboardlist, dashboardlist2 } from '../Redux/Actions/Dashboard';
 import { Color } from '../Style';
 import { useDispatch, useSelector } from 'react-redux';
 import { clientInfo, ManagerInfo } from '../Redux/Actions/TaxLeaf';
@@ -33,10 +33,12 @@ const HeadTabs = () => {
     const [loader, setLoader] = useState(false);
     const [infoData, setInfoData] = useState({});
     const [dashboardList, setDashboardList] = useState([]);
+    const [dashboardList2, setDashboardList2] = useState([]);
     const [dashboardMessageList, setDashboardMessageList] = useState([]);
     const { MY_INFO } = useSelector(state => state.TaxLeafReducer);
     const { DASHBOARD_LIST } = useSelector(state => state.DashboardReducer);
     const { DASHBOARD_MESSAGE_LIST } = useSelector(state => state.DashboardReducer);
+    const { DASHBOARD_LIST_TWO } = useSelector(state => state.DashboardReducer);
     const { MANAGER_INFO } = useSelector(state => state.TaxLeafReducer);
     const { LOGIN_DATA } = useSelector(state => state.TaxLeafReducer);
     const dispatch = useDispatch();
@@ -62,6 +64,7 @@ const HeadTabs = () => {
 
         dispatch(clientInfo(LOGIN_DATA, navigation))
             .then(() => dispatch(dashboardlist(jsonData?.clientId, jsonData?.clientType, officeInfo?.id, navigation)))
+            .then(() => dispatch(dashboardlist2(jsonData?.clientId, jsonData?.clientType, officeInfo?.id, navigation)))
             .then(() => dispatch(ManagerInfo(jsonData?.clientId, jsonData?.clientType, navigation)))
             .finally(() => {
                 setLoader(false);
@@ -74,8 +77,9 @@ const HeadTabs = () => {
 
     useEffect(() => {
         setDashboardList(DASHBOARD_LIST);
+        setDashboardList2(DASHBOARD_LIST_TWO);
         setDashboardMessageList(DASHBOARD_MESSAGE_LIST);
-    }, [DASHBOARD_LIST, DASHBOARD_MESSAGE_LIST]);
+    }, [DASHBOARD_LIST, DASHBOARD_MESSAGE_LIST, DASHBOARD_LIST_TWO]);
 
 
 
@@ -171,15 +175,44 @@ const HeadTabs = () => {
 
 
 
-    const desiredNewsType = 'Holidays ';
+    const HolidaysNewsType = 'Holidays';
     const TaxNewsType = 'Tax Deadlines';
-    const filteredList =
+    const EventsType = 'Events';
+    const OrderType = 'order';
+    const GovernmentType = 'government_payment';
+    const TaxReturnsType = 'tax_returns';
+    const BookKeepingType = 'bookkeeping';
+    const HolidaysfilteredList =
         dashboardList &&
-        dashboardList.filter(item => item.newsType === desiredNewsType);
+        dashboardList.filter(item => item.newsType === HolidaysNewsType);
 
     const TaxfilteredList =
         dashboardList &&
         dashboardList.filter(item => item.newsType === TaxNewsType);
+
+    const EventsfilteredList =
+        dashboardList &&
+        dashboardList.filter(item => item.newsType === EventsType);
+
+
+    const orderfilteredList =
+        dashboardList2 &&
+        dashboardList2.filter(item => item.section === OrderType);
+
+    const GovfilteredList =
+        dashboardList2 &&
+        dashboardList2.filter(item => item.reference === GovernmentType);
+
+    const taxreturnfilteredList =
+        dashboardList2 &&
+        dashboardList2.filter(item => item.reference === TaxReturnsType);
+
+    const BookKeepingfilteredList =
+        dashboardList2 &&
+        dashboardList2.filter(item => item.reference === BookKeepingType);
+
+
+
 
     // console.log(TaxfilteredList, 'TaxfilteredListt')
     return (
@@ -480,18 +513,7 @@ const HeadTabs = () => {
                                             />
 
 
-                                            {/* <Text
-                        style={[
-                          styles.ButtonText,
-                          {
-                            color:
-                              showwhat1 == 'Proposal'
-                                ? Color.white
-                                : Color.headerIconBG,
-                          },
-                        ]}>
-                        ({dashboardMessageList.length})
-                      </Text> */}
+
                                         </TouchableOpacity>
                                         <Text
                                             style={[
@@ -653,7 +675,7 @@ const HeadTabs = () => {
                                                             : Color.headerIconBG,
                                                 },
                                             ]}>
-                                            Tax Deadlines1
+                                            Tax Deadlines
                                         </Text>
                                     </View>
                                     <View style={styles.TabsContainer}>
@@ -1836,42 +1858,48 @@ const HeadTabs = () => {
                         return (
                             <ScrollView>
                                 {/* <View style={styles.subContainer}> */}
-                                <TouchableOpacity onPress={() => setshowwhat1('')}>
-                                    <View style={styles.part}></View>
-                                    {TaxfilteredList &&
-                                        TaxfilteredList.map(item => (
-                                            <View key={item.id} style={{ padding: 20 }}>
+                                {/* <TouchableOpacity onPress={() => setshowwhat1('')}> */}
+                                <View style={styles.part}></View>
+                                {TaxfilteredList && TaxfilteredList.length > 0 ? (
+                                    TaxfilteredList.map(item => (
+                                        <View key={item.id} style={{ alignSelf: "center", marginTop: 10, width: wp(80) }}>
+                                            <Text
+                                                style={{
+                                                    backgroundColor: '#23c6c8',
+                                                    fontSize: 12,
+                                                    padding: 3,
+                                                }}>
+                                                {item.subject}
+                                            </Text>
+                                            <Text
+                                                style={{
+                                                    fontSize: 12,
+                                                    fontWeight: '700',
+                                                    padding: 3,
+                                                }}>
+                                                Message:
                                                 <Text
                                                     style={{
-                                                        backgroundColor: '#23c6c8',
-                                                        fontSize: 12,
+                                                        fontSize: 10,
+                                                        fontWeight: 'normal',
                                                         padding: 3,
                                                     }}>
-                                                    {item.subject}
+                                                    {item.message}
                                                 </Text>
-                                                <Text
-                                                    style={{
-                                                        fontSize: 12,
-                                                        fontWeight: '700',
-                                                        padding: 3,
-                                                    }}>
-                                                    Message:
-                                                    <Text
-                                                        style={{
-                                                            fontSize: 10,
-                                                            fontWeight: 'normal',
-                                                            padding: 3,
-                                                        }}>
-                                                        {item.message}
-                                                    </Text>
-                                                </Text>
-                                            </View>
-                                        ))}
+                                            </Text>
+                                        </View>
+                                    ))
+                                ) : (
+                                    <Text style={styles.subHead}>
+                                        No Tax Deadlines
+                                    </Text>
+                                )}
 
-                                    {/* <Text style={styles.subHead}> Message Not Found</Text> */}
 
-                                    {/* </View> */}
-                                </TouchableOpacity>
+                                {/* <Text style={styles.subHead}> Message Not Found</Text> */}
+
+                                {/* </View> */}
+                                {/* </TouchableOpacity> */}
                             </ScrollView>
                         );
                     } else if (showwhat1 == 'Proposal') {
@@ -1880,14 +1908,13 @@ const HeadTabs = () => {
                                 <TouchableOpacity onPress={() => setshowwhat1('')}>
                                     <View style={styles.part}></View>
 
-                                    {dashboardMessageList &&
+                                    {dashboardMessageList && dashboardMessageList.length > 0 ? (
+
                                         dashboardMessageList.map(item => (
                                             <View
                                                 key={item.id}
                                                 style={{
-                                                    paddingLeft: 20,
-                                                    //paddingBottom: 10,
-                                                    paddingTop: 10,
+                                                    alignSelf: "center", marginTop: 10, width: wp(80)
                                                 }}>
                                                 <Text
                                                     style={{
@@ -1916,7 +1943,13 @@ const HeadTabs = () => {
                                                     </Text>
                                                 </Text>
                                             </View>
-                                        ))}
+                                        ))
+                                    ) : (
+                                        <Text style={styles.subHead}>
+                                            No Messages
+                                        </Text>
+                                    )}
+
 
                                     {/* <View style={styles.subContainer}> */}
                                     {/* <Text style={styles.subHead}>Proposal Results Found</Text> */}
@@ -1928,14 +1961,44 @@ const HeadTabs = () => {
                     } else if (showwhat1 == 'Signature') {
                         return (
                             <ScrollView>
-                                <TouchableOpacity onPress={() => setshowwhat1('')}>
-                                    <View style={styles.part}></View>
+                                {/* <TouchableOpacity onPress={() => setshowwhat1('')}> */}
+                                <View style={styles.part}></View>
 
-                                    {/* <View style={styles.subContainer}> */}
-                                    <Text style={styles.subHead}>No Events</Text>
-
-                                    {/* </View> */}
-                                </TouchableOpacity>
+                                {EventsfilteredList && EventsfilteredList.length > 0 ? (
+                                    EventsfilteredList.map(item => (
+                                        <View key={item.id} style={{ alignSelf: "center", marginTop: 10, width: wp(80) }}>
+                                            <Text
+                                                style={{
+                                                    backgroundColor: '#23c6c8',
+                                                    fontSize: 12,
+                                                    padding: 3,
+                                                }}>
+                                                {item.subject}
+                                            </Text>
+                                            <Text
+                                                style={{
+                                                    fontSize: 12,
+                                                    fontWeight: '700',
+                                                    padding: 3,
+                                                }}>
+                                                Message:
+                                                <Text
+                                                    style={{
+                                                        fontSize: 10,
+                                                        fontWeight: 'normal',
+                                                        padding: 3,
+                                                    }}>
+                                                    {item.message}
+                                                </Text>
+                                            </Text>
+                                        </View>
+                                    ))
+                                ) : (
+                                    <Text style={styles.subHead}>
+                                        No Events
+                                    </Text>
+                                )}
+                                {/* </TouchableOpacity> */}
                             </ScrollView>
                         );
                     } else if (showwhat1 == 'Reminders') {
@@ -1943,7 +2006,40 @@ const HeadTabs = () => {
                             <TouchableOpacity onPress={() => setshowwhat1('')}>
                                 <View style={{}}>
                                     <View style={styles.part}></View>
-                                    <Text style={styles.subHead}>No Holidays</Text>
+                                    {HolidaysfilteredList && HolidaysfilteredList.length > 0 ? (
+                                        HolidaysfilteredList.map(item => (
+                                            <View key={item.id} style={{ alignSelf: "center", marginTop: 10, width: wp(80) }}>
+                                                <Text
+                                                    style={{
+                                                        backgroundColor: '#23c6c8',
+                                                        fontSize: 12,
+                                                        padding: 3,
+                                                    }}>
+                                                    {item.subject}
+                                                </Text>
+                                                <Text
+                                                    style={{
+                                                        fontSize: 12,
+                                                        fontWeight: '700',
+                                                        padding: 3,
+                                                    }}>
+                                                    Message:
+                                                    <Text
+                                                        style={{
+                                                            fontSize: 10,
+                                                            fontWeight: 'normal',
+                                                            padding: 3,
+                                                        }}>
+                                                        {item.message}
+                                                    </Text>
+                                                </Text>
+                                            </View>
+                                        ))
+                                    ) : (
+                                        <Text style={styles.subHead}>
+                                            No Holidays
+                                        </Text>
+                                    )}
                                     {/* {filteredList &&
                                         filteredList.map(item => (
                                             <View key={item.id} style={{ height: 200, padding: 20 }}>
@@ -1987,10 +2083,42 @@ const HeadTabs = () => {
                         return (
                             <TouchableOpacity onPress={() => setshowwhat2('')}>
                                 <View style={styles.part}></View>
+                                {orderfilteredList && orderfilteredList.length > 0 ? (
+                                    orderfilteredList.map(item => (
+                                        <View key={item.id} style={{ alignSelf: "center", marginTop: 10, width: wp(80) }}>
+                                            <Text
+                                                style={{
+                                                    backgroundColor: '#23c6c8',
+                                                    fontSize: 12,
+                                                    padding: 3,
+                                                }}>
+                                                {item.action}
+                                            </Text>
+                                            <Text
+                                                style={{
+                                                    fontSize: 12,
+                                                    fontWeight: '700',
+                                                    padding: 3,
+                                                }}>
+                                                Message:
+                                                <Text
+                                                    style={{
+                                                        fontSize: 10,
+                                                        fontWeight: 'normal',
+                                                        padding: 3,
+                                                    }}>
+                                                    {item.action}
+                                                </Text>
+                                            </Text>
+                                        </View>
+                                    ))
+                                ) : (
+                                    <Text style={styles.subHead}>
+                                        No Orders
+                                    </Text>
+                                )}
 
 
-
-                                <Text style={{ alignSelf: 'center', marginTop: 20 }}>No Orders</Text>
 
                             </TouchableOpacity>
                         );
@@ -1999,8 +2127,41 @@ const HeadTabs = () => {
                             <TouchableOpacity onPress={() => setshowwhat2('')}>
                                 <View style={styles.part}></View>
 
+                                {taxreturnfilteredList && taxreturnfilteredList.length > 0 ? (
+                                    taxreturnfilteredList.map(item => (
+                                        <View key={item.id} style={{ alignSelf: "center", marginTop: 10, width: wp(80) }}>
+                                            <Text
+                                                style={{
+                                                    backgroundColor: '#23c6c8',
+                                                    fontSize: 12,
+                                                    padding: 3,
+                                                }}>
+                                                {item.action}
+                                            </Text>
+                                            <Text
+                                                style={{
+                                                    fontSize: 12,
+                                                    fontWeight: '700',
+                                                    padding: 3,
+                                                }}>
+                                                Message:
+                                                <Text
+                                                    style={{
+                                                        fontSize: 10,
+                                                        fontWeight: 'normal',
+                                                        padding: 3,
+                                                    }}>
+                                                    {item.action}
+                                                </Text>
+                                            </Text>
+                                        </View>
+                                    ))
+                                ) : (
+                                    <Text style={styles.subHead}>
+                                        No Tax Returns
+                                    </Text>
+                                )}
 
-                                <Text style={{ alignSelf: 'center', marginTop: 20 }}>No Tax Returns</Text>
 
                             </TouchableOpacity>
                         );
@@ -2010,7 +2171,40 @@ const HeadTabs = () => {
                                 <View style={styles.part}></View>
 
 
-                                <Text style={{ alignSelf: 'center', marginTop: 20 }}>No Bookkeeping</Text>
+                                {BookKeepingfilteredList && BookKeepingfilteredList.length > 0 ? (
+                                    BookKeepingfilteredList.map(item => (
+                                        <View key={item.id} style={{ alignSelf: "center", marginTop: 10, width: wp(80) }}>
+                                            <Text
+                                                style={{
+                                                    backgroundColor: '#23c6c8',
+                                                    fontSize: 12,
+                                                    padding: 3,
+                                                }}>
+                                                {item.action}
+                                            </Text>
+                                            <Text
+                                                style={{
+                                                    fontSize: 12,
+                                                    fontWeight: '700',
+                                                    padding: 3,
+                                                }}>
+                                                Message:
+                                                <Text
+                                                    style={{
+                                                        fontSize: 10,
+                                                        fontWeight: 'normal',
+                                                        padding: 3,
+                                                    }}>
+                                                    {item.action}
+                                                </Text>
+                                            </Text>
+                                        </View>
+                                    ))
+                                ) : (
+                                    <Text style={styles.subHead}>
+                                        No Bookkeeping
+                                    </Text>
+                                )}
 
                             </TouchableOpacity>
                         );
@@ -2019,8 +2213,41 @@ const HeadTabs = () => {
                             <TouchableOpacity onPress={() => setshowwhat2('')}>
                                 <View style={styles.part}></View>
 
+                                {GovfilteredList && GovfilteredList.length > 0 ? (
+                                    GovfilteredList.map(item => (
+                                        <View key={item.id} style={{ alignSelf: "center", marginTop: 10, width: wp(80) }}>
+                                            <Text
+                                                style={{
+                                                    backgroundColor: '#23c6c8',
+                                                    fontSize: 12,
+                                                    padding: 3,
+                                                }}>
+                                                {item.action}
+                                            </Text>
+                                            <Text
+                                                style={{
+                                                    fontSize: 12,
+                                                    fontWeight: '700',
+                                                    padding: 3,
+                                                }}>
+                                                Message:
+                                                <Text
+                                                    style={{
+                                                        fontSize: 10,
+                                                        fontWeight: 'normal',
+                                                        padding: 3,
+                                                    }}>
+                                                    {item.action}
+                                                </Text>
+                                            </Text>
+                                        </View>
+                                    ))
+                                ) : (
+                                    <Text style={styles.subHead}>
+                                        No Gov. Payments
+                                    </Text>
+                                )}
 
-                                <Text style={{ alignSelf: 'center', marginTop: 20 }}>No Gov. Payments</Text>
 
                             </TouchableOpacity>
                         );

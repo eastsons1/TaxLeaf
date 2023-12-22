@@ -60,14 +60,14 @@ const HomeScreen = () => {
 
 
   //console.log(dashboardMessageList?.length, 'messageList')
-  console.log(companyTypeInfo, 'jsonDatajsonDatajsonDatajsonDatajsonData')
-  console.log(stateInfo, 'jsonDatajsonDatajsonDatajsonDatajsonData')
-  console.log(companyInfo, 'jsonDatajsonDatajsonDatajsonDatajsonData')
+  //console.log(companyTypeInfo, 'jsonDatajsonDatajsonDatajsonDatajsonData')
+  //console.log(stateInfo, 'jsonDatajsonDatajsonDatajsonDatajsonData')
+  //console.log(companyInfo, 'jsonDatajsonDatajsonDatajsonDatajsonData')
   // console.log(officeInfo?.id, 'officeInfoofficeInfoofficeInfoofficeInfo')
   // console.log(manager, 'MANAGER_INFOMANAGER_INFOMANAGER_INFOMANAGER_INFO')
   //console.log(manageroffice, 'HOMEHOMEHOMEHOMEHOMEHOMEHOME')
 
-  console.log(jsonData?.clientId, jsonData?.clientType)
+  // console.log(jsonData?.clientId, jsonData?.clientType)
   //console.log(MY_INFO, 'MY_INFOMY_INFOMY_INFO')
 
 

@@ -7,6 +7,7 @@ import {
   CLIENT_LIST,
   CLIENT_DETAIL,
   REQUEST_INFO,
+  GET_LIB_FILES,
   REQUEST_INFO_BY_ID,
   FOLDER_LIST,
   DOCUMENT_INFO_FOLDER,
@@ -17,6 +18,7 @@ import {
 
 const initialstate = {
   LOGIN_DATA: {},
+  GET_LIB_FILES: [],
   MY_INFO: {},
   MANAGER_INFO: {},
   OFFICE_INFO: {},
@@ -79,6 +81,9 @@ const TaxLeafReducer = (state = initialstate, action) => {
     case EDITOR_TEXT:
 
       return { ...state, EDITOR_TEXT: action.payload };
+    case GET_LIB_FILES:
+
+      return { ...state, GET_LIB_FILES: action.payload };
   }
 
   return state;

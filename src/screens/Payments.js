@@ -1835,12 +1835,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   subContainer: {
-    // backgroundColor: '#fff',
+    //backgroundColor: '#fff',
     //width: wp(90),
 
     alignSelf: 'center',
     marginTop: 10,
     //height: hp(75),
+    height: wp(80),
 
     // alignItems: 'center',
   },

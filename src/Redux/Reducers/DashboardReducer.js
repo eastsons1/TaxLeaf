@@ -1,8 +1,9 @@
-import { DASHBOARD_LIST, DASHBOARD_MESSAGE_LIST } from '../Actions/types';
+import { DASHBOARD_LIST, DASHBOARD_MESSAGE_LIST, DASHBOARD_LIST_TWO } from '../Actions/types';
 
 const initialstate = {
   DASHBOARD_LIST: [],
   DASHBOARD_MESSAGE_LIST: [],
+  DASHBOARD_LIST_TWO: []
 };
 
 const DashboardReducer = (state = initialstate, action) => {
@@ -15,6 +16,8 @@ const DashboardReducer = (state = initialstate, action) => {
       return { ...state, DASHBOARD_LIST: action.payload };
     case DASHBOARD_MESSAGE_LIST:
       return { ...state, DASHBOARD_MESSAGE_LIST: action.payload };
+    case DASHBOARD_LIST_TWO:
+      return { ...state, DASHBOARD_LIST_TWO: action.payload };
   }
 
   return state;

@@ -17,6 +17,8 @@ export const PARTNER_INFO = 'PARTNER_INFO'
 export const MY_OFFICE_INFO = 'MY_OFFICE_INFO'
 export const FILE_UPLOAD_TOKEN = 'FILE_UPLOAD_TOKEN'
 export const EDITOR_TEXT = "EDITOR_TEXT"
+export const GET_LIB_FILES = "GET_LIB_FILES"
+export const DASHBOARD_LIST_TWO = "DASHBOARD_LIST_TWO"
 
 
 

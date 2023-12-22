@@ -468,7 +468,7 @@ export const documentInfobyFolder = (documentId, navigation) => dispatch => {
     };
     console.log(data, 'ddd')
     const response = await logistical.post('/FileCabinet/GetDocumentTypes', data);
-    console.log(response.documentInfo, 'hilllloooo');
+    //console.log(response.documentInfo, 'hilllloooo');
 
     if (response) {
       // AsyncStorage.setItem('login', JSON.stringify(response.token));

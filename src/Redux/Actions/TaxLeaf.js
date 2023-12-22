@@ -5,6 +5,7 @@ import {
   OFFICE_INFO,
   PARTNER_INFO,
   CLIENT_LIST,
+  GET_LIB_FILES,
   CLIENT_DETAIL,
   REQUEST_INFO,
   REQUEST_INFO_BY_ID,
@@ -505,7 +506,7 @@ export const documentInfobyFolder = (documentId, navigation) => dispatch => {
     };
     console.log(data, 'ddd')
     const response = await logistical.post('/FileCabinet/GetDocumentTypes', data);
-    console.log(response.documentInfo, 'hilllloooo');
+    //console.log(response.documentInfo, 'hilllloooo');
 
     if (response) {
       // AsyncStorage.setItem('login', JSON.stringify(response.token));
@@ -539,7 +540,7 @@ export const documentInfobyFolder = (documentId, navigation) => dispatch => {
 };
 
 
-export const uploadFile = (MY_INFO, FolderName, documentType, year, period, description, base64File, accessToken, documentsLibraryId, periodValue, UploadedByName, UploadedBy, navigation) => dispatch => {
+export const uploadFile = (MY_INFO, FolderName, documentType, fileext, year, period, description, base64File, accessToken, documentsLibraryId, periodValue, UploadedByName, UploadedBy, navigation) => dispatch => {
   // dispatch({
   //   type: 'LOADING',
   //   payload: true,
@@ -557,7 +558,7 @@ export const uploadFile = (MY_INFO, FolderName, documentType, year, period, desc
             "ClientId": MY_INFO?.guestInfo?.client,
             "SharepointFolderName": FolderName,
             "DocumentType": documentType,
-            "FileType": "pdf",
+            "FileType": fileext,
             "Period": periodValue,
             "PeriodText": period,
             "Year": year,
@@ -777,6 +778,63 @@ export const getFileInfo = (client, clientType, navigation) => dispatch => {
       dispatch({
         type: FILE_INFO,
         payload: response?.fileListViews,
+      });
+
+
+      //   Alert.alert(response.response[0])
+      resolve(response);
+
+      // Alert.alert(response.massage);
+      // navigation.navigate('ClientInfo');
+
+      // dispatch({
+      //   type: 'LOADING',
+      //   payload: false,
+      // });
+    } else {
+      Alert.alert('No data found');
+      //Alert.alert(response.massage);
+      // dispatch({
+      //   type: 'LOADING',
+      //   payload: false,
+      // });
+      reject(response);
+    }
+  });
+};
+
+
+
+
+export const GetAllLibraryFiles = (officeId, clientType, ClientId, SharepointFolderName, Brand, navigation) => dispatch => {
+  // dispatch({
+  //   type: 'LOADING',
+  //   payload: true,
+  // });
+
+  return new Promise(async (resolve, reject) => {
+    let data = {
+      "LibraryId": "b!Lk512wjgi02RXgn1f6gS_LglI0RARFdPqlWhynyni0PoNyVdBpdDS6rPS1ae4PfD",
+
+      "sharepointInfo": {
+        "Brand": Brand[0],
+        "OfficeId": officeId[0],
+        "ClientType": clientType[0],
+        "ClientId": ClientId[0],
+        "SharepointFolderName": SharepointFolderName
+      }
+    }
+
+    console.log(data, '&&&&&&&&&&&&&&&&')
+    const response = await logistical.post('/FileCabinet/GetAllLibraryFiles', data);
+    console.log(response?.driveItemList[0].name, 'fileRespfileRespfileRespfileRespfileRespfileRespfileRespfileRespfileRespfileRespfileResp');
+
+    if (response) {
+      // AsyncStorage.setItem('login', JSON.stringify(response.token));
+
+      dispatch({
+        type: GET_LIB_FILES,
+        payload: response?.driveItemList,
       });
 
 

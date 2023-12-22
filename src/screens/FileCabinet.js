@@ -1,4 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
+
+import { Linking } from 'react-native';
+
 import {
   SafeAreaView,
   View,
@@ -23,7 +26,7 @@ import { Dropdown } from 'react-native-element-dropdown';
 import CustomHeader from '../Component/CustomHeader';
 import CustomBottomTab from '../Component/CustomBottomTab';
 import { Color } from '../Style';
-import { folderNameList, documentInfobyFolder, uploadFile, generateFileToken, getFileInfo } from '../Redux/Actions/TaxLeaf';
+import { folderNameList, documentInfobyFolder, uploadFile, generateFileToken, getFileInfo, GetAllLibraryFiles } from '../Redux/Actions/TaxLeaf';
 import { Loader } from '../Component/Loader';
 import { useDispatch, useSelector } from 'react-redux';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
@@ -52,7 +55,14 @@ const FileCabinet = () => {
 
   const [isFocus, setIsFocus] = useState(false);
   const [loader, setLoader] = useState(false);
-  const [FilesInFolder, setFIlesInFolder] = useState()
+  const [filesInFolder, setFIlesInFolder] = useState()
+  const [officeId, setOfficeId] = useState()
+  const [ClientId, setClientId] = useState()
+  const [clientType, setClientType] = useState()
+  const [shareFolderName, setSharepointFolderName] = useState()
+  const [brandName, setBrand] = useState()
+
+
   const [filteredReq, setFilteredReq] = useState();
   const [docTypeById, setDocTypeById] = useState();
   const [base64File, setBase64File] = useState();
@@ -60,6 +70,7 @@ const FileCabinet = () => {
   const navigation = useNavigation();
   const { MY_INFO } = useSelector(state => state.TaxLeafReducer);
   const { FOLDER_LIST } = useSelector(state => state.TaxLeafReducer);
+  const { GET_LIB_FILES } = useSelector(state => state.TaxLeafReducer);
   const { DOCUMENT_INFO_FOLDER } = useSelector(state => state.TaxLeafReducer)
   const { FILE_UPLOAD_TOKEN } = useSelector(state => state.TaxLeafReducer)
   const { FILE_INFO } = useSelector(state => state.TaxLeafReducer)
@@ -71,7 +82,7 @@ const FileCabinet = () => {
   // console.log(value, 'kkkkkk')
   // console.log(FOLDER_LIST, 'FOLDER_LIST')
   // console.log(DOCUMENT_INFO_FOLDER, 'DOCUMENT_INFO_FOLDER')
-  console.log(selectedData, 'selectedData')
+  //console.log(selectedData, 'selectedData')
   // console.log(value1, 'value1')
   const jsonData = MY_INFO.guestInfo;
   const dataArray = DOCUMENT_INFO_FOLDER ? Object.values(DOCUMENT_INFO_FOLDER) : [];
@@ -93,6 +104,7 @@ const FileCabinet = () => {
 
   // console.log(Array.isArray(dataArray), 'isArray');
   const [fileResponse, setFileResponse] = useState();
+  const [fileExt, setFileExt] = useState();
 
 
 
@@ -108,11 +120,20 @@ const FileCabinet = () => {
       return null;
     }
   }
+
+
   const handleDocumentSelection = useCallback(async () => {
     try {
       const response = await DocumentPicker.pick({
         presentationStyle: 'fullScreen',
       });
+
+
+      const fileName = response[0]?.name;
+      const fileExtension = fileName.split('.').pop();
+      setFileExt(fileExtension)
+      console.log('File Extension:', fileExtension);
+
       // console.log(response, 'fileee')
       setFileResponse(response);
       if (response) {
@@ -126,7 +147,7 @@ const FileCabinet = () => {
     catch (err) {
       console.warn(err);
     }
-  }, []);
+  });
   // console.log(fileResponse[0]?.uri, 'fileResponse')
   const renderLabel = () => {
     if (value || isFocus) {
@@ -242,10 +263,22 @@ const FileCabinet = () => {
     { label: '2035', value: '35' },
   ];
   const handleRow = item => {
+    setLoader(true)
+
+    dispatch(GetAllLibraryFiles(officeId, clientType, ClientId, item.azureFolderName, brandName, navigation))
+    console.log(officeId, clientType, ClientId, item.azureFolderName, brandName, "KKKKKKKK")
+    console.log(item, "KKKKKKKK")
+
+
     setIdRow(item.id);
     setPress(true);
     setSelectedData(item);
     setdocumentId(item?.documentTypeIds)
+
+    setTimeout(() => {
+      setLoader(false)
+
+    }, 2000);
   };
   const handleRowOFF = item => {
     setIdRow(item.id);
@@ -296,14 +329,15 @@ const FileCabinet = () => {
   }, [FOLDER_LIST])
 
 
-  console.log(filteredReq, 'filteredReqfilteredReqfilteredReqfilteredReqfilteredReq')
 
 
 
   useEffect(() => {
 
+    setFIlesInFolder(GET_LIB_FILES)
+  }, [FILE_INFO, GET_LIB_FILES])
 
-  }, [FILE_INFO])
+
 
 
 
@@ -329,6 +363,8 @@ const FileCabinet = () => {
     dispatch(
       generateFileToken()
     )
+
+
   }, [])
 
 
@@ -347,16 +383,22 @@ const FileCabinet = () => {
   }, [navigation,]);
 
 
-  //console.log(FILE_UPLOAD_TOKEN, 'QQQQQQQQQQQQQQQQQQQQQQQQQQQQ')
+  //console.log(GET_LIB_FILES, 'GET_LIB_FILESGET_LIB_FILESGET_LIB_FILESGET_LIB_FILES')
 
 
   useEffect(() => {
+
+
+
     const filesInFolder = getFilesByFolder(selectedData?.azureFolderName, referenceFiles);
-    setFIlesInFolder(filesInFolder)
-    console.log(filesInFolder, 'filesInFolder')
+    // setFIlesInFolder(filesInFolder)
+
+    //console.log(filesInFolder, 'filesInFolder')
   }, [selectedData, FILE_UPLOAD_TOKEN])
 
 
+
+  //console.log(FilesInFolder[0].name, 'FilesInFolderFilesInFolderFilesInFolderFilesInFolderFilesInFolderFilesInFolder')
 
   // const submitUpload = () => {
   //   setLoader(true);
@@ -404,13 +446,73 @@ const FileCabinet = () => {
   //   cancelModal();
   // };
 
+  const downloadFile = async (url, fileName) => {
+    try {
+      // Send a GET request to the SharePoint download URL
+      const response = await fetch(url, { method: 'GET' });
+      // Extract the final download URL after any redirects
+      const finalUrl = response.url;
+
+      console.log(finalUrl, 'responseresponseresponseresponseresponseresponseresponseresponse')
+
+      Linking.openURL(finalUrl)
+      // Create a config object for the download
+      // const config = {
+      //   fileCache: true,
+      //   addAndroidDownloads: {
+      //     useDownloadManager: true,
+      //     notification: true,
+      //     mediaScannable: true,
+      //     title: fileName,
+      //     path: `${RNFetchBlob.fs.dirs.DownloadDir}/${fileName}`,
+      //   },
+      // };
+
+      // Start the download using the final URL
+      // RNFetchBlob
+      //   .config(config)
+      //   .fetch('GET', finalUrl)
+      //   .then((res) => {
+      //     // Open the downloaded file
+      //     Linking.openURL(res.path());
+      //   })
+      //   .catch((error) => {
+      //     console.error('Download error:', error);
+      //   });
+    } catch (error) {
+      console.error('Fetch error:', error);
+    }
+  };
+
+  // Example usage:
+  const handleDownloadPress = (item) => {
+
+
+    // dispatch(GetAllLibraryFiles(officeId, clientType, ClientId, SharepointFolderName, Brand, navigation))
+
+
+    console.log(item, 'WWWWWWWW')
+
+
+    // const downloadUrl = "https://taxleaf.sharepoint.com/sites/Leafcabinet/_layouts/15/download.aspx?UniqueId=b01b1016-df13-4c53-96e1-783861a1b9fb&Translate=false&tempauth=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwMDAwMDAwMy0wMDAwLTBmZjEtY2UwMC0wMDAwMDAwMDAwMDAvdGF4bGVhZi5zaGFyZXBvaW50LmNvbUA5NzI4ZmNmOC1mMDRiLTQyNzEtYjM1Mi0wMjJhMzNmYmZjYzQiLCJpc3MiOiIwMDAwMDAwMy0wMDAwLTBmZjEtY2UwMC0wMDAwMDAwMDAwMDAiLCJuYmYiOiIxNzAyOTc4NzE5IiwiZXhwIjoiMTcwMjk4MjMxOSIsImVuZHBvaW50dXJsIjoiSmNvUm0yQ0FUdnlNcXJqUDcwMW5aMUZOWjhMK2lxWGw0RHNpdUNVV2NSRT0iLCJlbmRwb2ludHVybExlbmd0aCI6IjEzNiIsImlzbG9vcGJhY2siOiJUcnVlIiwiY2lkIjoiR1NnZmJUQmF2RUtSUjM1ZXVDMm9EQT09IiwidmVyIjoiaGFzaGVkcHJvb2Z0b2tlbiIsInNpdGVpZCI6IlpHSTNOVFJsTW1VdFpUQXdPQzAwWkRoaUxUa3hOV1V0TURsbU5UZG1ZVGd4TW1aaiIsImFwcF9kaXNwbGF5bmFtZSI6IkNsaWVudHBvcnRhbC1TaGFyZXBvaW50LW1vYmlsZSIsIm5hbWVpZCI6IjA5ZjYxZWM0LTJhMjMtNDU5Mi04YjA2LWViNWNhN2U0NTMyYkA5NzI4ZmNmOC1mMDRiLTQyNzEtYjM1Mi0wMjJhMzNmYmZjYzQiLCJyb2xlcyI6ImFsbHNpdGVzLndyaXRlIiwidHQiOiIxIiwiaXBhZGRyIjoiMjAuMTkwLjE2MS44OCJ9.pQHK6wEXwgKKskNE_Nhq1Je8n60k2mJ-hgAkP2ZUx6U&ApiVersion=2.0"
+    //const fileName = 'examplefile'; // Replace with your desired file name
+
+    Linking.openURL(item)
+
+    // downloadFile(downloadUrl, fileName);
+  };
+
   const submitUpload = async () => {
+
+    console.log(value?.azureFolderName,
+      value1?.documentType, "SSSSSSSSSSSSSSSS", fileExt)
     setLoader(true);
     await dispatch(
       uploadFile(
         MY_INFO,
         value?.azureFolderName,
         value1?.documentType,
+        fileExt,
         year,
         period,
         description,
@@ -463,6 +565,19 @@ const FileCabinet = () => {
 
   function getFilesByFolder(azureFolderName, referenceFiles) {
     const matchingFiles = referenceFiles?.filter(file => file.sharepointFolderName === azureFolderName)?.map(file => file?.fileName);
+    const officeId = referenceFiles?.filter(file => file.sharepointFolderName === azureFolderName)?.map(file => file?.officeId);
+    const clientType = referenceFiles?.filter(file => file.sharepointFolderName === azureFolderName)?.map(file => file?.clientType);
+    const ClientId = referenceFiles?.filter(file => file.sharepointFolderName === azureFolderName)?.map(file => file?.clientId);
+    const SharepointFolderName = referenceFiles?.filter(file => file.sharepointFolderName === azureFolderName)?.map(file => file?.sharepointFolderName);
+    const Brand = referenceFiles?.filter(file => file.sharepointFolderName === azureFolderName)?.map(file => file?.brand);
+
+    setOfficeId(officeId)
+    setClientType(clientType)
+    setClientId(ClientId)
+    setSharepointFolderName(SharepointFolderName)
+    setBrand(Brand)
+
+
 
     return matchingFiles;
   }
@@ -487,7 +602,7 @@ const FileCabinet = () => {
       (file) => file.uploadedFrom.trim().toLowerCase() === "client"
     ).length;
 
-    console.log(clientCount, 'clientCountclientCountclientCountclientCount')
+    // console.log(clientCount, 'clientCountclientCountclientCountclientCount')
 
 
     // const referenceFiles = FILE_INFO[0]?.referenceFiles
@@ -598,36 +713,48 @@ const FileCabinet = () => {
               </DataTable.Header>
 
 
+
+
               <FlatList
                 contentContainerStyle={{ paddingBottom: 200 }}
-                data={FilesInFolder}
+                data={filesInFolder}
+                //data={GET_LIB_FILES}
                 // numColumns={5}
-                keyExtractor={(item, index) => index}
+                keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item, index }) => (
                   <DataTable.Row
-                    key={item.id}
+                    key={index}
                     style={{
                       backgroundColor:
                         idRow == item.id && press == true ? '#e8f1f2' : '#e8f1f2',
                     }}>
-                    <DataTable.Cell style={{ flex: 3 }}  >
-                      <Image source={require('../Assets/img/icons/smallFile.png')}
+                    {console.log(typeof (item.name), 'itemitemitemitemitemitem')}
+                    <TouchableOpacity
+                      onPress={() => handleDownloadPress(item.downloadUrl)}
+                      style={{ flex: 2.8 }}  >
+                      {/* <TouchableOpacity
+                        onPress={() => handleDownloadPress(item.downloadUrl)}
+                      > */}
+                      {/* <Image source={require('../Assets/img/icons/smallFile.png')}
 
-                        style={{ height: 10, width: 10, }} />
+                        style={{ height: 10, width: 10, }} /> */}
                       <Text
                         style={{
 
                           fontSize: 12,
                           fontFamily: 'Poppins-SemiBold',
+
                           color:
                             idRow == item.id && press == true
                               ? '#2F4050'
                               : '#676A6C',
 
                         }}>
-                        {item}
+                        {item.name}
                       </Text>
-                    </DataTable.Cell>
+
+                      {/* </TouchableOpacity> */}
+                    </TouchableOpacity>
 
                     <DataTable.Cell style={{ flex: 1 }}>
                       <Text
@@ -640,7 +767,8 @@ const FileCabinet = () => {
                               ? '#2F4050'
                               : '#676A6C',
                         }}>
-                        {moment(item?.createdAt).format('MM-DD-YYYY')}
+                        {moment(item?.createdDateTime).format('MM-DD-YYYY')}
+                        {/* {moment(item?.createdAt).format('MM-DD-YYYY')} */}
                       </Text>
                     </DataTable.Cell>
 
@@ -667,7 +795,9 @@ const FileCabinet = () => {
 
         style={{ backgroundColor: '#d5e3e5' }}
       >
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <ScrollView showsVerticalScrollIndicator={false}
+          style={{}}
+        >
           <HeadTabs />
           <Loader flag={loader} />
 

@@ -59,6 +59,7 @@ const Login = () => {
   // const [email, setEmail] = useState("julietam.geraci@gmail.com");
   // const [email, setEmail] = useState("aalok@eastsons.com");
   const [email, setEmail] = useState("prince@eastsons.com");
+  //const [email, setEmail] = useState("angiecotes@hotmail.com");
 
   //const [email, setEmail] = useState("julietam.geraci@gmail.com");
   //const [email, setEmail] = useState("Julieta.gracias@taxleaf.com");
