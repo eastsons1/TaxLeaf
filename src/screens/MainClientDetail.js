@@ -27,6 +27,7 @@ import { Loader } from '../Component/Loader';
 
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { Color } from '../Style';
+import HeadTabs from './HeadTabs';
 
 const MainClientDetails = ({ route }) => {
     const width = Dimensions.get('window').width;
@@ -45,7 +46,7 @@ const MainClientDetails = ({ route }) => {
 
     const ClientData = route.params.clientdetail;
     const manager = MANAGER_INFO;
-    const partner = MANAGER_INFO;
+    const partner = PARTNER_INFO;
     console.log(ClientData, 'ClientDataClientDataClientDataClientData');
 
     const [infoData, setInfoData] = useState({});
@@ -116,285 +117,507 @@ const MainClientDetails = ({ route }) => {
         <View style={styles.container}>
             <Loader flag={loader} />
             <ScrollView>
-                <View
-                    style={{
-                        width: wp(90),
-                        // backgroundColor: 'red',
-                        flexDirection: 'row',
-                        alignSelf: 'center',
-                    }}>
-                    <View style={{ width: wp(50) }}>
-                        <Text style={styles.heading}>
-                            {infoData?.companyInfo?.name}
-                            {/* {infoData?.individualInfo?.firstName} */}
-                        </Text>
-                    </View>
-
-                    <View style={{ width: wp(40) }}>
-                        <View
-                            style={{
-                                flexDirection: 'row',
-                                justifyContent: 'flex-start',
-                                //  marginTop: 10,
-                                //marginLeft: 18,
-                            }}>
-                            <TouchableOpacity
-                                onPress={() => navigation.navigate('FileCabinet')}
-                                style={styles.btnPrev}
-                            // onPress={() => { onPageChange(4) }}
-                            >
-                                {/* <Icon
-                                                style={[
-                                                    styles.icon,
-                                                    {
-                                                        color: '#fff',
-                                                    },
-                                                ]}
-                                                name="arrowleft"
-                                                size={20}
-                                                color="#fff"
-                                            /> */}
-                                <Image
-                                    source={require('../Assets/img/icons/files-dark.png')}
-                                    style={{
-                                        width: 20,
-                                        height: 20,
-                                        alignSelf: 'center',
-                                        marginBottom: 5,
-                                        // borderRadius: 50,
-                                        //alignSelf: 'center',
-                                    }}
-                                />
-                                <Text style={{ color: Color.darkGreen, fontSize: 8 }}>
-                                    FILE CABINET
-                                </Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.btnSubmit}>
-                                <Image
-                                    source={require('../Assets/img/icons/dots-dark.png')}
-                                    style={{
-                                        width: 20,
-                                        height: 20,
-                                        alignSelf: 'center',
-                                        marginBottom: 5,
-                                        //  borderRadius: 50,
-                                        //alignSelf: 'center',
-                                    }}
-                                />
-                                <Text style={{ color: Color.darkGreen, fontSize: 8 }}>
-                                    REQUEST
-                                </Text>
-                                {/* 
-                                            <Icon
-                                                style={[
-                                                    styles.icon,
-                                                    {
-                                                        color: '#fff',
-                                                    },
-                                                ]}
-                                                name="arrowright"
-                                                size={20}
-                                                color="#fff"
-                                            /> */}
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                </View>
+                <HeadTabs/>
 
 
 
-                <Text style={styles.subheading}>Hello Welcome To TaxLeaf</Text>
+              
+                <View>
+          <View style={styles.infoSec}>
+            <View style={{ flexDirection: 'row', marginBottom: 10 }}>
+              <Image
+                source={require('../Assets/layer_36.png')}
+                style={{
+                  width: 100,
+                  height: 70,
+                  resizeMode: 'contain',
+                  //  borderRadius: 50,
+                  alignSelf: 'center',
+                  marginLeft: 10
+                }}
+              />
+            <View style={{
+                width:wp(60),
+              //  backgroundColor:"red",
+                justifyContent:"center",
+                alignItems:"center"
+                }}>
+                <Text
+                  style={{
+                    textAlign: 'center',
+                    color: '#fff',
+                  //  marginTop: 10,
+                    fontFamily: 'Poppins-Bold',
+                    fontSize: 18,
+                   // marginLeft: 10
+                  }}>
+                  Hello  {route.params.companyInfo?.name}
+                   {/* {ClientData.subClientInfo.subClientName} */}
+                  {/* {manager?.firstName}{' '}
+                      {manager?.lastName} */}
+                </Text>
+                <Text
+                  style={{
+                    textAlign: 'center',
+                    color: '#90c460',
+                    fontFamily: 'Poppins-SemiBold',
+                    fontSize: 14,
+                   // marginRight: 25
+                  }}>
+                  Welcome to Taxleaf
+                </Text>
+              </View>
 
-                <View style={styles.slideContainer}>
-                    <View style={styles.contentView}>
-                        <Text style={styles.subHead1}>Status:</Text>
+            </View>
 
-                        <Text style={styles.LIstText21}>Active</Text>
-                    </View>
-                    <View style={styles.contentView}>
-                        <Text style={styles.subHead1}>ClientId:</Text>
+          </View>
+        </View>
+        <View
+          style={{
+            width: wp(90),
+            backgroundColor: '#fff',
+            //padding: 10,
+            elevation: 10,
+            marginBottom: 20,
+            alignSelf: 'center',
+            // borderRadius: 10,
+            paddingBottom: 20,
+          }}>
+          <View
+            style={{
+              height: 40,
 
-                        <Text style={styles.LIstText2}>
-                            {MY_INFO?.guestInfo?.client}
-                            {/* {ClientData.subClientInfo.subClientPracticeId} */}
-                        </Text>
-                    </View>
-                    <View style={styles.contentView}>
-                        <Text style={styles.subHead1}>OfficeId:</Text>
+              width: wp(90),
+              paddingLeft: 10,
+              //   alignSelf: 'center',
+              //justifyContent: 'center',
+              flexDirection: "row",
+              alignItems: "center",
+              backgroundColor: Color.green,
+            }}>
+            <Image
+              source={require('../Assets/PersonalInfo.png')}
+              style={{
+                width: 15,
+                height: 15,
 
-                        <Text style={styles.LIstText2}>
-                            {MY_INFO?.officeInfo?.name}
-                            {/* {ClientData.officeInfo.name} */}
-                        </Text>
-                    </View>
-                    <View style={styles.contentView}>
-                        <Text style={styles.subHead1}>Manager:</Text>
+                marginLeft: 5,
+                marginRight: 5,
+                //  borderRadius: 50,
+                //alignSelf: 'center',
+              }}
+            />
 
-                        <Text style={styles.LIstText2}>
-                            {manager?.firstName}  {manager?.lastName}
-                            {/* {ClientData.partnerInfo.firstName}{' '}
-                            {ClientData.partnerInfo.lastName} */}
-                        </Text>
-                    </View>
-                </View>
-                <View style={styles.slideContainer}>
-                    <View style={styles.contentView}>
-                        <Text style={styles.subHead1}>Total Orders:</Text>
-                        <Text style={styles.LIstText2}>{MY_INFO?.paymentDetails?.totalOrders} </Text>
-                    </View>
-                    <View style={styles.contentView}>
-                        <Text style={styles.subHead1}>Billed Amount:</Text>
-                        <Text style={styles.LIstText2}>${MY_INFO?.paymentDetails?.billedAmount} </Text>
-                    </View>
+            <Text style={{ margin: 5, fontSize: 14, fontFamily: 'Poppins-SemiBold', color: '#fff' }}>
+              Personal Info
+            </Text>
 
-                    <View style={styles.contentView}>
-                        <Text style={styles.subHead1}>Pending Amount:</Text>
+          </View>
 
-                        <Text style={styles.LIstText2}>${MY_INFO?.paymentDetails?.pendingAmount} </Text>
+          <View
+            style={{
+              height: 40,
+              backgroundColor: '#fff',
+              padding: 10,
+            }}>
 
-                    </View>
+            <Text style={styles.LIstText2}>
+              <Text style={{ fontSize: 14, fontFamily: 'Poppins-Bold' }}>Status:</Text>{' '}
 
-                </View>
+              <Text style={styles.LIstText21}>Active</Text>
 
-                <View style={styles.slideContainerClient}>
-                    <Text style={styles.headingClient}>Client Information</Text>
-                    <View style={styles.contentView}>
-                        <Text style={styles.subHead}>Client Id:</Text>
 
-                        <Text style={styles.LIstText2}>
+              {/* {infoData?.managerInfo?.cell ? infoData?.managerInfo?.cell : 'N/A'} */}
+              {/* {manager?.phone ? manager?.phone : 'N/A'} */}
+            </Text>
+          </View>
+          <View style={styles.partition}></View>
+          <View style={{ height: 40, padding: 10 }}>
+            <Text style={styles.LIstText2}>
+              <Text style={{ fontSize: 14, fontFamily: 'Poppins-Bold' }}>Client ID:</Text>{' '}
+              {/* {ClientData.subClientInfo.subClientName} */}
+              {MY_INFO?.guestInfo?.client}
+            </Text>
+          </View>
+          <View style={styles.partition}></View>
+          <View style={{ height: 40, padding: 10 }}>
+            <Text style={styles.LIstText2}>
+              <Text style={{ fontSize: 14, fontFamily: 'Poppins-Bold' }}>Office ID:</Text>{' '}
+              {/* {ClientData.officeInfo.name} */}
+              {MY_INFO?.officeInfo?.name}
+            </Text>
+          </View>
+          <View style={styles.partition}></View>
+          <View style={{ height: 40, padding: 10 }}>
+            <Text style={styles.LIstText2}>
+              <Text style={{ fontSize: 14, fontFamily: 'Poppins-Bold' }}>Manager:</Text>{' '}
+              {manager?.firstName}  {manager?.lastName}
+              {/* {ClientData.managerInfo.firstName}{' '}
+              {ClientData.managerInfo.lastName} */}
+            </Text>
+          </View>
+        </View>
 
-                            {MY_INFO?.guestInfo?.client}
-                            {/* {ClientData.subClientInfo.subClientPracticeId} */}
-                        </Text>
-                    </View>
-                    <View style={styles.contentView}>
-                        <Text style={styles.subHead}>Company Name:</Text>
+        <View
+          style={{
+            width: wp(90),
+            backgroundColor: '#fff',
+            //padding: 10,
+            elevation: 10,
+            marginBottom: 20,
+            alignSelf: 'center',
+            // borderRadius: 10,
+            paddingBottom: 20,
+          }}>
 
-                        <Text style={styles.LIstText2}>
 
-                            {infoData?.companyInfo?.name}
-                            {/* {infoData?.individualInfo?.lastName},{' '}
-                            {infoData?.individualInfo?.firstName} */}
-                        </Text>
-                    </View>
-                    <View style={styles.contentView}>
-                        <Text style={styles.subHead}>Type of Company:</Text>
 
-                        <Text style={styles.LIstText2}>
-                            {' '}
-                            {MY_INFO?.companyTypeInfo?.type}
-                            {/* {infoData?.individualInfo?.ssnItin} */}
-                        </Text>
-                    </View>
-                    <View style={styles.contentView}>
-                        <Text style={styles.subHead}>Fiscal Year End:</Text>
 
-                        <Text style={styles.LIstText2}>
-                            {' '}
-                            {/* {infoData?.individualInfo?.birthDate} */}
-                        </Text>
-                    </View>
-                    <View style={styles.contentView}>
-                        <Text style={styles.subHead}>Federal ID:</Text>
+          <View style={{ height: 40, padding: 10 }}>
+            <Text style={styles.LIstText2}>
+              <Text style={{ fontSize: 14, fontFamily: 'Poppins-Bold' }}>Total Orders:</Text>{' '}
+              <Text style={styles.LIstText22}> {MY_INFO?.paymentDetails?.totalOrders}</Text>
 
-                        <Text style={styles.LIstText2}>
-                            {' '}
-                            {MY_INFO?.companyInfo?.fein}
-                            {/* {infoData?.languageInfo?.language1} */}
-                        </Text>
-                    </View>
+            </Text>
+          </View>
+          <View style={styles.partition}></View>
+          <View style={{ height: 40, padding: 10 }}>
+            <Text style={styles.LIstText2}>
+              <Text style={{ fontSize: 14, fontFamily: 'Poppins-Bold' }}>Billed Amount:</Text>{' '}
+              <Text style={styles.LIstText2}>${Math.floor(Number(MY_INFO?.paymentDetails?.billedAmount )).toFixed(2)}</Text>
 
-                    <View style={styles.contentView}>
-                        <Text style={styles.subHead}>State of Corporation:</Text>
+            </Text>
+          </View>
+          <View style={styles.partition}></View>
+          <View style={{ height: 40, padding: 10 }}>
+            <Text style={styles.LIstText2}>
+              <Text style={{ fontSize: 14, fontFamily: 'Poppins-Bold' }}>Pending Amount:</Text>{' '}
+              <Text style={styles.LIstText2}>${Math.floor(Number(MY_INFO?.paymentDetails?.pendingAmount)).toFixed(2)}</Text>
 
-                        <Text style={styles.LIstText2}>
-                            {' '}
-                            {MY_INFO?.stateInfo?.stateName}
-                            {/* {infoData?.residenseInfo?.countryName} */}
-                        </Text>
-                    </View>
+            </Text>
+          </View>
+        </View>
+              
 
-                    <View style={styles.contentView}>
-                        <Text style={styles.subHead}>Citizenship:</Text>
+        <View
+          style={{
+            width: wp(90),
+            backgroundColor: '#fff',
+            //padding: 10,
+            elevation: 10,
+            marginBottom: 20,
+            alignSelf: 'center',
+            // borderRadius: 10,
+            //  paddingBottom: 20,
+          }}>
+          <View
+            style={{
+              height: 40,
 
-                        <Text style={styles.LIstText2}>
-                            {' '}
-                            {/* {infoData?.citizenInfo?.countryName} */}
-                        </Text>
-                    </View>
-                </View>
-                <View style={styles.slideContainerClient}>
-                    <Text style={styles.headingClient}>Contact Information</Text>
-                    <View style={[styles.contentView, { height: hp(6) }]}>
-                        <Text style={styles.subHead}>Email:</Text>
-                        <Text
-                            style={styles.LIstText2}
-                            onPress={() =>
-                                Linking.openURL(
-                                    `mailto:${MY_INFO?.officeInfo?.email}?subject=SendMail&body=Description`,
-                                )
-                            }
-                        // ÷    title={ClientData.officeInfo.email}
-                        >
+              width: wp(90),
+              paddingLeft: 10,
+              flexDirection: "row",
+              alignItems: "center",
+              fontFamily: "Poppins-SemiBold",
 
-                            {MY_INFO?.officeInfo?.email}
-                        </Text>
-                    </View>
-                    <View style={styles.contentView}>
-                        <Text style={styles.subHead}>Phone Number:</Text>
+              backgroundColor: Color.SubheaderBack
+            }}>
+            <Image
+              source={require('../Assets/ClientInformation.png')}
+              style={{
+                width: 25,
+                height: 15,
+                resizeMode: "cover",
+                marginLeft: 5,
+                marginRight: 5,
+                //  borderRadius: 50,
+                //alignSelf: 'center',
+              }}
+            />
 
-                        <Text
-                            style={styles.LIstText2}
-                            onPress={() =>
-                                Linking.openURL(`tel:${MY_INFO.officeInfo?.phone}`)
-                            }>
-                            {' '}
-                            {MY_INFO.officeInfo?.phone}
+            <Text style={{ fontSize: 14, margin: 5, fontFamily: 'Poppins-SemiBold', color: '#fff' }}>
+              Client Information
 
-                        </Text>
-                    </View>
+            </Text>
+          </View>
+          <View style={styles.partition1}></View>
+          <View
+            style={{
+              height: 40,
+              backgroundColor: Color.greenback,
+              padding: 10,
+              flexDirection: "row",
+              width: wp(90),
+            }}>
 
-                    <View style={styles.contentView}>
-                        <Text style={styles.subHead}>Address:</Text>
 
-                        <Text style={styles.LIstText2}>
-                            {MY_INFO.officeInfo?.address}
-                        </Text>
-                    </View>
-                </View>
+            <Text style={styles.LIstText3}>Client ID:</Text>
 
-                <View style={styles.slideContainerClient}>
-                    <Text style={styles.headingClient}>Internal Data</Text>
+            <Text style={styles.LIstText4}>
+            {MY_INFO?.guestInfo?.client}
+            </Text>
 
-                    <View style={[styles.contentView, { height: hp(6) }]}>
-                        <Text style={styles.subHead}>Office:</Text>
-                        <Text style={styles.LIstText2}>
-                            {MY_INFO.officeInfo?.name}
-                            {/* {ClientData.officeInfo.email} */}
-                        </Text>
-                    </View>
 
-                    <View style={styles.contentView}>
-                        <Text style={styles.subHead}>Client Partner:</Text>
+          </View>
+          <View style={styles.partition1}></View>
+          <View style={{ height: 40, padding: 10, flexDirection: 'row', backgroundColor: Color.greenback }}>
+            <Text style={styles.LIstText3}>
+              <Text style={{ fontSize: 14, fontFamily: 'Poppins-Bold' }}>Company Name:</Text>{' '}
+            </Text>
+            <Text style={styles.LIstText4}>
 
-                        <Text style={styles.LIstText2}>
-                            {' '}
-                            {partner?.firstName}  {partner?.lastName}
-                            {/* {ClientData.partnerInfo.firstName}{' '}
-                            {ClientData.partnerInfo.lastName} */}
-                        </Text>
-                    </View>
-                    <TouchableOpacity style={styles.contentView} onPress={() => navigation.navigate('Manager')}>
-                        <Text style={styles.subHead}>Client Manager:</Text>
+            {infoData?.companyInfo?.name}
+            </Text>
 
-                        <Text style={styles.LIstText2}>
-                            {' '}
-                            {manager?.firstName}  {manager?.lastName}
-                            {/* {ClientData.managerInfo.firstName}{' '}
-                            {ClientData.managerInfo.lastName} */}
-                        </Text>
-                    </TouchableOpacity>
-                </View>
+          </View>
+          <View style={styles.partition1}></View>
+          <View style={{ height: 40, flexDirection: 'row', padding: 10, backgroundColor: Color.greenback }}>
+            <Text style={styles.LIstText3}>
+              <Text style={{ fontSize: 14, fontFamily: 'Poppins-Bold' }}>Type Of Company:</Text>{' '}
+            </Text>
+
+            <Text style={styles.LIstText4}>
+            {MY_INFO?.companyTypeInfo?.type}
+            </Text>
+          </View>
+          <View style={styles.partition1}></View>
+          <View style={{ height: 40, padding: 10, flexDirection: 'row', padding: 10, backgroundColor: Color.greenback }}>
+
+            <Text style={styles.LIstText3}>Fiscal Year End:</Text>
+
+            <Text style={styles.LIstText4}>
+              {/* {infoData?.individualInfo?.birthDate} */}
+
+            </Text>
+          </View>
+          <View style={styles.partition1}></View>
+          <View style={{ height: 40, padding: 10, flexDirection: 'row', padding: 10, backgroundColor: Color.greenback }}>
+
+            <Text style={styles.LIstText3}>Federal ID:</Text>
+
+            <Text style={styles.LIstText4}>
+            {MY_INFO?.companyInfo?.fein}
+            </Text>
+          </View>
+          <View style={styles.partition1}></View>
+          <View style={{ height: 40, padding: 10, flexDirection: 'row', backgroundColor: Color.greenback }}>
+            <Text style={styles.LIstText4}>
+              <Text style={{ fontSize: 14, fontFamily: 'Poppins-Bold' }}>State of Corporation:</Text>
+            </Text>
+            <Text style={styles.LIstText4}>
+            {MY_INFO?.stateInfo?.stateName}
+            </Text>
+          </View>
+          <View style={styles.partition1}></View>
+          <View style={{ height: 40, padding: 10, flexDirection: 'row', backgroundColor: Color.greenback }}>
+
+            <Text style={styles.LIstText3}>Citizenship:</Text>
+
+            <Text style={styles.LIstText4}>
+              {/* {ClientData.managerInfo.firstName}{' '}
+              {ClientData.managerInfo.lastName} */}
+            </Text>
+          </View>
+
+
+        </View>
+
+        <View
+          style={{
+            width: wp(90),
+            backgroundColor: '#fff',
+            //padding: 10,
+            elevation: 10,
+            marginBottom: 20,
+            alignSelf: 'center',
+            // borderRadius: 10,
+            //  paddingBottom: 20,
+          }}>
+          <View
+            style={{
+              height: 40,
+
+              width: wp(90),
+              paddingLeft: 10,
+
+              fontFamily: "Poppins-SemiBold",
+              alignItems: "center",
+              flexDirection: "row",
+              backgroundColor: Color.SubheaderBack
+            }}>
+            <Image
+              source={require('../Assets/ContactInformation.png')}
+              style={{
+                width: 15,
+                height: 15,
+
+                marginLeft: 5,
+                marginRight: 5,
+                //  borderRadius: 50,
+                //alignSelf: 'center',
+              }}
+            />
+
+            <Text style={{ margin: 5, fontSize: 14, fontFamily: 'Poppins-SemiBold', color: '#fff' }}>
+              Contact Information
+
+            </Text>
+          </View>
+          <View style={styles.partition1}></View>
+          <View
+            style={{
+              //height: 45,
+              backgroundColor: Color.greenback,
+              padding: 10,
+              flexDirection: "row",
+              width: wp(90),
+            }}>
+
+
+            <Text style={styles.LIstText3}>Email:</Text>
+
+
+            <Text
+              style={styles.AddressText}
+              onPress={() =>
+                Linking.openURL(
+                  `mailto:${MY_INFO?.officeInfo?.email}?subject=SendMail&body=Description`,
+                )
+              }
+              title={MY_INFO?.officeInfo?.email}>
+
+                {MY_INFO?.officeInfo?.email}
+            </Text>
+
+
+          </View>
+          <View style={styles.partition1}></View>
+          <View style={{ height: 40, padding: 10, flexDirection: 'row', backgroundColor: Color.greenback }}>
+            <Text style={styles.LIstText3}>
+              <Text style={{ fontSize: 14, fontFamily: 'Poppins-Bold' }}>Phone:</Text>{' '}
+            </Text>
+
+            <Text
+              style={styles.LIstText4}
+              onPress={() =>
+                Linking.openURL(`tel:${MY_INFO.officeInfo?.phone}`)
+              }>
+              {' '}
+              {MY_INFO.officeInfo?.phone}
+            </Text>
+
+          </View>
+          <View style={styles.partition1}></View>
+          <View style={{  flexDirection: 'row', padding: 10, backgroundColor: Color.greenback }}>
+            <Text style={styles.LIstText3}>
+              <Text style={{ fontSize: 14, fontFamily: 'Poppins-Bold' }}>Address:</Text>{' '}
+            </Text>
+
+
+            <Text style={styles.AddressText}>
+
+            {MY_INFO.officeInfo?.address}
+            </Text>
+          </View>
+
+
+        </View>
+        <View
+          style={{
+            width: wp(90),
+            backgroundColor: '#fff',
+            //padding: 10,
+            elevation: 10,
+            marginBottom: 20,
+            alignSelf: 'center',
+            // borderRadius: 10,
+            //  paddingBottom: 20,
+          }}>
+          <View
+            style={{
+              height: 40,
+
+              width: wp(90),
+              paddingLeft: 10,
+
+              fontFamily: "Poppins-SemiBold",
+              flexDirection: "row",
+              alignItems: "center",
+              backgroundColor: Color.SubheaderBack
+            }}>
+            <Image
+              source={require('../Assets/InternalData.png')}
+              style={{
+                width: 15,
+                height: 15,
+
+                marginLeft: 5,
+                marginRight: 5,
+                //  borderRadius: 50,
+                //alignSelf: 'center',
+              }}
+            />
+
+            <Text style={{ margin: 5, fontSize: 14, fontFamily: 'Poppins-SemiBold', color: '#fff' }}>
+              Internal Data
+
+            </Text>
+          </View>
+
+          <View style={styles.partition1}></View>
+          <View
+            style={{
+              height: 40,
+              backgroundColor: Color.greenback,
+              padding: 10,
+              flexDirection: "row",
+              width: wp(90),
+            }}>
+
+
+            <Text style={styles.LIstText3}>Office:</Text>
+
+
+            <Text
+              style={styles.LIstText4}
+            >
+
+                {MY_INFO.officeInfo?.name}
+
+            </Text>
+
+
+          </View>
+          <View style={styles.partition1}></View>
+          <View style={{ height: 40, padding: 10, flexDirection: 'row', backgroundColor: Color.greenback }}>
+            <Text style={styles.LIstText3}>
+              <Text style={{ fontSize: 14, fontFamily: 'Poppins-Bold' }}>Client Partner:</Text>{' '}
+            </Text>
+
+            <Text
+              style={styles.LIstText4}
+            >
+               {partner?.firstName}  {partner?.lastName}
+            </Text>
+
+          </View>
+          <View style={styles.partition1}></View>
+          <View style={{ height: 40, flexDirection: 'row', padding: 10, backgroundColor: Color.greenback }}>
+            <Text style={styles.LIstText3}>
+              <Text style={{ fontSize: 14, fontFamily: 'Poppins-Bold' }}>Client Manager:</Text>{' '}
+            </Text>
+
+
+            <Text style={styles.LIstText4}>
+
+            {manager?.firstName}  {manager?.lastName}
+            </Text>
+          </View>
+
+
+        </View>
+
+              
             </ScrollView>
         </View>
     );
@@ -734,14 +957,45 @@ const styles = StyleSheet.create({
         // marginRight: 80
     },
     LIstText2: {
-        color: '#000',
+        fontSize: 14,
+        fontFamily: 'Poppins-SemiBold',
+        color: Color.headerIconBG,
+      },
+      LIstText3: {
+        fontSize: 14,
+        fontFamily: 'Poppins-SemiBold',
+        color: Color.white,
         width: wp(40),
-        height: hp(10)
-    },
-    LIstText21: {
+        // backgroundColor: "red"
+      },
+      LIstText4: {
+        fontSize: 14,
+        fontFamily: 'Poppins-SemiBold',
+        color: Color.white,
+        width: wp(40),
+        //  backgroundColor: "red"
+      },
+      AddressText: {
+        fontSize: 14,
+        fontFamily: 'Poppins-SemiBold',
+        color: Color.white,
+        width: wp(45),
+      //  backgroundColor: "red"
+      },
+      LIstText22: {
+        fontSize: 12,
+    
+        fontFamily: 'Poppins-SemiBold',
+        backgroundColor: Color.totalOrders,
+        color: '#fff'
+      },
+      LIstText21: {
         color: '#fff',
-        backgroundColor: '#8AB645',
-    },
+        fontSize: 12,
+    
+        fontFamily: 'Poppins-SemiBold',
+        backgroundColor: Color.statusActive
+      },
     subHead: {
         width: 150,
         fontSize: 15,
@@ -763,4 +1017,26 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         marginRight: 10,
     },
+    infoSec: {
+        // backgroundColor: Color.darkGreen,
+        backgroundColor: Color.HeaderBackground,
+    
+        borderRadius: 10,
+        padding: 10,
+        //height: 190,
+        width: wp(90),
+        alignSelf: 'center',
+        marginTop: 10,
+        marginBottom: 10,
+      },
+      partition: {
+        borderWidth: 0.3,
+        borderColor: '#A7B1C2',
+    
+      },
+      partition1: {
+        borderWidth: 0.3,
+        borderColor: Color.white
+    
+      },
 });

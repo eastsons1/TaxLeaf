@@ -39,6 +39,7 @@ import HeadTabs from './HeadTabs';
 let iconNm = require('../Assets/img/icons/msg.png');
 let usericon = require('../Assets/img/icons/user-icon.png');
 const FileCabinet = () => {
+  
   const [idRow, setIdRow] = useState();
   const [selectedData, setSelectedData] = useState();
   const [documentId, setdocumentId] = useState();
@@ -55,7 +56,7 @@ const FileCabinet = () => {
 
   const [isFocus, setIsFocus] = useState(false);
   const [loader, setLoader] = useState(false);
-  const [filesInFolder, setFIlesInFolder] = useState()
+  const [filesInFolder, setFIlesInFolder] = useState([])
   const [officeId, setOfficeId] = useState()
   const [ClientId, setClientId] = useState()
   const [clientType, setClientType] = useState()
@@ -262,24 +263,59 @@ const FileCabinet = () => {
     { label: '2034', value: '34' },
     { label: '2035', value: '35' },
   ];
+
+
+
+  const sortedDataYear = [...dataYear].sort((a, b) => b.label - a.label);
+
   const handleRow = item => {
-    setLoader(true)
-
-    dispatch(GetAllLibraryFiles(officeId, clientType, ClientId, item.azureFolderName, brandName, navigation))
-    console.log(officeId, clientType, ClientId, item.azureFolderName, brandName, "KKKKKKKK")
-    console.log(item, "KKKKKKKK")
-
+   
+   
+   
+    getFilesByFolder(selectedData?.azureFolderName, referenceFiles);
 
     setIdRow(item.id);
     setPress(true);
     setSelectedData(item);
     setdocumentId(item?.documentTypeIds)
 
-    setTimeout(() => {
-      setLoader(false)
+    //   if (!filesInFolder.length) {
+    //   getAllLibraryFiles(officeId, clientType, ClientId, item.azureFolderName, brandName, navigation);
+    // }
 
-    }, 2000);
+   
+    //  dispatch(GetAllLibraryFiles(officeId, clientType, ClientId, item.azureFolderName, brandName, navigation))
+      //console.log(officeId, clientType, ClientId, item.azureFolderName, brandName, "PPPPPPP")
+      console.log(item.azureFolderName, "KKKKKKKK")
+  
+
+   
   };
+
+
+  // const handleRow = async (item) => {
+  //   setLoader(true);
+  
+  //   // Assuming getFilesByFolder returns a Promise
+  //   await getFilesByFolder(selectedData?.azureFolderName, referenceFiles, item.azureFolderName);
+  
+  // //  dispatch(GetAllLibraryFiles(officeId, clientType, ClientId, item.azureFolderName, brandName, navigation));
+  
+  
+  
+  //   console.log(officeId, clientType, ClientId, item.azureFolderName, brandName, "PPPPPPP");
+  //   console.log(item, "KKKKKKKK");
+  
+  //   setIdRow(item.id);
+  //   setPress(true);
+  //   setSelectedData(item);
+  //   setDocumentId(item?.documentTypeIds);
+  
+  //   setTimeout(() => {
+  //     setLoader(false);
+  //   }, 2000);
+  // };
+
   const handleRowOFF = item => {
     setIdRow(item.id);
     setPress(false);
@@ -302,6 +338,19 @@ const FileCabinet = () => {
 
     // setInfoData(CLIENT_LIST);
   }, []);
+
+  useEffect(() => {
+    const currentYear = new Date().getFullYear();
+    setYear(currentYear);
+    setYearText(currentYear.toString());
+    const currentDate = new Date();
+    const currentMonthIndex = currentDate.getMonth();
+    const currentMonth = dataPeriod[currentMonthIndex].label;
+
+    setPeriod(currentMonth);
+    setPeriodValue(dataPeriod[currentMonthIndex].value);
+  }, []); // Empty dependency array ensures this effect runs only once when the component mounts
+
 
   useEffect(() => {
     // setLoader(true);
@@ -388,10 +437,11 @@ const FileCabinet = () => {
 
   useEffect(() => {
 
-
-
+ 
     const filesInFolder = getFilesByFolder(selectedData?.azureFolderName, referenceFiles);
-    // setFIlesInFolder(filesInFolder)
+ //  getFilesByFolder(selectedData?.azureFolderName, referenceFiles);
+
+     //setFIlesInFolder(filesInFolder)
 
     //console.log(filesInFolder, 'filesInFolder')
   }, [selectedData, FILE_UPLOAD_TOKEN])
@@ -534,7 +584,10 @@ const FileCabinet = () => {
 
     // console.log(numberOfMatchingResults, 'numberOfMatchingResults');
 
-    setLoader(false);
+   
+    setTimeout(() => {
+      setLoader(false);
+    }, 2000);
     cancelModal();
   };
 
@@ -563,7 +616,9 @@ const FileCabinet = () => {
   }
 
 
-  function getFilesByFolder(azureFolderName, referenceFiles) {
+  const getFilesByFolder = (azureFolderName, referenceFiles) =>  {
+    setLoader(true)
+    setFIlesInFolder([])
     const matchingFiles = referenceFiles?.filter(file => file.sharepointFolderName === azureFolderName)?.map(file => file?.fileName);
     const officeId = referenceFiles?.filter(file => file.sharepointFolderName === azureFolderName)?.map(file => file?.officeId);
     const clientType = referenceFiles?.filter(file => file.sharepointFolderName === azureFolderName)?.map(file => file?.clientType);
@@ -571,11 +626,27 @@ const FileCabinet = () => {
     const SharepointFolderName = referenceFiles?.filter(file => file.sharepointFolderName === azureFolderName)?.map(file => file?.sharepointFolderName);
     const Brand = referenceFiles?.filter(file => file.sharepointFolderName === azureFolderName)?.map(file => file?.brand);
 
-    setOfficeId(officeId)
-    setClientType(clientType)
-    setClientId(ClientId)
-    setSharepointFolderName(SharepointFolderName)
-    setBrand(Brand)
+      console.log(officeId,clientType,ClientId,SharepointFolderName,Brand,'JJJJJJJJJ',azureFolderName)
+    
+
+      dispatch(GetAllLibraryFiles(officeId, clientType, ClientId, azureFolderName, Brand, navigation));
+     
+    
+       
+   
+setTimeout(() => {
+  setLoader(false)
+}, 3000);
+
+    // setOfficeId(officeId)
+    // setClientType(clientType)
+    // setClientId(ClientId)
+    // setSharepointFolderName(SharepointFolderName)
+    // setBrand(Brand)
+
+
+
+
 
 
 
@@ -685,7 +756,7 @@ const FileCabinet = () => {
         {press == true && idRow == item.id ? (
           <View style={styles.popup}>
             <TouchableOpacity onPress={() => { handleRowOFF(item) }}>
-              <Text style={styles.popupHead}>{selectedData.azureRenameFolderName1}</Text>
+              <Text style={styles.popupHead}>{selectedData?.azureRenameFolderName1}</Text>
 
             </TouchableOpacity>
 
@@ -728,7 +799,7 @@ const FileCabinet = () => {
                       backgroundColor:
                         idRow == item.id && press == true ? '#e8f1f2' : '#e8f1f2',
                     }}>
-                    {console.log(typeof (item.name), 'itemitemitemitemitemitem')}
+                   
                     <TouchableOpacity
                       onPress={() => handleDownloadPress(item.downloadUrl)}
                       style={{ flex: 2.8 }}  >
@@ -798,7 +869,9 @@ const FileCabinet = () => {
         <ScrollView showsVerticalScrollIndicator={false}
           style={{}}
         >
-          <HeadTabs />
+          <HeadTabs
+          
+          />
           <Loader flag={loader} />
 
           {/* <CustomHeader /> */}
@@ -870,7 +943,7 @@ const FileCabinet = () => {
                   </DataTable.Title>
                 </DataTable.Header>
                 <FlatList
-                  contentContainerStyle={{ paddingBottom: 200 }}
+                  contentContainerStyle={{ paddingBottom: 100 }}
                   data={filteredReq}
                   // numColumns={5}
                   keyExtractor={(item, index) => index}
@@ -1036,7 +1109,7 @@ const FileCabinet = () => {
                           selectedTextStyle={styles.selectedTextStyle}
                           itemTextStyle={styles.selectedTextStyle}
                           iconStyle={styles.iconStyle}
-                          data={dataYear}
+                          data={sortedDataYear}
                           maxHeight={200}
                           labelField="label"
                           valueField="label"

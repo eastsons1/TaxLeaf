@@ -230,6 +230,20 @@ const Drawer = () => {
 
           <Text style={styles.screenNameText}>Contact</Text>
         </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.screenName}
+          onPress={() => {
+            navigation.navigate('ClientSteps');
+          }}>
+          <Icon2
+            style={styles.icon}
+            name="request-quote"
+            size={20}
+            color="#fff"
+          />
+
+          <Text style={styles.screenNameText}>Client Setup</Text>
+        </TouchableOpacity>
         <View style={styles.part}></View>
       </View>
       <View>

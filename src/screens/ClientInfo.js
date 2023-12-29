@@ -96,6 +96,7 @@ const ClientInfo = () => {
   const navigation = useNavigation();
   const jsonData = MY_INFO?.guestInfo;
   const staffview = MY_INFO?.staffview;
+  const companyInfo = MY_INFO?.companyInfo;
   //const ClinetCount = MY_INFO?.guestInfo;
   let countIndividuals = 0;
   let countBusiness = 0;
@@ -232,9 +233,10 @@ const ClientInfo = () => {
     );
   };
 
-  const GetClientDetail1 = item => {
+  const GetClientDetail1 = (item,companyInfo) => {
     navigation.navigate('MainClientDetails', {
       clientdetail: item,
+      companyInfo:companyInfo
     });
 
     dispatch(
@@ -251,7 +253,9 @@ const ClientInfo = () => {
 
         style={{ backgroundColor: '#d5e3e5', height: hp(85) }}
       >
-        <HeadTabs />
+        <HeadTabs
+          
+        />
         <Loader flag={loader} />
         <Text style={{ fontSize: 20, marginLeft: 20, color: Color.headerIconBG, fontFamily: 'Poppins-Bold', }}>Clients ({infoData?.length + companyCount + otherCount})</Text>
 
@@ -604,7 +608,7 @@ const ClientInfo = () => {
                         alignItems: 'center',
                       }}>
                       <Text style={{ color: Color.darkGreen, fontSize: 10, fontFamily: 'Poppins-SemiBold' }}>
-                        {staffview?.firstName}  {staffview?.lastName}{staffview?.length}
+                      {companyInfo?.name} 
                       </Text>
                     </View>
 
@@ -630,7 +634,7 @@ const ClientInfo = () => {
                 {item.associationType}
               </Text> */}
                       <TouchableOpacity
-                        onPress={() => GetClientDetail1(jsonData)}
+                        onPress={() => GetClientDetail1(jsonData,companyInfo)}
                       >
                         <Image
                           source={require('../Assets/img/icons/view.png')}
@@ -836,7 +840,8 @@ const ClientInfo = () => {
                             alignItems: 'center',
                           }}>
                           <Text style={{ color: Color.darkGreen, fontSize: 10, fontFamily: 'Poppins-SemiBold' }}>
-                            {staffview?.firstName}  {staffview?.lastName}{staffview.length}
+                          {companyInfo?.name}  
+                            {/* {staffview?.firstName}  {staffview?.lastName}{staffview.length} */}
                           </Text>
                         </View>
 
@@ -858,7 +863,7 @@ const ClientInfo = () => {
                           }}>
 
                           <TouchableOpacity
-                            onPress={() => GetClientDetail1(jsonData)}
+                            onPress={() => GetClientDetail1(jsonData,companyInfo)}
                           >
                             <Image
                               source={require('../Assets/img/icons/view.png')}
@@ -1169,7 +1174,7 @@ const ClientInfo = () => {
                           }}>
 
                           <TouchableOpacity
-                            onPress={() => GetClientDetail1(jsonData)}
+                            onPress={() => GetClientDetail1(jsonData,companyInfo)}
                           >
                             <Image
                               source={require('../Assets/img/icons/view.png')}

@@ -198,17 +198,22 @@ const ClientDetails = ({ route }) => {
                   marginLeft: 10
                 }}
               />
-              <View>
+              <View style={{
+                width:wp(60),
+               // backgroundColor:"red",
+                justifyContent:"center",
+                alignItems:"center"
+                }}>
                 <Text
                   style={{
                     textAlign: 'center',
                     color: '#fff',
-                    marginTop: 10,
+                   // marginTop: 10,
                     fontFamily: 'Poppins-Bold',
                     fontSize: 18,
-                    marginLeft: 10
+                    //marginLeft: 10
                   }}>
-                  Hello {ClientData.subClientInfo.subClientName}
+                  Hello {ClientData.subClientInfo.subClientPracticeId}
                   {/* {manager?.firstName}{' '}
                       {manager?.lastName} */}
                 </Text>
@@ -219,7 +224,7 @@ const ClientDetails = ({ route }) => {
 
                     fontFamily: 'Poppins-SemiBold',
                     fontSize: 14,
-                    marginRight: 25
+                   // marginRight: 25
                   }}>
                   Welcome to Taxleaf
                 </Text>
@@ -229,6 +234,8 @@ const ClientDetails = ({ route }) => {
 
           </View>
         </View>
+
+        
         <View
           style={{
             width: wp(90),
@@ -667,13 +674,13 @@ const ClientDetails = ({ route }) => {
 
           </View>
           <View style={styles.partition1}></View>
-          <View style={{ height: 40, flexDirection: 'row', padding: 10, backgroundColor: Color.greenback }}>
+          <View style={{ flexDirection: 'row', padding: 10, backgroundColor: Color.greenback }}>
             <Text style={styles.LIstText3}>
               <Text style={{ fontSize: 14, fontFamily: 'Poppins-Bold' }}>Address:</Text>{' '}
             </Text>
 
 
-            <Text style={styles.LIstText4}>
+            <Text style={styles.AddressText}>
 
               {ClientData.officeInfo.address}
             </Text>
@@ -1084,6 +1091,13 @@ const styles = StyleSheet.create({
     color: Color.white,
     width: wp(40),
     //  backgroundColor: "red"
+  },
+  AddressText: {
+    fontSize: 14,
+    fontFamily: 'Poppins-SemiBold',
+    color: Color.white,
+    width: wp(45),
+  //  backgroundColor: "red"
   },
   LIstText22: {
     fontSize: 12,

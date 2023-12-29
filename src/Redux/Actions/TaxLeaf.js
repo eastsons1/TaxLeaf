@@ -561,7 +561,7 @@ export const uploadFile = (MY_INFO, FolderName, documentType, fileext, year, per
             "FileType": fileext,
             "Period": periodValue,
             "PeriodText": period,
-            "Year": year,
+            "Year": year.toString(),
             "Description": description,
             "UploadedByName": UploadedByName,
             "UploadedBy": UploadedBy.toString()
@@ -575,6 +575,7 @@ export const uploadFile = (MY_INFO, FolderName, documentType, fileext, year, per
       }
     }
 
+    console.log(data, 'datadatadatadatadatadatadata')
     console.log(data?.FileListModel[0]?.FileModel, 'uplaodPayload')
     const response = await logistical.post('/FileCabinet/UploadFiles', data);
     // console.log(response, 'UploadFilesResp');
@@ -807,11 +808,7 @@ export const getFileInfo = (client, clientType, navigation) => dispatch => {
 
 
 export const GetAllLibraryFiles = (officeId, clientType, ClientId, SharepointFolderName, Brand, navigation) => dispatch => {
-  // dispatch({
-  //   type: 'LOADING',
-  //   payload: true,
-  // });
-
+ 
   return new Promise(async (resolve, reject) => {
     let data = {
       "LibraryId": "b!Lk512wjgi02RXgn1f6gS_LglI0RARFdPqlWhynyni0PoNyVdBpdDS6rPS1ae4PfD",
@@ -827,7 +824,7 @@ export const GetAllLibraryFiles = (officeId, clientType, ClientId, SharepointFol
 
     console.log(data, '&&&&&&&&&&&&&&&&')
     const response = await logistical.post('/FileCabinet/GetAllLibraryFiles', data);
-    console.log(response?.driveItemList[0].name, 'fileRespfileRespfileRespfileRespfileRespfileRespfileRespfileRespfileRespfileRespfileResp');
+   // console.log(response, 'fileRespfileRespfileRespfileRespfileRespfileRespfileRespfileRespfileRespfileRespfileResp');
 
     if (response) {
       // AsyncStorage.setItem('login', JSON.stringify(response.token));

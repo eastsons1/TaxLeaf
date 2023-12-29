@@ -52,11 +52,11 @@ const HeadTabs = () => {
 
     const showwhatfunc1 = data => {
         setshowwhat1(data);
-        console.log(data);
+        console.log(data,'showwhat1showwhat1showwhat1');
     };
     const showwhatfunc2 = data => {
         setshowwhat2(data);
-        console.log(data);
+        console.log(data,'showwhat2showwhat2');
     };
 
     useEffect(() => {
@@ -71,9 +71,7 @@ const HeadTabs = () => {
             });
     }, [LOGIN_DATA, jsonData?.clientId, jsonData?.clientType, officeInfo?.id]);
 
-    // useEffect(() => {
-    //     // dispatch(ManagerInfo(jsonData?.clientId, jsonData?.clientType, navigation));
-    // }, [MY_INFO, MANAGER_INFO]);
+   
 
     useEffect(() => {
         setDashboardList(DASHBOARD_LIST);
@@ -82,98 +80,21 @@ const HeadTabs = () => {
     }, [DASHBOARD_LIST, DASHBOARD_MESSAGE_LIST, DASHBOARD_LIST_TWO]);
 
 
-
-
-    // useEffect(() => {
-    //     if (showwhat1) {
-    //         setshowwhat2('')
-
-    //     }
-    // }, [showwhat1])
-    // useEffect(() => {
-    //     if (showwhat2) {
-    //         setshowwhat1('')
-
-    //     }
-    // }, [showwhat2])
-
-
-    // useEffect(() => {
-    //     setLoader(true);
-    //     dispatch(clientInfo(LOGIN_DATA, navigation));
-    //     dispatch(
-    //         dashboardlist(
-    //             jsonData?.clientId,
-    //             jsonData?.clientType,
-    //             officeInfo?.id,
-    //             navigation,
-    //         ),
-    //     );
-
-
-    //     setDashboardList(DASHBOARD_LIST);
-    //     setDashboardMessageList(DASHBOARD_MESSAGE_LIST);
-    //     // dispatch(ManagerInfo(jsonData?.clientId, jsonData?.clientType, navigation));
-
-    //     setTimeout(() => {
-    //         setLoader(false);
-    //     }, 2000);
-    // }, []);
-
-
-    // useEffect(() => {
-    //     console.log('ManagerInfo111', jsonData?.clientId, jsonData?.clientType)
-    //     dispatch(ManagerInfo(jsonData?.clientId, jsonData?.clientType, navigation));
-
-    //     setDashboardList(DASHBOARD_LIST);
-    //     setDashboardMessageList(DASHBOARD_MESSAGE_LIST);
-    //     dispatch(
-    //         dashboardlist(
-    //             jsonData?.clientId,
-    //             jsonData?.clientType,
-    //             officeInfo?.id,
-    //             navigation,
-    //         ),
-    //     );
-    // }, [LOGIN_DATA]);
-
-    // useEffect(() => {
-
-    //     setDashboardList(DASHBOARD_LIST);
-    //     setDashboardMessageList(DASHBOARD_MESSAGE_LIST);
-    // }, []);
-    // useEffect(() => {
-
-    //     setDashboardList(DASHBOARD_LIST);
-    //     setDashboardMessageList(DASHBOARD_MESSAGE_LIST);
-    //     dispatch(
-    //         dashboardlist(
-    //             jsonData?.clientId,
-    //             jsonData?.clientType,
-    //             officeInfo?.id,
-    //             navigation,
-    //         ),
-    //     );
-
-    //     console.log('ManagerInfo2222', jsonData?.clientId, jsonData?.clientType)
-
-    //     dispatch(ManagerInfo(jsonData?.clientId, jsonData?.clientType, navigation));
-
-    // }, [showwhat1]);
-
-
-    // useEffect(() => {
-    //     // setLoader(true);
-
-    //     setDashboardList(DASHBOARD_LIST);
-    //     setDashboardMessageList(DASHBOARD_MESSAGE_LIST);
-    //     // setTimeout(() => {
-    //     //   setLoader(false);
-    //     // }, 2000);
-    // }, [MY_INFO, MANAGER_INFO, DASHBOARD_LIST, DASHBOARD_MESSAGE_LIST]);
-
-
-
+    useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+          // setLoader(true);
+         console.log("HeadTAbsHeadTAbs")
+        // showwhatfunc1(showwhat1)
+          setshowwhat1("")
+          setshowwhat2("")
+          // setTimeout(() => {
+          //   setLoader(false);
+          // }, 2000);
+    
+        });
+        return unsubscribe;
+      }, [navigation,]);
+    
 
     const HolidaysNewsType = 'Holidays';
     const TaxNewsType = 'Tax Deadlines';
@@ -1702,7 +1623,7 @@ const HeadTabs = () => {
                                                     ? (setshowwhat2(''), setshowwhat1(''))
                                                     : (showwhatfunc2('taxReturn'), showwhatfunc1(''))
                                             }>
-                                            {console.log(showwhat1, showwhat2, "LLLLL")}
+                                            {/* {console.log(showwhat1, showwhat2, "LLLLL")} */}
                                             <Icon4
                                                 style={[
                                                     styles.icon,

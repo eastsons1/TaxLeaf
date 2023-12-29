@@ -136,114 +136,7 @@ const HomeScreen = () => {
   const [loader, setLoader] = useState(false);
 
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       setLoader(true);
 
-  //       // Fetch order details
-  //       // await dispatch(GetDetailsbyOrderId(jsonData?.clientId, jsonData?.clientType, orderId, navigation));
-
-  //       // Fetch manager info
-
-  //       await dispatch(ManagerInfo(jsonData?.clientId, jsonData?.clientType, navigation));
-
-
-  //       setLoader(false);
-  //     } catch (error) {
-  //       console.error("Error fetching data:", error);
-  //       setLoader(false);
-  //     } finally {
-  //       setLoader(false);
-  //     }
-
-  //   };
-
-  //   fetchData();
-  // }, []);
-
-
-
-  // useEffect(() => {
-  //   setLoader(true);
-
-
-  //   dispatch(clientInfo(Login, navigation));
-  //   dispatch(ManagerInfo(jsonData?.clientId, jsonData?.clientType, navigation));
-  //   dispatch(
-  //     dashboardlist(
-  //       jsonData?.clientId,
-  //       jsonData?.clientType,
-  //       officeInfo?.id,
-  //       navigation,
-  //     ),
-  //   );
-
-  //   setInfoData(MANAGER_INFO);
-  //   setDashboardList(DASHBOARD_LIST);
-  //   setDashboardMessageList(DASHBOARD_MESSAGE_LIST);
-  //   setTimeout(() => {
-  //     setLoader(false);
-  //   }, 2000);
-  // }, []);
-
-
-  // console.log(userDetail, 'userDetailuserDetailuserDetailuserDetail')
-
-
-  // useEffect(() => {
-  //   setInfoData(MANAGER_INFO);
-  //   setDashboardList(DASHBOARD_LIST);
-  //   setDashboardMessageList(DASHBOARD_MESSAGE_LIST);
-  //   dispatch(
-  //     dashboardlist(
-  //       jsonData?.clientId,
-  //       jsonData?.clientType,
-  //       officeInfo?.id,
-  //       navigation,
-  //     ),
-  //   );
-  //   dispatch(ManagerInfo(jsonData?.clientId, jsonData?.clientType, navigation));
-  // }, []);
-
-
-
-
-  // useEffect(() => {
-  //   setInfoData(MANAGER_INFO);
-  //   setDashboardList(DASHBOARD_LIST);
-  //   setDashboardMessageList(DASHBOARD_MESSAGE_LIST);
-  // }, []);
-
-
-
-
-  // useEffect(() => {
-  //   // setLoader(true);
-  //   setInfoData(MANAGER_INFO);
-  //   setDashboardList(DASHBOARD_LIST);
-  //   setDashboardMessageList(DASHBOARD_MESSAGE_LIST);
-  //   // setTimeout(() => {
-  //   //   setLoader(false);
-  //   // }, 2000);
-  // }, [MY_INFO, OFFICE_INFO, DASHBOARD_LIST, DASHBOARD_MESSAGE_LIST]);
-
-  // console.log(
-  //   dashboardList,
-  //   'newsandupdatelistnewsandupdatelistnewsandupdatelistnewsandupdatelistnewsandupdatelist',
-  // );
-
-  const desiredNewsType = 'Holidays ';
-  const TaxNewsType = 'Tax Deadlines';
-  const filteredList =
-    dashboardList &&
-    dashboardList.filter(item => item.newsType === desiredNewsType);
-
-  const TaxfilteredList =
-    dashboardList &&
-    dashboardList.filter(item => item.newsType === TaxNewsType);
-
-  // console.log(TaxfilteredList, 'TaxfilteredListt');
 
   const renderItem = ({ item }) => (
     <TouchableOpacity
@@ -270,7 +163,7 @@ const HomeScreen = () => {
         </Text>
         <Text style={styles.info}>{item.footHead}</Text>
         <TouchableOpacity style={styles.btn}>
-          <View style={{ width: wp(7) }}>
+          {/* <View style={{ width: wp(30) }}> */}
             <Icon1
               style={[
                 styles.icon,
@@ -282,9 +175,12 @@ const HomeScreen = () => {
               size={22}
               color="#fff"
             />
-          </View>
+          {/* </View> */}
 
-          <Text style={{ color: '#fff', fontFamily: 'Poppins-SemiBold', width: wp(27), fontSize: 12 }}>888-Y-TAXLEAF</Text>
+          <Text style={{marginLeft:10, color: '#fff',textAlign:"center", fontFamily: 'Poppins-SemiBold', fontSize: 12 }}>
+            {/* 333-888-2345 */}
+            {manager?.phone ? manager?.phone : 'N/A'}
+            </Text>
         </TouchableOpacity>
       </View>
     </TouchableOpacity>

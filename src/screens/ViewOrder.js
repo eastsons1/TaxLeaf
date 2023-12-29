@@ -62,6 +62,15 @@ const ViewOrder = ({ route }) => {
                 <TouchableOpacity
                     onPress={() => { navigation.navigate('HomeScreen') }}
                 >
+                     <Image
+                          source={require('../Assets/img/icons/backToD.png')}
+                          style={{
+                            width: 30,
+                            height: 30,
+                           // borderRadius: 50,
+                            //alignSelf: 'center',
+                          }}
+                        />
                     <Text style={{
                         color: Color.white,
                         fontSize: 12,

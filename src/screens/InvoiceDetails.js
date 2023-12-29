@@ -106,9 +106,22 @@ export default InvoiceDetails = ({ route }) => {
                 <View style={styles.invoiceInfoContainer}>
                     <View style={[styles.header, { flexDirection: 'row', justifyContent: 'space-between', width: wp(90) }]}>
                         <Text style={styles.title}>Invoice</Text>
-                        <View style={styles.invoiceInfo}>
-                            <Text style={{ fontSize: 15, fontFamily: 'Poppins-Bold', marginTop: 12 }}>Back To Dashboard</Text>
-                        </View>
+                        <TouchableOpacity 
+                        onPress={() => navigation.navigate('Payments')}
+                        style={styles.invoiceInfo}>
+                        <Image
+                          source={require('../Assets/img/icons/backToD.png')}
+                          style={{
+                            width: 25,
+                            height: 25,
+                            marginTop: 12,
+                            marginRight:5,
+                           // borderRadius: 50,
+                            //alignSelf: 'center',
+                          }}
+                        />
+                            <Text style={{ fontSize: 12, fontFamily: 'Poppins-Bold', marginTop: 13 }}>Back to Dashboard</Text>
+                        </TouchableOpacity>
                     </View>
                     <View style={styles.invoiceInfo}>
                         <Text style={[styles.label, { marginLeft: 5 }]}>Order ID:</Text>

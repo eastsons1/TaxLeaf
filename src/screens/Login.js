@@ -444,7 +444,7 @@ const Login = () => {
 
             </View>
             <View style={styles.formContainer}>
-              {/* <TextInput
+               <TextInput
                 placeholder="Enter Email"
                 placeholderTextColor={'lightgrey'}
                 style={[styles.input, { height: 50 }]}
@@ -452,7 +452,7 @@ const Login = () => {
                 onChangeText={text => {
                   onChangeEmail(text);
                 }}
-              /> */}
+              /> 
 
               <View
                 style={{
@@ -470,7 +470,7 @@ const Login = () => {
                 onPress={() => loginWithOffice365()}>
                 <Text style={styles.loginText}>Login with Office365</Text>
               </TouchableOpacity>
-              {/* <TouchableOpacity
+               <TouchableOpacity
                 onPress={() => onLogin()}
                 //  onPress={() => loginWithOffice365()}
                 // onPress={() => authenticate()}
@@ -478,7 +478,7 @@ const Login = () => {
               // onPress={() => setModalVisible(!modalVisible)}
               >
                 <Text style={styles.textStyle}>Login</Text>
-              </TouchableOpacity> */}
+              </TouchableOpacity> 
 
 
             </View>

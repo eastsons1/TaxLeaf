@@ -42,6 +42,7 @@ import ViewRequest from '../screens/ViewRequest';
 import SplashScreen from '../screens/SplashScreen';
 import InvoiceDetails from '../screens/InvoiceDetails';
 import MainClientDetails from '../screens/MainClientDetail';
+import ClientSteps from '../screens/ClientSteps'; 
 
 enableScreens();
 
@@ -410,6 +411,14 @@ function HomeScreenStack() {
       <Stack.Screen
         name="ContactUs"
         component={ContactUs}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+<Stack.Screen
+        name="ClientSteps"
+        component={ClientSteps}
         options={{
           headerShown: false,
         }}

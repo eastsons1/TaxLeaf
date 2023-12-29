@@ -26,7 +26,7 @@ export const dashboardlist =
       //  console.log(response, 'PaymentListPaymentListPaymentListPaymentList');
 
       if (response.failureStatus == false) {
-        console.log(response, 'dashboarddashboarddashboard');
+       // console.log(response, 'dashboarddashboarddashboard');
         // AsyncStorage.setItem('login', JSON.stringify(response.token));
 
         dispatch({

@@ -127,8 +127,26 @@ export default InvoiceView = ({ route }) => {
             >
                 <HeadTabs />
 
-                <View style={styles.header}>
+                <View style={[styles.header, { flexDirection: 'row', justifyContent: 'space-between', width: wp(90) }]}>
+
                     <Text style={styles.title}>Invoice</Text>
+
+                    <TouchableOpacity 
+                        onPress={() => navigation.navigate('Payments')}
+                        style={styles.invoiceInfo}>
+                        <Image
+                          source={require('../Assets/img/icons/backToD.png')}
+                          style={{
+                            width: 25,
+                            height: 25,
+                            marginTop: 12,
+                            marginRight:5,
+                           // borderRadius: 50,
+                            //alignSelf: 'center',
+                          }}
+                        />
+                            <Text style={{ fontSize: 12, fontFamily: 'Poppins-Bold', marginTop: 13 }}>Back to Dashboard</Text>
+                        </TouchableOpacity>
                 </View>
                 <View style={styles.invoiceInfoContainer}>
                     <View style={styles.invoiceInfo}>
