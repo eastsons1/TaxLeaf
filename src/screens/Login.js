@@ -56,9 +56,9 @@ const Login = () => {
 
 
   const bgImage = require('../Assets/img/login-mainbg.jpg');
-  // const [email, setEmail] = useState("julietam.geraci@gmail.com");
+   const [email, setEmail] = useState("julietam.geraci@gmail.com");
   // const [email, setEmail] = useState("aalok@eastsons.com");
-  const [email, setEmail] = useState("prince@eastsons.com");
+  //const [email, setEmail] = useState("prince@eastsons.com");
   //const [email, setEmail] = useState("angiecotes@hotmail.com");
 
   //const [email, setEmail] = useState("julietam.geraci@gmail.com");
@@ -438,8 +438,6 @@ const Login = () => {
               <TouchableOpacity onPress={() => handleSignOut()}>
                 <Text>Sign our</Text>
               </TouchableOpacity> */}
-
-
 
 
             </View>

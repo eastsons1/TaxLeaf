@@ -37,36 +37,44 @@ export const LoginUser = (email, navigation) => dispatch => {
 
     const response = await logistical.postlogin('/Staff/LoginStaff', data);
     console.log(response.token, 'responseresponseresponseresponse');
-    // console.log(response, 'responseresponseresponseresponse2222222222222222');
+     console.log(response.clientSetupStatus, 'responseresponseresponseresponse2222222222222222');
 
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200 && response.clientSetupStatus == true) {
       AsyncStorage.setItem('login', JSON.stringify(response.token));
       AsyncStorage.setItem('response', response.staffview.user);
-      // console.log(response.token, 'token');
-      // console.log(
-      //   response.staffview.user,
-      //   'staffviewinfostaffviewinfostaffviewinfostaffviewinfo',
-      // );
+     
 
       dispatch({
         type: LOGIN_DATA,
         payload: response.staffview.user,
       });
 
-      //   Alert.alert(response.response[0])
-      resolve(response);
-
-      // Alert.alert(response.massage);
+     resolve(response);
       navigation.navigate('Auth');
 
-      // dispatch({
-      //   type: 'LOADING',
-      //   payload: false,
-      // });
-    } else if (response.statusCode == 404) {
+     
+    } 
+    
+    else if (response.statusCode == 404 && response.clientSetupStatus == true) {
 
       Alert.alert(response.massage);
       navigation.navigate('home');
+    }
+
+    else if (response.statusCode == 200 && response.clientSetupStatus == false) {
+
+      AsyncStorage.setItem('login', JSON.stringify(response.token));
+      AsyncStorage.setItem('response', response.staffview.user);
+
+      dispatch({
+        type: LOGIN_DATA,
+        payload: response.staffview.user,
+      });
+
+     resolve(response);
+    //  Alert.alert(response.massage);
+      navigation.navigate('ClientSetup');
+
     }
 
     else {
@@ -256,6 +264,8 @@ export const ClientInfoList =
     //   payload: true,
     // });
 
+    console.log("AAAAAAAAAA",clientId,clientType)
+
     return new Promise(async (resolve, reject) => {
       let data = {
         GuestInfo: {
@@ -264,10 +274,10 @@ export const ClientInfoList =
         },
       };
       const response = await logistical.post('/Staff/GetAssociateList', data);
-      // console.log(
-      //   response.associateListInfo,
-      //   'ClientLIstClientLIstClientLIstClientLIst',
-      // );
+      console.log(
+        response.associateListInfo,
+        'associateListInfoassociateListInfoassociateListInfoassociateListInfoassociateListInfo',
+      );
 
       if (response) {
 

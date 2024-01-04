@@ -283,17 +283,29 @@ const ClientDetails = ({ route }) => {
               height: 40,
               backgroundColor: '#fff',
               padding: 10,
+              flexDirection:'row',
+            
             }}>
 
-            <Text style={styles.LIstText2}>
-              <Text style={{ fontSize: 14, fontFamily: 'Poppins-Bold' }}>Status:</Text>{' '}
+           
+              <Text style={[styles.LIstText2,{ fontSize: 14, fontFamily: 'Poppins-Bold' }]}>Status:</Text>
+            <View style={{
+              height:20,
+              width:50,
+              justifyContent:'center',
+              alignItems:"center",
+              marginLeft:5,
+    backgroundColor: Color.statusActive
 
-              <Text style={styles.LIstText21}>Active</Text>
+             }}>
+  <Text style={styles.LIstText21}>ACTIVE</Text>
+            </View>
+            
 
 
               {/* {infoData?.managerInfo?.cell ? infoData?.managerInfo?.cell : 'N/A'} */}
               {/* {manager?.phone ? manager?.phone : 'N/A'} */}
-            </Text>
+          
           </View>
           <View style={styles.partition}></View>
           <View style={{ height: 40, padding: 10 }}>
@@ -334,12 +346,24 @@ const ClientDetails = ({ route }) => {
 
 
 
-          <View style={{ height: 40, padding: 10 }}>
-            <Text style={styles.LIstText2}>
-              <Text style={{ fontSize: 14, fontFamily: 'Poppins-Bold' }}>Total Orders:</Text>{' '}
-              <Text style={styles.LIstText22}> {infoData?.paymentDetails?.totalOrders} </Text>
+          <View style={{ padding: 10 ,flexDirection:"row",alignItems:"center"}}>
+          <Text style={[styles.LIstText2, { fontSize: 14, fontFamily: 'Poppins-Bold' }]}>Total Orders:</Text>
+            
+         
+            <View 
+              style={{ 
+                justifyContent:"center",
+                borderRadius:3,
+                marginLeft:5,
+                backgroundColor: Color.totalOrders,
+                height:20,width:20,
+                alignItems:"center",
+              
+              }}
+              >
+              <Text style={styles.LIstText22}>{infoData?.paymentDetails?.totalOrders}</Text>
 
-            </Text>
+              </View>
           </View>
           <View style={styles.partition}></View>
           <View style={{ height: 40, padding: 10 }}>
@@ -500,7 +524,7 @@ const ClientDetails = ({ route }) => {
             </Text>
           </View>
           <View style={styles.partition1}></View>
-          <View style={{ height: 40, padding: 10, flexDirection: 'row', padding: 10, backgroundColor: Color.greenback }}>
+          <View style={{  padding: 10, flexDirection: 'row', padding: 10, backgroundColor: Color.greenback }}>
 
             <Text style={styles.LIstText3}>Federal ID:</Text>
 
@@ -510,7 +534,7 @@ const ClientDetails = ({ route }) => {
             </Text>
           </View>
           <View style={styles.partition1}></View>
-          <View style={{ height: 40, padding: 10, flexDirection: 'row', backgroundColor: Color.greenback }}>
+          <View style={{  padding: 10, flexDirection: 'row', backgroundColor: Color.greenback }}>
             <Text style={styles.LIstText4}>
               <Text style={{ fontSize: 14, fontFamily: 'Poppins-Bold' }}>State of Corporation:</Text>
             </Text>
@@ -520,7 +544,7 @@ const ClientDetails = ({ route }) => {
             </Text>
           </View>
           <View style={styles.partition1}></View>
-          <View style={{ height: 40, padding: 10, flexDirection: 'row', backgroundColor: Color.greenback }}>
+          <View style={{  padding: 10, flexDirection: 'row', backgroundColor: Color.greenback }}>
 
             <Text style={styles.LIstText3}>Citizenship:</Text>
 
@@ -632,7 +656,7 @@ const ClientDetails = ({ route }) => {
           <View style={styles.partition1}></View>
           <View
             style={{
-              height: 40,
+             // height: 40,
               backgroundColor: Color.greenback,
               padding: 10,
               flexDirection: "row",
@@ -774,7 +798,7 @@ const ClientDetails = ({ route }) => {
           <View style={styles.partition1}></View>
           <View
             style={{
-              height: 40,
+             // height: 40,
               backgroundColor: Color.greenback,
               padding: 10,
               flexDirection: "row",
@@ -801,7 +825,7 @@ const ClientDetails = ({ route }) => {
 
           </View>
           <View style={styles.partition1}></View>
-          <View style={{ height: 40, padding: 10, flexDirection: 'row', backgroundColor: Color.greenback }}>
+          <View style={{  padding: 10, flexDirection: 'row', backgroundColor: Color.greenback }}>
             <Text style={styles.LIstText3}>
               <Text style={{ fontSize: 14, fontFamily: 'Poppins-Bold' }}>Client Partner:</Text>{' '}
             </Text>
@@ -815,7 +839,7 @@ const ClientDetails = ({ route }) => {
 
           </View>
           <View style={styles.partition1}></View>
-          <View style={{ height: 40, flexDirection: 'row', padding: 10, backgroundColor: Color.greenback }}>
+          <View style={{  flexDirection: 'row', padding: 10, backgroundColor: Color.greenback }}>
             <Text style={styles.LIstText3}>
               <Text style={{ fontSize: 14, fontFamily: 'Poppins-Bold' }}>Client Manager:</Text>{' '}
             </Text>
@@ -1101,9 +1125,9 @@ const styles = StyleSheet.create({
   },
   LIstText22: {
     fontSize: 12,
-
+    //textAlign:"center",
     fontFamily: 'Poppins-SemiBold',
-    backgroundColor: Color.totalOrders,
+   
     color: '#fff'
   },
   headText1: {
@@ -1294,10 +1318,9 @@ const styles = StyleSheet.create({
   // },
   LIstText21: {
     color: '#fff',
-    fontSize: 12,
+    fontSize: 10,
 
     fontFamily: 'Poppins-SemiBold',
-    backgroundColor: Color.statusActive
   },
   subHead: {
     width: 150,

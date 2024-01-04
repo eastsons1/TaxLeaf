@@ -218,18 +218,29 @@ const MainClientDetails = ({ route }) => {
             style={{
               height: 40,
               backgroundColor: '#fff',
+              flexDirection:'row',
               padding: 10,
             }}>
 
-            <Text style={styles.LIstText2}>
-              <Text style={{ fontSize: 14, fontFamily: 'Poppins-Bold' }}>Status:</Text>{' '}
+<Text style={[styles.LIstText2,{ fontSize: 14, fontFamily: 'Poppins-Bold' }]}>Status:</Text>
+          
+             
+              <View style={{
+              height:20,
+              width:50,
+              justifyContent:'center',
+              alignItems:"center",
+              marginLeft:5,
+    backgroundColor: Color.statusActive
 
-              <Text style={styles.LIstText21}>Active</Text>
+             }}>
+  <Text style={styles.LIstText21}>ACTIVE</Text>
+            </View>
 
 
               {/* {infoData?.managerInfo?.cell ? infoData?.managerInfo?.cell : 'N/A'} */}
               {/* {manager?.phone ? manager?.phone : 'N/A'} */}
-            </Text>
+           
           </View>
           <View style={styles.partition}></View>
           <View style={{ height: 40, padding: 10 }}>
@@ -272,14 +283,32 @@ const MainClientDetails = ({ route }) => {
 
 
 
+        <View style={{ padding: 10 ,flexDirection:"row"}}>
+          <Text style={[styles.LIstText2, { fontSize: 14, fontFamily: 'Poppins-Bold' }]}>Total Orders:</Text>
+            
+         
+            <View 
+              style={{ 
+                justifyContent:"center",
+                borderRadius:3,
+                marginLeft:5,
+                backgroundColor: Color.totalOrders,
+                height:20,width:20,
+                alignItems:"center",
+              
+              }}
+              >
+             <Text style={styles.LIstText22}>{MY_INFO?.paymentDetails?.totalOrders}</Text>
 
-          <View style={{ height: 40, padding: 10 }}>
+              </View>
+          </View>
+          {/* <View style={{ height: 40, padding: 10 }}>
             <Text style={styles.LIstText2}>
               <Text style={{ fontSize: 14, fontFamily: 'Poppins-Bold' }}>Total Orders:</Text>{' '}
               <Text style={styles.LIstText22}> {MY_INFO?.paymentDetails?.totalOrders}</Text>
 
             </Text>
-          </View>
+          </View> */}
           <View style={styles.partition}></View>
           <View style={{ height: 40, padding: 10 }}>
             <Text style={styles.LIstText2}>
@@ -984,14 +1013,14 @@ const styles = StyleSheet.create({
       },
       LIstText22: {
         fontSize: 12,
-    
+    // textAlign:"center",
         fontFamily: 'Poppins-SemiBold',
-        backgroundColor: Color.totalOrders,
+       // backgroundColor: Color.totalOrders,
         color: '#fff'
       },
       LIstText21: {
         color: '#fff',
-        fontSize: 12,
+        fontSize: 10,
     
         fontFamily: 'Poppins-SemiBold',
         backgroundColor: Color.statusActive

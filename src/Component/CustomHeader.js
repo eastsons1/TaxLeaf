@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { View, Text, Image,SafeAreaView, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import {
   widthPercentageToDP as wp,
@@ -14,14 +14,17 @@ const CustomHeader = () => {
   let profile = require('../Assets/img/icons/profile-green.png');
 
   return (
-    <View
+    <SafeAreaView
       style={{
         backgroundColor: Color.white,
         // backgroundColor: '',
         //borderBottomWidth: 1,
+        
         // borderBottomColor: 'orange',
         justifyContent: 'center',
+       // alignItems:"center",
         padding: 15,
+       // paddingBottom:10
       }}>
       <View
         style={{
@@ -46,11 +49,15 @@ const CustomHeader = () => {
           style={{
             //backgroundColor: 'red',
             width: wp(50),
+            justifyContent:"center",
+            alignItems:"center",
             //height: 10,
           }}>
           <Image
             source={logo}
-            style={{ width: 200, height: 45 }}
+            style={{ width: 200, height: 45,
+          marginBottom:10,
+            }}
             resizeMode="contain"
           />
         </View>
@@ -98,7 +105,7 @@ const CustomHeader = () => {
           </View>
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

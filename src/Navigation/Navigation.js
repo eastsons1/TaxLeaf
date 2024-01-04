@@ -44,6 +44,7 @@ import InvoiceDetails from '../screens/InvoiceDetails';
 import MainClientDetails from '../screens/MainClientDetail';
 import ClientSteps from '../screens/ClientSteps'; 
 
+
 enableScreens();
 
 // const SignStack = createStackNavigator();
@@ -137,6 +138,7 @@ function MyDrawer3({ navigation, route }) {
         navigation={navigation}
         name="Manager"
         component={Manager}
+        
       />
       {/* <Drawer.Screen name="Home2" component={MainNavigation2} /> */}
 
@@ -153,12 +155,13 @@ function MyTabBar({ state, descriptors, navigation }) {
         // position:'absolute',
         bottom: 0,
         alignSelf: 'center',
+       
         borderTopColor: '#E5E5E5',
         borderTopWidth: 1,
         width: wp(112),
         //   justifyContent: 'space-between',
         backgroundColor: Color.darkGreen,
-        height: 60,
+        height: 80,
         color: '#fff',
         paddingHorizontal: 22
       }}>
@@ -218,51 +221,7 @@ function MyTabBar({ state, descriptors, navigation }) {
 
           }
         }
-        // if (label == "Tab3") {
-        //   //showlabel = "Home";
-        //   iconNm = require("../Assets/Bookings.png");
-
-        //   // {
-        //   //   isFocused ?
-        //   //     iconNm = require('../Assets/bell.png')
-        //   //     :
-        //   //     iconNm = require('../Assets/bell.png')
-        //   // }
-        // }
-
-        // if (label == "FirstStacknavigation") {
-        //   //showlabel = "Home";
-        //   iconNm = require("../Assets/Settings.png");
-
-        //   // {
-        //   //   isFocused ?
-        //   //     iconNm = require('../Assets/bell.png')
-        //   //     :
-        //   //     iconNm = require('../Assets/bell.png')
-        //   // }
-        // }
-
-        // if (label == "FirstStacknavigation") {
-        //   //showlabel = "Home";
-        //   iconNm = require("../Assets/Settings.png");
-
-        //   // {
-        //   //   isFocused ?
-        //   //     iconNm = require('../Assets/bell.png')
-        //   //     :
-        //   //     iconNm = require('../Assets/bell.png')
-        //   // }
-        // }
-
-        // if (label == "bell") {
-        //     showlabel = "Notification";
-        //     iconNm= label;
-        // }
-
-        // if (label == "envelope") {
-        //     showlabel = "Contact us";
-        //     iconNm = label
-        // }
+       
 
         const onPress = () => {
           const event = navigation.emit({
@@ -416,13 +375,13 @@ function HomeScreenStack() {
         }}
       />
 
-<Stack.Screen
+{/* <Stack.Screen
         name="ClientSteps"
         component={ClientSteps}
         options={{
           headerShown: false,
         }}
-      />
+      /> */}
       <Stack.Screen
         name="MyInfo"
         component={MyInfo}
@@ -562,6 +521,7 @@ function MainNavigation() {
           }}>
           <Stack.Screen name="home" component={SignInScreen} />
           <Stack.Screen name="Auth" component={MyDrawer3} />
+          <Stack.Screen name="ClientSetup" component={ClientSteps} />
           {/* <Stack.Screen name="home" component={MyDrawer2} /> */}
         </Stack.Navigator>
       </NavigationContainer>

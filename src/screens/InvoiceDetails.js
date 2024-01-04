@@ -112,8 +112,8 @@ export default InvoiceDetails = ({ route }) => {
                         <Image
                           source={require('../Assets/img/icons/backToD.png')}
                           style={{
-                            width: 25,
-                            height: 25,
+                            width: 20,
+                            height: 20,
                             marginTop: 12,
                             marginRight:5,
                            // borderRadius: 50,
@@ -277,7 +277,9 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 20,
         fontFamily: 'Poppins-Bold',
-        padding: 5
+        padding: 5,
+    color:Color.headerIconBG
+
 
     },
     invoiceInfoContainer: {

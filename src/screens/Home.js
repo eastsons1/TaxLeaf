@@ -9,6 +9,7 @@ import {
   Image,
   ImageBackground,
   Button,
+  
   Alert
 } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
@@ -164,17 +165,10 @@ const HomeScreen = () => {
         <Text style={styles.info}>{item.footHead}</Text>
         <TouchableOpacity style={styles.btn}>
           {/* <View style={{ width: wp(30) }}> */}
-            <Icon1
-              style={[
-                styles.icon,
-                {
-                  color: '#fff',
-                },
-              ]}
-              name="phone-in-talk"
-              size={22}
-              color="#fff"
-            />
+          <Image
+                  source={ require('../Assets/img/icons/telefono.png')}
+                  style={  [styles.icons,]}
+                />
           {/* </View> */}
 
           <Text style={{marginLeft:10, color: '#fff',textAlign:"center", fontFamily: 'Poppins-SemiBold', fontSize: 12 }}>
@@ -187,10 +181,7 @@ const HomeScreen = () => {
   );
   return (
     <View style={styles.container}>
-      {/* <ImageBackground
-          source={bgImage}
-          style={styles.bgImg}
-          resizeMode="cover"> */}
+    
       <Loader flag={loader} />
       <ScrollView
         showsVerticalScrollIndicator={false}
@@ -239,12 +230,16 @@ const HomeScreen = () => {
               <Text style={styles.infoHeadText}> Office Information</Text>
             </View>
             <View style={{ marginBottom: 5, marginTop: 5, flexDirection: "row", width: wp(80), alignSelf: "center" }}>
-              <Icon
+              {/* <Icon
                 style={styles.icon}
                 name="phone"
                 size={20}
                 color="#000"
-              />
+              /> */}
+                <Image
+                  source={ require('../Assets/img/icons/phone-icon.png')}
+                  style={  [styles.icons,]}
+                />
               <Text style={styles.ofcInfotxt1}>
 
 
@@ -254,7 +249,11 @@ const HomeScreen = () => {
 
 
             <View style={{ flexDirection: "row", width: wp(80), alignSelf: "center" }}>
-              <Icon style={styles.icon} name="mail" size={20} color="#000" />
+              {/* <Icon style={styles.icon} name="mail" size={20} color="#000" /> */}
+              <Image
+                  source={ require('../Assets/img/icons/email-icon.png')}
+                  style={  [styles.icons,]}
+                />
               <Text style={styles.ofcInfotxt1}>
 
                 {officeInfo?.email}
@@ -266,12 +265,16 @@ const HomeScreen = () => {
               <Text style={styles.infoHeadText}> Staff Information</Text>
             </View>
             <View style={{ marginBottom: 5, marginTop: 5, flexDirection: "row", width: wp(80), alignSelf: "center" }}>
-              <Icon
+              {/* <Icon
                 style={styles.icon}
                 name="phone"
                 size={20}
                 color="#000"
-              />
+              /> */}
+                <Image
+                  source={ require('../Assets/img/icons/phone-icon.png')}
+                  style={  [styles.icons,]}
+                />
               <Text style={styles.ofcInfotxt1}>
 
 
@@ -279,7 +282,11 @@ const HomeScreen = () => {
               </Text>
             </View>
             <View style={{ flexDirection: "row", width: wp(80), alignSelf: "center" }}>
-              <Icon style={styles.icon} name="mail" size={20} color="#000" />
+              {/* <Icon style={styles.icon} name="mail" size={20} color="#000" /> */}
+              <Image
+                  source={ require('../Assets/img/icons/email-icon.png')}
+                  style={  [styles.icons,]}
+                />
               <Text style={styles.ofcInfotxt1}>
 
                 {manager?.user}
@@ -342,6 +349,13 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     // marginTop: 20,
     // width:'62%'
+  },
+  icons:{
+    alignSelf: 'center',
+    height:20,
+    resizeMode:'contain',
+    width:20,
+ 
   },
   Slidericons: {
     width: wp(60),
@@ -439,7 +453,7 @@ const styles = StyleSheet.create({
     // fontWeight: '700',
     fontSize: 20,
     textAlign: "center",
-    fontFamily: 'Poppins-Bold'
+   fontFamily: 'Poppins-Bold'
 
     //marginLeft: 30,
   },

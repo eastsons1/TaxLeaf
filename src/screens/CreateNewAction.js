@@ -16,6 +16,9 @@ import RadioGroup from 'react-native-radio-buttons-group';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
+import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
+ 
+ 
 
 import {
   widthPercentageToDP as wp,
@@ -31,6 +34,7 @@ import Editor from './editor';
 import { RequestSubmit, ManagerInfo } from '../Redux/Actions/TaxLeaf';
 import { Color } from '../Style';
 import { Loader } from '../Component/Loader';
+import HeadTabs from './HeadTabs';
 
 const CreateNewAction = () => {
   const width = Dimensions.get('window').width;
@@ -53,6 +57,8 @@ const CreateNewAction = () => {
   const { PARTNER_INFO } = useSelector(state => state.TaxLeafReducer);
   const { EDITOR_TEXT } = useSelector(state => state.TaxLeafReducer);
   const bgImage = require('../Assets/img/guest_shape.png');
+  const [selectedOption, setSelectedOption] = useState(0);
+
 
   const staffview = MY_INFO.staffview;
   const officeInfo = MY_INFO.officeInfo;
@@ -91,6 +97,34 @@ const CreateNewAction = () => {
     { label: 'Regular', value: '3' },
 
   ];
+
+  var radio_props = [
+    {
+      id: '1', // acts as primary key, should be unique and non-empty string
+      label:
+        managerInfo?.firstName +
+        ' ' +
+        managerInfo?.lastName +
+        ' ' +
+        '(Manager)',
+      value: 'option1',
+    
+     
+    },
+    {
+      id: '2',
+      label:
+        partnerInfo?.firstName +
+        ' ' +
+        partnerInfo?.lastName +
+        ' ' +
+        '(Partner)',
+      value: 'option2',
+     
+     
+    },
+  ];
+   
   const radioButtons = useMemo(
     () => [
       {
@@ -102,6 +136,8 @@ const CreateNewAction = () => {
           ' ' +
           '(Manager)',
         value: 'option1',
+      
+       
       },
       {
         id: '2',
@@ -112,6 +148,8 @@ const CreateNewAction = () => {
           ' ' +
           '(Partner)',
         value: 'option2',
+       
+       
       },
     ],
     [],
@@ -138,7 +176,7 @@ const CreateNewAction = () => {
         "dueDate": moment(date).format('YYYY-MM-DD'),
         "isCreatedFromAction": "n",
         "clientIdForGuest": jsonData?.clientId.toString(),
-        "assignWhom": selectedId == 1 ? 'Manager' : 'Partner'
+        "assignWhom": selectedOption == 1 ? 'Manager' : 'Partner'
       },
       "actionStaffModel": {
         "staffId": selectedId == 1 ? managerInfo.id : partnerInfo?.id
@@ -188,138 +226,159 @@ const CreateNewAction = () => {
 
 
   };
+
+
+  const CustomRadioButton = ({ label, selected, onPress, selectedInnerColor, unselectedInnerColor }) => {
+    return (
+      <TouchableOpacity onPress={onPress} style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <View
+          style={{
+            width: 15,
+            height: 15,
+            borderRadius: 10,
+            borderWidth: 3,
+            backgroundColor:selected ? Color.green: '#fff' ,
+            borderColor: '#fff',
+           
+          //  backgroundColor: selected ? selectedInnerColor : 'transparent',
+            marginRight: 10,
+          }}
+        />
+        <Text style={{color:Color.white,fontSize:10,fontFamily:'Poppins-SemiBold'}}>{label}</Text>
+      </TouchableOpacity>
+    );
+  };
+
+  const handleRadioChange = (value) => {
+    setSelectedOption(value);
+  };
+ 
+
+  console.log(selectedOption)
+
   return (
     <View style={styles.container}>
       <Loader flag={loader} />
       <View
 
-        style={{ backgroundColor: '#d5e3e5' }}
+        style={{ backgroundColor: Color.bgColor }}
       >
         <ScrollView>
+          <HeadTabs/>
           <Text style={styles.heading}>Create New Action</Text>
 
           <View style={styles.slideContainerFrom}>
-            <Text style={{ textAlign: 'center', fontSize: 18, marginTop: 10 }}>
+            <Text style={{color:Color.white,fontFamily:'Poppins-SemiBold', textAlign: 'center', fontSize: 16, marginTop: 10 }}>
               From
             </Text>
-            <View style={styles.part}></View>
-            <Text
-              style={{
-                alignSelf: 'flex-start',
-                padding: 5,
-                color: '#000',
-                marginLeft: 12,
-              }}>
-              Name
-            </Text>
+          
+           
             <TextInput
               placeholder="First Name"
               style={[styles.input]}
               editable={false}
               value={staffview?.firstName + ' ' + staffview?.lastName}
             />
-            <Text
-              style={{
-                alignSelf: 'flex-start',
-                padding: 5,
-                color: '#000',
-                marginLeft: 12,
-              }}>
-              My Office *
-            </Text>
+          
             <TextInput
               placeholder="First Name"
               style={[styles.input]}
               editable={false}
               value={officeInfo?.name}
             />
-            {/* <Dropdown
-            style={[styles.dropdown, isFocus && {borderColor: 'blue'}]}
-            placeholderStyle={styles.placeholderStyle}
-            selectedTextStyle={styles.selectedTextStyle}
-            iconStyle={styles.iconStyle}
-            data={data1}
-            maxHeight={200}
-            labelField="label"
-            valueField="value"
-            placeholder={!isFocus ? 'Select item' : '...'}
-            value={value}
-            onFocus={() => setIsFocus(true)}
-            onBlur={() => setIsFocus(false)}
-            onChange={item => {
-              setValue(item.value);
-              setIsFocus(false);
-            }}
-         
-          /> */}
+           
+        
           </View>
           <View style={styles.slideContainerTo}>
-            <Text style={{ textAlign: 'center', fontSize: 18, marginTop: 10 }}>
+            <Text style={{color:Color.white,fontFamily:'Poppins-SemiBold', textAlign: 'center', fontSize: 16, marginTop: 10 }}>
               To
             </Text>
             <View style={styles.part}></View>
             <View
               style={{
-                alignItems: 'flex-start',
-                //alignSelf: 'center',
+               width:wp(80),
+                alignSelf: 'center',
                 //alignItems: 'center',
-                //justifyContent: 'center',
+                justifyContent: 'center',
               }}>
-              <RadioGroup
-                radioButtons={radioButtons}
-                onPress={setSelectedId}
-                selectedId={selectedId}
-              />
+
+
+              
+{/* <RadioForm
+        radio_props={radio_props}
+        initial={0}
+        onPress={(value) => {
+          setSelectedOption(value);
+        }}
+       // labelColor={'#fff'}
+        buttonColor={'#fff'}
+        buttonSize={10}
+        selectedButtonColor={'#fff'}
+        buttonInnerColor={'#00f'} 
+        labelStyle={{fontSize: 12, color: '#fff'}}
+      /> */}
+
+<CustomRadioButton
+        label={   managerInfo?.firstName +
+          ' ' +
+          managerInfo?.lastName +
+          ' ' +
+          '(Manager)'}
+        selected={selectedOption === 1}
+        onPress={() => handleRadioChange(1)}
+        selectedInnerColor={Color.green}    // Set the inner color for the selected button
+        unselectedInnerColor="#fff"  // Set the inner color for the unselected button
+      />
+      <View style={{height:5}}></View>
+      <CustomRadioButton
+        label={ partnerInfo?.firstName +
+          ' ' +
+          partnerInfo?.lastName +
+          ' ' +
+          '(Partner)'}
+        selected={selectedOption === 2}
+        onPress={() => handleRadioChange(2)}
+        selectedInnerColor={Color.green}  // Set the inner color for the selected button
+        unselectedInnerColor="#fff"
+        // Set the inner color for the unselected button
+      />
+             
             </View>
           </View>
 
-          <View style={{ width: '95%', alignSelf: 'center' }}>
-            <Text
-              style={{
-                alignSelf: 'flex-start',
-                padding: 5,
-                color: '#000',
-                marginLeft: 12,
-                marginTop: 10,
-              }}>
-              Action Subject *
-            </Text>
+          <View style={{height:hp(28),paddingTop:10, width: wp(90),backgroundColor:"#c3d2d7", alignSelf: 'center' }}>
+           
             <TextInput
               onChangeText={(text) => setActionSubject(text)}
               // placeholder='First Name'
+              placeholder="Action Subject"
               style={[styles.input]}
             />
-          </View>
-          <View style={styles.slideContainerEdit}>
-            <Text style={{ alignSelf: 'flex-start', padding: 5, color: '#000' }}>
-              Action Message *
-            </Text>
 
-            <TextInput
-              numberOfLines={5}
-              multiline={true}
-              //   placeholder="Enter Email"
-              // placeholderTextColor={'lightgrey'}
-              style={{ paddingTop: 0, textAlignVertical: 'top' }}
-              value={descriptionText}
-              onChangeText={text => {
-                setDescriptionText(text);
-              }}
-            />
+            <View style={styles.slideContainerEdit}>
+           
+
+           <TextInput
+             numberOfLines={5}
+             multiline={true}
+              placeholder="Action Message"
+             // placeholderTextColor={'lightgrey'}
+             style={{color:Color.HeaderBackground,fontFamily:'Poppins-SemiBold',   fontSize:12,
+               paddingTop: 10, textAlignVertical: 'top' }}
+             value={descriptionText}
+             onChangeText={text => {
+               setDescriptionText(text);
+             }}
+           />
+        
+         </View>
+
           </View>
+       
+         
           <View style={styles.slideContainer}>
-            <View style={{}}>
-              <Text
-                style={{
-                  alignSelf: 'flex-start',
-                  padding: 5,
-                  color: '#000',
-                  marginLeft: 12,
-                  marginTop: 10
-
-                }}>
-                Priority *
-              </Text>
+            <View style={{marginTop:20}}>
+             
               <Dropdown
                 style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
                 placeholderStyle={styles.placeholderStyle}
@@ -329,7 +388,7 @@ const CreateNewAction = () => {
                 maxHeight={200}
                 labelField="label"
                 valueField="value"
-                placeholder={!isFocus ? 'Select item' : '...'}
+                placeholder={!isFocus ? 'Priority' : '...'}
                 value={value}
                 onFocus={() => setIsFocus(true)}
                 onBlur={() => setIsFocus(false)}
@@ -346,26 +405,23 @@ const CreateNewAction = () => {
               //     />
               //   )}
               />
-              <Text
-                style={{
-                  alignSelf: 'flex-start',
-                  padding: 5,
-                  color: '#000',
-                  marginLeft: 12,
-                  marginTop: 10
-                }}>
-                Due Date
-              </Text>
+            
               <TouchableOpacity
                 style={styles.btn}
                 onPress={() => setDatePicker(true)}>
+                  <View style={{flexDirection:"row",justifyContent:'space-between',width:wp(75)}}> 
+                  <Text style={{ fontFamily:'Poppins-SemiBold', color: '#fff', fontSize: 12 }}>
+                  Due Date
+                  </Text>
                 {date ? (
-                  <Text style={{ color: '#fff', fontSize: 15 }}>
+                  <Text style={{ fontFamily:'Poppins-SemiBold', color: '#fff', fontSize: 12 }}>
                     {moment(date, 'MM-DD-YYYY').format('ddd,DD MMM YYYY')}
                   </Text>
                 ) : (
                   <Text style={{ color: '#fff', fontSize: 15 }}>Select</Text>
                 )}
+                  </View>
+                   
               </TouchableOpacity>
 
               {datePicker && (
@@ -399,42 +455,27 @@ const CreateNewAction = () => {
           <View
             style={{
               flexDirection: 'row',
-              justifyContent: 'flex-end',
-              marginTop: 40,
+              justifyContent: 'space-between',
+              marginTop: 10,
+              width:wp(88),
+             //  backgroundColor:"red",
+              alignSelf:'center'
             }}>
             <TouchableOpacity
               style={styles.btnPrev}
             // onPress={() => { onPageChange(4) }}
             >
-              {/* <Icon
-                                                style={[
-                                                    styles.icon,
-                                                    {
-                                                        color: '#fff',
-                                                    },
-                                                ]}
-                                                name="arrowleft"
-                                                size={20}
-                                                color="#fff"
-                                            /> */}
-              <Text style={{ color: '#fff' }}>Cancel</Text>
+             <Image source={require('../Assets/img/icons/close.png')} style={{ width: 25, height: 25,}} />
+
+              <Text style={{ color:'#5a5a5a',fontFamily:'Poppins-SemiBold',fontSize:12,marginLeft: 5 }}>Cancel</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.btnSubmit}
               onPress={() => { onSubmit() }}
             >
-              <Text style={{ color: '#fff', marginLeft: 10 }}>Submit</Text>
-              {/* 
-                                            <Icon
-                                                style={[
-                                                    styles.icon,
-                                                    {
-                                                        color: '#fff',
-                                                    },
-                                                ]}
-                                                name="arrowright"
-                                                size={20}
-                                                color="#fff"
-                                            /> */}
+               <Image source={require('../Assets/img/icons/tickWhite.png')} style={{ width: 25, height: 25,  }} />
+
+              <Text style={{ color: '#fff',fontFamily:'Poppins-SemiBold',fontSize:12, marginLeft: 5 }}>Submit</Text>
+             
             </TouchableOpacity>
           </View>
         </ScrollView>
@@ -450,69 +491,72 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   heading: {
-    fontSize: 18,
+    fontSize: 20,
     fontFamily: 'Poppins-Bold',
     // maxWidth:'80%',
-    color: '#676A6C',
+    color: Color.headerIconBG,
     // height:40,
-    marginTop: 20,
+    marginTop: 0,
     marginLeft: 20,
     // fontWeight: '600',
     // textAlign: 'center',
   },
   part: {
-    borderWidth: 0.5,
-    borderColor: '#A7B1C2',
-    marginTop: 10,
-    width: '90%',
+    borderWidth: 0.3,
+    borderColor: '#aaca79',
+    margin: 5,
+    marginBottom:10,
+    width: wp(80),
     alignSelf: 'center',
   },
   slideContainer: {
-    backgroundColor: '#fff',
+    backgroundColor: Color.headerIconBG,
     width: wp(90),
     justifyContent: 'center',
     alignSelf: 'center',
-    /// height: 420,
-    opacity: 2,
-    paddingBottom: 20,
-    borderRadius: 10,
-    marginTop: 20,
+  
+    borderBottomLeftRadius:10,
+    borderBottomRightRadius:10,
+  
+   // marginTop: 20,
     // width:'62%'
   },
   slideContainerEdit: {
     backgroundColor: '#fff',
-    width: wp(90),
+    width: wp(80),
     justifyContent: 'center',
     alignSelf: 'center',
     // height: 220,
     opacity: 2,
     paddingBottom: 20,
     borderRadius: 10,
-    marginTop: 20,
+    marginTop: 10,
     // width:'62%'
   },
   slideContainerFrom: {
-    backgroundColor: '#CCDEFD',
+    backgroundColor: Color.HeaderBackground,
     width: wp(90),
     justifyContent: 'center',
     alignSelf: 'center',
     /// height: 420,
     opacity: 2,
     paddingBottom: 20,
-    borderRadius: 10,
+    borderTopLeftRadius:10,
+    borderTopRightRadius:10,
+  
     marginTop: 20,
     // width:'62%'
   },
   slideContainerTo: {
-    backgroundColor: '#C3EFA5',
+    backgroundColor: Color.green,
     width: wp(90),
     justifyContent: 'center',
     alignSelf: 'center',
     /// height: 420,
     opacity: 2,
     paddingBottom: 20,
-    borderRadius: 10,
-    marginTop: 20,
+    //borderRadius: 10,
+   // marginTop: 20,
     // width:'62%'
   },
   Slidericons: {
@@ -548,18 +592,19 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginTop: 10,
   },
-  btn: {
-    width: wp(40),
-    alignSelf: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
-    marginBottom: 30,
-    marginTop: 10,
-    backgroundColor: '#2F4050',
-    borderRadius: 10,
-    padding: 10,
-    alignItems: 'center',
-  },
+  // btn: {
+  //   width: wp(40),
+  //   alignSelf: 'center',
+  //   justifyContent: 'center',
+  //   flexDirection: 'row',
+  //   marginBottom: 30,
+  //   marginTop: 10,
+  //   backgroundColor: 'red',
+  // //  backgroundColor: '#2F4050',
+  //   borderRadius: 10,
+  //   padding: 10,
+  //   alignItems: 'center',
+  // },
   profileImg: {
     width: 70,
     borderRadius: 80,
@@ -652,7 +697,7 @@ const styles = StyleSheet.create({
   },
   icon: { alignSelf: 'center' },
   dropdown: {
-    height: 50,
+    height: hp(5),
     borderColor: 'gray',
     backgroundColor: '#fff',
     borderWidth: 0.5,
@@ -675,13 +720,16 @@ const styles = StyleSheet.create({
   },
   placeholderStyle: {
     fontSize: 12,
+    fontFamily:'Poppins-SemiBold'
   },
   selectedTextStyle: {
-    fontSize: 16,
+    fontSize: 12,
+    fontFamily:'Poppins-SemiBold'
   },
   iconStyle: {
     width: 20,
     height: 20,
+    
   },
   inputSearchStyle: {
     height: 40,
@@ -692,25 +740,29 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   input: {
-    height: 50,
-    margin: 12,
-    borderWidth: 1,
+    height: hp(5),
+    margin: 5,
+   // borderWidth: 1,
     borderRadius: 10,
-    padding: 10,
-    width: '90%',
+    fontSize:12,
+    width: wp(80),
+    
+    fontFamily:"Poppins-SemiBold",
+    color:Color.HeaderBackground,
     backgroundColor: '#fff',
     alignSelf: 'center',
     borderColor: 'gray',
   },
   btn: {
-    width: '90%',
-    height: hp(7),
+    width: wp(80),
+    height: hp(5),
     alignSelf: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
     marginBottom: 30,
     marginTop: 10,
     backgroundColor: '#8AB645',
+   // backgroundColor: 'red',
     borderRadius: 10,
     // padding: 10,
     alignItems: 'center',
@@ -726,30 +778,32 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   btnSubmit: {
-    width: wp(28),
-    height: hp(7),
+    width: wp(40),
+    height: hp(5),
     // alignSelf: 'flex-end',
     justifyContent: 'center',
     flexDirection: 'row',
     marginBottom: 30,
+    justifyContent:"center",
     marginTop: 10,
-    backgroundColor: 'purple',
-    borderRadius: 5,
+    backgroundColor: Color.green,
+    borderRadius: 20,
     padding: 10,
     alignItems: 'center',
-    marginRight: 10,
+   // marginRight: 10,
     marginLeft: 10,
   },
   btnPrev: {
-    width: wp(28),
-    height: hp(7),
+    width: wp(40),
+    height: hp(5),
     // alignSelf: 'flex-start',
     justifyContent: 'center',
     flexDirection: 'row',
     marginBottom: 30,
+    justifyContent:"center",
     marginTop: 10,
-    backgroundColor: 'lightgray',
-    borderRadius: 5,
+    backgroundColor: '#fff',
+    borderRadius: 20,
     padding: 10,
     alignItems: 'center',
     // marginRight: 80

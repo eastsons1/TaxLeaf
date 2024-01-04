@@ -835,10 +835,10 @@ const Payments = () => {
 
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: Color.backgroundcolor }}>
+    <SafeAreaView style={{ flex: 1,backgroundColor:Color.white}}>
       <Loader flag={loader} />
       <CustomHeader />
-      <View style={{}}>
+   
 
         {/* <ImageBackground
 
@@ -848,9 +848,10 @@ const Payments = () => {
 
         <ScrollView
           //nestedScrollEnabled={true}
-          style={{ height: hp(77), }}
+          style={{height: hp(80), backgroundColor:'#d5e3e5'}}
         >
 
+   <View style={{ backgroundColor:'#d5e3e5' }}>
           <HeadTabs />
           {/* <View style={styles.headerView}>
           <Text style={styles.header}>Plan Invoices</Text>
@@ -881,7 +882,11 @@ const Payments = () => {
                           // borderRadius: 15
                         }}
                       >
-                        <Icon
+                         <Image
+                  source={ require('../Assets/img/icons/pending.png')}
+                  style={  [styles.icons,]}
+                />
+                        {/* <Icon
                           style={[
                             { marginRight: 5 }
 
@@ -889,7 +894,7 @@ const Payments = () => {
                           name="clockcircle"
                           size={20}
                           color="#fff"
-                        />
+                        /> */}
                       </View>
 
                       <Text style={showwhat == 'My Schools' ? styles.ButtonText1 : styles.ButtonTextW}>
@@ -909,14 +914,14 @@ const Payments = () => {
                       onPress={() => showwhatfunc('My Schools')}>
                       <View
                         style={{
-                          backgroundColor: showwhat == 'My Schools' ? 'lightgray' : Color.geen,
-                          height: wp(5), width: wp(5),
+                        //  backgroundColor: showwhat == 'My Schools' ? 'lightgray' : Color.geen,
+                         // height: wp(5), width: wp(5),
 
-                          alignItems: "center",
-                          borderRadius: 15, marginRight: 4,
+                         // alignItems: "center",
+                         // borderRadius: 15, marginRight: 4,
                         }}
                       >
-                        <IconF
+                        {/* <IconF
                           style={{
 
                             color: showwhat == 'My Schools' ? Color.geen : '#fff'
@@ -924,7 +929,11 @@ const Payments = () => {
                           name="dollar"
                           size={20}
                           color={Color.geen}
-                        />
+                        /> */}
+                         <Image
+                  source={ require('../Assets/img/icons/paidicon.png')}
+                  style={  [styles.icons,]}
+                />
                       </View>
 
                       <Text style={showwhat == 'My Schools' ? styles.ButtonTextW : styles.ButtonText1}>Paid (0)</Text>
@@ -941,7 +950,11 @@ const Payments = () => {
                       ]}
                       onPress={() => showwhatfunc('Reviews')}>
                       <View>
-                        <Icon
+                      <Image
+                  source={ require('../Assets/img/icons/planicon.png')}
+                  style={  [styles.icons,]}
+                />
+                        {/* <Icon
                           style={[
                             { marginRight: 5 }
 
@@ -949,7 +962,7 @@ const Payments = () => {
                           name="checkcircle"
                           size={20}
                           color={Color.geen}
-                        />
+                        /> */}
                       </View>
 
                       <Text style={showwhat == 'My Schools' ? styles.ButtonTextW : styles.ButtonText1}>Plan</Text>
@@ -971,7 +984,8 @@ const Payments = () => {
                         },
                       ]}
                       onPress={() => showwhatfunc('Experience')}>
-                      <Icon
+                       
+                      {/* <Icon
                         style={[
                           { marginRight: 5 }
 
@@ -979,7 +993,12 @@ const Payments = () => {
                         name="clockcircle"
                         size={20}
                         color={showwhat == 'My Schools' ? Color.geen : 'lightgray'}
-                      />
+                      /> */}
+
+                <Image
+                  source={ require('../Assets/img/icons/pending-greenic.png')}
+                  style={  [styles.icons,]}
+                />
                       <Text style={showwhat == 'My Schools' ? styles.ButtonText1 : styles.ButtonTextW}>
                         Pending ({infoData.length})
                       </Text>
@@ -996,15 +1015,24 @@ const Payments = () => {
                       ]}
                       onPress={() => showwhatfunc('My Schools')}>
                       <View
-                        style={{ alignItems: 'center', backgroundColor: showwhat == 'My Schools' ? '#fff' : '#fff', width: wp(5), borderRadius: 15, height: wp(5), marginRight: 4, }}
+                        style={{ alignItems: 'center', 
+                      //  backgroundColor: showwhat == 'My Schools' ? '#fff' : '#fff', 
+                        //width: wp(5), borderRadius: 15,
+                         //height: wp(5), marginRight: 4,
+                         }}
 
                       >
-                        <IconF
+                        {/* <IconF
                           style={{ color: showwhat == 'My Schools' ? Color.geen : 'lightgray' }}
                           name="dollar"
                           size={20}
                           color="#fff"
-                        />
+                        /> */}
+                          <Image
+                  source={ require('../Assets/img/icons/paid-whiteic.png')}
+                  style={  [styles.icons,]}
+                />
+
                       </View>
 
                       <Text style={showwhat == 'My Schools' ? styles.ButtonTextW : styles.ButtonText1}>Paid (0)</Text>
@@ -1020,14 +1048,18 @@ const Payments = () => {
                         },
                       ]}
                       onPress={() => showwhatfunc('Reviews')}>
-                      <Icon
+                      {/* <Icon
                         style={[
                           { marginRight: 5 }
                         ]}
                         name="checkcircle"
                         size={18}
                         color={showwhat == 'My Schools' ? Color.geen : 'lightgray'}
-                      />
+                      /> */}
+                        <Image
+                  source={ require('../Assets/img/icons/planicon.png')}
+                  style={  [styles.icons,]}
+                />
                       <Text style={showwhat == 'My Schools' ? styles.ButtonText1 : styles.ButtonTextW}>Plan</Text>
                     </TouchableOpacity>
                   </View>
@@ -1047,7 +1079,7 @@ const Payments = () => {
                         },
                       ]}
                       onPress={() => showwhatfunc('Experience')}>
-                      <Icon
+                      {/* <Icon
                         style={[
                           { marginRight: 5 }
 
@@ -1055,7 +1087,11 @@ const Payments = () => {
                         name="clockcircle"
                         size={20}
                         color={showwhat == 'My Schools' ? 'lightgray' : Color.geen}
-                      />
+                      /> */}
+                         <Image
+                  source={ require('../Assets/img/icons/pending-greenic.png')}
+                  style={  [styles.icons,]}
+                />
                       <Text style={showwhat == 'Experience' ? styles.ButtonTextW : styles.ButtonText1}>
                         Pending ({infoData.length})
                       </Text>
@@ -1072,15 +1108,23 @@ const Payments = () => {
                       ]}
                       onPress={() => showwhatfunc('My Schools')}>
                       <View
-                        style={{ alignItems: "center", backgroundColor: showwhat == 'My Schools' ? 'lightgray' : Color.geen, width: wp(5), borderRadius: 15, height: wp(5), marginRight: 4, color: showwhat == 'My Schools' ? Color.geen : '#fff' }}
+                        style={{ alignItems: "center", 
+                        // backgroundColor: showwhat == 'My Schools' ? 'lightgray' : Color.geen,
+                        //  width: wp(5), borderRadius: 15, height: wp(5), marginRight: 4, 
+                        //  color: showwhat == 'My Schools' ? Color.geen : '#fff'
+                         }}
 
                       >
-                        <IconF
+                        {/* <IconF
                           style={{ color: showwhat == 'My Schools' ? Color.geen : '#fff' }}
                           name="dollar"
                           size={20}
                           color="#fff"
-                        />
+                        /> */}
+                           <Image
+                  source={ require('../Assets/img/icons/paidicon.png')}
+                  style={  [styles.icons,]}
+                />
                       </View>
 
                       <Text style={showwhat == 'My Schools' ? styles.ButtonTextW : styles.ButtonText1}>Paid (0)</Text>
@@ -1096,7 +1140,7 @@ const Payments = () => {
                         },
                       ]}
                       onPress={() => showwhatfunc('Reviews')}>
-                      <Icon
+                      {/* <Icon
                         style={[
                           { marginRight: 5 }
 
@@ -1104,7 +1148,11 @@ const Payments = () => {
                         name="checkcircle"
                         size={18}
                         color="#fff"
-                      />
+                      /> */}
+                        <Image
+                  source={ require('../Assets/img/icons/plan-whiteic.png')}
+                  style={  [styles.icons,]}
+                />
                       <Text style={showwhat == 'My Schools' ? styles.ButtonText1 : styles.ButtonTextW}>Plan</Text>
                     </TouchableOpacity>
                   </View>
@@ -1485,19 +1533,25 @@ const Payments = () => {
                                     }}
                                     style={{
                                       // backgroundColor: '#8AB645',
-                                      paddingTop: 5,
+                                  //  paddingTop: 5,
                                       textAlign: 'center',
                                       width: wp(22),
+                                      justifyContent:"center",
+                                      alignItems:"center",
                                       marginLeft: 0,
                                       flexDirection: 'row',
                                       // borderRadius: 3
                                     }}
                                   >
-                                    <Icon
+                                    {/* <Icon
                                       name="eye"
                                       size={20}
                                       color="#8AB645"
-                                    />
+                                    /> */}
+                                     <Image
+                  source={ require('../Assets/img/icons/viewic.png')}
+                  style={  [styles.icons,]}
+                />
 
                                     <Text style={{
                                       color: "#000",
@@ -1524,6 +1578,8 @@ const Payments = () => {
                                     style={{
                                       // backgroundColor: '#8AB645',
                                       padding: 5,
+                                      justifyContent:"center",
+                                      alignItems:"center",
                                       textAlign: 'center',
                                       width: wp(20),
                                       marginLeft: 10,
@@ -1531,11 +1587,16 @@ const Payments = () => {
                                       // borderRadius: 3
                                     }}
                                   >
-                                    <Icon
+                                    {/* <Icon
                                       name="eye"
                                       size={20}
                                       color="#8AB645"
-                                    />
+                                    /> */}
+                                      <Image
+                  source={ require('../Assets/img/icons/viewic.png')}
+                  style={  [styles.icons,]}
+                />
+
                                     <Text style={{
                                       color: "#000",
                                       fontSize: 9,
@@ -1725,11 +1786,12 @@ const Payments = () => {
               }
             })()}
           </View>
+          </View >
         </ScrollView >
 
         {/* </ImageBackground> */}
 
-      </View >
+     
       <CustomBottomTab />
     </SafeAreaView >
   );
@@ -1779,6 +1841,14 @@ const styles = StyleSheet.create({
   FavBooKChatContainer: {
     height: 30,
     width: '33%',
+  },
+  icons:{
+    alignSelf: 'center',
+    height:15,
+    resizeMode:'contain',
+    width:15,
+    marginRight:5
+ 
   },
   moblieSec1: {
     backgroundColor: '#fff',

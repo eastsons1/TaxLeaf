@@ -91,7 +91,7 @@ const Manager = () => {
   console.log(infoData?.managerInfo?.user, 'MANAGER_INFOMANAGER_INFO');
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ backgroundColor:'#fff',flex:1 }}>
       <Loader flag={loader} />
       <CustomHeader />
       <ScrollView style={{ height: hp(80) }}>

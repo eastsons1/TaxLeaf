@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, ScrollView, TextInput, TouchableOpacity, ImageBackground, Image } from 'react-native'
-import React, { useState } from 'react'
+import { StyleSheet,FlatList, Text, View, ScrollView, TextInput, TouchableOpacity, ImageBackground, Image } from 'react-native'
+import React, { useState, useEffect } from 'react';
 import StepIndicator from 'react-native-step-indicator';
 import {
     widthPercentageToDP as wp,
@@ -13,6 +13,17 @@ import Icon3 from 'react-native-vector-icons/FontAwesome'
 import CheckBox from '@react-native-community/checkbox';
 import { Color } from '../Style';
 
+import { GetInterestList,GetProfessionList,ConfirmClientSetup } from '../Redux/Actions/ClientSetUp'
+import { useDispatch, useSelector } from 'react-redux';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
+import {
+    clientInfo,
+    ClientInfoList,
+    client_Detail,
+    ManagerInfo
+  } from '../Redux/Actions/TaxLeaf';
+
+
 const ClientSteps = () => {
     const labels = ["ABOUT YOURSELF", "REFERRAL SOURCE", "PAYMENT METHOD", "ASSOCIATIONS IF CORRECT", "CURRENT PROFESSION", "ARE YOU INTRESTED IN ANY OF THE BELOW"];
     const labels1 = ["ABOUT YOURSELF", " ", " ", "  ", " ", " "];
@@ -22,33 +33,38 @@ const ClientSteps = () => {
     const labels5 = ["", " ", " ", "  ", "CURRENT PROFESSION ", " "];
     const labels6 = ["", " ", " ", "  ", " ", "INTERESTS"];
     const [position, setPosition] = useState(0)
+    const [loader, setLoader] = useState(false);
+    const dispatch = useDispatch();
+    const navigation = useNavigation();
+    const { LOGIN_DATA } = useSelector(state => state.TaxLeafReducer);
+    const { INTEREST_LIST } = useSelector(state => state.ClientSetupReducer);
+    const { PROFESSION_LIST } = useSelector(state => state.ClientSetupReducer);
+    const { MY_INFO } = useSelector(state => state.TaxLeafReducer);
+    const { CLIENT_LIST } = useSelector(state => state.TaxLeafReducer);
     console.log(position, 'position')
-    const [toggleCheckBox, setToggleCheckBox] = useState(false)
-    const [toggleCheckBox1, setToggleCheckBox1] = useState(false)
-    const [toggleCheckBox2, setToggleCheckBox2] = useState(false)
-    const [toggleCheckBox3, setToggleCheckBox3] = useState(false)
-    const [toggleCheckBox4, setToggleCheckBox4] = useState(false)
-    const [toggleCheckBox5, setToggleCheckBox5] = useState(false)
-    const [toggleCheckBox6, setToggleCheckBox6] = useState(false)
-    const [toggleCheckBox7, setToggleCheckBox7] = useState(false)
 
-    const [toggleCheckBoxInt, setToggleCheckBoxInt] = useState(false)
-    const [toggleCheckBoxInt1, setToggleCheckBoxInt1] = useState(false)
-    const [toggleCheckBoxInt2, setToggleCheckBoxInt2] = useState(false)
-    const [toggleCheckBoxInt3, setToggleCheckBoxInt3] = useState(false)
-    const [toggleCheckBoxInt4, setToggleCheckBoxInt4] = useState(false)
-    const [toggleCheckBoxInt5, setToggleCheckBoxInt5] = useState(false)
-    const [toggleCheckBoxInt6, setToggleCheckBoxInt6] = useState(false)
-    const [toggleCheckBoxInt7, setToggleCheckBoxInt7] = useState(false)
+
+    console.log(CLIENT_LIST,'CLIENT_LISTCLIENT_LISTCLIENT_LISTCLIENT_LISTCLIENT_LISTCLIENT_LISTCLIENT_LIST')
+   
+    const [selectedProfessions, setSelectedProfessions] = useState('');
+    const [selectedInterest, setSelectedInterest] = useState([]);
+    const [interestList, setInterestList] = useState([])
+    const [professionList, setProfessionList] = useState([])
     const [isChecked, setChecked] = useState(false);
     const [firstname, setFirstName] = useState(false);
     const [lastname, setLastName] = useState(false);
     const [email, setEmail] = useState(false);
+    const [mobile, setMobile] = useState(false);
     const [whatnumber, setWhatNumber] = useState(false);
-    const [banknumber, setBankNumber] = useState(false);
+    const [REFERREDBYSOURCE, setREFERREDBYSOURCE] = useState('Website');
+  
+    const [bankname, setBankName] = useState(false);
     const [accountnum, setAccountNum] = useState(false);
     const [currentac, setCurrentAc] = useState(false);
     const [routingnum, setRoutingNum] = useState(false);
+    const [infoData, setInfoData] = useState({});
+    const jsonData = MY_INFO?.guestInfo;
+    console.log(jsonData?.clientId,'kkkkkkk')
 
     const customStyles = {
         stepIndicatorSize: 30,
@@ -75,11 +91,95 @@ const ClientSteps = () => {
         currentStepLabelColor: Color.darkGreen,
         labelFontFamily	:'Poppins-Bold'
     }
+
+
+    useEffect(() => {
+        setLoader(true);
+
+        dispatch(GetInterestList( navigation))
+        dispatch(GetProfessionList( navigation))
+         
+            .finally(() => {
+                setLoader(false);
+            });
+    }, []);
+
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            setLoader(true);
+    
+            const [myInfoResponse, clientListResponse] = await Promise.all([
+                dispatch(clientInfo(LOGIN_DATA, navigation)),
+            
+              dispatch(ClientInfoList(jsonData?.clientId, jsonData?.clientType, navigation)),
+            ]);
+    
+            setInfoData(clientListResponse);
+            setLoader(false);
+          } catch (error) {
+            console.error('Error fetching data:', error);
+            setLoader(false);
+          }
+        };
+    
+        fetchData();
+      }, [jsonData?.clientId, jsonData?.clientType,]);
+
+    useEffect(() => {
+        // setLoader(true);
+        setInfoData(CLIENT_LIST);
+        // setTimeout(() => {
+        //   setLoader(false);
+        // }, 2000);
+      }, [MY_INFO, CLIENT_LIST]);
+
+
+      let associationList;
+     console.log(infoData,'infodatainfodatainfodatainfodatainfodata')
+    if (infoData && Array.isArray(infoData)) {
+        // Assuming infoData has a property called "data" that contains an array
+        const dataArray = infoData.map(item => item.subClientInfo);
+      
+        // Now you can use map and join on dataArray
+      associationList = dataArray.map(item => item.subClientPracticeId).join(', ');
+      
+
+      }
+
+    //   useEffect(() => {
+    //     setLoader(true);
+
+    //     dispatch(clientInfo(LOGIN_DATA, navigation))
+          
+           
+    //         .then(() => dispatch(ManagerInfo(jsonData?.clientId, jsonData?.clientType, navigation)))
+    //         .finally(() => {
+    //             setLoader(false);
+    //         });
+    // }, [LOGIN_DATA, jsonData?.clientId, jsonData?.clientType,]);
+
+   
+    
+    useEffect(() => {
+        setInterestList(INTEREST_LIST);
+        setProfessionList(PROFESSION_LIST);
+       
+    }, [INTEREST_LIST,PROFESSION_LIST]);
+
+
+   
     const onPageChange = (position) => {
         setPosition(position);
     }
 
+
+    //console.log(professionList,'WWWWWWWWWWWWWWWWWWWWW')
+
+   // console.log(associationList,'1111111111111');
+
     //console.log(position, 'position')
+
     const icons = [
         require("../Assets/img/icons/userGreen.png"),
         require("../Assets/img/icons/connectUser.png"),
@@ -91,8 +191,90 @@ const ClientSteps = () => {
     const bgImage = require("../Assets/img/stepsBG.png")
     // let iconNm = require('../Assets/img/icons/msg.png');
 
+    const handleToggleCheckbox = (professionName) => {
+        if (selectedProfessions.includes(professionName)) {
+          // If already selected, remove from the list
+          const updatedProfessions = selectedProfessions
+            .split(', ')
+            .filter((prof) => prof !== professionName)
+            .join(', ');
+    
+          setSelectedProfessions(updatedProfessions);
+        } else {
+          // If not selected, add to the list
+          const updatedProfessions =
+            selectedProfessions === ''
+              ? professionName
+              : `${selectedProfessions}, ${professionName}`;
+    
+          setSelectedProfessions(updatedProfessions);
+        }
+      };
+    
+
+      console.log(selectedProfessions,'LLLLLLLLL')
+
+
+    //   const handleInterestCheckbox = (professionName) => {
+    //     if (selectedInterest.includes(professionName)) {
+    //       // If already selected, remove from the list
+    //       const updatedProfessions = selectedInterest
+    //         .split(', ')
+    //         .filter((prof) => prof !== professionName)
+    //         .join(', ');
+    
+    //       setSelectedInterest(updatedProfessions);
+    //     } else {
+    //       // If not selected, add to the list
+    //       const updatedProfessions =
+    //       selectedInterest === ''
+    //           ? professionName
+    //           : `${selectedInterest}, ${professionName}`;
+    
+    //           setSelectedInterest(updatedProfessions);
+    //     }
+    //   };
+
+    const handleInterestCheckbox = (interestId) => {
+        if (selectedInterest.includes(interestId)) {
+          // If already selected, remove from the list
+          const updatedInterests = selectedInterest.filter((id) => id !== interestId);
+          setSelectedInterest(updatedInterests);
+        } else {
+          // If not selected, add to the list
+          const updatedInterests = [...selectedInterest, interestId];
+          setSelectedInterest(updatedInterests);
+        }
+      };
+
+      const interestedAreas = selectedInterest.join(',');
+
+    
+console.log(interestedAreas,'selectedInterestselectedInterestselectedInterest')
+
+    
+  const FinalConfirm = () => {
+
+    console.log('LLLL')
+    console.log(jsonData?.staffId,jsonData?.client,jsonData?.clientType,
+        firstname,lastname,email,mobile,whatnumber,REFERREDBYSOURCE,bankname,accountnum,currentac,routingnum,
+        associationList,
+        selectedProfessions,interestedAreas
+        )
+
+
+     dispatch(ConfirmClientSetup(
+        jsonData?.staffId,jsonData?.clientId,jsonData?.clientType,
+        firstname,lastname,email,mobile,whatnumber,REFERREDBYSOURCE,bankname,accountnum,currentac,routingnum,
+        associationList,
+        selectedProfessions,interestedAreas,navigation
+
+     ))   
+} 
+
+
     const renderStepIndicator = params => {
-        console.log(params,'pppppp')
+       // console.log(params,'pppppp')
 
         return (
             
@@ -177,27 +359,43 @@ const ClientSteps = () => {
                                             placeholder='First Name'
                                             value={firstname}
                                             onChangeText={text => {
-                                              onChangeEmail(text);
+                                              setFirstName(text);
                                             }}
                                             style={[styles.input, { marginTop: 20 }]}
                                         />
                                         <TextInput
                                             placeholder='Last Name'
+                                            value={lastname}
+                                            onChangeText={text => {
+                                              setLastName(text);
+                                            }}
                                             style={styles.input}
 
                                         />
                                         <TextInput
                                             placeholder='Email Address'
+                                            value={email}
+                                            onChangeText={text => {
+                                              setEmail(text);
+                                            }}
                                             style={styles.input}
 
                                         />
                                         <TextInput
                                             placeholder='Mobile Number'
+                                            value={mobile}
+                                            onChangeText={text => {
+                                              setMobile(text);
+                                            }}
                                             style={styles.input}
 
                                         />
                                         <TextInput
                                             placeholder='Whatsapp Number'
+                                            value={whatnumber}
+                                            onChangeText={text => {
+                                              setWhatNumber(text);
+                                            }}
                                             style={styles.input}
 
                                         />
@@ -248,22 +446,7 @@ const ClientSteps = () => {
                                             <Text style={{ backgroundColor: Color.green,fontFamily:'Poppins-SemiBold', color:"#243859",padding:5,fontSize:16 }}>Website</Text>
                                         </View>
                                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                            {/* <TouchableOpacity style={styles.btnPrev}
-                                            onPress={() => { onPageChange(0) }}
-                                        >
-                                            <Icon
-                                                style={[
-                                                    styles.icon,
-                                                    {
-                                                        color: '#fff',
-                                                    },
-                                                ]}
-                                                name="arrowleft"
-                                                size={20}
-                                                color="#fff"
-                                            />
-                                            <Text style={{ color: '#fff', fontSize: 15 }}>Previous</Text>
-                                        </TouchableOpacity> */}
+                                          
                                             <TouchableOpacity style={styles.btn} onPress={() => { onPageChange(2) }}>
                                             <Icon
                                             style={[
@@ -308,22 +491,38 @@ const ClientSteps = () => {
                                     <View style={{ backgroundColor: '#f4f8f9', height: hp(35), width: '100%', alignItems: 'center', borderBottomLeftRadius: 10, borderBottomRightRadius: 10 }}>
                                         <TextInput
                                             placeholder='Bank Name'
+                                            value={bankname}
+                                            onChangeText={text => {
+                                              setBankName(text);
+                                            }}
                                             style={[styles.input, { marginTop: 20 }]}
 
                                         />
                                             <TextInput
                                             placeholder='Account Number'
+                                            value={accountnum}
+                                            onChangeText={text => {
+                                              setAccountNum(text);
+                                            }}
                                             style={styles.input}
 
                                         />
                                         <TextInput
                                             placeholder='Current Account'
+                                            value={currentac}
+                                            onChangeText={text => {
+                                              setCurrentAc(text);
+                                            }}
                                             style={styles.input}
 
                                         />
                                     
                                         <TextInput
                                             placeholder='Routing Number'
+                                            value={routingnum}
+                                            onChangeText={text => {
+                                              setRoutingNum(text);
+                                            }}
                                             style={styles.input}
 
                                         />
@@ -389,8 +588,21 @@ const ClientSteps = () => {
                                             <Text style={styles.subHead}>Associations if Correct</Text>
                                             <Text style={styles.subHead}>STEP 4</Text>
                                         </View>
-                                        <View style={{ backgroundColor: '#fff', height: hp(35), width: '100%', alignItems: 'center', borderBottomLeftRadius: 10, borderBottomRightRadius: 10 }}>
-                                            <View style={styles.contentView}>
+                                        <View style={{height:hp(70), backgroundColor: '#fff', height: hp(35), width: '100%', alignItems: 'center', borderBottomLeftRadius: 10, borderBottomRightRadius: 10 }}>
+                                        <FlatList
+                    data={infoData}
+                    // numColumns={5}
+                    keyExtractor={(item, index) => index}
+                    renderItem={({ item, index }) => (
+
+                        <View style={styles.contentView}>
+                        <Text style={styles.clientAssoc}> {item?.subClientInfo?.subClientPracticeId}</Text>
+
+
+                    </View>
+                    )}/>
+                                          
+                                            {/* <View style={styles.contentView}>
                                                 <Text style={styles.clientAssoc}>Client Name 1</Text>
 
 
@@ -420,7 +632,7 @@ const ClientSteps = () => {
                                                 <Text style={styles.clientAssoc}>Client Name 6</Text>
 
 
-                                            </View>
+                                            </View> */}
                                         </View>
 
 
@@ -485,120 +697,33 @@ const ClientSteps = () => {
                                             <Text style={styles.subHead}>Current Profession</Text>
                                             <Text style={styles.subHead}>STEP 5</Text>
                                         </View>
-                                        <View style={{ backgroundColor: '#fff', borderBottomRightRadius: 10, borderBottomLeftRadius: 10 }}>
-                                            <View style={styles.contentView}>
-                                                <View style={styles.client}>
-                                                    <CheckBox
-                                                        disabled={false}
-                                                        value={toggleCheckBox}
-                                                        tintColors={{ true: 'white', false: 'white' }}
-                                                        onValueChange={(newValue) => setToggleCheckBox(newValue)}
-                                                    />
-                                                    <Text style={styles.ProfesstionList} >
+                                        <View style={{height:hp(70), backgroundColor: '#fff', borderBottomRightRadius: 10, borderBottomLeftRadius: 10 }}>
+                                          
+                                        <FlatList
+                    data={professionList}
+                    // numColumns={5}
+                    keyExtractor={(item, index) => index}
+                    renderItem={({ item, index }) => (
+                        <View style={styles.contentView}>
+                        <View style={styles.client}>
+                        <CheckBox
+              disabled={false}
+              value={selectedProfessions.includes(item.professionName)}
+              tintColors={{ true: 'white', false: 'white' }}
+              onValueChange={() => handleToggleCheckbox(item.professionName)}
+            />
+                           <Text style={styles.ProfesstionList} >
 
-                                                        Accountant</Text>
-                                                </View>
+                               {item.professionName}</Text>
+                        </View>
 
 
-                                            </View>
-                                            <View style={styles.contentView}>
+                    </View>
 
-                                                <View style={styles.client}>
-                                                    <CheckBox
-                                                        disabled={false}
-                                                        value={toggleCheckBox1}
-                                                        tintColors={{ true: 'white', false: 'white' }}
-                                                        onValueChange={(newValue) => setToggleCheckBox1(newValue)}
-                                                    />
-                                                   <Text style={styles.ProfesstionList} >
-                                                        Author
-                                                    </Text>
-                                                </View>
-                                            </View>
-                                            <View style={styles.contentView}>
 
-                                                <View style={styles.client}>
-                                                    <CheckBox
-                                                        disabled={false}
-                                                        value={toggleCheckBox2}
-                                                        tintColors={{ true: 'white', false: 'white' }}
-                                                        onValueChange={(newValue) => setToggleCheckBox2(newValue)}
-                                                    />
-                                                   <Text style={styles.ProfesstionList} >
-                                                       Dentist
-                                                    </Text>
-                                                </View>
-                                            </View>
-                                            <View style={styles.contentView}>
-
-                                                <View style={styles.client}>
-                                                    <CheckBox
-                                                        disabled={false}
-                                                        value={toggleCheckBox3}
-                                                        tintColors={{ true: 'white', false: 'white' }}
-                                                        onValueChange={(newValue) => setToggleCheckBox3(newValue)}
-                                                    />
-                                                 <Text style={styles.ProfesstionList} >
-                                                       Doctor
-                                                    </Text>
-                                                </View>
-                                            </View>
-                                            <View style={styles.contentView}>
-
-                                                <View style={styles.client}>
-                                                    <CheckBox
-                                                        disabled={false}
-                                                        value={toggleCheckBox4}
-                                                        tintColors={{ true: 'white', false: 'white' }}
-                                                        onValueChange={(newValue) => setToggleCheckBox4(newValue)}
-                                                    />
-                                                   <Text style={styles.ProfesstionList} >
-                                                       Journalist
-                                                    </Text>
-                                                </View>
-                                            </View>
-                                            <View style={styles.contentView}>
-
-                                                <View style={styles.client}>
-                                                    <CheckBox
-                                                        disabled={false}
-                                                        value={toggleCheckBox5}
-                                                        tintColors={{ true: 'white', false: 'white' }}
-                                                        onValueChange={(newValue) => setToggleCheckBox5(newValue)}
-                                                    />
-                                                  <Text style={styles.ProfesstionList} >
-                                                        Lawyer
-                                                    </Text>
-                                                </View>
-                                            </View>
-                                            <View style={styles.contentView}>
-
-                                                <View style={styles.client}>
-                                                    <CheckBox
-                                                        disabled={false}
-                                                        value={toggleCheckBox6}
-                                                        tintColors={{ true: 'white', false: 'white' }}
-                                                        onValueChange={(newValue) => setToggleCheckBox6(newValue)}
-                                                    />
-                                                   <Text style={styles.ProfesstionList} >
-                                                       Musician
-                                                    </Text>
-                                                </View>
-                                            </View>
-                                            <View style={styles.contentView}>
-
-                                                <View style={styles.client}>
-                                                    <CheckBox
-                                                        disabled={false}
-                                                        value={toggleCheckBox7}
-                                                        tintColors={{ true: 'white', false: 'white' }}
-                                                        onValueChange={(newValue) => setToggleCheckBox7(newValue)}
-                                                    />
-                                                   <Text style={styles.ProfesstionList} >
-                                                       Plumber
-                                                    </Text>
-                                                </View>
-                                            </View>
+                    )}
+                    />
+                                           
                                         </View>
                                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                             {/* <TouchableOpacity style={styles.btnPrev}
@@ -661,141 +786,38 @@ const ClientSteps = () => {
                                         </View>
 
 
-                                        <View style={{ backgroundColor: '#fff', borderBottomRightRadius: 10, borderBottomLeftRadius: 10 }}>
-                                            <View style={styles.contentView}>
-                                                <View style={styles.client}>
-                                                    <CheckBox
-                                                        disabled={false}
-                                                        value={toggleCheckBoxInt}
-                                                        tintColors={{ true: 'white', false: 'white' }}
-                                                        onValueChange={(newValue) => setToggleCheckBoxInt(newValue)}
-                                                    />
-                                                   <Text style={styles.ProfesstionList} >
+                                        <View style={{height:hp(70), backgroundColor: '#fff', borderBottomRightRadius: 10, borderBottomLeftRadius: 10 }}>
+                                        
+                                        <FlatList
+                    data={interestList}
+                    // numColumns={5}
+                    keyExtractor={(item, index) => index}
+                    renderItem={({ item, index }) => (
+                        <View style={styles.contentView}>
+                        <View style={styles.client}>
+                        <CheckBox
+              disabled={false}
+              value={selectedInterest.includes(item.id)}
+              tintColors={{ true: 'white', false: 'white' }}
+              onValueChange={() => handleInterestCheckbox(item.id)}
+            />
+                           <Text style={styles.ProfesstionList} >
 
-                                                        Buy Real Estate</Text>
-                                                </View>
+                               {item.name}</Text>
+                        </View>
 
 
-                                            </View>
-                                            <View style={styles.contentView}>
+                    </View>
 
-                                                <View style={styles.client}>
-                                                    <CheckBox
-                                                        disabled={false}
-                                                        value={toggleCheckBoxInt1}
-                                                        tintColors={{ true: 'white', false: 'white' }}
-                                                        onValueChange={(newValue) => setToggleCheckBoxInt1(newValue)}
-                                                    />
-                                                    <Text style={styles.ProfesstionList} >
-                                                        Sell Real Estate
-                                                    </Text>
-                                                </View>
-                                            </View>
-                                            <View style={styles.contentView}>
 
-                                                <View style={styles.client}>
-                                                    <CheckBox
-                                                        disabled={false}
-                                                        value={toggleCheckBoxInt2}
-                                                        tintColors={{ true: 'white', false: 'white' }}
-                                                        onValueChange={(newValue) => setToggleCheckBoxInt2(newValue)}
-                                                    />
-                                                    <Text style={styles.ProfesstionList} >
-                                                        Need a Loan or Mortgage
-                                                    </Text>
-                                                </View>
-                                            </View>
-                                            <View style={styles.contentView}>
-
-                                                <View style={styles.client}>
-                                                    <CheckBox
-                                                        disabled={false}
-                                                        value={toggleCheckBoxInt3}
-                                                        tintColors={{ true: 'white', false: 'white' }}
-                                                        onValueChange={(newValue) => setToggleCheckBoxInt3(newValue)}
-                                                    />
-                                                   <Text style={styles.ProfesstionList} >
-                                                        Business Legal Services
-                                                    </Text>
-                                                </View>
-                                            </View>
-                                            <View style={styles.contentView}>
-
-                                                <View style={styles.client}>
-                                                    <CheckBox
-                                                        disabled={false}
-                                                        value={toggleCheckBoxInt4}
-                                                        tintColors={{ true: 'white', false: 'white' }}
-                                                        onValueChange={(newValue) => setToggleCheckBoxInt4(newValue)}
-                                                    />
-                                                    <Text style={styles.ProfesstionList} >
-                                                        Immigration Legal Services
-                                                    </Text>
-                                                </View>
-                                            </View>
-                                            <View style={styles.contentView}>
-
-                                                <View style={styles.client}>
-                                                    <CheckBox
-                                                        disabled={false}
-                                                        value={toggleCheckBoxInt5}
-                                                        tintColors={{ true: 'white', false: 'white' }}
-                                                        onValueChange={(newValue) => setToggleCheckBoxInt5(newValue)}
-                                                    />
-                                                    <Text style={styles.ProfesstionList} >
-                                                        Real Estate Legal Services or Closings
-                                                    </Text>
-                                                </View>
-                                            </View>
-                                            <View style={styles.contentView}>
-
-                                                <View style={styles.client}>
-                                                    <CheckBox
-                                                        disabled={false}
-                                                        value={toggleCheckBoxInt6}
-                                                        tintColors={{ true: 'white', false: 'white' }}
-                                                        onValueChange={(newValue) => setToggleCheckBoxInt6(newValue)}
-                                                    />
-                                                    <Text style={styles.ProfesstionList} >
-                                                        Insurance Services
-                                                    </Text>
-                                                </View>
-                                            </View>
-                                            <View style={styles.contentView}>
-
-                                                <View style={styles.client}>
-
-                                                    <CheckBox
-                                                        disabled={false}
-                                                        value={toggleCheckBoxInt7}
-                                                        tintColors={{ true: 'white', false: 'white' }}
-                                                        onValueChange={(newValue) => setToggleCheckBoxInt7(newValue)}
-                                                    />
-
-                                                        <Text style={styles.ProfesstionList} >
-                                                        Buy an Existing Business
-                                                    </Text>
-                                                </View>
-                                            </View>
+                    )}
+                    />
+                                        
+                                           
                                         </View>
                                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                            {/* <TouchableOpacity style={styles.btnPrev}
-                                            onPress={() => { onPageChange(3) }}
-                                        >
-                                            <Icon
-                                                style={[
-                                                    styles.icon,
-                                                    {
-                                                        color: '#fff',
-                                                    },
-                                                ]}
-                                                name="arrowleft"
-                                                size={20}
-                                                color="#fff"
-                                            />
-                                            <Text style={{ color: '#fff' }}>Previous</Text>
-                                        </TouchableOpacity> */}
-                                            <TouchableOpacity style={styles.btn} onPress={() => { onPageChange(5) }}>
+                                           
+                                            <TouchableOpacity style={styles.btn} onPress={() => FinalConfirm() }>
                                             <Icon
                                             style={[
                                                 styles.icon,
@@ -976,11 +998,12 @@ const styles = StyleSheet.create({
         //  backgroundColor: '#fff',
         // marginTop: 10,
         // padding: 10,
-        flexDirection: 'row',
+       // flexDirection: 'row',
         marginTop:10,
         width:wp(100),
-        alignItems:'center',
-        justifyContent:'center',
+       // alignItems:'center',
+
+       // justifyContent:'center',
     },
 
 
@@ -989,11 +1012,15 @@ const styles = StyleSheet.create({
         borderRadius: 25,
         color: '#fff',
         // padding: 5,
+    marginLeft:10,
         width:wp(90),
+      //  alignSelf:"center",
+        //alignSelf:"center",
         height: hp(4),
         // marginRight: 10,
         flexDirection: 'row',
-        textAlign: 'center',
+       // justifyContent:"center"
+      //  textAlign: 'center',
         // paddingBottom: 20
     },
     clientAssoc: {
@@ -1003,10 +1030,10 @@ const styles = StyleSheet.create({
         fontFamily:'Poppins-SemiBold',
         padding: 5,
         width: wp(90),
-    
+    marginLeft:10,
      fontSize:12,
         // marginRight: 10,
-       alignSelf:"center",
+      // alignSelf:"center",
         textAlign: 'center',
         // paddingBottom: 20
     },

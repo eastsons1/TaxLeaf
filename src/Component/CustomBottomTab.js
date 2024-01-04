@@ -33,10 +33,10 @@ const CustomBottomTab = () => {
           alignSelf: 'center',
           borderTopColor: '#E5E5E5',
           borderTopWidth: 1,
-          width: wp(96),
+          width: wp(95),
           justifyContent: 'space-between',
           backgroundColor: Color.darkGreen,
-          height: 65,
+          height: 80,
           paddingHorizontal: 22
 
         }}>

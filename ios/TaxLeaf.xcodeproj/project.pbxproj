@@ -12,6 +12,31 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		536DDA552B46E17B000162AF /* Poppins-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 536DDA3D2B46E177000162AF /* Poppins-Black.otf */; };
+		536DDA562B46E17B000162AF /* Poppins-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 536DDA3E2B46E177000162AF /* Poppins-ExtraLight.otf */; };
+		536DDA572B46E17B000162AF /* Poppins-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 536DDA3F2B46E177000162AF /* Poppins-ExtraBold.otf */; };
+		536DDA582B46E17B000162AF /* glyphicons-halflings-regular.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 536DDA402B46E177000162AF /* glyphicons-halflings-regular.woff2 */; };
+		536DDA592B46E17B000162AF /* glyphicons-halflings-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 536DDA412B46E177000162AF /* glyphicons-halflings-regular.ttf */; };
+		536DDA5A2B46E17B000162AF /* Poppins-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 536DDA422B46E177000162AF /* Poppins-Italic.otf */; };
+		536DDA5B2B46E17B000162AF /* Poppins-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 536DDA432B46E177000162AF /* Poppins-Medium.otf */; };
+		536DDA5C2B46E17B000162AF /* Poppins-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 536DDA442B46E177000162AF /* Poppins-Light.otf */; };
+		536DDA5D2B46E17B000162AF /* Poppins-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 536DDA452B46E177000162AF /* Poppins-MediumItalic.otf */; };
+		536DDA5E2B46E17B000162AF /* Poppins-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 536DDA462B46E178000162AF /* Poppins-Regular.otf */; };
+		536DDA5F2B46E17B000162AF /* Poppins-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 536DDA472B46E178000162AF /* Poppins-SemiBold.otf */; };
+		536DDA602B46E17B000162AF /* Poppins-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 536DDA482B46E178000162AF /* Poppins-Thin.otf */; };
+		536DDA612B46E17B000162AF /* glyphicons-halflings-regular.svg in Resources */ = {isa = PBXBuildFile; fileRef = 536DDA492B46E179000162AF /* glyphicons-halflings-regular.svg */; };
+		536DDA622B46E17B000162AF /* glyphicons-halflings-regular.eot_ in Resources */ = {isa = PBXBuildFile; fileRef = 536DDA4A2B46E179000162AF /* glyphicons-halflings-regular.eot_ */; };
+		536DDA632B46E17B000162AF /* glyphicons-halflings-regular.woff in Resources */ = {isa = PBXBuildFile; fileRef = 536DDA4B2B46E179000162AF /* glyphicons-halflings-regular.woff */; };
+		536DDA642B46E17B000162AF /* Poppins-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 536DDA4C2B46E179000162AF /* Poppins-BoldItalic.otf */; };
+		536DDA652B46E17B000162AF /* Poppins-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 536DDA4D2B46E17A000162AF /* Poppins-ThinItalic.otf */; };
+		536DDA662B46E17B000162AF /* Poppins-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 536DDA4E2B46E17A000162AF /* Poppins-BlackItalic.otf */; };
+		536DDA672B46E17B000162AF /* glyphicons-halflings-regular.eot in Resources */ = {isa = PBXBuildFile; fileRef = 536DDA4F2B46E17A000162AF /* glyphicons-halflings-regular.eot */; };
+		536DDA682B46E17B000162AF /* Poppins-ExtraBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 536DDA502B46E17A000162AF /* Poppins-ExtraBoldItalic.otf */; };
+		536DDA692B46E17B000162AF /* SIL Open Font License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 536DDA512B46E17A000162AF /* SIL Open Font License.txt */; };
+		536DDA6A2B46E17B000162AF /* Poppins-SemiBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 536DDA522B46E17A000162AF /* Poppins-SemiBoldItalic.otf */; };
+		536DDA6B2B46E17B000162AF /* Poppins-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 536DDA532B46E17B000162AF /* Poppins-LightItalic.otf */; };
+		536DDA6C2B46E17B000162AF /* Poppins-ExtraLightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 536DDA542B46E17B000162AF /* Poppins-ExtraLightItalic.otf */; };
+		536DDAA02B46E737000162AF /* Poppins-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 536DDA9F2B46E737000162AF /* Poppins-Bold.otf */; };
 		706FBF7D337AE27EE49C6AC3 /* libPods-TaxLeaf.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF3B3C5F65E676E3536594D /* libPods-TaxLeaf.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -36,6 +61,31 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = TaxLeaf/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = TaxLeaf/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = TaxLeaf/main.m; sourceTree = "<group>"; };
+		536DDA3D2B46E177000162AF /* Poppins-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Black.otf"; path = "../assets/fonts/Poppins-Black.otf"; sourceTree = "<group>"; };
+		536DDA3E2B46E177000162AF /* Poppins-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-ExtraLight.otf"; path = "../assets/fonts/Poppins-ExtraLight.otf"; sourceTree = "<group>"; };
+		536DDA3F2B46E177000162AF /* Poppins-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-ExtraBold.otf"; path = "../assets/fonts/Poppins-ExtraBold.otf"; sourceTree = "<group>"; };
+		536DDA402B46E177000162AF /* glyphicons-halflings-regular.woff2 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "glyphicons-halflings-regular.woff2"; path = "../assets/fonts/glyphicons-halflings-regular.woff2"; sourceTree = "<group>"; };
+		536DDA412B46E177000162AF /* glyphicons-halflings-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "glyphicons-halflings-regular.ttf"; path = "../assets/fonts/glyphicons-halflings-regular.ttf"; sourceTree = "<group>"; };
+		536DDA422B46E177000162AF /* Poppins-Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Italic.otf"; path = "../assets/fonts/Poppins-Italic.otf"; sourceTree = "<group>"; };
+		536DDA432B46E177000162AF /* Poppins-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Medium.otf"; path = "../assets/fonts/Poppins-Medium.otf"; sourceTree = "<group>"; };
+		536DDA442B46E177000162AF /* Poppins-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Light.otf"; path = "../assets/fonts/Poppins-Light.otf"; sourceTree = "<group>"; };
+		536DDA452B46E177000162AF /* Poppins-MediumItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-MediumItalic.otf"; path = "../assets/fonts/Poppins-MediumItalic.otf"; sourceTree = "<group>"; };
+		536DDA462B46E178000162AF /* Poppins-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Regular.otf"; path = "../assets/fonts/Poppins-Regular.otf"; sourceTree = "<group>"; };
+		536DDA472B46E178000162AF /* Poppins-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-SemiBold.otf"; path = "../assets/fonts/Poppins-SemiBold.otf"; sourceTree = "<group>"; };
+		536DDA482B46E178000162AF /* Poppins-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Thin.otf"; path = "../assets/fonts/Poppins-Thin.otf"; sourceTree = "<group>"; };
+		536DDA492B46E179000162AF /* glyphicons-halflings-regular.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "glyphicons-halflings-regular.svg"; path = "../assets/fonts/glyphicons-halflings-regular.svg"; sourceTree = "<group>"; };
+		536DDA4A2B46E179000162AF /* glyphicons-halflings-regular.eot_ */ = {isa = PBXFileReference; lastKnownFileType = file; name = "glyphicons-halflings-regular.eot_"; path = "../assets/fonts/glyphicons-halflings-regular.eot_"; sourceTree = "<group>"; };
+		536DDA4B2B46E179000162AF /* glyphicons-halflings-regular.woff */ = {isa = PBXFileReference; lastKnownFileType = file; name = "glyphicons-halflings-regular.woff"; path = "../assets/fonts/glyphicons-halflings-regular.woff"; sourceTree = "<group>"; };
+		536DDA4C2B46E179000162AF /* Poppins-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-BoldItalic.otf"; path = "../assets/fonts/Poppins-BoldItalic.otf"; sourceTree = "<group>"; };
+		536DDA4D2B46E17A000162AF /* Poppins-ThinItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-ThinItalic.otf"; path = "../assets/fonts/Poppins-ThinItalic.otf"; sourceTree = "<group>"; };
+		536DDA4E2B46E17A000162AF /* Poppins-BlackItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-BlackItalic.otf"; path = "../assets/fonts/Poppins-BlackItalic.otf"; sourceTree = "<group>"; };
+		536DDA4F2B46E17A000162AF /* glyphicons-halflings-regular.eot */ = {isa = PBXFileReference; lastKnownFileType = file; name = "glyphicons-halflings-regular.eot"; path = "../assets/fonts/glyphicons-halflings-regular.eot"; sourceTree = "<group>"; };
+		536DDA502B46E17A000162AF /* Poppins-ExtraBoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-ExtraBoldItalic.otf"; path = "../assets/fonts/Poppins-ExtraBoldItalic.otf"; sourceTree = "<group>"; };
+		536DDA512B46E17A000162AF /* SIL Open Font License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "SIL Open Font License.txt"; path = "../assets/fonts/SIL Open Font License.txt"; sourceTree = "<group>"; };
+		536DDA522B46E17A000162AF /* Poppins-SemiBoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-SemiBoldItalic.otf"; path = "../assets/fonts/Poppins-SemiBoldItalic.otf"; sourceTree = "<group>"; };
+		536DDA532B46E17B000162AF /* Poppins-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-LightItalic.otf"; path = "../assets/fonts/Poppins-LightItalic.otf"; sourceTree = "<group>"; };
+		536DDA542B46E17B000162AF /* Poppins-ExtraLightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-ExtraLightItalic.otf"; path = "../assets/fonts/Poppins-ExtraLightItalic.otf"; sourceTree = "<group>"; };
+		536DDA9F2B46E737000162AF /* Poppins-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Bold.otf"; path = "../assets/fonts/Poppins-Bold.otf"; sourceTree = "<group>"; };
 		5DF3B3C5F65E676E3536594D /* libPods-TaxLeaf.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TaxLeaf.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = TaxLeaf/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		90DE402AE664F1359B3EB878 /* Pods-TaxLeaf.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaxLeaf.debug.xcconfig"; path = "Target Support Files/Pods-TaxLeaf/Pods-TaxLeaf.debug.xcconfig"; sourceTree = "<group>"; };
@@ -122,6 +172,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				E904B7EFEEC64B3C99E0F233 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -146,6 +197,38 @@
 				C78F3DC0E1D45F792B3F8CF6 /* Pods-TaxLeaf-TaxLeafTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		E904B7EFEEC64B3C99E0F233 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				536DDA9F2B46E737000162AF /* Poppins-Bold.otf */,
+				536DDA4F2B46E17A000162AF /* glyphicons-halflings-regular.eot */,
+				536DDA4A2B46E179000162AF /* glyphicons-halflings-regular.eot_ */,
+				536DDA492B46E179000162AF /* glyphicons-halflings-regular.svg */,
+				536DDA412B46E177000162AF /* glyphicons-halflings-regular.ttf */,
+				536DDA4B2B46E179000162AF /* glyphicons-halflings-regular.woff */,
+				536DDA402B46E177000162AF /* glyphicons-halflings-regular.woff2 */,
+				536DDA3D2B46E177000162AF /* Poppins-Black.otf */,
+				536DDA4E2B46E17A000162AF /* Poppins-BlackItalic.otf */,
+				536DDA4C2B46E179000162AF /* Poppins-BoldItalic.otf */,
+				536DDA3F2B46E177000162AF /* Poppins-ExtraBold.otf */,
+				536DDA502B46E17A000162AF /* Poppins-ExtraBoldItalic.otf */,
+				536DDA3E2B46E177000162AF /* Poppins-ExtraLight.otf */,
+				536DDA542B46E17B000162AF /* Poppins-ExtraLightItalic.otf */,
+				536DDA422B46E177000162AF /* Poppins-Italic.otf */,
+				536DDA442B46E177000162AF /* Poppins-Light.otf */,
+				536DDA532B46E17B000162AF /* Poppins-LightItalic.otf */,
+				536DDA432B46E177000162AF /* Poppins-Medium.otf */,
+				536DDA452B46E177000162AF /* Poppins-MediumItalic.otf */,
+				536DDA462B46E178000162AF /* Poppins-Regular.otf */,
+				536DDA472B46E178000162AF /* Poppins-SemiBold.otf */,
+				536DDA522B46E17A000162AF /* Poppins-SemiBoldItalic.otf */,
+				536DDA482B46E178000162AF /* Poppins-Thin.otf */,
+				536DDA4D2B46E17A000162AF /* Poppins-ThinItalic.otf */,
+				536DDA512B46E17A000162AF /* SIL Open Font License.txt */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -240,8 +323,33 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				536DDAA02B46E737000162AF /* Poppins-Bold.otf in Resources */,
+				536DDA632B46E17B000162AF /* glyphicons-halflings-regular.woff in Resources */,
+				536DDA552B46E17B000162AF /* Poppins-Black.otf in Resources */,
+				536DDA572B46E17B000162AF /* Poppins-ExtraBold.otf in Resources */,
+				536DDA592B46E17B000162AF /* glyphicons-halflings-regular.ttf in Resources */,
+				536DDA6A2B46E17B000162AF /* Poppins-SemiBoldItalic.otf in Resources */,
+				536DDA582B46E17B000162AF /* glyphicons-halflings-regular.woff2 in Resources */,
+				536DDA6B2B46E17B000162AF /* Poppins-LightItalic.otf in Resources */,
+				536DDA612B46E17B000162AF /* glyphicons-halflings-regular.svg in Resources */,
+				536DDA602B46E17B000162AF /* Poppins-Thin.otf in Resources */,
+				536DDA672B46E17B000162AF /* glyphicons-halflings-regular.eot in Resources */,
+				536DDA662B46E17B000162AF /* Poppins-BlackItalic.otf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				536DDA642B46E17B000162AF /* Poppins-BoldItalic.otf in Resources */,
+				536DDA5D2B46E17B000162AF /* Poppins-MediumItalic.otf in Resources */,
+				536DDA652B46E17B000162AF /* Poppins-ThinItalic.otf in Resources */,
+				536DDA5E2B46E17B000162AF /* Poppins-Regular.otf in Resources */,
+				536DDA5A2B46E17B000162AF /* Poppins-Italic.otf in Resources */,
+				536DDA682B46E17B000162AF /* Poppins-ExtraBoldItalic.otf in Resources */,
+				536DDA5C2B46E17B000162AF /* Poppins-Light.otf in Resources */,
+				536DDA692B46E17B000162AF /* SIL Open Font License.txt in Resources */,
+				536DDA5F2B46E17B000162AF /* Poppins-SemiBold.otf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				536DDA562B46E17B000162AF /* Poppins-ExtraLight.otf in Resources */,
+				536DDA6C2B46E17B000162AF /* Poppins-ExtraLightItalic.otf in Resources */,
+				536DDA622B46E17B000162AF /* glyphicons-halflings-regular.eot_ in Resources */,
+				536DDA5B2B46E17B000162AF /* Poppins-Medium.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -450,15 +558,16 @@
 			baseConfigurationReference = 90DE402AE664F1359B3EB878 /* Pods-TaxLeaf.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = TCMSWUT38G;
+				DEVELOPMENT_TEAM = TCMSWUT38G;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = TaxLeaf/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Taxleaf;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -472,7 +581,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.taxleaf.taxleaf;
 				PRODUCT_NAME = TaxLeaf;
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = TaxLeafProfile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -484,14 +592,15 @@
 			baseConfigurationReference = F7080CF82C0CEEDDFE987ED6 /* Pods-TaxLeaf.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = TCMSWUT38G;
+				DEVELOPMENT_TEAM = TCMSWUT38G;
 				INFOPLIST_FILE = TaxLeaf/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Taxleaf;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -505,7 +614,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.taxleaf.taxleaf;
 				PRODUCT_NAME = TaxLeaf;
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = TaxLeafProfile;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -580,10 +688,7 @@
 					"-DFOLLY_MOBILE=1",
 					"-DFOLLY_USE_LIBCPP=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 			};
@@ -653,10 +758,7 @@
 					"-DFOLLY_MOBILE=1",
 					"-DFOLLY_USE_LIBCPP=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

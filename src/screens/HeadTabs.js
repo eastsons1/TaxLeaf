@@ -159,17 +159,10 @@ const HeadTabs = () => {
                                                     ? (setshowwhat1(''), setshowwhat2(''))
                                                     : (showwhatfunc1('Message'), showwhatfunc2(''))
                                             }>
-                                            <Icon3
-                                                style={[
-                                                    styles.icon,
-                                                    {
-                                                        color: showwhat1 == 'Message' ? '#fff' : '#fff',
-                                                    },
-                                                ]}
-                                                name="money-check-alt"
-                                                size={25}
-                                                color="#fff"
-                                            />
+                                           <Image
+                                                    source={ require('../Assets/img/icons/tax.png')}
+                              style={  [styles.icon,]}
+                              />
 
 
 
@@ -184,7 +177,7 @@ const HeadTabs = () => {
                                                             : Color.IconTextColor,
                                                 },
                                             ]}>
-                                            Tax Deadlines
+                                            Tax Deadlines1
                                         </Text>
                                     </View>
                                     <View style={styles.TabsContainer}>
@@ -202,20 +195,10 @@ const HeadTabs = () => {
                                                     ? (setshowwhat1(''), setshowwhat2(''))
                                                     : (showwhatfunc1('Proposal'), showwhatfunc2(''))
                                             }>
-                                            <Icon
-                                                style={[
-                                                    styles.icon,
-                                                    {
-                                                        color:
-                                                            showwhat1 == 'Proposal'
-                                                                ? Color.white
-                                                                : Color.white,
-                                                    },
-                                                ]}
-                                                name="message1"
-                                                size={25}
-                                                color="#fff"
-                                            />
+                                            <Image
+                                                    source={ require('../Assets/img/icons/message.png')}
+                              style={  styles.icon}
+                              />
 
 
 
@@ -248,34 +231,13 @@ const HeadTabs = () => {
                                                     ? (setshowwhat1(''), setshowwhat2(''))
                                                     : (showwhatfunc1('Signature'), showwhatfunc2(''))
                                             }>
-                                            <Icon1
-                                                style={[
-                                                    styles.icon,
-                                                    {
-                                                        color:
-                                                            showwhat1 == 'Signature'
-                                                                ? Color.white
-                                                                : Color.white,
-                                                    },
-                                                ]}
-                                                name="event"
-                                                size={25}
-                                                color="#fff"
-                                            />
+                                             <Image
+                                                    source={ require('../Assets/img/icons/events.png')}
+                                                    style={  [styles.icon,]}
+                              />
 
 
-                                            {/* <Text
-                        style={[
-                          styles.ButtonText,
-                          {
-                            color:
-                              showwhat1 == 'Signature'
-                                ? Color.white
-                                : Color.headerIconBG,
-                          },
-                        ]}>
-                        (0)
-                      </Text> */}
+                                          
                                         </TouchableOpacity>
                                         <Text
                                             style={[
@@ -305,7 +267,13 @@ const HeadTabs = () => {
                                                     ? (setshowwhat1(''), setshowwhat2(''))
                                                     : (showwhatfunc1('Reminders'), showwhatfunc2(''))
                                             }>
-                                            <Icon2
+                                                <Image
+                                                    source={ require('../Assets/img/icons/holidayicon.png')}
+                              style={  styles.icon}
+                               
+                            />
+
+                                            {/* <Icon2
                                                 style={[
                                                     styles.icon,
                                                     {
@@ -318,7 +286,7 @@ const HeadTabs = () => {
                                                 name="holiday-village"
                                                 size={25}
                                                 color="#fff"
-                                            />
+                                            /> */}
 
 
                                             {/* <Text
@@ -371,27 +339,12 @@ const HeadTabs = () => {
                                                     ? (setshowwhat1(''), setshowwhat2(''))
                                                     : (showwhatfunc1('Message'), showwhatfunc2(''))
                                             }>
-                                            <Icon3
-                                                style={[
-                                                    styles.icon,
-                                                    {
-                                                        color: showwhat1 == 'Message' ? '#fff' : '#fff',
-                                                    },
-                                                ]}
-                                                name="money-check-alt"
-                                                size={25}
-                                                color="#fff"
-                                            />
+                                           <Image
+                                                    source={ require('../Assets/img/icons/tax.png')}
+                                                    style={  [styles.icon,]}
+                              />
 
-                                            {/* <Text
-                        style={[
-                          styles.ButtonText,
-                          {
-                            color: showwhat1 == 'Message' ? '#fff' : '#000',
-                          },
-                        ]}>
-                        (1)
-                      </Text> */}
+                                          
                                         </TouchableOpacity>
                                         <Text
                                             style={[
@@ -421,17 +374,10 @@ const HeadTabs = () => {
                                                     ? (setshowwhat1(''), setshowwhat2(''))
                                                     : (showwhatfunc1('Proposal'), showwhatfunc2(''))
                                             }>
-                                            <Icon
-                                                style={[
-                                                    styles.icon,
-                                                    {
-                                                        color: showwhat1 == 'Proposal' ? '#fff' : '#fff',
-                                                    },
-                                                ]}
-                                                name="message1"
-                                                size={25}
-                                                color="#fff"
-                                            />
+                                            <Image
+                                                    source={ require('../Assets/img/icons/message.png')}
+                              style={  styles.icon}
+                              />
 
 
 
@@ -464,26 +410,13 @@ const HeadTabs = () => {
                                                     ? (setshowwhat1(''), setshowwhat2(''))
                                                     : (showwhatfunc1('Signature'), showwhatfunc2(''))
                                             }>
-                                            <Icon1
-                                                style={[
-                                                    styles.icon,
-                                                    { color: showwhat1 == 'Signature' ? '#fff' : '#fff' },
-                                                ]}
-                                                name="event"
-                                                size={25}
-                                                color="#fff"
-                                            />
+                                              <Image
+                                                    source={ require('../Assets/img/icons/events.png')}
+                                                    style={  [styles.icon,]}
+                              />
 
 
-                                            {/* <Text
-                        style={[
-                          styles.ButtonText,
-                          {
-                            color: showwhat1 == 'Signature' ? '#fff' : '#000',
-                          },
-                        ]}>
-                        (0)
-                      </Text> */}
+
                                         </TouchableOpacity>
                                         <Text
                                             style={[
@@ -513,17 +446,11 @@ const HeadTabs = () => {
                                                     ? (setshowwhat1(''), setshowwhat2(''))
                                                     : (showwhatfunc1('Reminders'), showwhatfunc2(''))
                                             }>
-                                            <Icon2
-                                                style={[
-                                                    styles.icon,
-                                                    {
-                                                        color: showwhat1 == 'Reminders' ? '#fff' : '#fff',
-                                                    },
-                                                ]}
-                                                name="holiday-village"
-                                                size={25}
-                                                color="#fff"
-                                            />
+                                           <Image
+                                                    source={ require('../Assets/img/icons/holidayicon.png')}
+                              style={  styles.icon}
+                               
+                            />
 
 
                                             {/* <Text
@@ -571,17 +498,10 @@ const HeadTabs = () => {
                                                     ? (setshowwhat1(''), setshowwhat2(''))
                                                     : (showwhatfunc1('Message'), showwhatfunc2(''))
                                             }>
-                                            <Icon3
-                                                style={[
-                                                    styles.icon,
-                                                    {
-                                                        color: showwhat1 == 'Message' ? '#fff' : '#fff',
-                                                    },
-                                                ]}
-                                                name="money-check-alt"
-                                                size={25}
-                                                color="#fff"
-                                            />
+                                            <Image
+                                                    source={ require('../Assets/img/icons/tax.png')}
+                                                    style={  [styles.icon,]}
+                              />
 
 
 
@@ -613,17 +533,10 @@ const HeadTabs = () => {
                                                     ? (setshowwhat1(''), setshowwhat2(''))
                                                     : (showwhatfunc1('Proposal'), showwhatfunc2(''))
                                             }>
-                                            <Icon
-                                                style={[
-                                                    styles.icon,
-                                                    {
-                                                        color: showwhat1 == 'Proposal' ? '#fff' : '#fff',
-                                                    },
-                                                ]}
-                                                name="message1"
-                                                size={25}
-                                                color="#fff"
-                                            />
+                                             <Image
+                                                    source={ require('../Assets/img/icons/message.png')}
+                              style={  styles.icon}
+                              />
 
 
 
@@ -655,15 +568,10 @@ const HeadTabs = () => {
                                                     ? (setshowwhat1(''), setshowwhat2(''))
                                                     : (showwhatfunc1('Signature'), showwhatfunc2(''))
                                             }>
-                                            <Icon1
-                                                style={[
-                                                    styles.icon,
-                                                    { color: showwhat1 == 'Signature' ? '#fff' : '#fff' },
-                                                ]}
-                                                name="event"
-                                                size={25}
-                                                color="#fff"
-                                            />
+                                             <Image
+                                                    source={ require('../Assets/img/icons/events.png')}
+                                                    style={  [styles.icon,]}
+                              />
 
 
 
@@ -695,17 +603,11 @@ const HeadTabs = () => {
                                                     ? (setshowwhat1(''), setshowwhat2(''))
                                                     : (showwhatfunc1('Reminders'), showwhatfunc2(''))
                                             }>
-                                            <Icon2
-                                                style={[
-                                                    styles.icon,
-                                                    {
-                                                        color: showwhat1 == 'Reminders' ? '#fff' : '#fff',
-                                                    },
-                                                ]}
-                                                name="holiday-village"
-                                                size={25}
-                                                color="#fff"
-                                            />
+                                           <Image
+                                                    source={ require('../Assets/img/icons/holidayicon.png')}
+                              style={  styles.icon}
+                               
+                            />
 
 
                                             {/* <Text
@@ -752,17 +654,10 @@ const HeadTabs = () => {
                                                     ? (setshowwhat1(''), setshowwhat2(''))
                                                     : (showwhatfunc1('Message'), showwhatfunc2(''))
                                             }>
-                                            <Icon3
-                                                style={[
-                                                    styles.icon,
-                                                    {
-                                                        color: showwhat1 == 'Message' ? '#fff' : '#fff',
-                                                    },
-                                                ]}
-                                                name="money-check-alt"
-                                                size={25}
-                                                color="#fff"
-                                            />
+                                            <Image
+                                                    source={ require('../Assets/img/icons/tax.png')}
+                                                    style={  [styles.icon,]}
+                              />
 
 
 
@@ -794,28 +689,12 @@ const HeadTabs = () => {
                                                     ? (setshowwhat1(''), setshowwhat2(''))
                                                     : (showwhatfunc1('Proposal'), showwhatfunc2(''))
                                             }>
-                                            <Icon
-                                                style={[
-                                                    styles.icon,
-                                                    {
-                                                        color: showwhat1 == 'Proposal' ? '#fff' : '#fff',
-                                                    },
-                                                ]}
-                                                name="message1"
-                                                size={25}
-                                                color="#fff"
-                                            />
+                                            <Image
+                                                    source={ require('../Assets/img/icons/message.png')}
+                              style={  styles.icon}
+                              />
 
 
-                                            {/* <Text
-                        style={[
-                          styles.ButtonText,
-                          {
-                            color: showwhat1 == 'Proposal' ? '#fff' : '#000',
-                          },
-                        ]}>
-                        ({dashboardMessageList.length})
-                      </Text> */}
                                         </TouchableOpacity>
                                         <Text
                                             style={[
@@ -844,26 +723,12 @@ const HeadTabs = () => {
                                                     ? (setshowwhat1(''), setshowwhat2(''))
                                                     : (showwhatfunc1('Signature'), showwhatfunc2(''))
                                             }>
-                                            <Icon1
-                                                style={[
-                                                    styles.icon,
-                                                    { color: showwhat1 == 'Signature' ? '#fff' : '#fff' },
-                                                ]}
-                                                name="event"
-                                                size={25}
-                                                color="#fff"
-                                            />
+                                            <Image
+                                                    source={ require('../Assets/img/icons/events.png')}
+                                                    style={  [styles.icon,]}
+                              />
 
 
-                                            {/* <Text
-                        style={[
-                          styles.ButtonText,
-                          {
-                            color: showwhat1 == 'Signature' ? '#fff' : '#000',
-                          },
-                        ]}>
-                        (0)
-                      </Text> */}
                                         </TouchableOpacity>
                                         <Text
                                             style={[
@@ -875,7 +740,7 @@ const HeadTabs = () => {
                                                             : Color.headerIconBG,
                                                 },
                                             ]}>
-                                            Events
+                                            Events1
                                         </Text>
                                     </View>
                                     <View style={styles.TabsContainer}>
@@ -892,17 +757,11 @@ const HeadTabs = () => {
                                                     ? (setshowwhat1(''), setshowwhat2(''))
                                                     : (showwhatfunc1('Reminders'), showwhatfunc2(''))
                                             }>
-                                            <Icon2
-                                                style={[
-                                                    styles.icon,
-                                                    {
-                                                        color: showwhat1 == 'Reminders' ? '#fff' : '#fff',
-                                                    },
-                                                ]}
-                                                name="holiday-village"
-                                                size={25}
-                                                color="#fff"
-                                            />
+                                            <Image
+                                                    source={ require('../Assets/img/icons/holidayicon.png')}
+                              style={  styles.icon}
+                               
+                            />
 
 
                                             {/* <Text
@@ -959,17 +818,10 @@ const HeadTabs = () => {
                                                     : (showwhatfunc2('orders'), showwhatfunc1(''))
                                             }>
 
-                                            <Icon4
-                                                style={[
-                                                    styles.icon,
-                                                    {
-                                                        color: showwhat2 == 'orders' ? '#fff' : '#fff',
-                                                    },
-                                                ]}
-                                                name="list-check"
-                                                size={25}
-                                                color="#fff"
-                                            />
+                                            <Image
+                                             source={ require('../Assets/img/icons/orders.png')}
+                                             style={  styles.icon}
+                                             />
 
 
                                         </TouchableOpacity>
@@ -1003,34 +855,13 @@ const HeadTabs = () => {
                                                 console.log('showwhat2 after:', showwhat2)
 
                                             }}>
-                                            <Icon4
-                                                style={[
-                                                    styles.icon,
-                                                    {
-                                                        color:
-                                                            showwhat2 == 'taxReturn'
-                                                                ? Color.white
-                                                                : Color.white,
-                                                    },
-                                                ]}
-                                                name="money-bills"
-                                                size={25}
-                                                color="#fff"
-                                            />
+                                             <Image
+                                             source={ require('../Assets/img/icons/tax-returns.png')}
+                                             style={  styles.icon}
+                                             />
 
 
-                                            {/* <Text
-                      style={[
-                        styles.ButtonText,
-                        {
-                          color:
-                            showwhat1 == 'Proposal'
-                              ? Color.white
-                              : Color.headerIconBG,
-                        },
-                      ]}>
-                      ({dashboardMessageList.length})
-                    </Text> */}
+                                          
                                         </TouchableOpacity>
                                         <Text
                                             style={[
@@ -1059,20 +890,10 @@ const HeadTabs = () => {
                                                     ? (setshowwhat2(''), setshowwhat1(''))
                                                     : (showwhatfunc2('book'), showwhatfunc1(''))
                                             }>
-                                            <Icon4
-                                                style={[
-                                                    styles.icon,
-                                                    {
-                                                        color:
-                                                            showwhat2 == 'book'
-                                                                ? Color.white
-                                                                : Color.white,
-                                                    },
-                                                ]}
-                                                name="calculator"
-                                                size={25}
-                                                color="#fff"
-                                            />
+                                             <Image
+                                             source={ require('../Assets/img/icons/book-keeping.png')}
+                                             style={  styles.icon}
+                                             />
 
 
                                             {/* <Text
@@ -1116,21 +937,10 @@ const HeadTabs = () => {
                                                     ? (setshowwhat2(''), setshowwhat1(''))
                                                     : (showwhatfunc2('Gov'), showwhatfunc1(''))
                                             }>
-                                            <Icon4
-                                                style={[
-                                                    styles.icon,
-                                                    {
-                                                        color:
-                                                            showwhat2 == 'Gov'
-                                                                ? Color.white
-                                                                : Color.white,
-
-                                                    },
-                                                ]}
-                                                name="hand-holding-dollar"
-                                                size={25}
-                                                color="#fff"
-                                            />
+                                            <Image
+                                             source={ require('../Assets/img/icons/gov-payments.png')}
+                                             style={  styles.icon}
+                                             />
 
 
                                             {/* <Text
@@ -1180,17 +990,10 @@ const HeadTabs = () => {
                                                     ? (setshowwhat2(''), setshowwhat1(''))
                                                     : (showwhatfunc2('orders'), showwhatfunc2(''))
                                             }>
-                                            <Icon4
-                                                style={[
-                                                    styles.icon,
-                                                    {
-                                                        color: showwhat2 == 'orders' ? '#fff' : '#fff',
-                                                    },
-                                                ]}
-                                                name="list-check"
-                                                size={25}
-                                                color="#fff"
-                                            />
+                                            <Image
+                                             source={ require('../Assets/img/icons/orders.png')}
+                                             style={  styles.icon}
+                                             />
 
 
 
@@ -1222,20 +1025,10 @@ const HeadTabs = () => {
                                                     ? setshowwhat2('')
                                                     : showwhatfunc2('taxReturn')
                                             }>
-                                            <Icon4
-                                                style={[
-                                                    styles.icon,
-                                                    {
-                                                        color:
-                                                            showwhat2 == 'taxReturn'
-                                                                ? Color.white
-                                                                : Color.white,
-                                                    },
-                                                ]}
-                                                name="money-bills"
-                                                size={25}
-                                                color="#fff"
-                                            />
+                                             <Image
+                                             source={ require('../Assets/img/icons/tax-returns.png')}
+                                             style={  styles.icon}
+                                             />
 
 
 
@@ -1267,20 +1060,10 @@ const HeadTabs = () => {
                                                     ? (setshowwhat2(''), setshowwhat1(''))
                                                     : (showwhatfunc2('book'), showwhatfunc1(''))
                                             }>
-                                            <Icon4
-                                                style={[
-                                                    styles.icon,
-                                                    {
-                                                        color:
-                                                            showwhat2 == 'book'
-                                                                ? Color.white
-                                                                : Color.white,
-                                                    },
-                                                ]}
-                                                name="calculator"
-                                                size={25}
-                                                color="#fff"
-                                            />
+                                            <Image
+                                             source={ require('../Assets/img/icons/book-keeping.png')}
+                                             style={  styles.icon}
+                                             />
 
 
                                             {/* <Text
@@ -1324,20 +1107,10 @@ const HeadTabs = () => {
                                                     ? (setshowwhat2(''), setshowwhat1(''))
                                                     : (showwhatfunc2('Gov'), showwhatfunc1(''))
                                             }>
-                                            <Icon4
-                                                style={[
-                                                    styles.icon,
-                                                    {
-                                                        color:
-                                                            showwhat2 == 'Gov'
-                                                                ? Color.white
-                                                                : Color.white,
-                                                    },
-                                                ]}
-                                                name="hand-holding-dollar"
-                                                size={25}
-                                                color="#fff"
-                                            />
+                                            <Image
+                                             source={ require('../Assets/img/icons/gov-payments.png')}
+                                             style={  styles.icon}
+                                             />
 
 
                                             {/* <Text
@@ -1387,17 +1160,10 @@ const HeadTabs = () => {
                                                     ? setshowwhat2('')
                                                     : showwhatfunc2('orders')
                                             }>
-                                            <Icon4
-                                                style={[
-                                                    styles.icon,
-                                                    {
-                                                        color: showwhat2 == 'orders' ? '#fff' : '#fff',
-                                                    },
-                                                ]}
-                                                name="list-check"
-                                                size={25}
-                                                color="#fff"
-                                            />
+                                           <Image
+                                             source={ require('../Assets/img/icons/orders.png')}
+                                             style={  styles.icon}
+                                             />
 
 
                                         </TouchableOpacity>
@@ -1428,20 +1194,10 @@ const HeadTabs = () => {
                                                     ? setshowwhat2('')
                                                     : showwhatfunc2('taxReturn')
                                             }>
-                                            <Icon4
-                                                style={[
-                                                    styles.icon,
-                                                    {
-                                                        color:
-                                                            showwhat2 == 'taxReturn'
-                                                                ? Color.white
-                                                                : Color.white,
-                                                    },
-                                                ]}
-                                                name="money-bills"
-                                                size={25}
-                                                color="#fff"
-                                            />
+                                            <Image
+                                             source={ require('../Assets/img/icons/tax-returns.png')}
+                                             style={  styles.icon}
+                                             />
 
 
                                         </TouchableOpacity>
@@ -1472,20 +1228,10 @@ const HeadTabs = () => {
                                                     ? (setshowwhat2(''), setshowwhat1(''))
                                                     : (showwhatfunc2('book'), showwhatfunc1(''))
                                             }>
-                                            <Icon4
-                                                style={[
-                                                    styles.icon,
-                                                    {
-                                                        color:
-                                                            showwhat2 == 'book'
-                                                                ? Color.white
-                                                                : Color.white,
-                                                    },
-                                                ]}
-                                                name="calculator"
-                                                size={25}
-                                                color="#fff"
-                                            />
+                                             <Image
+                                             source={ require('../Assets/img/icons/book-keeping.png')}
+                                             style={  styles.icon}
+                                             />
 
 
 
@@ -1518,20 +1264,10 @@ const HeadTabs = () => {
                                                     ? (setshowwhat2(''), setshowwhat1(''))
                                                     : (showwhatfunc2('Gov'), showwhatfunc1(''))
                                             }>
-                                            <Icon4
-                                                style={[
-                                                    styles.icon,
-                                                    {
-                                                        color:
-                                                            showwhat2 == 'Gov'
-                                                                ? Color.white
-                                                                : Color.white,
-                                                    },
-                                                ]}
-                                                name="hand-holding-dollar"
-                                                size={25}
-                                                color="#fff"
-                                            />
+                                             <Image
+                                             source={ require('../Assets/img/icons/gov-payments.png')}
+                                             style={  styles.icon}
+                                             />
 
 
                                             {/* <Text
@@ -1581,17 +1317,10 @@ const HeadTabs = () => {
                                                     ? (setshowwhat2(''), setshowwhat1(''))
                                                     : (showwhatfunc2('orders'), showwhatfunc1(''))
                                             }>
-                                            <Icon4
-                                                style={[
-                                                    styles.icon,
-                                                    {
-                                                        color: showwhat2 == 'orders' ? '#fff' : '#fff',
-                                                    },
-                                                ]}
-                                                name="list-check"
-                                                size={25}
-                                                color="#fff"
-                                            />
+                                           <Image
+                                             source={ require('../Assets/img/icons/orders.png')}
+                                             style={  styles.icon}
+                                             />
 
 
 
@@ -1624,20 +1353,10 @@ const HeadTabs = () => {
                                                     : (showwhatfunc2('taxReturn'), showwhatfunc1(''))
                                             }>
                                             {/* {console.log(showwhat1, showwhat2, "LLLLL")} */}
-                                            <Icon4
-                                                style={[
-                                                    styles.icon,
-                                                    {
-                                                        color:
-                                                            showwhat2 == 'taxReturn'
-                                                                ? Color.white
-                                                                : Color.white,
-                                                    },
-                                                ]}
-                                                name="money-bills"
-                                                size={25}
-                                                color="#fff"
-                                            />
+                                            <Image
+                                             source={ require('../Assets/img/icons/tax-returns.png')}
+                                             style={  styles.icon}
+                                             />
 
 
 
@@ -1669,20 +1388,10 @@ const HeadTabs = () => {
                                                     ? (setshowwhat2(''), setshowwhat1(''))
                                                     : (showwhatfunc2('book'), showwhatfunc1(''))
                                             }>
-                                            <Icon4
-                                                style={[
-                                                    styles.icon,
-                                                    {
-                                                        color:
-                                                            showwhat2 == 'book'
-                                                                ? Color.white
-                                                                : Color.white,
-                                                    },
-                                                ]}
-                                                name="calculator"
-                                                size={25}
-                                                color="#fff"
-                                            />
+                                            <Image
+                                             source={ require('../Assets/img/icons/book-keeping.png')}
+                                             style={  styles.icon}
+                                             />
 
 
                                             {/* <Text
@@ -1726,34 +1435,13 @@ const HeadTabs = () => {
                                                     ? (setshowwhat2(''), setshowwhat1(''))
                                                     : (showwhatfunc2('Gov'), showwhatfunc1(''))
                                             }>
-                                            <Icon4
-                                                style={[
-                                                    styles.icon,
-                                                    {
-                                                        color:
-                                                            showwhat2 == 'Gov'
-                                                                ? Color.white
-                                                                : Color.white,
-                                                    },
-                                                ]}
-                                                name="hand-holding-dollar"
-                                                size={25}
-                                                color="#fff"
-                                            />
+                                             <Image
+                                             source={ require('../Assets/img/icons/gov-payments.png')}
+                                             style={  styles.icon}
+                                             />
 
 
-                                            {/* <Text
-                      style={[
-                        styles.ButtonText,
-                        {
-                          color:
-                            showwhat1 == 'Reminders'
-                              ? Color.white
-                              : Color.headerIconBG,
-                        },
-                      ]}>
-                      (1)
-                    </Text> */}
+                                          
                                         </TouchableOpacity>
                                         <Text
                                             style={[
@@ -2232,6 +1920,7 @@ const styles = StyleSheet.create({
         width: wp(12),
         height: wp(12),
         paddingTop: 5,
+        
 
         //  justifyContent: 'center',
         borderRadius: 50,
@@ -2284,7 +1973,13 @@ const styles = StyleSheet.create({
         marginTop: 20,
         textAlign: "center"
     },
-    icon: { alignSelf: 'center', marginTop: 5 },
+    icon: {
+         alignSelf: 'center',
+            height:25,
+            resizeMode:'contain',
+            width:25,
+          marginTop: 5 
+        },
 
 
 })

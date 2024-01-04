@@ -104,7 +104,7 @@ const Drawer = () => {
 
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Loader flag={loader} />
       <View style={styles.headImg}>
         <Image source={require('../Assets/img/logo.png')} style={styles.logo} />
@@ -230,7 +230,7 @@ const Drawer = () => {
 
           <Text style={styles.screenNameText}>Contact</Text>
         </TouchableOpacity>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={styles.screenName}
           onPress={() => {
             navigation.navigate('ClientSteps');
@@ -243,7 +243,7 @@ const Drawer = () => {
           />
 
           <Text style={styles.screenNameText}>Client Setup</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <View style={styles.part}></View>
       </View>
       <View>
@@ -262,7 +262,7 @@ const Drawer = () => {
         </TouchableOpacity>
         <View style={styles.part}></View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -341,6 +341,7 @@ const styles = StyleSheet.create({
   headImg: {
     backgroundColor: '#F3F3F3',
     padding: 10,
+    //flex:1
   },
   profileImg: {
     width: '40%',

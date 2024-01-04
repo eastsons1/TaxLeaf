@@ -137,9 +137,9 @@ export default InvoiceView = ({ route }) => {
                         <Image
                           source={require('../Assets/img/icons/backToD.png')}
                           style={{
-                            width: 25,
-                            height: 25,
-                            marginTop: 12,
+                            width: 20,
+                            height: 20,
+                            marginTop: 11,
                             marginRight:5,
                            // borderRadius: 50,
                             //alignSelf: 'center',

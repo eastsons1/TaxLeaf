@@ -7,147 +7,169 @@ import {
 } from 'react-native-responsive-screen';
 import { Color } from '../Style';
 import Icon from 'react-native-vector-icons/AntDesign';
+import HeadTabs from './HeadTabs';
 import { useDispatch, useSelector } from 'react-redux';
+
 const ContactUs = () => {
-
-    const { MY_INFO } = useSelector(state => state.TaxLeafReducer);
-    const { DASHBOARD_LIST } = useSelector(state => state.DashboardReducer);
-    const { DASHBOARD_MESSAGE_LIST } = useSelector(state => state.DashboardReducer);
-    const { MANAGER_INFO } = useSelector(state => state.TaxLeafReducer);
-    const { OFFICE_INFO } = useSelector(state => state.TaxLeafReducer);
-    const { PARTNER_INFO } = useSelector(state => state.TaxLeafReducer);
-    const { LOGIN_DATA } = useSelector(state => state.TaxLeafReducer);
-
-    const jsonData = MY_INFO.guestInfo
-    const officeInfo = MY_INFO.officeInfo;
-    const manager = MANAGER_INFO;
-    const manageroffice = OFFICE_INFO
     const bgImage = require("../Assets/img/guest_shape.png")
-
+    const { MANAGER_INFO } = useSelector(state => state.TaxLeafReducer);
+    const manager = MANAGER_INFO;
     return (
-        <View>
+        <View style={{backgroundColor:'#d0e4e6'}}>
             <ScrollView>
+            <HeadTabs />
+                <Text style={styles.headText1}>Get in Touch !</Text>
 
-                <View style={{ backgroundColor: '#d5e3e5' }}>
-                    <Text style={styles.headText1}>Get in Touch !</Text>
+                <View>
+                    <View style={styles.infoSec}>
+                        <View style={{ flexDirection: 'row', marginBottom: 10 }}>
+                            <Image
+                                source={require('../Assets/profileBlank.png')}
+                                style={{
+                                    width: 70,
+                                    height: 70,
+                                    borderRadius: 50,
+                                    alignSelf: 'center',
+                                    marginLeft: 10
+                                }}
+                            />
+                            <View style={{marginLeft:20}}>
+                                <Text
+                                    style={{
+                                        textAlign: 'left',
+                                        color: '#fff',
+                                        marginTop: 10,
+                                        // fontFamily: 'Poppins-Bold',
+                                        fontSize: 12,
+                                        fontFamily:'Poppins-SemiBold',
+                                        // marginLeft: 10
+                                    }}>
+                                    Manager Information
+                                </Text>
+                                <Text
+                                    style={{
+                                        textAlign: 'left',
+                                        color: '#fff',
+                                        marginTop: 5,
+                                        // fontFamily: 'Poppins-Bold',
+                                        fontSize: 18,
+                                      fontFamily:'Poppins-Bold'
+                                        // marginLeft: 10
+                                    }}>
+                                    {manager?.firstName}{' '}
+                      {manager?.lastName}
+                                </Text>
+                                <Text
+                                    style={{
+                                        textAlign: 'left',
+                                        color: '#90c460',
+                                        width:wp(60),
+                                        fontFamily:'Poppins-SemiBold',
+                                        fontSize: 14,
+                                        // marginRight: 25,
+                                    }}>
+                                       {manager?.user}
 
-                    <View style={styles.slideContainer}>
-                        <Icon
-                            style={[
-                                styles.icon,
+                                </Text>
+                                <Text
+                                    style={{
+                                        textAlign: 'left',
+                                        color: '#90c460',
 
-                            ]}
-                            name="user"
-                            size={50}
-                            color="green"
-                        />
-                        <View style={styles.contentView}>
-                            <Text style={styles.subHead}>Manager:</Text>
-                            <Text style={styles.LIstText2}>
-                                {manager?.firstName}  {manager?.lastName}
-                            </Text>
+                                        fontFamily:'Poppins-SemiBold',
+                                        fontSize: 14,
+                                        // marginRight: 25,
+                                    }}>
+
+                                {manager?.phone ? manager?.phone : 'N/A'}
+                                </Text>
+                            </View>
+
                         </View>
-                        <View style={styles.contentView}>
-                            <Text style={styles.subHead}>Email:</Text>
-                            <Text style={styles.LIstText2}>
-                                {manager?.user}
-                            </Text>
-                        </View>
+
                     </View>
-                    <View style={styles.slideContainer}>
-                        <Icon
-                            style={[
-                                styles.icon,
+                </View>
+               
 
-                            ]}
-                            name="phone"
-                            size={50}
-                            color="green"
-                        />
-                        <View style={styles.contentView}>
-                            <Text style={styles.subHead}>Call Us:</Text>
-                            <Text style={styles.LIstText2}>
-                                {officeInfo?.phone}
-                                {/* {manager?.phone ? manager?.phone : "N/A"} */}
-                            </Text>
-                        </View>
-
-                    </View>
+                <View style={styles.formContainer}>
                     <Text style={styles.heading}>
                         Submit Your Request
                     </Text>
-                    <View style={styles.formContainer}>
-                        <View >
+                    <View style={styles.part}></View>
+                    <View >
 
 
-                            <TextInput
-                                placeholder="Name"
-                                placeholderTextColor={'lightgrey'}
-                                style={[styles.input, { height: 50 }]}
-                            // value={email}
-                            // onChangeText={text => {
-                            //   onChangeEmail(text);
-                            // }}
-                            />
-                        </View>
-                        <View>
-
-
-                            <TextInput
-                                placeholder="Phone Number"
-                                placeholderTextColor={'lightgrey'}
-                                style={[styles.input, { height: 50 }]}
-                            // value={email}
-                            // onChangeText={text => {
-                            //   onChangeEmail(text);
-                            // }}
-                            />
-                        </View>
-                        <View style={{ marginBottom: 10 }}>
-
-
-                            <TextInput
-                                placeholder="Email"
-                                placeholderTextColor={'lightgrey'}
-                                style={[styles.input, { height: 50 }]}
-                            // value={email}
-                            // onChangeText={text => {
-                            //   onChangeEmail(text);
-                            // }}
-                            />
-                        </View>
-                        <View style={{ marginBottom: 15 }}>
-
-                            <TextInput
-                                multiline={true}
-                                placeholder="Message"
-                                numberOfLines={6}
-                                style={styles.textArea}
-                            />
-
-                        </View>
-                        <View style={{ marginBottom: 10 }}>
-
-
-                            <TextInput
-                                placeholder="Country"
-                                placeholderTextColor={'lightgrey'}
-                                style={[styles.input, { height: 50 }]}
-                            // value={email}
-                            // onChangeText={text => {
-                            //   onChangeEmail(text);
-                            // }}
-                            />
-                        </View>
-                        <View style={{ marginBottom: 10 }}>
-                            <TouchableOpacity
-                                style={[styles.button, styles.buttonClose]}
-                            // onPress={() => setModalVisible(!modalVisible)}
-                            >
-                                <Text style={styles.textStyle}>Send</Text>
-                            </TouchableOpacity>
-                        </View>
+                        <TextInput
+                            placeholder="Name"
+                            placeholderTextColor={'#47607c'}
+                            style={[styles.input]}
+                        // value={email}
+                        // onChangeText={text => {
+                        //   onChangeEmail(text);
+                        // }}
+                        />
                     </View>
+                    <View>
+
+
+                        <TextInput
+                            placeholder="Phone Number"
+                            placeholderTextColor={'#47607c'}
+                            style={[styles.input]}
+                        // value={email}
+                        // onChangeText={text => {
+                        //   onChangeEmail(text);
+                        // }}
+                        />
+                    </View>
+                    <View style={{  }}>
+
+
+                        <TextInput
+                            placeholder="Email"
+                            placeholderTextColor={'#47607c'}
+                            style={[styles.input]}
+                        // value={email}
+                        // onChangeText={text => {
+                        //   onChangeEmail(text);
+                        // }}
+                        />
+                    </View>
+                    <View style={{ marginBottom: 5 }}>
+
+
+                        <TextInput
+                            placeholder="Country"
+                            placeholderTextColor={'#47607c'}
+                            style={[styles.input]}
+                        // value={email}
+                        // onChangeText={text => {
+                        //   onChangeEmail(text);
+                        // }}
+                        />
+                    </View>
+                    <View style={{ marginBottom: 15 }}>
+
+                        <TextInput
+                            multiline={true}
+                            placeholder="Message"
+                            placeholderTextColor={'#47607c'}
+                            numberOfLines={6}
+                            style={styles.textArea}
+                        />
+
+                    </View>
+
+
+                </View>
+                <View style={{ marginTop: 10,marginBottom:20 }}>
+                    <TouchableOpacity
+                        style={[styles.button]}
+                    // onPress={() => setModalVisible(!modalVisible)}
+                    >
+                      <Image source={require('../Assets/img/icons/tickWhite.png')} style={{ width: 25, height: 25,  }} />
+                         <Text style={styles.textStyle}>Submit</Text>
+                    </TouchableOpacity>
                 </View>
             </ScrollView>
         </View>
@@ -159,54 +181,62 @@ export default ContactUs
 const styles = StyleSheet.create({
     input: {
         height: 40,
-        margin: 12,
-        borderWidth: 1,
-        borderRadius: 30,
+        margin: 5,
+        alignSelf:'center',
+        // borderWidth: 1,
+        borderRadius: 10,
         padding: 10,
         width: wp(80),
         backgroundColor: '#fff',
     },
     formContainer: {
-        backgroundColor: '#2F4050',
+        backgroundColor: '#00818a',
         width: wp(90),
         padding: 10,
         alignSelf: 'center',
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,
+        borderRadius: 20
     },
     button: {
-        borderRadius: 5,
+        borderRadius: 20,
         padding: 10,
-        elevation: 2,
-        width: wp(50),
+        //elevation: 2,
+        flexDirection:"row",
+        justifyContent:"center",
+        width: wp(90),
         alignSelf: 'center',
+        backgroundColor: '#82be4e',
         //alignSelf: 'flex-end',
     },
     buttonOpen: {
-        backgroundColor: '#8AB645',
+
     },
     buttonClose: {
-        backgroundColor: '#8AB645',
+        backgroundColor: '#82be4e',
     },
     textStyle: {
         color: '#fff',
         textAlign: 'center',
+       fontFamily:'Poppins-SemiBold',
+       marginLeft:5
     },
     textArea: {
-        height: 100, textAlignVertical: 'top', borderWidth: 1, borderColor: 'gray', width: '93%', alignSelf: 'center', borderRadius: 20,
-        backgroundColor: '#fff'
+        height: 100, textAlignVertical: 'top', borderWidth: 1, borderColor: 'gray', width: '96%', alignSelf: 'center', borderRadius: 20,
+        backgroundColor: '#fff',
+        marginLeft: 8,
+        paddingLeft:10
+
     },
     heading: {
-        fontSize: 21,
-        fontFamily: 'Poppins-Bold',
+        fontSize: 18,
+        fontFamily: 'Poppins-SemiBold',
         // maxWidth:'80%',
-        color: Color.darkGreen,
+        color: '#fff',
         // height:40,
-        marginTop: 20,
+        marginTop: 10,
         marginLeft: 20,
         fontWeight: '800',
         textAlign: 'center',
-        marginBottom: 10
+        // marginBottom: 10
     },
     headText: {
         // textAlign: 'flex',
@@ -216,10 +246,10 @@ const styles = StyleSheet.create({
         fontWeight: '600',
     },
     headText1: {
-        color: Color.darkGreen,
-        marginTop: 30,
-        fontWeight: '600',
-        fontSize: 24,
+        color: '#00818a',
+        fontFamily:'Poppins-Bold',
+   
+        fontSize: 20,
         marginLeft: 30,
     },
     slideContainer: {
@@ -240,7 +270,6 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
-
         elevation: 5,
     },
     // icon: {color:'#000'},
@@ -260,5 +289,32 @@ const styles = StyleSheet.create({
         marginTop: 10,
         padding: 10,
         flexDirection: 'row',
+    },
+    part: {
+        borderWidth: 0.5,
+        borderColor: '#3e9aa2',
+        marginTop: 10,
+        width: '90%',
+        alignSelf: 'center',
+    },
+    infoSec: {
+        backgroundColor: '#0f355a',
+        borderRadius: 20,
+        padding: 10,
+        //height: 190,
+        width: wp(90),
+        alignSelf: 'center',
+        marginTop: 5,
+        marginBottom: 10,
+    },
+    infoSecText: {
+        color: '#fff',
+        fontSize: 11,
+        lineHeight: 18,
+        width: wp(80),
+        alignSelf: "center",
+        //textAlign: "center",
+        fontFamily: 'Poppins-SemiBold',
+        // marginLeft: 10
     },
 })

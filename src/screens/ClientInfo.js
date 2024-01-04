@@ -289,7 +289,7 @@ const ClientInfo = () => {
                         // borderRadius: 15
                       }}
                     >
-                      <Icon
+                      {/* <Icon
                         style={[
                           { marginRight: 5 }
 
@@ -297,7 +297,11 @@ const ClientInfo = () => {
                         name="clockcircle"
                         size={20}
                         color="#fff"
-                      />
+                      /> */}
+                       <Image
+                  source={ require('../Assets/img/icons/pending.png')}
+                  style={  [styles.icons,]}
+                />
                     </View>
 
                     <Text style={showwhat == 'My Schools' ? styles.ButtonText1 : styles.ButtonTextW}>
@@ -317,14 +321,14 @@ const ClientInfo = () => {
                     onPress={() => showwhatfunc('My Schools')}>
                     <View
                       style={{
-                        backgroundColor: showwhat == 'My Schools' ? 'lightgray' : Color.geen,
-                        height: wp(5), width: wp(5),
+                        // backgroundColor: showwhat == 'My Schools' ? 'lightgray' : Color.geen,
+                        // height: wp(5), width: wp(5),
 
-                        alignItems: "center",
-                        borderRadius: 15, marginRight: 4,
+                        // alignItems: "center",
+                        // borderRadius: 15, marginRight: 4,
                       }}
                     >
-                      <IconF
+                      {/* <IconF
                         style={{
 
                           color: showwhat == 'My Schools' ? Color.geen : '#fff'
@@ -332,10 +336,14 @@ const ClientInfo = () => {
                         name="dollar"
                         size={20}
                         color={Color.geen}
-                      />
+                      /> */}
+                           <Image
+                  source={ require('../Assets/img/icons/paidicon.png')}
+                  style={  [styles.icons,]}
+                />
                     </View>
 
-                    <Text style={showwhat == 'My Schools' ? styles.ButtonTextW : styles.ButtonText1}>Bussiness ({companyCount + countBusiness})</Text>
+                    <Text style={showwhat == 'My Schools' ? styles.ButtonTextW : styles.ButtonText1}>Bussiness1 ({companyCount + countBusiness})</Text>
                   </TouchableOpacity>
                   <TouchableOpacity
                     style={[
@@ -349,7 +357,7 @@ const ClientInfo = () => {
                     ]}
                     onPress={() => showwhatfunc('Reviews')}>
                     <View>
-                      <Icon
+                      {/* <Icon
                         style={[
                           { marginRight: 5 }
 
@@ -357,7 +365,11 @@ const ClientInfo = () => {
                         name="checkcircle"
                         size={20}
                         color={Color.geen}
-                      />
+                      /> */}
+                       <Image
+                  source={ require('../Assets/img/icons/planicon.png')}
+                  style={  [styles.icons,]}
+                />
                     </View>
 
                     <Text style={showwhat == 'My Schools' ? styles.ButtonTextW : styles.ButtonText1}>   Individual ({countIndividuals + otherCount})</Text>
@@ -379,7 +391,7 @@ const ClientInfo = () => {
                       },
                     ]}
                     onPress={() => showwhatfunc('Experience')}>
-                    <Icon
+                    {/* <Icon
                       style={[
                         { marginRight: 5 }
 
@@ -387,7 +399,11 @@ const ClientInfo = () => {
                       name="clockcircle"
                       size={20}
                       color={showwhat == 'My Schools' ? Color.geen : 'lightgray'}
-                    />
+                    /> */}
+                      <Image
+                  source={ require('../Assets/img/icons/pending-greenic.png')}
+                  style={  [styles.icons,]}
+                />
                     <Text style={showwhat == 'My Schools' ? styles.ButtonText1 : styles.ButtonTextW}>
                       Total ({infoData?.length + companyCount + otherCount})
                     </Text>
@@ -404,15 +420,23 @@ const ClientInfo = () => {
                     ]}
                     onPress={() => showwhatfunc('My Schools')}>
                     <View
-                      style={{ alignItems: 'center', backgroundColor: showwhat == 'My Schools' ? '#fff' : '#fff', width: wp(5), borderRadius: 15, height: wp(5), marginRight: 4, }}
+                      style={{ alignItems: 'center', 
+                      // backgroundColor: showwhat == 'My Schools' ? '#fff' : '#fff', 
+                      // width: wp(5), borderRadius: 15, height: wp(5), marginRight: 4, 
+                    
+                    }}
 
                     >
-                      <IconF
+                      {/* <IconF
                         style={{ color: showwhat == 'My Schools' ? Color.geen : 'lightgray' }}
                         name="dollar"
                         size={20}
                         color="#fff"
-                      />
+                      /> */}
+                            <Image
+                  source={ require('../Assets/img/icons/paid-whiteic.png')}
+                  style={  [styles.icons,]}
+                />
                     </View>
 
                     <Text style={showwhat == 'My Schools' ? styles.ButtonTextW : styles.ButtonText1}>Business ({companyCount + countBusiness})</Text>
@@ -428,14 +452,18 @@ const ClientInfo = () => {
                       },
                     ]}
                     onPress={() => showwhatfunc('Reviews')}>
-                    <Icon
+                    {/* <Icon
                       style={[
                         { marginRight: 5 }
                       ]}
                       name="checkcircle"
                       size={18}
                       color={showwhat == 'My Schools' ? Color.geen : 'lightgray'}
-                    />
+                    /> */}
+                      <Image
+                  source={ require('../Assets/img/icons/planicon.png')}
+                  style={  [styles.icons,]}
+                />
                     <Text style={showwhat == 'My Schools' ? styles.ButtonText1 : styles.ButtonTextW}> Individual ({countIndividuals + otherCount})</Text>
                   </TouchableOpacity>
                 </View>
@@ -455,7 +483,7 @@ const ClientInfo = () => {
                       },
                     ]}
                     onPress={() => showwhatfunc('Experience')}>
-                    <Icon
+                    {/* <Icon
                       style={[
                         { marginRight: 5 }
 
@@ -463,7 +491,11 @@ const ClientInfo = () => {
                       name="clockcircle"
                       size={20}
                       color={showwhat == 'My Schools' ? 'lightgray' : Color.geen}
-                    />
+                    /> */}
+                      <Image
+                  source={ require('../Assets/img/icons/pending-greenic.png')}
+                  style={  [styles.icons,]}
+                />
                     <Text style={showwhat == 'Experience' ? styles.ButtonTextW : styles.ButtonText1}>
                       Total ({infoData?.length + companyCount + otherCount})
                     </Text>
@@ -480,15 +512,24 @@ const ClientInfo = () => {
                     ]}
                     onPress={() => showwhatfunc('My Schools')}>
                     <View
-                      style={{ alignItems: "center", backgroundColor: showwhat == 'My Schools' ? 'lightgray' : Color.geen, width: wp(5), borderRadius: 15, height: wp(5), marginRight: 4, color: showwhat == 'My Schools' ? Color.geen : '#fff' }}
+                      style={{
+                         alignItems: "center",
+                          // backgroundColor: showwhat == 'My Schools' ? 'lightgray' : Color.geen,
+                          //  width: wp(5), borderRadius: 15, height: wp(5), marginRight: 4, 
+                          //  color: showwhat == 'My Schools' ? Color.geen : '#fff'
+                           }}
 
                     >
-                      <IconF
+                      {/* <IconF
                         style={{ color: showwhat == 'My Schools' ? Color.geen : '#fff' }}
                         name="dollar"
                         size={20}
                         color="#fff"
-                      />
+                      /> */}
+                        <Image
+                  source={ require('../Assets/img/icons/paidicon.png')}
+                  style={  [styles.icons,]}
+                />
                     </View>
 
                     <Text style={showwhat == 'My Schools' ? styles.ButtonTextW : styles.ButtonText1}>Business ({companyCount + countBusiness})</Text>
@@ -504,7 +545,7 @@ const ClientInfo = () => {
                       },
                     ]}
                     onPress={() => showwhatfunc('Reviews')}>
-                    <Icon
+                    {/* <Icon
                       style={[
                         { marginRight: 5 }
 
@@ -512,7 +553,11 @@ const ClientInfo = () => {
                       name="checkcircle"
                       size={18}
                       color="#fff"
-                    />
+                    /> */}
+                      <Image
+                  source={ require('../Assets/img/icons/plan-whiteic.png')}
+                  style={  [styles.icons,]}
+                />
                     <Text style={showwhat == 'My Schools' ? styles.ButtonText1 : styles.ButtonTextW}> Individual ({countIndividuals + otherCount})</Text>
                   </TouchableOpacity>
                 </View>
@@ -1767,11 +1812,13 @@ const styles = StyleSheet.create({
     width: 100,
   },
 
-  icons: {
-    height: 30,
-    width: 30,
-    marginRight: 10,
+  icons:{
     alignSelf: 'center',
+    height:15,
+    resizeMode:'contain',
+    width:15,
+    marginRight:5
+ 
   },
   Bookicons: {
     height: 30,
