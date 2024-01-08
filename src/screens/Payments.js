@@ -851,7 +851,7 @@ const Payments = () => {
           style={{height: hp(80), backgroundColor:'#d5e3e5'}}
         >
 
-   <View style={{ backgroundColor:'#d5e3e5' }}>
+    <View style={{ backgroundColor:'#d5e3e5' }}>
           <HeadTabs />
           {/* <View style={styles.headerView}>
           <Text style={styles.header}>Plan Invoices</Text>
@@ -898,7 +898,7 @@ const Payments = () => {
                       </View>
 
                       <Text style={showwhat == 'My Schools' ? styles.ButtonText1 : styles.ButtonTextW}>
-                        Pending ({filteredData?.length})
+                        Pending ({filteredData?.length}) 
                       </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -1000,7 +1000,8 @@ const Payments = () => {
                   style={  [styles.icons,]}
                 />
                       <Text style={showwhat == 'My Schools' ? styles.ButtonText1 : styles.ButtonTextW}>
-                        Pending ({infoData.length})
+                        Pending ({filteredData?.length})
+                        {/* ({infoData.length}) */}
                       </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -1093,7 +1094,8 @@ const Payments = () => {
                   style={  [styles.icons,]}
                 />
                       <Text style={showwhat == 'Experience' ? styles.ButtonTextW : styles.ButtonText1}>
-                        Pending ({infoData.length})
+                        Pending  ({filteredData?.length}) 
+                        {/* ({infoData.length}) */}
                       </Text>
                     </TouchableOpacity>
                     <TouchableOpacity

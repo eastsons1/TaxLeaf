@@ -16,7 +16,7 @@ import {
 } from './types';
 import AsyncStorage from '@react-native-community/async-storage';
 import axios, * as others from 'axios';
-import { Alert } from 'react-native';
+import { Alert,StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { logistical } from '../../utils';
 
@@ -380,7 +380,23 @@ export const RequestSubmit = (data, navigation) => dispatch => {
       //   Alert.alert(response.response[0])
       resolve(response);
 
-      Alert.alert('Submit Request Sent');
+     // Alert.alert('Submit Request Sent');
+     Alert.alert(
+      'Alert',
+      'Your request has been submitted',
+      [
+        {
+          text: 'OK',
+          onPress: () => console.log('OK Pressed'),
+        },
+      ],
+      {
+        // Custom styles for the Alert component
+        containerStyle: styles.alertContainer,
+        titleStyle: styles.alertTitle,
+        messageStyle: styles.alertMessage,
+      }
+    );
       setTimeout(() => {
         navigation.goBack();
       }, 2000);
@@ -390,7 +406,23 @@ export const RequestSubmit = (data, navigation) => dispatch => {
       //   payload: false,
       // });
     } else {
-      Alert.alert('No data found');
+      Alert.alert(
+        'Alert',
+        'No data found',
+        [
+          {
+            text: 'OK',
+            onPress: () => console.log('OK Pressed'),
+          },
+        ],
+        {
+          // Custom styles for the Alert component
+          containerStyle: styles.alertContainer,
+          titleStyle: styles.alertTitle,
+          messageStyle: styles.alertMessage,
+        }
+      );
+     // Alert.alert('No data found');
       //Alert.alert(response.massage);
       // dispatch({
       //   type: 'LOADING',
@@ -438,7 +470,23 @@ export const RequestInfoById = (id, navigation) => dispatch => {
       //   payload: false,
       // });
     } else {
-      Alert.alert('No data found');
+     // Alert.alert('No data found');
+     Alert.alert(
+      'Alert',
+      'No data found',
+      [
+        {
+          text: 'OK',
+          onPress: () => console.log('OK Pressed'),
+        },
+      ],
+      {
+        // Custom styles for the Alert component
+        containerStyle: styles.alertContainer,
+        titleStyle: styles.alertTitle,
+        messageStyle: styles.alertMessage,
+      }
+    );
       //Alert.alert(response.massage);
       // dispatch({
       //   type: 'LOADING',
@@ -490,7 +538,23 @@ export const folderNameList =
         //   payload: false,
         // });
       } else {
-        Alert.alert('No data found');
+       // Alert.alert('No data found');
+        Alert.alert(
+          'Alert',
+          'No data found',
+          [
+            {
+              text: 'OK',
+              onPress: () => console.log('OK Pressed'),
+            },
+          ],
+          {
+            // Custom styles for the Alert component
+            containerStyle: styles.alertContainer,
+            titleStyle: styles.alertTitle,
+            messageStyle: styles.alertMessage,
+          }
+        );
         //Alert.alert(response.massage);
         // dispatch({
         //   type: 'LOADING',
@@ -538,7 +602,23 @@ export const documentInfobyFolder = (documentId, navigation) => dispatch => {
       //   payload: false,
       // });
     } else {
-      Alert.alert('No data found');
+      Alert.alert(
+        'Alert',
+        'No data found',
+        [
+          {
+            text: 'OK',
+            onPress: () => console.log('OK Pressed'),
+          },
+        ],
+        {
+          // Custom styles for the Alert component
+          containerStyle: styles.alertContainer,
+          titleStyle: styles.alertTitle,
+          messageStyle: styles.alertMessage,
+        }
+      );
+     // Alert.alert('No data found');
       //Alert.alert(response.massage);
       // dispatch({
       //   type: 'LOADING',
@@ -609,7 +689,23 @@ export const uploadFile = (MY_INFO, FolderName, documentType, fileext, year, per
       //   payload: false,
       // });
     } else {
-      Alert.alert('Folder does not exist');
+     // Alert.alert('Folder does not exist');
+      Alert.alert(
+        'Alert',
+        'Folder does not exist',
+        [
+          {
+            text: 'OK',
+            onPress: () => console.log('OK Pressed'),
+          },
+        ],
+        {
+          // Custom styles for the Alert component
+          containerStyle: styles.alertContainer,
+          titleStyle: styles.alertTitle,
+          messageStyle: styles.alertMessage,
+        }
+      );
       //Alert.alert(response.massage);
       // dispatch({
       //   type: 'LOADING',
@@ -750,7 +846,23 @@ export const generateFileToken = (documentId, navigation) => dispatch => {
       //   payload: false,
       // });
     } else {
-      Alert.alert('No data found');
+     // Alert.alert('No data found');
+      Alert.alert(
+        'Alert',
+        'No data found',
+        [
+          {
+            text: 'OK',
+            onPress: () => console.log('OK Pressed'),
+          },
+        ],
+        {
+          // Custom styles for the Alert component
+          containerStyle: styles.alertContainer,
+          titleStyle: styles.alertTitle,
+          messageStyle: styles.alertMessage,
+        }
+      );
       //Alert.alert(response.massage);
       // dispatch({
       //   type: 'LOADING',
@@ -803,7 +915,23 @@ export const getFileInfo = (client, clientType, navigation) => dispatch => {
       //   payload: false,
       // });
     } else {
-      Alert.alert('No data found');
+     // Alert.alert('No data found');
+      Alert.alert(
+        'Alert',
+        'No data found',
+        [
+          {
+            text: 'OK',
+            onPress: () => console.log('OK Pressed'),
+          },
+        ],
+        {
+          // Custom styles for the Alert component
+          containerStyle: styles.alertContainer,
+          titleStyle: styles.alertTitle,
+          messageStyle: styles.alertMessage,
+        }
+      );
       //Alert.alert(response.massage);
       // dispatch({
       //   type: 'LOADING',
@@ -856,7 +984,23 @@ export const GetAllLibraryFiles = (officeId, clientType, ClientId, SharepointFol
       //   payload: false,
       // });
     } else {
-      Alert.alert('No data found');
+    //  Alert.alert('No data found');
+      Alert.alert(
+        'Alert',
+        'No data found',
+        [
+          {
+            text: 'OK',
+            onPress: () => console.log('OK Pressed'),
+          },
+        ],
+        {
+          // Custom styles for the Alert component
+          containerStyle: styles.alertContainer,
+          titleStyle: styles.alertTitle,
+          messageStyle: styles.alertMessage,
+        }
+      );
       //Alert.alert(response.massage);
       // dispatch({
       //   type: 'LOADING',
@@ -866,3 +1010,103 @@ export const GetAllLibraryFiles = (officeId, clientType, ClientId, SharepointFol
     }
   });
 };
+
+
+
+
+export const SubmitContactUs = (id,name,phone,email,message,country, navigation) => dispatch => {
+ 
+  return new Promise(async (resolve, reject) => {
+    let data ={
+      "ReceiverStaffId": id,
+      "receipentName": name,
+      "receipentPhoneWhatsapp": phone,
+      "receipentEmail": email,
+      "receipentMassage": message,
+      "receipentCountry": country
+    }
+
+    console.log(data, '&&&&&&&&&&&&&&&&')
+    const response = await logistical.post('/Request/SendContact', data);
+   // console.log(response, 'fileRespfileRespfileRespfileRespfileRespfileRespfileRespfileRespfileRespfileRespfileResp');
+
+    if (response) {
+      // AsyncStorage.setItem('login', JSON.stringify(response.token));
+
+      // dispatch({
+      //   type: GET_LIB_FILES,
+      //   payload: response?.driveItemList,
+      // });
+
+
+       // Alert.alert(response.massage)
+        Alert.alert(
+          'Success',
+          response.massage,
+          [
+            {
+              text: 'OK',
+              onPress: () => console.log('OK Pressed'),
+            },
+          ],
+          {
+            // Custom styles for the Alert component
+            containerStyle: styles.alertContainer,
+            titleStyle: styles.alertTitle,
+            messageStyle: styles.alertMessage,
+          }
+        );
+      resolve(response);
+
+      // Alert.alert(response.massage);
+      // navigation.navigate('ClientInfo');
+
+      // dispatch({
+      //   type: 'LOADING',
+      //   payload: false,
+      // });
+    } else {
+    //  Alert.alert('No data found');
+      Alert.alert(
+        'Alert',
+        'No data found',
+        [
+          {
+            text: 'OK',
+            onPress: () => console.log('OK Pressed'),
+          },
+        ],
+        {
+          // Custom styles for the Alert component
+          containerStyle: styles.alertContainer,
+          titleStyle: styles.alertTitle,
+          messageStyle: styles.alertMessage,
+        }
+      );
+      //Alert.alert(response.massage);
+      // dispatch({
+      //   type: 'LOADING',
+      //   payload: false,
+      // });
+      reject(response);
+    }
+  });
+};
+
+const styles = StyleSheet.create({
+  alertContainer: {
+    borderRadius: 10, // Adjust the border radius as needed
+    backgroundColor: '#fff', // Adjust the background color as needed
+    borderWidth: 1,
+    borderColor: '#ccc', // Adjust the border color as needed
+  },
+  alertTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#333', // Adjust the title text color as needed
+  },
+  alertMessage: {
+    fontSize: 16,
+    color: '#555', // Adjust the message text color as needed
+  },
+});

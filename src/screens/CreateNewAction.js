@@ -44,6 +44,8 @@ const CreateNewAction = () => {
   const [showwhat1, setshowwhat1] = useState('Message');
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
+  const [error, setError] = useState('');
+
   const [selectedId, setSelectedId] = useState();
   const [datePicker, setDatePicker] = useState(false);
   const [date, setDate] = useState(new Date());
@@ -68,8 +70,6 @@ const CreateNewAction = () => {
   //const contentInsideDiv = EDITOR_TEXT?.replace(/<\/?div>/g, '');
   const contentInsideDiv = EDITOR_TEXT;
   console.log(contentInsideDiv, 'contentInsideDivcontentInsideDivcontentInsideDivcontentInsideDiv')
-
-
 
   console.log(MY_INFO, 'MY_INFO')
 
@@ -159,9 +159,13 @@ const CreateNewAction = () => {
 
   }, [])
 
+
+
   const onSubmit = () => {
 
-
+    if (handleValidation()) {
+      // Proceed with your form submission or other actions
+   
     let data = {
       "actionTime": "2023-10-20T05:05:54.895Z",
       "actionModel": {
@@ -192,39 +196,34 @@ const CreateNewAction = () => {
       ]
     }
 
-    // let data = {
-    //   "actionTime": "2023-10-20T05:05:54.895Z",
-    //   "actionModel": {
-    //     "createdOffice": 17,
-    //     "assignTo": 1,
-    //     "clientId": jsonData?.client,
-    //     "subject": actionSubject,
-    //     "message": "Who Are You?",
-    //     "priority": value,
-    //     "status": jsonData?.status,
-    //     "addedByUser": MY_INFO?.individualInfo?.addedByUser,
-    //     "dueDate": moment(date).format('YYYY-MM-DD'),
-    //     "isCreatedFromAction": "n",
-    //     "clientIdForGuest": jsonData?.clientId.toString(),
-    //     "assignWhom": selectedId == 1 ? 'Manager' : 'Partner'
-    //   },
-    //   "actionStaffModel": {
-    //     "staffId": jsonData?.staffId
-    //   },
-    //   "actionClientListModel": {
-    //   },
-    //   "actionNoteListModel": [
-    //     {
-    //       "note": "E"
-    //     }, {
-    //       "note": "F"
-    //     }
-    //   ]
-    // }
+    
     console.log(data, 'datatatatatatatdatatatatatatatdatatatatatatat', data1)
     dispatch(RequestSubmit(data, navigation));
+    console.log('Form submitted with value:', value);
+  }
 
 
+  };
+
+  const handleValidation = () => {
+    if (!value) {
+      setError('Please select an option');
+      return false;
+    }
+    setError('');
+    return true;
+  };
+
+  const handleDropdownChange = (item) => {
+    console.log(item,'IIIII')
+    setValue(item.value);
+    setIsFocus(false);
+    setError(''); // Clear the error message when a value is selected
+  };
+
+  const handleBlur = () => {
+    setIsFocus(false);
+    handleValidation(); // Validate on blur
   };
 
 
@@ -386,16 +385,21 @@ const CreateNewAction = () => {
                 iconStyle={styles.iconStyle}
                 data={data1}
                 maxHeight={200}
+                itemTextStyle={{ fontSize: 12, fontFamily: 'Poppins-SemiBold', color: '#5a5a5a' }} // Set the font size and other styles for dropdown items
+
                 labelField="label"
                 valueField="value"
                 placeholder={!isFocus ? 'Priority' : '...'}
                 value={value}
                 onFocus={() => setIsFocus(true)}
-                onBlur={() => setIsFocus(false)}
-                onChange={item => {
-                  setValue(item.value);
-                  setIsFocus(false);
-                }}
+              //  onBlur={() => setIsFocus(false)}
+                onBlur={handleBlur}
+                onChange={ (item) => handleDropdownChange(item)}
+                // onChange={item => {
+                //   setValue(item.value);
+                //   setIsFocus(false);
+                // }}
+
               //   renderLeftIcon={() => (
               //     <AntDesign
               //       style={styles.icon}
@@ -405,6 +409,7 @@ const CreateNewAction = () => {
               //     />
               //   )}
               />
+               {error ? <Text style={styles.errorText}>{error}</Text> : null}
             
               <TouchableOpacity
                 style={styles.btn}
@@ -708,6 +713,13 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginRight: 5,
+  },
+  errorText: {
+    color: 'red',
+    fontFamily:'Poppins-SemiBold',
+    fontSize:12,
+    padding:5,
+    marginLeft: 15,
   },
   label: {
     position: 'absolute',

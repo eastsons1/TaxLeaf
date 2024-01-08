@@ -128,7 +128,11 @@ const Drawer = () => {
           onPress={() => {
             navigation.navigate('Dashboard');
           }}>
-          <Icon2 style={styles.icon} name="home" size={20} color="#fff" />
+          {/* <Icon2 style={styles.icon} name="home" size={20} color="#fff" /> */}
+          <Image
+                  source={ require('../Assets/img/icons/home.png')}
+                  style={  [styles.icons,]}
+                />
           <Text style={styles.screenNameText}>Home</Text>
         </TouchableOpacity>
         {/* <View style={styles.part}></View> */}
@@ -141,8 +145,11 @@ const Drawer = () => {
           onPress={() => {
             navigation.navigate('ClientInfo');
           }}>
-          <Icon2 style={styles.icon} name="groups" size={20} color="#fff" />
-
+          {/* <Icon2 style={styles.icon} name="groups" size={20} color="#fff" /> */}
+          <Image
+                  source={ require('../Assets/img/icons/group.png')}
+                  style={  [styles.icons,]}
+                />
           <Text style={styles.screenNameText}>Client Info</Text>
         </TouchableOpacity>
         {/* <View style={styles.part}></View> */}
@@ -156,8 +163,11 @@ const Drawer = () => {
           onPress={() => {
             navigation.navigate('Manager');
           }}>
-          <Icon2 style={styles.icon} name="person" size={20} color="#fff" />
-
+          {/* <Icon2 style={styles.icon} name="person" size={20} color="#fff" /> */}
+          <Image
+                  source={ require('../Assets/img/icons/userM.png')}
+                  style={  [styles.icons,]}
+                />
           <Text style={styles.screenNameText}>Manager</Text>
         </TouchableOpacity>
 
@@ -171,8 +181,11 @@ const Drawer = () => {
           onPress={() => {
             navigation.navigate('PaymentsContain');
           }}>
-          <Icon2 style={styles.icon} name="payment" size={20} color="#fff" />
-
+          {/* <Icon2 style={styles.icon} name="payment" size={20} color="#fff" /> */}
+          <Image
+                  source={ require('../Assets/img/icons/transaction.png')}
+                  style={  [styles.icons,]}
+                />
           <Text style={styles.screenNameText}>Payments</Text>
         </TouchableOpacity>
 
@@ -185,12 +198,16 @@ const Drawer = () => {
           onPress={() => {
             navigation.navigate('FileCabinet');
           }}>
-          <Icon2
+          {/* <Icon2
             name="upload-file"
             style={styles.icon}
             size={20}
             color="#fff"
-          />
+          /> */}
+           <Image
+                  source={ require('../Assets/img/icons/files-white.png')}
+                  style={  [styles.icons,]}
+                />
 
           <Text style={styles.screenNameText}>File Cabinet</Text>
         </TouchableOpacity>
@@ -203,13 +220,16 @@ const Drawer = () => {
           onPress={() => {
             navigation.navigate('Requests');
           }}>
-          <Icon2
+          {/* <Icon2
             style={styles.icon}
             name="request-quote"
             size={20}
             color="#fff"
-          />
-
+          /> */}
+            <Image
+                  source={ require('../Assets/img/icons/product-request.png')}
+                  style={  [styles.icons,]}
+                />
           <Text style={styles.screenNameText}>Requests</Text>
         </TouchableOpacity>
         <View style={styles.part}></View>
@@ -221,12 +241,16 @@ const Drawer = () => {
           onPress={() => {
             navigation.navigate('ContactUs');
           }}>
-          <Icon2
+          {/* <Icon2
             style={styles.icon}
             name="request-quote"
             size={20}
             color="#fff"
-          />
+          /> */}
+           <Image
+                  source={ require('../Assets/img/icons/contact-us.png')}
+                  style={  [styles.icons,]}
+                />
 
           <Text style={styles.screenNameText}>Contact</Text>
         </TouchableOpacity>
@@ -251,12 +275,16 @@ const Drawer = () => {
         <TouchableOpacity
           style={styles.screenName}
           onPress={() => signOut()}>
-          <Icon2
+          {/* <Icon2
             style={styles.icon}
             name="request-quote"
             size={20}
             color="#fff"
-          />
+          /> */}
+             <Image
+                  source={ require('../Assets/img/icons/logout1.png')}
+                  style={  [styles.icons,]}
+                />
 
           <Text style={styles.screenNameText}>Logout</Text>
         </TouchableOpacity>
@@ -286,9 +314,13 @@ const styles = StyleSheet.create({
     height: 80,
     width: 80,
   },
-  icons: {
-    height: 25,
-    width: 25,
+  icons:{
+    alignSelf: 'center',
+    height:20,
+    marginLeft: 20,
+    resizeMode:'contain',
+    width:20,
+ 
   },
   MenuLIstContainer: {
     padding: 10,
@@ -364,6 +396,7 @@ const styles = StyleSheet.create({
   },
   screenName: {
     marginVertical: 10,
+  //  marginLeft:20,
     flexDirection: 'row',
   },
   screenNameText: {

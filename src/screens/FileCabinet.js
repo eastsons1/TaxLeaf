@@ -889,7 +889,7 @@ setTimeout(() => {
                 //  alignSelf: 'center',
                 flexDirection: 'row',
                 justifyContent: 'space-between',
-                // marginBottom: 20,
+                 marginBottom: 10,
 
               }}>
 
@@ -904,7 +904,7 @@ setTimeout(() => {
                   // marginBottom: wp(5),
                 }}>
                 {/* <Image source={usericon} style={{ width: 20, height: 20 }} /> */}
-                <Text style={{ fontSize: 20, fontFamily: 'Poppins-Bold', }}>File Cabinet</Text>
+                <Text style={{ color: Color.headerIconBG, fontSize: 20, fontFamily: 'Poppins-Bold', }}>File Cabinet</Text>
                 <Text style={styles.client}>Client ID : {jsonData?.client}</Text>
               </View>
               <TouchableOpacity

@@ -1,5 +1,6 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, ImageBackground } from 'react-native'
-import React from 'react'
+import { StyleSheet,Alert, Text, View, TouchableOpacity, Image, ScrollView, ImageBackground } from 'react-native'
+import React, { useState, useMemo, useEffect } from 'react';
+
 import { TextInput } from 'react-native-gesture-handler';
 import {
     widthPercentageToDP as wp,
@@ -9,13 +10,60 @@ import { Color } from '../Style';
 import Icon from 'react-native-vector-icons/AntDesign';
 import HeadTabs from './HeadTabs';
 import { useDispatch, useSelector } from 'react-redux';
+import { SubmitContactUs } from '../Redux/Actions/TaxLeaf';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
+import { Loader } from '../Component/Loader';
+
+
 
 const ContactUs = () => {
     const bgImage = require("../Assets/img/guest_shape.png")
     const { MANAGER_INFO } = useSelector(state => state.TaxLeafReducer);
     const manager = MANAGER_INFO;
+   // console.log(manager,'WWWWW')
+    const dispatch = useDispatch();
+    const navigation = useNavigation();
+    const [name, setName] = useState("");
+    const [phone, setPhone] = useState("");
+    const [email, setEmail] = useState("");
+    const [country, setCountry] = useState("");
+    const [message, setMessage] = useState("");
+    const [loader, setLoader] = useState(false);
+
+    const SubmitRequest = () => {
+
+      
+        if (!name || !phone || !email || !country || !message) {
+            setLoader(true)
+            Alert.alert('Validation Error', 'All fields are required');
+            setTimeout(() => {
+                setLoader(false)
+          }, 2000);
+          }
+
+          else{
+            setLoader(true)
+            dispatch(SubmitContactUs(manager?.id,name,phone,email,message,country,navigation))
+            setTimeout(() => {
+                setLoader(false)
+                setName('')
+                setEmail('')
+                setMessage('')
+                setCountry('')
+                setPhone('')
+          }, 2000);
+          }
+      
+
+    
+
+    }
+
+
     return (
         <View style={{backgroundColor:'#d0e4e6'}}>
+             <Loader flag={loader} />
+
             <ScrollView>
             <HeadTabs />
                 <Text style={styles.headText1}>Get in Touch !</Text>
@@ -103,10 +151,11 @@ const ContactUs = () => {
                             placeholder="Name"
                             placeholderTextColor={'#47607c'}
                             style={[styles.input]}
-                        // value={email}
-                        // onChangeText={text => {
-                        //   onChangeEmail(text);
-                        // }}
+                            
+                         value={name}
+                        onChangeText={text => {
+                          setName(text);
+                        }}
                         />
                     </View>
                     <View>
@@ -116,6 +165,10 @@ const ContactUs = () => {
                             placeholder="Phone Number"
                             placeholderTextColor={'#47607c'}
                             style={[styles.input]}
+                            value={phone}
+                            onChangeText={text => {
+                              setPhone(text);
+                            }}
                         // value={email}
                         // onChangeText={text => {
                         //   onChangeEmail(text);
@@ -129,6 +182,11 @@ const ContactUs = () => {
                             placeholder="Email"
                             placeholderTextColor={'#47607c'}
                             style={[styles.input]}
+                            value={email}
+                            onChangeText={text => {
+                              setEmail(text);
+                            }}
+
                         // value={email}
                         // onChangeText={text => {
                         //   onChangeEmail(text);
@@ -142,6 +200,10 @@ const ContactUs = () => {
                             placeholder="Country"
                             placeholderTextColor={'#47607c'}
                             style={[styles.input]}
+                            value={country}
+                            onChangeText={text => {
+                              setCountry(text);
+                            }}
                         // value={email}
                         // onChangeText={text => {
                         //   onChangeEmail(text);
@@ -155,6 +217,10 @@ const ContactUs = () => {
                             placeholder="Message"
                             placeholderTextColor={'#47607c'}
                             numberOfLines={6}
+                            value={message}
+                            onChangeText={text => {
+                              setMessage(text);
+                            }}
                             style={styles.textArea}
                         />
 
@@ -165,7 +231,9 @@ const ContactUs = () => {
                 <View style={{ marginTop: 10,marginBottom:20 }}>
                     <TouchableOpacity
                         style={[styles.button]}
-                    // onPress={() => setModalVisible(!modalVisible)}
+                     onPress={() =>
+                        SubmitRequest()
+                       }
                     >
                       <Image source={require('../Assets/img/icons/tickWhite.png')} style={{ width: 25, height: 25,  }} />
                          <Text style={styles.textStyle}>Submit</Text>

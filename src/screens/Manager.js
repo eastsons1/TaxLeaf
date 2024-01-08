@@ -112,7 +112,8 @@ const Manager = () => {
               }}>
               <Text style={{ fontSize: 20, fontFamily: 'Poppins-Bold', color: Color.headerIconBG }}>Manager</Text>
               <TouchableOpacity
-                onPress={() => setModalVisible(true)}
+               // onPress={() => setModalVisible(true)}
+                onPress={() => navigation.navigate('ContactUs')}
                 style={{
                   flexDirection: 'row',
                   justifyContent: 'center',
@@ -365,7 +366,9 @@ const Manager = () => {
               }}>
               <Text style={styles.Subheading}>Submit Your Request</Text>
               <TouchableOpacity
-                onPress={() => setModalVisible(!modalVisible)}
+              //  onPress={() => setModalVisible(!modalVisible)}
+                onPress={() => navigation.navigate('ContactUs')}
+              
                 style={{
                   backgroundColor: '#8AB645',
                   height: wp(10),

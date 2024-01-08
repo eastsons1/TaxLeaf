@@ -68,7 +68,13 @@ const ViewRequest = ({ route }) => {
     }, []);
 
 
-
+    const removeHtmlTags = (htmlString) => {
+        if (!htmlString) {
+            return ''; // or handle it in another way based on your requirements
+          }
+        // Use a regular expression to remove HTML tags
+        return htmlString.replace(/<[^>]*>/g, '');
+      };  
 
     // useEffect(() => {
     //     setLoader(true);
@@ -229,7 +235,10 @@ const ViewRequest = ({ route }) => {
                             </View>
                             <View style={styles.part}></View>
                             <View style={{ marginLeft: 15, justifyContent: "center", marginTop: 10 }}>
-                                <Text style={{ fontSize: 12, fontFamily: 'Poppins-SemiBold', color: Color.headerIconBG, }}>Message:  <Text style={{ fontSize: 12, color: Color.darkGreen }}>{REQUEST_INFO_BY_ID?.actionModel?.message}</Text></Text>
+                                <Text style={{ fontSize: 12, fontFamily: 'Poppins-SemiBold', color: Color.headerIconBG, }}>Message:  <Text style={{ fontSize: 12, color: Color.darkGreen }}> 
+                                {removeHtmlTags(REQUEST_INFO_BY_ID?.actionModel?.message)} 
+                                {/* {REQUEST_INFO_BY_ID?.actionModel?.message} */}
+                                </Text></Text>
 
 
                             </View>

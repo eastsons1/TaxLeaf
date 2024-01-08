@@ -1,4 +1,5 @@
-import { StyleSheet,FlatList, Text, View, ScrollView, TextInput, TouchableOpacity, ImageBackground, Image } from 'react-native'
+import { StyleSheet,FlatList, Button,
+    Text, View, ScrollView, TextInput, TouchableOpacity, ImageBackground, Image, SafeAreaView } from 'react-native'
 import React, { useState, useEffect } from 'react';
 import StepIndicator from 'react-native-step-indicator';
 import {
@@ -12,7 +13,7 @@ import Icon2 from 'react-native-vector-icons/Feather'
 import Icon3 from 'react-native-vector-icons/FontAwesome'
 import CheckBox from '@react-native-community/checkbox';
 import { Color } from '../Style';
-
+import { Dropdown } from 'react-native-element-dropdown';
 import { GetInterestList,GetProfessionList,ConfirmClientSetup } from '../Redux/Actions/ClientSetUp'
 import { useDispatch, useSelector } from 'react-redux';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
@@ -25,11 +26,11 @@ import {
 
 
 const ClientSteps = () => {
-    const labels = ["ABOUT YOURSELF", "REFERRAL SOURCE", "PAYMENT METHOD", "ASSOCIATIONS IF CORRECT", "CURRENT PROFESSION", "ARE YOU INTRESTED IN ANY OF THE BELOW"];
+    const labels = ["ABOUT YOURSELF", "REFERRAL SOURCE", "PAYMENT METHOD", "ASSOCIATIONS", "CURRENT PROFESSION", "ARE YOU INTRESTED IN ANY OF THE BELOW"];
     const labels1 = ["ABOUT YOURSELF", " ", " ", "  ", " ", " "];
     const labels2 = [" ", "REFERRAL SOURCE", " ", "  ", " ", " "];
     const labels3 = ["", " ", "PAYMENT METHOD", "  ", " ", " "];
-    const labels4 = ["", " ", " ", "ASSOCIATIONS IF CORRECT", " ", " "];
+    const labels4 = ["", " ", " ", "ASSOCIATIONS", " ", " "];
     const labels5 = ["", " ", " ", "  ", "CURRENT PROFESSION ", " "];
     const labels6 = ["", " ", " ", "  ", " ", "INTERESTS"];
     const [position, setPosition] = useState(0)
@@ -56,15 +57,25 @@ const ClientSteps = () => {
     const [email, setEmail] = useState(false);
     const [mobile, setMobile] = useState(false);
     const [whatnumber, setWhatNumber] = useState(false);
+    const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
+    const [value, setValue] = useState(null);
     const [REFERREDBYSOURCE, setREFERREDBYSOURCE] = useState('Website');
   
     const [bankname, setBankName] = useState(false);
     const [accountnum, setAccountNum] = useState(false);
     const [currentac, setCurrentAc] = useState(false);
+    const [isFocus, setIsFocus] = useState(false);
     const [routingnum, setRoutingNum] = useState(false);
     const [infoData, setInfoData] = useState({});
     const jsonData = MY_INFO?.guestInfo;
     console.log(jsonData?.clientId,'kkkkkkk')
+
+    const data1 = [
+        { label: 'Saving Account', value: 'Saving Account' },
+        { label: 'Current Account', value: 'Current Account' },
+       
+    
+      ];
 
     const customStyles = {
         stepIndicatorSize: 30,
@@ -167,7 +178,7 @@ const ClientSteps = () => {
        
     }, [INTEREST_LIST,PROFESSION_LIST]);
 
-
+   
    
     const onPageChange = (position) => {
         setPosition(position);
@@ -187,6 +198,7 @@ const ClientSteps = () => {
         require("../Assets/img/icons/handShake.png"),
         require("../Assets/img/icons/profGreen.png"),
         require("../Assets/img/icons/mind.png")
+
     ];
     const bgImage = require("../Assets/img/stepsBG.png")
     // let iconNm = require('../Assets/img/icons/msg.png');
@@ -257,7 +269,7 @@ console.log(interestedAreas,'selectedInterestselectedInterestselectedInterest')
 
     console.log('LLLL')
     console.log(jsonData?.staffId,jsonData?.client,jsonData?.clientType,
-        firstname,lastname,email,mobile,whatnumber,REFERREDBYSOURCE,bankname,accountnum,currentac,routingnum,
+        firstname,lastname,email,mobile,whatnumber,REFERREDBYSOURCE,bankname,accountnum,value,routingnum,
         associationList,
         selectedProfessions,interestedAreas
         )
@@ -265,7 +277,7 @@ console.log(interestedAreas,'selectedInterestselectedInterestselectedInterest')
 
      dispatch(ConfirmClientSetup(
         jsonData?.staffId,jsonData?.clientId,jsonData?.clientType,
-        firstname,lastname,email,mobile,whatnumber,REFERREDBYSOURCE,bankname,accountnum,currentac,routingnum,
+        firstname,lastname,email,mobile,whatnumber,REFERREDBYSOURCE,bankname,accountnum,value,routingnum,
         associationList,
         selectedProfessions,interestedAreas,navigation
 
@@ -273,6 +285,15 @@ console.log(interestedAreas,'selectedInterestselectedInterestselectedInterest')
 } 
 
 
+const handleCheckboxChange = () => {
+    // Copy or remove the phone number from input1 to input2 based on checkbox state
+    if (isCheckboxChecked) {
+        setWhatNumber('');
+    } else {
+     
+      setWhatNumber(mobile);
+    }
+  };
     const renderStepIndicator = params => {
        // console.log(params,'pppppp')
 
@@ -310,7 +331,8 @@ console.log(interestedAreas,'selectedInterestselectedInterestselectedInterest')
         )
     };
     return (
-        <ImageBackground source={bgImage} style={styles.bgImg} resizeMode='cover'>
+        <SafeAreaView>
+        <ImageBackground source={bgImage} style={styles.bgImg} >
             <View style={styles.headBG}>
                 <Text style={{ textAlign: 'center', color: '#fff', fontFamily:'Poppins-SemiBold', marginVertical: 14 }}>PLEASE CONFIRM THE FOLLOWING INFORMATION IS CORRECT TO BEGIN</Text>
             </View>
@@ -328,7 +350,7 @@ console.log(interestedAreas,'selectedInterestselectedInterestselectedInterest')
                 </View>
               
                 <View style={styles.subContainer}>
-                <ScrollView style={{height:hp(55),}}>
+                <ScrollView style={{height:hp(70),}}>
 
                     {(() => {
                         if (position == 0) {
@@ -339,18 +361,7 @@ console.log(interestedAreas,'selectedInterestselectedInterestselectedInterest')
                                        
                                              
                                              }>
-                                        {/* <Icon1
-                                        style={[
-                                            styles.icon,
-                                            {
-                                                color: '#2F4050',
-                                                marginTop:3
-                                            },
-                                        ]}
-                                        name="user"
-                                        size={40}
-                                        color="#fff"
-                                    /> */}
+                                       
                                         <Text style={styles.subHead}>Contact Information</Text>
                                         <Text style={styles.subHead}>STEP 1</Text>
                                     </View>
@@ -390,6 +401,39 @@ console.log(interestedAreas,'selectedInterestselectedInterestselectedInterest')
                                             style={styles.input}
 
                                         />
+                                        <View 
+                                        style={{flexDirection:"row",
+                                        alignItems:'center',
+                                        alignSelf:"flex-start" ,
+                                        paddingBottom:5
+                                    }}
+                                        >
+
+                                        <CheckBox
+                                       boxType='square'
+                                         style={{backgroundColor:"#d7eef1",marginLeft:15,height:15,width:15,}}
+                                         onCheckColor={Color.headerIconBG}
+                                            //         backgroundColor="#d7eef1"
+                                          onTintColor="#d7eef1"
+                                        value={isCheckboxChecked}
+                                        onValueChange={() => {
+                                        setIsCheckboxChecked(!isCheckboxChecked);
+                                        handleCheckboxChange();
+                                        }}
+                                    />
+                                    <Text style={{
+                                        fontFamily:'Poppins-SemiBold',
+                                        fontSize:12,
+                                        color:Color.headerIconBG,
+                                        paddingLeft:10,
+                                      
+                                        
+
+                                    }}>Copy Mobile Number</Text>
+                                        </View>
+                                   
+
+
                                         <TextInput
                                             placeholder='Whatsapp Number'
                                             value={whatnumber}
@@ -401,7 +445,7 @@ console.log(interestedAreas,'selectedInterestselectedInterestselectedInterest')
                                         />
                                     </View>
                                     <TouchableOpacity style={styles.btn} onPress={() => { onPageChange(1) }}>
-                                        <Icon
+                                        {/* <Icon
                                             style={[
                                                 styles.icon,
                                                 {
@@ -411,7 +455,17 @@ console.log(interestedAreas,'selectedInterestselectedInterestselectedInterest')
                                             name="play"
                                             size={25}
                                             color="#fff"
-                                        />
+                                        /> */}
+                                       <Image
+                          source={require('../Assets/img/icons/play.png')}
+                          style={{
+                            width: 30,
+                            height: 30,
+
+                          //  marginTop: 5,
+                        
+                          }}
+                        />
                                         <Text style={styles.ConfirmButton}>Confirm</Text>
 
 
@@ -448,7 +502,7 @@ console.log(interestedAreas,'selectedInterestselectedInterestselectedInterest')
                                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                           
                                             <TouchableOpacity style={styles.btn} onPress={() => { onPageChange(2) }}>
-                                            <Icon
+                                            {/* <Icon
                                             style={[
                                                 styles.icon,
                                                 {
@@ -458,7 +512,17 @@ console.log(interestedAreas,'selectedInterestselectedInterestselectedInterest')
                                             name="play"
                                             size={25}
                                             color="#fff"
-                                        />
+                                        /> */}
+                                            <Image
+                          source={require('../Assets/img/icons/play.png')}
+                          style={{
+                            width: 30,
+                            height: 30,
+
+                          //  marginTop: 5,
+                        
+                          }}
+                        />
                                         <Text style={styles.ConfirmButton}>Confirm</Text>
 
                                             </TouchableOpacity>
@@ -507,6 +571,32 @@ console.log(interestedAreas,'selectedInterestselectedInterestselectedInterest')
                                             style={styles.input}
 
                                         />
+                                          <View style={styles.slideContainer}>
+                                        <Dropdown
+                style={[styles.dropdown, isFocus && {fontSize:12,fontFamily:'Poppins-SemiBold', borderColor: 'blue' }]}
+                placeholderStyle={styles.placeholderStyle}
+                selectedTextStyle={styles.selectedTextStyle}
+                iconStyle={styles.iconStyle}
+                data={data1}
+                maxHeight={200}
+                itemTextStyle={{ fontSize: 12, fontFamily: 'Poppins-SemiBold', color: '#5a5a5a' }} // Set the font size and other styles for dropdown items
+                labelField="label"
+                valueField="value"
+                placeholder={!isFocus ? 'Account Type' : '...'}
+                value={value}
+                onFocus={() => setIsFocus(true)}
+                onBlur={() => setIsFocus(false)}
+                onChange={item => {
+                    setValue(item.value);
+                  setIsFocus(false);
+                }}
+              
+             
+              />
+
+              {console.log(value,'LLL')}
+              </View>
+
                                         <TextInput
                                             placeholder='Current Account'
                                             value={currentac}
@@ -550,7 +640,7 @@ console.log(interestedAreas,'selectedInterestselectedInterestselectedInterest')
                                         <Text style={{ color: '#fff' }}>Previous</Text>
                                     </TouchableOpacity> */}
                                         <TouchableOpacity style={styles.btn} onPress={() => { onPageChange(3) }}>
-                                        <Icon
+                                        {/* <Icon
                                             style={[
                                                 styles.icon,
                                                 {
@@ -560,8 +650,19 @@ console.log(interestedAreas,'selectedInterestselectedInterestselectedInterest')
                                             name="play"
                                             size={25}
                                             color="#fff"
-                                        />
-                                        <Text style={styles.ConfirmButton}>Confirm</Text>
+                                        /> */}
+
+                                            <Image
+                          source={require('../Assets/img/icons/play.png')}
+                          style={{
+                            width: 30,
+                            height: 30,
+
+                          //  marginTop: 5,
+                        
+                          }}
+                        />                                
+                                <Text style={styles.ConfirmButton}>Confirm</Text>
 
                                         </TouchableOpacity>
                                     </View>
@@ -585,13 +686,14 @@ console.log(interestedAreas,'selectedInterestselectedInterestselectedInterest')
                                         size={40}
                                         color="#fff"
                                     /> */}
-                                            <Text style={styles.subHead}>Associations if Correct</Text>
+                                            <Text style={styles.subHead}>Associations</Text>
                                             <Text style={styles.subHead}>STEP 4</Text>
                                         </View>
                                         <View style={{height:hp(70), backgroundColor: '#fff', height: hp(35), width: '100%', alignItems: 'center', borderBottomLeftRadius: 10, borderBottomRightRadius: 10 }}>
                                         <FlatList
                     data={infoData}
                     // numColumns={5}
+                    showsVerticalScrollIndicator={false}
                     keyExtractor={(item, index) => index}
                     renderItem={({ item, index }) => (
 
@@ -657,7 +759,7 @@ console.log(interestedAreas,'selectedInterestselectedInterestselectedInterest')
                                             <Text style={{ color: '#fff' }}>Previous</Text>
                                         </TouchableOpacity> */}
                                             <TouchableOpacity style={styles.btn} onPress={() => { onPageChange(4) }}>
-                                            <Icon
+                                            {/* <Icon
                                             style={[
                                                 styles.icon,
                                                 {
@@ -667,7 +769,17 @@ console.log(interestedAreas,'selectedInterestselectedInterestselectedInterest')
                                             name="play"
                                             size={25}
                                             color="#fff"
-                                        />
+                                        /> */}
+                                           <Image
+                          source={require('../Assets/img/icons/play.png')}
+                          style={{
+                            width: 30,
+                            height: 30,
+
+                          //  marginTop: 5,
+                        
+                          }}
+                        />
                                         <Text style={styles.ConfirmButton}>Confirm</Text>
 
                                             </TouchableOpacity>
@@ -675,43 +787,47 @@ console.log(interestedAreas,'selectedInterestselectedInterestselectedInterest')
                                     </View>
                                 </ScrollView>
                             );
-                        } else if (position == 4) {
+                        } 
+                        else if (position == 4) {
                             return (
-                                <ScrollView>
+                                // <ScrollView>
                                     <View style={styles.subContainerProf}>
                                     <View style={styles.HeadingContainer}>
-                                           {/* <Icon3
-                                            style={[
-                                                styles.icon,
-                                                {
-                                                    color: '#2F4050',
-                                                    marginLeft: 10,
-                                                    marginRight: 10,
-                                                    marginTop: 3
-                                                },
-                                            ]}
-                                            name="suitcase"
-                                            size={30}
-                                            color="#fff"
-                                        /> */}
+                                          
                                             <Text style={styles.subHead}>Current Profession</Text>
                                             <Text style={styles.subHead}>STEP 5</Text>
                                         </View>
-                                        <View style={{height:hp(70), backgroundColor: '#fff', borderBottomRightRadius: 10, borderBottomLeftRadius: 10 }}>
+                                        <View style={{height:hp(48),paddingBottom:15, backgroundColor: '#fff', borderBottomRightRadius: 10, borderBottomLeftRadius: 10 }}>
                                           
                                         <FlatList
                     data={professionList}
+                    showsVerticalScrollIndicator={false}
                     // numColumns={5}
                     keyExtractor={(item, index) => index}
                     renderItem={({ item, index }) => (
                         <View style={styles.contentView}>
                         <View style={styles.client}>
+                     
                         <CheckBox
               disabled={false}
+              boxType="square"
+             style={{backgroundColor:"#d7eef1", marginTop:8,marginLeft:10,height:15,width:15,alignSelf:"center",justifyContent:'center'}}
+             onCheckColor={Color.headerIconBG}
+                //         backgroundColor="#d7eef1"
+              onTintColor="#d7eef1"
+            
+            // onTintColor="#d7eef1"
+           //tintColor="#d7eef1" 
+        // lineWidth={2.5}
+          
+           
               value={selectedProfessions.includes(item.professionName)}
-              tintColors={{ true: 'white', false: 'white' }}
+           //   tintColors="red"
               onValueChange={() => handleToggleCheckbox(item.professionName)}
+            //   style={{height:10,width:10}}
+
             />
+           
                            <Text style={styles.ProfesstionList} >
 
                                {item.professionName}</Text>
@@ -726,24 +842,9 @@ console.log(interestedAreas,'selectedInterestselectedInterestselectedInterest')
                                            
                                         </View>
                                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                            {/* <TouchableOpacity style={styles.btnPrev}
-                                            onPress={() => { onPageChange(3) }}
-                                        >
-                                            <Icon
-                                                style={[
-                                                    styles.icon,
-                                                    {
-                                                        color: '#fff',
-                                                    },
-                                                ]}
-                                                name="arrowleft"
-                                                size={20}
-                                                color="#fff"
-                                            />
-                                            <Text style={{ color: '#fff' }}>Previous</Text>
-                                        </TouchableOpacity> */}
+                                          
                                             <TouchableOpacity style={styles.btn} onPress={() => { onPageChange(5) }}>
-                                            <Icon
+                                            {/* <Icon
                                             style={[
                                                 styles.icon,
                                                 {
@@ -753,14 +854,24 @@ console.log(interestedAreas,'selectedInterestselectedInterestselectedInterest')
                                             name="play"
                                             size={25}
                                             color="#fff"
-                                        />
+                                        /> */}
+                                            <Image
+                          source={require('../Assets/img/icons/play.png')}
+                          style={{
+                            width: 30,
+                            height: 30,
+
+                          //  marginTop: 5,
+                        
+                          }}
+                        />
                                         <Text style={styles.ConfirmButton}>Confirm</Text>
 
                                             </TouchableOpacity>
                                         </View>
 
                                     </View>
-                                </ScrollView>
+                                // </ScrollView>
                             );
                         } else {
                             return (
@@ -786,17 +897,25 @@ console.log(interestedAreas,'selectedInterestselectedInterestselectedInterest')
                                         </View>
 
 
-                                        <View style={{height:hp(70), backgroundColor: '#fff', borderBottomRightRadius: 10, borderBottomLeftRadius: 10 }}>
+                                        <View style={{height:hp(48),paddingBottom:15, backgroundColor: '#fff', borderBottomRightRadius: 10, borderBottomLeftRadius: 10 }}>
                                         
                                         <FlatList
                     data={interestList}
                     // numColumns={5}
+                    showsVerticalScrollIndicator={false}
                     keyExtractor={(item, index) => index}
                     renderItem={({ item, index }) => (
                         <View style={styles.contentView}>
                         <View style={styles.client}>
                         <CheckBox
-              disabled={false}
+            
+               disabled={false}
+              boxType="square"
+              style={{backgroundColor:"#d7eef1", marginTop:8,marginLeft:10,height:15,width:15,alignSelf:"center",justifyContent:'center'}}
+              onCheckColor={Color.headerIconBG}
+                //         backgroundColor="#d7eef1"
+              onTintColor="#d7eef1"
+          //  tintColor="#d7eef1"
               value={selectedInterest.includes(item.id)}
               tintColors={{ true: 'white', false: 'white' }}
               onValueChange={() => handleInterestCheckbox(item.id)}
@@ -818,7 +937,7 @@ console.log(interestedAreas,'selectedInterestselectedInterestselectedInterest')
                                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                            
                                             <TouchableOpacity style={styles.btn} onPress={() => FinalConfirm() }>
-                                            <Icon
+                                            {/* <Icon
                                             style={[
                                                 styles.icon,
                                                 {
@@ -828,7 +947,17 @@ console.log(interestedAreas,'selectedInterestselectedInterestselectedInterest')
                                             name="play"
                                             size={25}
                                             color="#fff"
-                                        />
+                                        /> */}
+                                          <Image
+                          source={require('../Assets/img/icons/play.png')}
+                          style={{
+                            width: 30,
+                            height: 30,
+
+                          //  marginTop: 5,
+                        
+                          }}
+                        />
                                         <Text style={styles.ConfirmButton}>Confirm</Text>
 
                                             </TouchableOpacity>
@@ -844,6 +973,7 @@ console.log(interestedAreas,'selectedInterestselectedInterestselectedInterest')
               
             </View>
         </ImageBackground>
+        </SafeAreaView>
 
     )
 }
@@ -870,6 +1000,45 @@ const styles = StyleSheet.create({
 
         // elevation: 6,
     },
+    slideContainer: {
+        backgroundColor: Color.white,
+        width: wp(90),
+        justifyContent: 'center',
+        alignSelf: 'center',
+        marginBottom: 10,
+
+        fontSize:12,
+        borderColor:'#f3f3f3',
+         borderWidth: 1,
+        // borderRadius: 10,
+      
+        fontFamily:'Poppins-SemiBold', 
+      
+      
+        borderRadius: 20
+      
+       // marginTop: 20,
+        // width:'62%'
+      },
+      selectedTextStyle: {
+        fontSize: 12,
+      paddingLeft:10,
+      color:'#5a5a5a',
+        fontFamily:'Poppins-SemiBold'
+      },
+      placeholderStyle:{
+        fontSize:12,
+        paddingLeft:10,
+        color:'#5a5a5a',
+        fontFamily:'Poppins-SemiBold'
+      },
+    
+      iconStyle: {
+        width: 20,
+        height: 20,
+      },
+
+
     subHead: {
         alignSelf: 'flex-start',
         fontSize: 16,
@@ -928,6 +1097,14 @@ const styles = StyleSheet.create({
         borderRadius: 10,
 
     },
+    checkbox:{
+
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 30, // Adjust the width as needed
+        height: 30, // Adjust the height as needed
+    },
     btn: {
         width: wp(35),
          height: hp(6),
@@ -964,6 +1141,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginRight: 10
     },
+    bgImg:{
+        height:hp(100),
+        resizeMode:'repeat'
+    },
     btnPrev: {
         width: wp(28),
         height: hp(7),
@@ -986,6 +1167,7 @@ const styles = StyleSheet.create({
         fontSize:12,
         borderColor:'#f3f3f3',
          borderWidth: 1,
+         color:'#5a5a5a',
         // borderRadius: 10,
         padding: 10,
            fontFamily:'Poppins-SemiBold', 
@@ -1012,7 +1194,7 @@ const styles = StyleSheet.create({
         borderRadius: 25,
         color: '#fff',
         // padding: 5,
-    marginLeft:10,
+       marginLeft:10,
         width:wp(90),
       //  alignSelf:"center",
         //alignSelf:"center",
@@ -1031,7 +1213,7 @@ const styles = StyleSheet.create({
         padding: 5,
         width: wp(90),
     marginLeft:10,
-     fontSize:12,
+     fontSize:14,
         // marginRight: 10,
       // alignSelf:"center",
         textAlign: 'center',
@@ -1039,14 +1221,14 @@ const styles = StyleSheet.create({
     },
 
     ProfesstionList: {
-        backgroundColor: '#39aab8',
+      //  backgroundColor: '#39aab8',
         borderRadius: 25,
         color: '#fff',
         fontFamily:'Poppins-SemiBold',
         padding: 5,
       
         width:wp(80),
-          fontSize:12,
+          fontSize:14,
         // marginRight: 10,
      
         textAlign: 'center',
