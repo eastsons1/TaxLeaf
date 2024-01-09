@@ -161,7 +161,7 @@ const HeadTabs = () => {
                                             }>
                                            <Image
                                                     source={ require('../Assets/img/icons/tax.png')}
-                              style={  [styles.icon,]}
+                                            style={  [styles.icon,]}
                               />
 
 
@@ -173,8 +173,8 @@ const HeadTabs = () => {
                                                 {
                                                     color:
                                                         showwhat1 == 'Message'
-                                                            ? Color.IconTextColor
-                                                            : Color.IconTextColor,
+                                                            ? Color.headerIconBG
+                                                            : Color.headerIconBG,
                                                 },
                                             ]}>
                                             Tax Deadlines1
@@ -196,7 +196,7 @@ const HeadTabs = () => {
                                                     : (showwhatfunc1('Proposal'), showwhatfunc2(''))
                                             }>
                                             <Image
-                                                    source={ require('../Assets/img/icons/message.png')}
+                                                    source={ require('../Assets/img/icons/Messages.png')}
                               style={  styles.icon}
                               />
 
@@ -213,7 +213,7 @@ const HeadTabs = () => {
                                                             : Color.headerIconBG,
                                                 },
                                             ]}>
-                                            Messages
+                                            Messages1
                                         </Text>
                                     </View>
                                     <View style={styles.TabsContainer}>
@@ -232,7 +232,7 @@ const HeadTabs = () => {
                                                     : (showwhatfunc1('Signature'), showwhatfunc2(''))
                                             }>
                                              <Image
-                                                    source={ require('../Assets/img/icons/events.png')}
+                                                    source={ require('../Assets/img/icons/Events-Icon.png')}
                                                     style={  [styles.icon,]}
                               />
 
@@ -249,7 +249,7 @@ const HeadTabs = () => {
                                                             : Color.headerIconBG,
                                                 },
                                             ]}>
-                                            Events
+                                            Events1
                                         </Text>
                                     </View>
                                     <View style={styles.TabsContainer}>
@@ -268,7 +268,7 @@ const HeadTabs = () => {
                                                     : (showwhatfunc1('Reminders'), showwhatfunc2(''))
                                             }>
                                                 <Image
-                                                    source={ require('../Assets/img/icons/holidayicon.png')}
+                                                    source={ require('../Assets/img/icons/Holidays.png')}
                               style={  styles.icon}
                                
                             />
@@ -312,7 +312,7 @@ const HeadTabs = () => {
                                                             : Color.headerIconBG,
                                                 },
                                             ]}>
-                                            Holidays
+                                            Holidays1
                                         </Text>
                                     </View>
                                     {/* </View> */}
@@ -340,7 +340,7 @@ const HeadTabs = () => {
                                                     : (showwhatfunc1('Message'), showwhatfunc2(''))
                                             }>
                                            <Image
-                                                    source={ require('../Assets/img/icons/tax.png')}
+                                                    source={ require('../Assets/img/icons/Tax-Deadlines.png')}
                                                     style={  [styles.icon,]}
                               />
 
@@ -356,7 +356,7 @@ const HeadTabs = () => {
                                                             : Color.headerIconBG,
                                                 },
                                             ]}>
-                                            Tax Deadlines
+                                            Tax Deadlines2
                                         </Text>
                                     </View>
                                     <View style={styles.TabsContainer}>
@@ -411,7 +411,7 @@ const HeadTabs = () => {
                                                     : (showwhatfunc1('Signature'), showwhatfunc2(''))
                                             }>
                                               <Image
-                                                    source={ require('../Assets/img/icons/events.png')}
+                                                    source={ require('../Assets/img/icons/Events-Icon.png')}
                                                     style={  [styles.icon,]}
                               />
 
@@ -447,7 +447,7 @@ const HeadTabs = () => {
                                                     : (showwhatfunc1('Reminders'), showwhatfunc2(''))
                                             }>
                                            <Image
-                                                    source={ require('../Assets/img/icons/holidayicon.png')}
+                                                    source={ require('../Assets/img/icons/Holidays.png')}
                               style={  styles.icon}
                                
                             />
@@ -473,7 +473,7 @@ const HeadTabs = () => {
                                                             : Color.headerIconBG,
                                                 },
                                             ]}>
-                                            Holidays
+                                            Holidays2
                                         </Text>
                                     </View>
                                     {/* </View> */}
@@ -499,7 +499,7 @@ const HeadTabs = () => {
                                                     : (showwhatfunc1('Message'), showwhatfunc2(''))
                                             }>
                                             <Image
-                                                    source={ require('../Assets/img/icons/tax.png')}
+                                                    source={ require('../Assets/img/icons/Tax-Deadlines.png')}
                                                     style={  [styles.icon,]}
                               />
 
@@ -516,7 +516,7 @@ const HeadTabs = () => {
                                                             : Color.headerIconBG,
                                                 },
                                             ]}>
-                                            Tax Deadlines
+                                            Tax Deadlines3
                                         </Text>
                                     </View>
                                     <View style={styles.TabsContainer}>
@@ -534,7 +534,7 @@ const HeadTabs = () => {
                                                     : (showwhatfunc1('Proposal'), showwhatfunc2(''))
                                             }>
                                              <Image
-                                                    source={ require('../Assets/img/icons/message.png')}
+                                                    source={ require('../Assets/img/icons/Messages.png')}
                               style={  styles.icon}
                               />
 
@@ -551,7 +551,7 @@ const HeadTabs = () => {
                                                             : Color.headerIconBG,
                                                 },
                                             ]}>
-                                            Messages
+                                            Messages3
                                         </Text>
                                     </View>
                                     <View style={styles.TabsContainer}>
@@ -569,7 +569,7 @@ const HeadTabs = () => {
                                                     : (showwhatfunc1('Signature'), showwhatfunc2(''))
                                             }>
                                              <Image
-                                                    source={ require('../Assets/img/icons/events.png')}
+                                                    source={ require('../Assets/img/icons/Events-Icon.png')}
                                                     style={  [styles.icon,]}
                               />
 
@@ -604,7 +604,7 @@ const HeadTabs = () => {
                                                     : (showwhatfunc1('Reminders'), showwhatfunc2(''))
                                             }>
                                            <Image
-                                                    source={ require('../Assets/img/icons/holidayicon.png')}
+                                                    source={ require('../Assets/img/icons/Holidays.png')}
                               style={  styles.icon}
                                
                             />
@@ -630,7 +630,7 @@ const HeadTabs = () => {
                                                             : Color.headerIconBG,
                                                 },
                                             ]}>
-                                            Holidays
+                                            Holidays4
                                         </Text>
                                     </View>
                                     {/* </View> */}
@@ -655,9 +655,10 @@ const HeadTabs = () => {
                                                     : (showwhatfunc1('Message'), showwhatfunc2(''))
                                             }>
                                             <Image
-                                                    source={ require('../Assets/img/icons/tax.png')}
+                                                    source={ require('../Assets/img/icons/Tax-Deadlines.png')}
+                                                   // style={{height:50,width:50}}
                                                     style={  [styles.icon,]}
-                              />
+                                             />
 
 
 
@@ -672,7 +673,7 @@ const HeadTabs = () => {
                                                             : Color.headerIconBG,
                                                 },
                                             ]}>
-                                            Tax Deadlines
+                                            Tax Deadlines4
                                         </Text>
                                     </View>
                                     <View style={styles.TabsContainer}>
@@ -690,7 +691,7 @@ const HeadTabs = () => {
                                                     : (showwhatfunc1('Proposal'), showwhatfunc2(''))
                                             }>
                                             <Image
-                                                    source={ require('../Assets/img/icons/message.png')}
+                                                    source={ require('../Assets/img/icons/Messages.png')}
                               style={  styles.icon}
                               />
 
@@ -706,7 +707,7 @@ const HeadTabs = () => {
                                                             : Color.headerIconBG,
                                                 },
                                             ]}>
-                                            Messages
+                                            Messages4
                                         </Text>
                                     </View>
                                     <View style={styles.TabsContainer}>
@@ -724,7 +725,7 @@ const HeadTabs = () => {
                                                     : (showwhatfunc1('Signature'), showwhatfunc2(''))
                                             }>
                                             <Image
-                                                    source={ require('../Assets/img/icons/events.png')}
+                                                    source={ require('../Assets/img/icons/Events-Icon.png')}
                                                     style={  [styles.icon,]}
                               />
 
@@ -740,7 +741,7 @@ const HeadTabs = () => {
                                                             : Color.headerIconBG,
                                                 },
                                             ]}>
-                                            Events1
+                                            Events4
                                         </Text>
                                     </View>
                                     <View style={styles.TabsContainer}>
@@ -758,7 +759,7 @@ const HeadTabs = () => {
                                                     : (showwhatfunc1('Reminders'), showwhatfunc2(''))
                                             }>
                                             <Image
-                                                    source={ require('../Assets/img/icons/holidayicon.png')}
+                                                    source={ require('../Assets/img/icons/Holidays.png')}
                               style={  styles.icon}
                                
                             />
@@ -835,7 +836,7 @@ const HeadTabs = () => {
                                                             : Color.headerIconBG,
                                                 },
                                             ]}>
-                                            Orders
+                                            Orders1
                                         </Text>
                                     </View>
                                     <View style={styles.TabsContainer}>
@@ -856,7 +857,7 @@ const HeadTabs = () => {
 
                                             }}>
                                              <Image
-                                             source={ require('../Assets/img/icons/tax-returns.png')}
+                                             source={ require('../Assets/img/icons/Tax-Returns-Icons.png')}
                                              style={  styles.icon}
                                              />
 
@@ -873,7 +874,7 @@ const HeadTabs = () => {
                                                             : Color.headerIconBG,
                                                 },
                                             ]}>
-                                            Tax Returns
+                                            Tax Returns1
                                         </Text>
                                     </View>
                                     <View style={styles.TabsContainer}>
@@ -891,7 +892,7 @@ const HeadTabs = () => {
                                                     : (showwhatfunc2('book'), showwhatfunc1(''))
                                             }>
                                              <Image
-                                             source={ require('../Assets/img/icons/book-keeping.png')}
+                                             source={ require('../Assets/img/icons/Bookkeeping-Icon.png')}
                                              style={  styles.icon}
                                              />
 
@@ -920,7 +921,7 @@ const HeadTabs = () => {
                                                     marginLeft: 5
                                                 },
                                             ]}>
-                                            BookKeeping
+                                            BookKeeping1
                                         </Text>
                                     </View>
                                     <View style={styles.TabsContainer}>
@@ -938,7 +939,7 @@ const HeadTabs = () => {
                                                     : (showwhatfunc2('Gov'), showwhatfunc1(''))
                                             }>
                                             <Image
-                                             source={ require('../Assets/img/icons/gov-payments.png')}
+                                             source={ require('../Assets/img/icons/Gov-Payments-Icons.png')}
                                              style={  styles.icon}
                                              />
 
@@ -991,7 +992,7 @@ const HeadTabs = () => {
                                                     : (showwhatfunc2('orders'), showwhatfunc2(''))
                                             }>
                                             <Image
-                                             source={ require('../Assets/img/icons/orders.png')}
+                                             source={ require('../Assets/img/icons/Orders-Icon.png')}
                                              style={  styles.icon}
                                              />
 
@@ -1008,7 +1009,7 @@ const HeadTabs = () => {
                                                             : Color.headerIconBG,
                                                 },
                                             ]}>
-                                            Orders
+                                            Orders2
                                         </Text>
                                     </View>
                                     <View style={styles.TabsContainer}>
@@ -1043,7 +1044,7 @@ const HeadTabs = () => {
                                                             : Color.headerIconBG,
                                                 },
                                             ]}>
-                                            Tax Returns
+                                            Tax Returns2
                                         </Text>
                                     </View>
                                     <View style={styles.TabsContainer}>
@@ -1061,7 +1062,7 @@ const HeadTabs = () => {
                                                     : (showwhatfunc2('book'), showwhatfunc1(''))
                                             }>
                                             <Image
-                                             source={ require('../Assets/img/icons/book-keeping.png')}
+                                             source={ require('../Assets/img/icons/Bookkeeping-Icon.png')}
                                              style={  styles.icon}
                                              />
 
@@ -1108,7 +1109,7 @@ const HeadTabs = () => {
                                                     : (showwhatfunc2('Gov'), showwhatfunc1(''))
                                             }>
                                             <Image
-                                             source={ require('../Assets/img/icons/gov-payments.png')}
+                                             source={ require('../Assets/img/icons/Gov-Payments-Icons.png')}
                                              style={  styles.icon}
                                              />
 
@@ -1161,7 +1162,7 @@ const HeadTabs = () => {
                                                     : showwhatfunc2('orders')
                                             }>
                                            <Image
-                                             source={ require('../Assets/img/icons/orders.png')}
+                                             source={ require('../Assets/img/icons/Orders-Icon.png')}
                                              style={  styles.icon}
                                              />
 
@@ -1177,7 +1178,7 @@ const HeadTabs = () => {
                                                             : Color.headerIconBG,
                                                 },
                                             ]}>
-                                            Orders
+                                            Orders3
                                         </Text>
                                     </View>
                                     <View style={styles.TabsContainer}>
@@ -1195,7 +1196,7 @@ const HeadTabs = () => {
                                                     : showwhatfunc2('taxReturn')
                                             }>
                                             <Image
-                                             source={ require('../Assets/img/icons/tax-returns.png')}
+                                             source={ require('../Assets/img/icons/Tax-Returns-Icons.png')}
                                              style={  styles.icon}
                                              />
 
@@ -1265,7 +1266,7 @@ const HeadTabs = () => {
                                                     : (showwhatfunc2('Gov'), showwhatfunc1(''))
                                             }>
                                              <Image
-                                             source={ require('../Assets/img/icons/gov-payments.png')}
+                                             source={ require('../Assets/img/icons/Gov-Payments-Icons.png')}
                                              style={  styles.icon}
                                              />
 
@@ -1318,7 +1319,7 @@ const HeadTabs = () => {
                                                     : (showwhatfunc2('orders'), showwhatfunc1(''))
                                             }>
                                            <Image
-                                             source={ require('../Assets/img/icons/orders.png')}
+                                             source={ require('../Assets/img/icons/Orders-Icon.png')}
                                              style={  styles.icon}
                                              />
 
@@ -1335,7 +1336,7 @@ const HeadTabs = () => {
                                                             : Color.headerIconBG,
                                                 },
                                             ]}>
-                                            Orders
+                                            Orders4
                                         </Text>
                                     </View>
                                     <View style={styles.TabsContainer}>
@@ -1354,7 +1355,7 @@ const HeadTabs = () => {
                                             }>
                                             {/* {console.log(showwhat1, showwhat2, "LLLLL")} */}
                                             <Image
-                                             source={ require('../Assets/img/icons/tax-returns.png')}
+                                             source={ require('../Assets/img/icons/Tax-Returns-Icons.png')}
                                              style={  styles.icon}
                                              />
 
@@ -1371,7 +1372,7 @@ const HeadTabs = () => {
                                                             : Color.headerIconBG,
                                                 },
                                             ]}>
-                                            Tax Returns
+                                            Tax Returns4
                                         </Text>
                                     </View>
                                     <View style={styles.TabsContainer}>
@@ -1389,7 +1390,7 @@ const HeadTabs = () => {
                                                     : (showwhatfunc2('book'), showwhatfunc1(''))
                                             }>
                                             <Image
-                                             source={ require('../Assets/img/icons/book-keeping.png')}
+                                             source={ require('../Assets/img/icons/Bookkeeping-Icon.png')}
                                              style={  styles.icon}
                                              />
 
@@ -1418,7 +1419,7 @@ const HeadTabs = () => {
                                                     marginLeft: 5
                                                 },
                                             ]}>
-                                            Bookkeeping
+                                            BookKeeping4
                                         </Text>
                                     </View>
                                     <View style={styles.TabsContainer}>
@@ -1436,7 +1437,7 @@ const HeadTabs = () => {
                                                     : (showwhatfunc2('Gov'), showwhatfunc1(''))
                                             }>
                                              <Image
-                                             source={ require('../Assets/img/icons/gov-payments.png')}
+                                             source={ require('../Assets/img/icons/Gov-Payments-Icons.png')}
                                              style={  styles.icon}
                                              />
 
@@ -1453,7 +1454,7 @@ const HeadTabs = () => {
                                                             : Color.headerIconBG,
                                                 },
                                             ]}>
-                                            Gov. Payments
+                                            Gov. Payments4
                                         </Text>
                                     </View>
                                     {/* </View> */}
@@ -1468,34 +1469,105 @@ const HeadTabs = () => {
                             <ScrollView>
                                 {/* <View style={styles.subContainer}> */}
                                 {/* <TouchableOpacity onPress={() => setshowwhat1('')}> */}
-                                <View style={styles.part}></View>
+                                {/* <View style={styles.part}></View> */}
                                 {TaxfilteredList && TaxfilteredList.length > 0 ? (
                                     TaxfilteredList.map(item => (
-                                        <View key={item.id} style={{ alignSelf: "center", marginTop: 10, width: wp(80) }}>
+                                        <View key={item.id} style={{
+                                            borderRadius:10,
+                                            backgroundColor:"#f7f9fa",
+                                             alignSelf: "center", 
+                                             marginTop: 10,
+                                             padding:10,
+                                              width: wp(90),
+                                              flexDirection:'row'
+                                               }}>
+                                                <View
+                                                style={{  width: wp(15),
+                                                   // flexDirection: 'row',
+                                                    //justifyContent: 'center',
+                                                   // alignItems: 'center',
+                                                }}
+                                                >
+                                                {/* <Image
+                                                    source={ require('../Assets/img/icons/Tax-Deadlines.png')}
+                                                    style={  [styles.icon,]}
+                              />  */}
+                                <Image source={require('../Assets/img/icons/bell-green.png')}
+                                 style={{ 
+                                    alignSelf: 'center',
+                                    height:30,
+                                    resizeMode:'contain',
+                                    width:30,
+                                     }} />
+                                      <View
+                                            style={{
+                                            position: 'absolute',
+                                            top: -2,
+                                            right: 10,
+                                            height: 20,
+
+                                            width: 20,
+                                            justifyContent: 'center',
+                                            borderWidth: 1,
+                                            borderColor: Color.white,
+                                            backgroundColor: 'red',
+                                            borderRadius: 50,
+                                            }}>
                                             <Text
+                                            style={{
+                                                color: Color.white,
+                                                alignSelf: 'center',
+                                                fontFamily:'Poppins-SemiBold',
+                                                fontSize: 10,
+                                            }}>
+                                            1
+                                            </Text>
+                                        </View>
+                                                </View>
+                                                <View
+                                                    style={{  width: wp(65),
+                                                  //  backgroundColor:'red'
+                                                    }}
+                                                >
+
+                                                <Text
                                                 style={{
-                                                    backgroundColor: '#23c6c8',
-                                                    fontSize: 12,
+                                                    fontSize: 16,
+                                                    fontFamily:'Poppins-Bold',
+                                                    color:Color.headerIconBG,
                                                     padding: 3,
+                                                  
+
                                                 }}>
                                                 {item.subject}
                                             </Text>
+                                         <View 
+                                         style={{
+                                            borderBottomWidth: 1,
+                                          
+                                            borderBottomColor: '#e4edee',
+                                         }}
+                                         ></View>
                                             <Text
                                                 style={{
-                                                    fontSize: 12,
-                                                    fontWeight: '700',
+                                                    fontSize: 14,
+                                                   fontFamily:'Poppins-SemiBold',
+                                                   color:Color.headerIconBG,
                                                     padding: 3,
                                                 }}>
                                                 Message:
                                                 <Text
                                                     style={{
-                                                        fontSize: 10,
-                                                        fontWeight: 'normal',
+                                                        fontSize: 12,
+                                                   fontFamily:'Poppins-SemiBold',
+                                                   color:Color.headerIconBG,
                                                         padding: 3,
                                                     }}>
                                                     {item.message}
                                                 </Text>
                                             </Text>
+                                                </View>
+                                           
                                         </View>
                                     ))
                                 ) : (
@@ -1919,7 +1991,7 @@ const styles = StyleSheet.create({
         //  backgroundColor: "yellow",
         width: wp(12),
         height: wp(12),
-        paddingTop: 5,
+       // paddingTop: 5,
         
 
         //  justifyContent: 'center',
@@ -1931,7 +2003,7 @@ const styles = StyleSheet.create({
         //  backgroundColor: "lightgray",
         width: wp(12),
         height: wp(12),
-        paddingTop: 5,
+       // paddingTop: 5,
         //  justifyContent: 'center',
         borderRadius: 50,
         //marginRight: 6,
@@ -1951,7 +2023,7 @@ const styles = StyleSheet.create({
         width: wp(12),
         height: wp(12),
         //marginTop: 10,
-        paddingTop: 5,
+       // paddingTop: 5,
         borderRadius: 50,
         // justifyContent: 'center',
         // marginLeft: 10
@@ -1963,7 +2035,7 @@ const styles = StyleSheet.create({
         width: wp(12),
         height: wp(12),
         //marginTop: 10,
-        paddingTop: 5,
+      //  paddingTop: 5,
         borderRadius: 50,
         // justifyContent: 'center',
         // marginRight: 5,
@@ -1975,10 +2047,10 @@ const styles = StyleSheet.create({
     },
     icon: {
          alignSelf: 'center',
-            height:25,
+            height:50,
             resizeMode:'contain',
-            width:25,
-          marginTop: 5 
+            width:50,
+          //marginTop: 5 
         },
 
 

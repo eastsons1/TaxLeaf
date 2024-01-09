@@ -112,8 +112,8 @@ const Manager = () => {
               }}>
               <Text style={{ fontSize: 20, fontFamily: 'Poppins-Bold', color: Color.headerIconBG }}>Manager</Text>
               <TouchableOpacity
-               // onPress={() => setModalVisible(true)}
-                onPress={() => navigation.navigate('ContactUs')}
+                onPress={() => setModalVisible(true)}
+              //  onPress={() => navigation.navigate('ContactUs')}
                 style={{
                   flexDirection: 'row',
                   justifyContent: 'center',
@@ -128,7 +128,7 @@ const Manager = () => {
                   //padding: 4
                 }}>
                 <Image source={require('../Assets/img/icons/createAction.png')} style={{ width: 25, height: 25, alignSelf: 'center' }} />
-                <Text style={[styles.client, { alignSelf: 'center', marginLeft: 5, fontFamily: 'Poppins-Bold', fontSize: 12, marginTop: 5 }]}>Submit Your Request</Text>
+                <Text style={[styles.client, { alignSelf: 'center', marginLeft: 5, fontFamily: 'Poppins-Bold', fontSize: 12, marginTop: 5 }]}>Submit Your Request22</Text>
               </TouchableOpacity>
               {/* <Button
             title="+ New Request"
@@ -364,10 +364,10 @@ const Manager = () => {
                 width: wp(90),
                 alignSelf: 'center',
               }}>
-              <Text style={styles.Subheading}>Submit Your Request</Text>
+              <Text style={styles.Subheading}>Submit Your Request11</Text>
               <TouchableOpacity
-              //  onPress={() => setModalVisible(!modalVisible)}
-                onPress={() => navigation.navigate('ContactUs')}
+                onPress={() => setModalVisible(!modalVisible)}
+               // onPress={() => navigation.navigate('ContactUs')}
               
                 style={{
                   backgroundColor: '#8AB645',

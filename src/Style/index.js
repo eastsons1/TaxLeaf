@@ -14,5 +14,6 @@ export const Color = {
   whitebottom: '#d5e3e5',
   white: '#fff',
   bgColor: '#d0e4e6',
-  headerIconBG: '#00818a'
+  headerIconBG: '#00818a',
+  screenBG:'#d5e3e5'
 };

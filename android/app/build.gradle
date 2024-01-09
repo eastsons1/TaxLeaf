@@ -77,7 +77,7 @@ android {
 
     namespace "com.taxleaf"
     defaultConfig {
-        applicationId "com.taxleaf"
+        applicationId "com.taxleaf.taxleaf"
         manifestPlaceholders = [
       appAuthRedirectScheme: 'com.taxleaf'
     ]

@@ -306,7 +306,7 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Color.screenBg
+    backgroundColor: Color.screenBG
   },
   heading: {
     fontSize: 16,

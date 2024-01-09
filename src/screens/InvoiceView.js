@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, FlatList, Alert, Image } from 'react-native';
+import { View, Text,
+    Modal, StyleSheet,
+    TextInput,
+    ScrollView, TouchableOpacity, FlatList, Alert, Image } from 'react-native';
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+import { Dropdown } from 'react-native-element-dropdown';
 import { Color } from '../Style';
 import { GetDetailsbyOrderId } from '../Redux/Actions/PaymentAction';
 import { ManagerInfo } from '../Redux/Actions/TaxLeaf';
-
+import DateTimePicker from '@react-native-community/datetimepicker';
+import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import { Loader } from '../Component/Loader';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
@@ -17,15 +22,19 @@ import HeadTabs from './HeadTabs';
 export default InvoiceView = ({ route }) => {
     const dispatch = useDispatch();
     const navigation = useNavigation();
-
+    const [modalVisible, setModalVisible] = useState(false);
     const { MY_INFO } = useSelector(state => state.TaxLeafReducer);
     const { GET_ORDER_DETAILS } = useSelector(state => state.PaymentReducer);
     const { MANAGER_INFO } = useSelector(state => state.TaxLeafReducer);
     const { OFFICE_INFO } = useSelector(state => state.TaxLeafReducer);
+    const [value, setValue] = useState(null);
+    const [isFocus, setIsFocus] = useState(false);
+    const [error, setError] = useState('');
 
     console.log(GET_ORDER_DETAILS, 'orderInfoInvoiceorderInfoInvoiceorderInfoInvoice')
     console.log(MANAGER_INFO, 'MANAGER_INFO')
-
+    const [datePicker, setDatePicker] = useState(false);
+    const [date, setDate] = useState(new Date());
     const [loader, setLoader] = useState(false);
     const orderId = route.params.orderId;
     const countryname = route.params.countryname;
@@ -39,6 +48,8 @@ export default InvoiceView = ({ route }) => {
     const serviceList = GET_ORDER_DETAILS[0]?.serviceListModel;
 
     //console.log(officeInfo, 'officeInfoofficeInfoofficeInfo')
+
+    console.log(value,'Selectionnnn')
 
     // Calculate the sum of "priceCharged" using reduce
     const totalPriceCharged = serviceList?.reduce((sum, service) => {
@@ -75,7 +86,39 @@ export default InvoiceView = ({ route }) => {
         total: 39.97,
     };
 
+    const data1 = [
+        { label: 'Paypal', value: '1' },
+        { label: 'Credit Card', value: '2' },
+        // { label: 'Regular', value: '3' },
+    
+      ];
 
+      const handleDropdownChange = (item) => {
+        console.log(item,'IIIII')
+        setValue(item.value);
+        setIsFocus(false);
+        setError(''); // Clear the error message when a value is selected
+      };
+    
+      const handleBlur = () => {
+        setIsFocus(false);
+        handleValidation(); // Validate on blur
+      };
+
+
+      const handleValidation = () => {
+        if (!value) {
+          setError('Please select an option');
+          return false;
+        }
+        setError('');
+        return true;
+      };
+    
+    const onDateSelected = (event, value) => {
+        setDate(value);
+        setDatePicker(false);
+      };
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -335,6 +378,7 @@ export default InvoiceView = ({ route }) => {
                         </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
+                          onPress={() => setModalVisible(true)}
                         style={{
                             color: Color.darkGreen,
                             fontSize: 12,
@@ -365,6 +409,150 @@ export default InvoiceView = ({ route }) => {
                 </View>
             </ScrollView>
             <CustomBottomTab />
+            <Modal
+        ///    animationType="slide"
+        // animationType="fade"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}>
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <View
+              style={{
+                flexDirection: 'row',
+                marginBottom: 20,
+                width: wp(90),
+                alignSelf: 'center',
+              }}>
+              <Text style={styles.Subheading}>Add Payment</Text>
+              <TouchableOpacity
+                onPress={() => setModalVisible(!modalVisible)}
+               // onPress={() => navigation.navigate('ContactUs')}
+              
+                style={{
+                  backgroundColor: '#8AB645',
+                  height: wp(10),
+                  width: wp(10),
+                  borderRadius: 40,
+                  position: 'absolute',
+                  right: -20,
+                  top: -45,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Text style={{ color: '#fff' }}>X</Text>
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.formContainer}>
+
+            <TouchableOpacity
+                style={styles.btn}
+                onPress={() => setDatePicker(true)}>
+                  <View style={{flexDirection:"row",justifyContent:'space-between',width:wp(75)}}> 
+                  <Text style={{ fontFamily:'Poppins-SemiBold', color: '#fff', fontSize: 12 }}>
+                  Payment Date
+                  </Text>
+                {date ? (
+                  <Text style={{ fontFamily:'Poppins-SemiBold', color: '#fff', fontSize: 12 }}>
+                    {moment(date, 'MM-DD-YYYY').format('ddd,DD MMM YYYY')}
+                  </Text>
+                ) : (
+                  <Text style={{ color: '#fff', fontSize: 15 }}>Select</Text>
+                )}
+                  </View>
+                   
+              </TouchableOpacity>
+
+              {datePicker && (
+                <DateTimePicker
+                  value={date}
+                  mode={'date'}
+                  display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+                  //   is24Hour={false}
+                  onChange={onDateSelected}
+                 style={styles.datePicker}
+                />
+              )}
+
+                <Dropdown
+                style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
+                placeholderStyle={styles.placeholderStyle}
+                selectedTextStyle={styles.selectedTextStyle}
+                iconStyle={styles.iconStyle}
+                data={data1}
+                maxHeight={200}
+                itemTextStyle={{ fontSize: 12, fontFamily: 'Poppins-SemiBold', color: '#5a5a5a' }} // Set the font size and other styles for dropdown items
+
+                labelField="label"
+                valueField="value"
+                placeholder={!isFocus ? 'Priority' : '...'}
+                value={value}
+                onFocus={() => setIsFocus(true)}
+              //  onBlur={() => setIsFocus(false)}
+                onBlur={handleBlur}
+                onChange={ (item) => handleDropdownChange(item)}
+              />
+              <TextInput
+                style={styles.input}
+                placeholder="Payment Amount"
+              // onChangeText={onChangeText}
+              // value={text}
+              />
+                <TextInput
+                style={styles.input}
+                placeholder="Card Number"
+
+              // onChangeText={onChangeText}
+              // value={text}
+              />
+                {/* <TextInput
+                style={[styles.input, { Height: 50 }]}
+                placeholder="Messsage"
+                editable
+                multiline
+                numberOfLines={5}
+                maxLength={40}
+              // onChangeText={onChangeText}
+              // value={text}
+              /> */}
+               <TextInput
+                style={styles.input}
+                placeholder="Card Holder Name"
+
+              // onChangeText={onChangeText}
+              // value={text}
+              />
+                 <View style={styles.slideContainerEdit}>
+              <TextInput
+               numberOfLines={5}
+               multiline={true}
+               placeholder="Notes"
+               // placeholderTextColor={'lightgrey'}
+               style={[ {color:Color.HeaderBackground,fontFamily:'Poppins-SemiBold',   fontSize:12,
+                 padding: 10,paddingTop:10, textAlignVertical: 'top' }]}
+               // style={styles.input}
+               // placeholder="Phone"
+
+              // onChangeText={onChangeText}
+              // value={text}
+              />
+              </View>
+            
+            
+             
+              <TouchableOpacity
+                style={[styles.button, styles.buttonClose]}
+              // onPress={() => setModalVisible(!modalVisible)}
+              >
+                <Text style={styles.textStyle}>Proceed</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
         </View>
     );
 };
@@ -387,31 +575,85 @@ const styles = StyleSheet.create({
         color: Color.headerIconBG,
         fontFamily: 'Poppins-Bold',
         padding: 5
-
     },
+
     invoiceInfoContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         // marginTop: 10,
     },
+
     invoiceInfo: {
         flexDirection: 'row',
     },
+
     label: {
         fontSize: 14,
-
         fontFamily: 'Poppins-Bold',
     },
+
     text: {
         marginLeft: 5,
         fontFamily: 'Poppins-Bold',
         // marginTop: 4
     },
+
+  dropdown: {
+        height: 40,
+        borderColor: 'gray',
+        backgroundColor: '#fff',
+        borderWidth: 0.5,
+        borderRadius: 8,
+        width: wp(80),
+        marginTop:10,
+        marginBottom:10,
+        alignSelf: 'center',
+        paddingHorizontal: 8,
+      },
+
+
+      placeholderStyle: {
+        fontSize: 12,
+        fontFamily:'Poppins-SemiBold'
+      },
+
+      slideContainerEdit: {
+        backgroundColor: '#fff',
+        width: wp(80),
+        justifyContent: 'center',
+        alignSelf: 'center',
+        // height: 220,
+        opacity: 2,
+        paddingBottom: 20,
+        borderRadius: 10,
+        marginBottom:10,
+        marginTop: 10,
+        // width:'62%'
+      },
+      selectedTextStyle: {
+        fontSize: 12,
+        fontFamily:'Poppins-SemiBold'
+      },
     divider: {
         borderBottomColor: '#ccc',
         borderBottomWidth: 1,
         // marginVertical: 20,
     },
+    btn: {
+        width: wp(80),
+        height: hp(5),
+        alignSelf: 'center',
+        justifyContent: 'center',
+        flexDirection: 'row',
+        marginBottom: 10,
+        marginTop: 10,
+        backgroundColor: '#8AB645',
+       // backgroundColor: 'red',
+        borderRadius: 10,
+        // padding: 10,
+        alignItems: 'center',
+        // marginRight: 10
+      },
     customerInfoContainer: {
         marginTop: 20,
     },
@@ -448,6 +690,9 @@ const styles = StyleSheet.create({
         color: Color.darkGreen,
 
         width: wp(17)
+    },
+    datePicker:{
+        backgroundColor:Color.white
     },
     Price: {
         fontSize: 10,
@@ -578,10 +823,67 @@ const styles = StyleSheet.create({
         //  alignItems: "center",
         justifyContent: "center"
 
-
-
-
-
-
-    }
+    },
+    centeredView: {
+        flex: 1,
+    
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        justifyContent: 'flex-end',
+        // marginTop: 22,
+      },
+      modalView: {
+        //margin: 20,
+    
+        backgroundColor: 'white',
+        //borderRadius: 20,
+        padding: 35,
+    
+        shadowColor: '#000',
+        shadowOffset: {
+          width: 0,
+          height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+      },
+      Subheading: {
+        fontSize: 16,
+        color: '#000',
+        paddingLeft: 20,
+        fontWeight: '700',
+      },
+      formContainer: {
+        backgroundColor: '#2F4050',
+        width: wp(90),
+        padding: 10,
+        alignSelf: 'center',
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+      },
+      input: {
+        height: 40,
+        margin: 12,
+        borderWidth: 1,
+        borderRadius: 10,
+        padding: 10,
+        width: wp(80),
+        backgroundColor: '#fff',
+      },
+      buttonClose: {
+        backgroundColor: '#8AB645',
+        width: wp(80),
+      },
+      textStyle: {
+        color: 'white',
+        fontWeight: 'bold',
+        textAlign: 'center',
+      },
+      button: {
+        borderRadius: 5,
+        padding: 10,
+        elevation: 2,
+        width: 120,
+        alignSelf: 'center',
+      },
 });

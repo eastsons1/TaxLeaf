@@ -3,6 +3,7 @@ import {
   SafeAreaView,
   View,
   Text,
+  
   Dimensions,
   FlatList,
   StyleSheet,
@@ -88,6 +89,7 @@ const data = [
 ];
 const Payments = () => {
   const [showwhat, setshowwhat] = useState('Experience');
+
   const [infoData, setInfoData] = useState([]);
   const [idRow, setIdRow] = useState();
   const { MY_INFO } = useSelector(state => state.TaxLeafReducer);
@@ -1795,6 +1797,7 @@ const Payments = () => {
 
      
       <CustomBottomTab />
+     
     </SafeAreaView >
   );
 };

@@ -91,6 +91,8 @@ const CreateNewAction = () => {
     setDate(value);
     setDatePicker(false);
   };
+
+
   const data1 = [
     { label: 'Urgent', value: '1' },
     { label: 'Important', value: '2' },
@@ -395,20 +397,11 @@ const CreateNewAction = () => {
               //  onBlur={() => setIsFocus(false)}
                 onBlur={handleBlur}
                 onChange={ (item) => handleDropdownChange(item)}
-                // onChange={item => {
-                //   setValue(item.value);
-                //   setIsFocus(false);
-                // }}
-
-              //   renderLeftIcon={() => (
-              //     <AntDesign
-              //       style={styles.icon}
-              //       color={isFocus ? 'blue' : 'black'}
-              //       name="Safety"
-              //       size={20}
-              //     />
-              //   )}
               />
+
+
+              
+
                {error ? <Text style={styles.errorText}>{error}</Text> : null}
             
               <TouchableOpacity
@@ -433,10 +426,10 @@ const CreateNewAction = () => {
                 <DateTimePicker
                   value={date}
                   mode={'date'}
-                  display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+                  display={Platform.OS === 'ios' ? "default" : 'default'}
                   //   is24Hour={false}
                   onChange={onDateSelected}
-                //   style={styles.datePicker}
+                 style={styles.datePicker}
                 />
               )}
 
