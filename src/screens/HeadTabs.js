@@ -160,7 +160,7 @@ const HeadTabs = () => {
                                                     : (showwhatfunc1('Message'), showwhatfunc2(''))
                                             }>
                                            <Image
-                                                    source={ require('../Assets/img/icons/tax.png')}
+                                                    source={ require('../Assets/img/icons/Tax-Deadline-Green.png')}
                                             style={  [styles.icon,]}
                               />
 
@@ -177,7 +177,7 @@ const HeadTabs = () => {
                                                             : Color.headerIconBG,
                                                 },
                                             ]}>
-                                            Tax Deadlines1
+                                            Tax Deadlines
                                         </Text>
                                     </View>
                                     <View style={styles.TabsContainer}>
@@ -213,9 +213,47 @@ const HeadTabs = () => {
                                                             : Color.headerIconBG,
                                                 },
                                             ]}>
-                                            Messages1
+                                            Messages
                                         </Text>
                                     </View>
+
+                                               <View style={styles.TabsContainer}>
+
+                                        <TouchableOpacity
+                                            style={[
+                                                styles.mobiletoch1,
+                                                {
+                                                    backgroundColor:
+                                                        showwhat1 == 'Reminders' ? '#2F4050' : Color.headerIconBG,
+                                                },
+                                            ]}
+                                            onPress={() =>
+                                                showwhat1 == 'Reminders'
+                                                    ? (setshowwhat1(''), setshowwhat2(''))
+                                                    : (showwhatfunc1('Reminders'), showwhatfunc2(''))
+                                            }>
+                                                <Image
+                                                    source={ require('../Assets/img/icons/Holidays.png')}
+                              style={  styles.icon}
+                               
+                            />
+
+                                           
+                                        </TouchableOpacity>
+                                        <Text
+                                            style={[
+                                                styles.ButtonText,
+                                                {
+                                                    color:
+                                                        showwhat1 == 'Message'
+                                                            ? Color.headerIconBG
+                                                            : Color.headerIconBG,
+                                                },
+                                            ]}>
+                                            Holidays
+                                        </Text>
+                                    </View>
+
                                     <View style={styles.TabsContainer}>
 
                                         <TouchableOpacity
@@ -249,72 +287,10 @@ const HeadTabs = () => {
                                                             : Color.headerIconBG,
                                                 },
                                             ]}>
-                                            Events1
+                                            Events
                                         </Text>
                                     </View>
-                                    <View style={styles.TabsContainer}>
-
-                                        <TouchableOpacity
-                                            style={[
-                                                styles.mobiletoch1,
-                                                {
-                                                    backgroundColor:
-                                                        showwhat1 == 'Reminders' ? '#2F4050' : Color.headerIconBG,
-                                                },
-                                            ]}
-                                            onPress={() =>
-                                                showwhat1 == 'Reminders'
-                                                    ? (setshowwhat1(''), setshowwhat2(''))
-                                                    : (showwhatfunc1('Reminders'), showwhatfunc2(''))
-                                            }>
-                                                <Image
-                                                    source={ require('../Assets/img/icons/Holidays.png')}
-                              style={  styles.icon}
-                               
-                            />
-
-                                            {/* <Icon2
-                                                style={[
-                                                    styles.icon,
-                                                    {
-                                                        color:
-                                                            showwhat1 == 'Reminders'
-                                                                ? Color.white
-                                                                : Color.white,
-                                                    },
-                                                ]}
-                                                name="holiday-village"
-                                                size={25}
-                                                color="#fff"
-                                            /> */}
-
-
-                                            {/* <Text
-                        style={[
-                          styles.ButtonText,
-                          {
-                            color:
-                              showwhat1 == 'Reminders'
-                                ? Color.white
-                                : Color.headerIconBG,
-                          },
-                        ]}>
-                        (1)
-                      </Text> */}
-                                        </TouchableOpacity>
-                                        <Text
-                                            style={[
-                                                styles.ButtonText,
-                                                {
-                                                    color:
-                                                        showwhat1 == 'Message'
-                                                            ? Color.headerIconBG
-                                                            : Color.headerIconBG,
-                                                },
-                                            ]}>
-                                            Holidays1
-                                        </Text>
-                                    </View>
+                                 
                                     {/* </View> */}
                                 </View>
                             );
@@ -356,7 +332,7 @@ const HeadTabs = () => {
                                                             : Color.headerIconBG,
                                                 },
                                             ]}>
-                                            Tax Deadlines2
+                                            Tax Deadlines
                                         </Text>
                                     </View>
                                     <View style={styles.TabsContainer}>
@@ -375,7 +351,7 @@ const HeadTabs = () => {
                                                     : (showwhatfunc1('Proposal'), showwhatfunc2(''))
                                             }>
                                             <Image
-                                                    source={ require('../Assets/img/icons/message.png')}
+                                                    source={ require('../Assets/img/icons/Messages-Green.png')}
                               style={  styles.icon}
                               />
 
@@ -395,6 +371,44 @@ const HeadTabs = () => {
                                             Messages
                                         </Text>
                                     </View>
+                                               <View style={styles.TabsContainer}>
+
+                                        <TouchableOpacity
+                                            style={[
+                                                styles.mobiletoch1,
+                                                {
+                                                    backgroundColor:
+                                                        showwhat1 == 'Reminders' ? '#2F4050' : Color.headerIconBG,
+                                                },
+                                            ]}
+                                            onPress={() =>
+                                                showwhat1 == 'Reminders'
+                                                    ? (setshowwhat1(''), setshowwhat2(''))
+                                                    : (showwhatfunc1('Reminders'), showwhatfunc2(''))
+                                            }>
+                                           <Image
+                                                    source={ require('../Assets/img/icons/Holidays.png')}
+                              style={  styles.icon}
+                               
+                            />
+
+
+                                          
+                                        </TouchableOpacity>
+                                        <Text
+                                            style={[
+                                                styles.ButtonText,
+                                                {
+                                                    color:
+                                                        showwhat1 == 'Message'
+                                                            ? Color.headerIconBG
+                                                            : Color.headerIconBG,
+                                                },
+                                            ]}>
+                                            Holidays
+                                        </Text>
+                                    </View>
+
                                     <View style={styles.TabsContainer}>
 
                                         <TouchableOpacity
@@ -431,51 +445,7 @@ const HeadTabs = () => {
                                             Events
                                         </Text>
                                     </View>
-                                    <View style={styles.TabsContainer}>
-
-                                        <TouchableOpacity
-                                            style={[
-                                                styles.mobiletoch1,
-                                                {
-                                                    backgroundColor:
-                                                        showwhat1 == 'Reminders' ? '#2F4050' : Color.headerIconBG,
-                                                },
-                                            ]}
-                                            onPress={() =>
-                                                showwhat1 == 'Reminders'
-                                                    ? (setshowwhat1(''), setshowwhat2(''))
-                                                    : (showwhatfunc1('Reminders'), showwhatfunc2(''))
-                                            }>
-                                           <Image
-                                                    source={ require('../Assets/img/icons/Holidays.png')}
-                              style={  styles.icon}
-                               
-                            />
-
-
-                                            {/* <Text
-                        style={[
-                          styles.ButtonText,
-                          {
-                            color: showwhat1 == 'Reminders' ? '#fff' : '#000',
-                          },
-                        ]}>
-                        (1)
-                      </Text> */}
-                                        </TouchableOpacity>
-                                        <Text
-                                            style={[
-                                                styles.ButtonText,
-                                                {
-                                                    color:
-                                                        showwhat1 == 'Message'
-                                                            ? Color.headerIconBG
-                                                            : Color.headerIconBG,
-                                                },
-                                            ]}>
-                                            Holidays2
-                                        </Text>
-                                    </View>
+                                 
                                     {/* </View> */}
                                 </View>
                             );
@@ -516,7 +486,7 @@ const HeadTabs = () => {
                                                             : Color.headerIconBG,
                                                 },
                                             ]}>
-                                            Tax Deadlines3
+                                            Tax Deadlines
                                         </Text>
                                     </View>
                                     <View style={styles.TabsContainer}>
@@ -554,41 +524,7 @@ const HeadTabs = () => {
                                             Messages3
                                         </Text>
                                     </View>
-                                    <View style={styles.TabsContainer}>
-                                        <TouchableOpacity
-                                            style={[
-                                                styles.mobiletoch1,
-                                                {
-                                                    backgroundColor:
-                                                        showwhat1 == 'Signature' ? Color.geen : Color.headerIconBG,
-                                                },
-                                            ]}
-                                            onPress={() =>
-                                                showwhat1 == 'Signature'
-                                                    ? (setshowwhat1(''), setshowwhat2(''))
-                                                    : (showwhatfunc1('Signature'), showwhatfunc2(''))
-                                            }>
-                                             <Image
-                                                    source={ require('../Assets/img/icons/Events-Icon.png')}
-                                                    style={  [styles.icon,]}
-                              />
 
-
-
-                                        </TouchableOpacity>
-                                        <Text
-                                            style={[
-                                                styles.ButtonText,
-                                                {
-                                                    color:
-                                                        showwhat1 == 'Message'
-                                                            ? Color.headerIconBG
-                                                            : Color.headerIconBG,
-                                                },
-                                            ]}>
-                                            Events
-                                        </Text>
-                                    </View>
                                     <View style={styles.TabsContainer}>
                                         <TouchableOpacity
                                             style={[
@@ -609,16 +545,41 @@ const HeadTabs = () => {
                                
                             />
 
+                               </TouchableOpacity>
+                                        <Text
+                                            style={[
+                                                styles.ButtonText,
+                                                {
+                                                    color:
+                                                        showwhat1 == 'Message'
+                                                            ? Color.headerIconBG
+                                                            : Color.headerIconBG,
+                                                },
+                                            ]}>
+                                            Holidays
+                                        </Text>
+                                    </View>
+                                    <View style={styles.TabsContainer}>
+                                    <TouchableOpacity
+                                            style={[
+                                                styles.mobiletoch1,
+                                                {
+                                                    backgroundColor:
+                                                        showwhat1 == 'Signature' ? '#2F4050' : Color.headerIconBG,
+                                                },
+                                            ]}
+                                            onPress={() =>
+                                                showwhat1 == 'Signature'
+                                                    ? (setshowwhat1(''), setshowwhat2(''))
+                                                    : (showwhatfunc1('Signature'), showwhatfunc2(''))
+                                            }>
+                                              <Image
+                                                    source={ require('../Assets/img/icons/Events-Green.png')}
+                                                    style={  [styles.icon,]}
+                              />
 
-                                            {/* <Text
-                        style={[
-                          styles.ButtonText,
-                          {
-                            color: showwhat1 == 'Reminders' ? '#fff' : '#000',
-                          },
-                        ]}>
-                        (1)
-                      </Text> */}
+
+
                                         </TouchableOpacity>
                                         <Text
                                             style={[
@@ -630,13 +591,167 @@ const HeadTabs = () => {
                                                             : Color.headerIconBG,
                                                 },
                                             ]}>
-                                            Holidays4
+                                            Events
                                         </Text>
                                     </View>
+                                   
                                     {/* </View> */}
                                 </View>
                             );
-                        } else {
+                        }
+
+                     else if (showwhat1 == 'Reminders') {
+                        return (
+                            <View style={styles.moblieSec}>
+                                {/* <View style={{ flexDirection: "column", justifyContent: 'space-between' }}> */}
+                                <View style={styles.TabsContainer}>
+
+                                    <TouchableOpacity
+                                        style={[
+                                            styles.emailtoch,
+                                            {
+                                                backgroundColor:
+                                                    showwhat1 == 'Message' ? '#2F4050' : Color.headerIconBG,
+                                            },
+                                        ]}
+                                        onPress={() =>
+                                            showwhat1 == 'Message'
+                                                ? (setshowwhat1(''), setshowwhat2(''))
+                                                : (showwhatfunc1('Message'), showwhatfunc2(''))
+                                        }>
+                                        <Image
+                                                source={ require('../Assets/img/icons/Tax-Deadlines.png')}
+                                                style={  [styles.icon,]}
+                          />
+
+
+
+                                    </TouchableOpacity>
+                                    <Text
+                                        style={[
+                                            styles.ButtonText,
+                                            {
+                                                color:
+                                                    showwhat1 == 'Message'
+                                                        ? Color.headerIconBG
+                                                        : Color.headerIconBG,
+                                            },
+                                        ]}>
+                                        Tax Deadlines
+                                    </Text>
+                                </View>
+                                <View style={styles.TabsContainer}>
+                                    <TouchableOpacity
+                                        style={[
+                                            styles.mobiletoch1,
+                                            {
+                                                backgroundColor:
+                                                    showwhat1 == 'Proposal' ? '#2F4050' : Color.headerIconBG,
+                                            },
+                                        ]}
+                                        onPress={() =>
+                                            showwhat1 == 'Proposal'
+                                                ? (setshowwhat1(''), setshowwhat2(''))
+                                                : (showwhatfunc1('Proposal'), showwhatfunc2(''))
+                                        }>
+                                         <Image
+                                                source={ require('../Assets/img/icons/Messages.png')}
+                          style={  styles.icon}
+                          />
+
+
+
+                                    </TouchableOpacity>
+                                    <Text
+                                        style={[
+                                            styles.ButtonText,
+                                            {
+                                                color:
+                                                    showwhat1 == 'Message'
+                                                        ? Color.headerIconBG
+                                                        : Color.headerIconBG,
+                                            },
+                                        ]}>
+                                        Messages3
+                                    </Text>
+                                </View>
+                                <View style={styles.TabsContainer}>
+                                    <TouchableOpacity
+                                        style={[
+                                            styles.mobiletoch1,
+                                            {
+                                                backgroundColor:
+                                                    showwhat1 == 'Reminders' ? '#2F4050' : Color.headerIconBG,
+                                            },
+                                        ]}
+                                        onPress={() =>
+                                            showwhat1 == 'Reminders'
+                                                ? (setshowwhat1(''), setshowwhat2(''))
+                                                : (showwhatfunc1('Reminders'), showwhatfunc2(''))
+                                        }>
+                                       <Image
+                                                source={ require('../Assets/img/icons/Holidays-Green.png')}
+                          style={  styles.icon}
+                           
+                        />
+
+                           </TouchableOpacity>
+                                    <Text
+                                        style={[
+                                            styles.ButtonText,
+                                            {
+                                                color:
+                                                    showwhat1 == 'Message'
+                                                        ? Color.headerIconBG
+                                                        : Color.headerIconBG,
+                                            },
+                                        ]}>
+                                        Holidays
+                                    </Text>
+                                </View>
+
+                                <View style={styles.TabsContainer}>
+                                    <TouchableOpacity
+                                        style={[
+                                            styles.mobiletoch1,
+                                            {
+                                                backgroundColor:
+                                                    showwhat1 == 'Signature' ? Color.geen : Color.headerIconBG,
+                                            },
+                                        ]}
+                                        onPress={() =>
+                                            showwhat1 == 'Signature'
+                                                ? (setshowwhat1(''), setshowwhat2(''))
+                                                : (showwhatfunc1('Signature'), showwhatfunc2(''))
+                                        }>
+                                         <Image
+                                                source={ require('../Assets/img/icons/Events-Icon.png')}
+                                                style={  [styles.icon,]}
+                          />
+
+
+
+                                    </TouchableOpacity>
+                                    <Text
+                                        style={[
+                                            styles.ButtonText,
+                                            {
+                                                color:
+                                                    showwhat1 == 'Message'
+                                                        ? Color.headerIconBG
+                                                        : Color.headerIconBG,
+                                            },
+                                        ]}>
+                                        Events
+                                    </Text>
+                                </View>
+                               
+                                {/* </View> */}
+                            </View>
+                        );
+                    }
+                        
+                        else {
                             return (
                                 <View style={styles.moblieSec}>
                                     {/* <View style={{ flexDirection: "column", justifyContent: 'space-between' }}> */}
@@ -673,7 +788,7 @@ const HeadTabs = () => {
                                                             : Color.headerIconBG,
                                                 },
                                             ]}>
-                                            Tax Deadlines4
+                                            Tax Deadlines
                                         </Text>
                                     </View>
                                     <View style={styles.TabsContainer}>
@@ -707,7 +822,43 @@ const HeadTabs = () => {
                                                             : Color.headerIconBG,
                                                 },
                                             ]}>
-                                            Messages4
+                                            Messages
+                                        </Text>
+                                    </View>
+
+                                    <View style={styles.TabsContainer}>
+                                        <TouchableOpacity
+                                            style={[
+                                                styles.mobiletoch1,
+                                                {
+                                                    backgroundColor:
+                                                        showwhat1 == 'Reminders' ? '#2F4050' : Color.headerIconBG,
+                                                },
+                                            ]}
+                                            onPress={() =>
+                                                showwhat1 == 'Reminders'
+                                                    ? (setshowwhat1(''), setshowwhat2(''))
+                                                    : (showwhatfunc1('Reminders'), showwhatfunc2(''))
+                                            }>
+                                            <Image
+                                                    source={ require('../Assets/img/icons/Holidays.png')}
+                              style={  styles.icon}
+                               
+                            />
+
+
+                                        </TouchableOpacity>
+                                        <Text
+                                            style={[
+                                                styles.ButtonText,
+                                                {
+                                                    color:
+                                                        showwhat1 == 'Message'
+                                                            ? Color.headerIconBG
+                                                            : Color.headerIconBG,
+                                                },
+                                            ]}>
+                                            Holidays
                                         </Text>
                                     </View>
                                     <View style={styles.TabsContainer}>
@@ -741,56 +892,10 @@ const HeadTabs = () => {
                                                             : Color.headerIconBG,
                                                 },
                                             ]}>
-                                            Events4
+                                            Events
                                         </Text>
                                     </View>
-                                    <View style={styles.TabsContainer}>
-                                        <TouchableOpacity
-                                            style={[
-                                                styles.mobiletoch1,
-                                                {
-                                                    backgroundColor:
-                                                        showwhat1 == 'Reminders' ? Color.geen : Color.headerIconBG,
-                                                },
-                                            ]}
-                                            onPress={() =>
-                                                showwhat1 == 'Reminders'
-                                                    ? (setshowwhat1(''), setshowwhat2(''))
-                                                    : (showwhatfunc1('Reminders'), showwhatfunc2(''))
-                                            }>
-                                            <Image
-                                                    source={ require('../Assets/img/icons/Holidays.png')}
-                              style={  styles.icon}
-                               
-                            />
-
-
-                                            {/* <Text
-                        style={[
-                          styles.ButtonText,
-                          {
-                            color:
-                              showwhat1 == 'Reminders'
-                                ? Color.white
-                                : Color.headerIconBG,
-                          },
-                        ]}>
-                        (1)
-                      </Text> */}
-                                        </TouchableOpacity>
-                                        <Text
-                                            style={[
-                                                styles.ButtonText,
-                                                {
-                                                    color:
-                                                        showwhat1 == 'Message'
-                                                            ? Color.headerIconBG
-                                                            : Color.headerIconBG,
-                                                },
-                                            ]}>
-                                            Holidays
-                                        </Text>
-                                    </View>
+                                 
                                     {/* </View> */}
                                 </View>
                             );
@@ -820,7 +925,7 @@ const HeadTabs = () => {
                                             }>
 
                                             <Image
-                                             source={ require('../Assets/img/icons/orders.png')}
+                                             source={ require('../Assets/img/icons/Orders-Green.png')}
                                              style={  styles.icon}
                                              />
 
@@ -836,7 +941,7 @@ const HeadTabs = () => {
                                                             : Color.headerIconBG,
                                                 },
                                             ]}>
-                                            Orders1
+                                            Orders
                                         </Text>
                                     </View>
                                     <View style={styles.TabsContainer}>
@@ -874,7 +979,7 @@ const HeadTabs = () => {
                                                             : Color.headerIconBG,
                                                 },
                                             ]}>
-                                            Tax Returns1
+                                            Tax Returns
                                         </Text>
                                     </View>
                                     <View style={styles.TabsContainer}>
@@ -1009,7 +1114,7 @@ const HeadTabs = () => {
                                                             : Color.headerIconBG,
                                                 },
                                             ]}>
-                                            Orders2
+                                            Orders
                                         </Text>
                                     </View>
                                     <View style={styles.TabsContainer}>
@@ -1027,7 +1132,7 @@ const HeadTabs = () => {
                                                     : showwhatfunc2('taxReturn')
                                             }>
                                              <Image
-                                             source={ require('../Assets/img/icons/tax-returns.png')}
+                                             source={ require('../Assets/img/icons/Tax-Returns-Green.png')}
                                              style={  styles.icon}
                                              />
 
@@ -1044,7 +1149,7 @@ const HeadTabs = () => {
                                                             : Color.headerIconBG,
                                                 },
                                             ]}>
-                                            Tax Returns2
+                                            Tax Returns
                                         </Text>
                                     </View>
                                     <View style={styles.TabsContainer}>
@@ -1143,7 +1248,8 @@ const HeadTabs = () => {
                                     {/* </View> */}
                                 </View>
                             );
-                        } else if (showwhat2 == 'book') {
+                        } 
+                        else if (showwhat2 == 'book') {
                             return (
                                 <View style={styles.moblieSec}>
                                     {/* <View style={{ flexDirection: "column", justifyContent: 'space-between' }}> */}
@@ -1178,7 +1284,7 @@ const HeadTabs = () => {
                                                             : Color.headerIconBG,
                                                 },
                                             ]}>
-                                            Orders3
+                                            Orders
                                         </Text>
                                     </View>
                                     <View style={styles.TabsContainer}>
@@ -1230,7 +1336,7 @@ const HeadTabs = () => {
                                                     : (showwhatfunc2('book'), showwhatfunc1(''))
                                             }>
                                              <Image
-                                             source={ require('../Assets/img/icons/book-keeping.png')}
+                                             source={ require('../Assets/img/icons/Bookkeeping-Green.png')}
                                              style={  styles.icon}
                                              />
 
@@ -1300,7 +1406,166 @@ const HeadTabs = () => {
                                     {/* </View> */}
                                 </View>
                             );
-                        } else {
+                        } 
+                        else if (showwhat2 == 'Gov') {
+                            return (
+                                <View style={styles.moblieSec}>
+                                    {/* <View style={{ flexDirection: "column", justifyContent: 'space-between' }}> */}
+                                    <View style={styles.TabsContainer}>
+                                        <TouchableOpacity
+                                            style={[
+                                                styles.emailtochO,
+                                                {
+                                                    backgroundColor:
+                                                        showwhat2 == 'orders' ? Color.geen : Color.headerIconBG,
+                                                },
+                                            ]}
+                                            onPress={() =>
+                                                showwhat2 == 'orders'
+                                                    ? setshowwhat2('')
+                                                    : showwhatfunc2('orders')
+                                            }>
+                                           <Image
+                                             source={ require('../Assets/img/icons/Orders-Icon.png')}
+                                             style={  styles.icon}
+                                             />
+
+
+                                        </TouchableOpacity>
+                                        <Text
+                                            style={[
+                                                styles.ButtonText,
+                                                {
+                                                    color:
+                                                        showwhat1 == 'Message'
+                                                            ? Color.headerIconBG
+                                                            : Color.headerIconBG,
+                                                },
+                                            ]}>
+                                            Orders
+                                        </Text>
+                                    </View>
+                                    <View style={styles.TabsContainer}>
+                                        <TouchableOpacity
+                                            style={[
+                                                styles.mobiletoch,
+                                                {
+                                                    backgroundColor:
+                                                        showwhat2 == 'taxReturn' ? Color.geen : Color.headerIconBG,
+                                                },
+                                            ]}
+                                            onPress={() =>
+                                                showwhat2 == 'taxReturn'
+                                                    ? setshowwhat2('')
+                                                    : showwhatfunc2('taxReturn')
+                                            }>
+                                            <Image
+                                             source={ require('../Assets/img/icons/Tax-Returns-Icons.png')}
+                                             style={  styles.icon}
+                                             />
+
+
+                                        </TouchableOpacity>
+                                        <Text
+                                            style={[
+                                                styles.ButtonText,
+                                                {
+                                                    color:
+                                                        showwhat1 == 'Message'
+                                                            ? Color.headerIconBG
+                                                            : Color.headerIconBG,
+                                                },
+                                            ]}>
+                                            Tax Returns
+                                        </Text>
+                                    </View>
+                                    <View style={styles.TabsContainer}>
+                                        <TouchableOpacity
+                                            style={[
+                                                styles.mobiletoch,
+                                                {
+                                                    backgroundColor:
+                                                        showwhat2 == 'book' ? Color.geen : Color.headerIconBG,
+                                                },
+                                            ]}
+                                            onPress={() =>
+                                                showwhat2 == 'book'
+                                                    ? (setshowwhat2(''), setshowwhat1(''))
+                                                    : (showwhatfunc2('book'), showwhatfunc1(''))
+                                            }>
+                                             <Image
+                                             source={ require('../Assets/img/icons/Bookkeeping-Icon.png')}
+                                             style={  styles.icon}
+                                             />
+
+
+
+                                        </TouchableOpacity>
+                                        <Text
+                                            style={[
+                                                styles.ButtonText,
+                                                {
+                                                    color:
+                                                        showwhat1 == 'Message'
+                                                            ? Color.headerIconBG
+                                                            : Color.headerIconBG,
+                                                    marginLeft: 5
+                                                },
+                                            ]}>
+                                            Bookkeeping
+                                        </Text>
+                                    </View>
+                                    <View style={styles.TabsContainer}>
+                                        <TouchableOpacity
+                                            style={[
+                                                styles.mobiletoch,
+                                                {
+                                                    backgroundColor:
+                                                        showwhat2 == 'Gov' ? Color.geen : Color.headerIconBG,
+                                                },
+                                            ]}
+                                            onPress={() =>
+                                                showwhat2 == 'Gov'
+                                                    ? (setshowwhat2(''), setshowwhat1(''))
+                                                    : (showwhatfunc2('Gov'), showwhatfunc1(''))
+                                            }>
+                                             <Image
+                                             source={ require('../Assets/img/icons/GovPayments-Green.png')}
+                                             style={  styles.icon}
+                                             />
+
+
+                                            {/* <Text
+                      style={[
+                        styles.ButtonText,
+                        {
+                          color:
+                            showwhat1 == 'Reminders'
+                              ? Color.white
+                              : Color.headerIconBG,
+                        },
+                      ]}>
+                      (1)
+                    </Text> */}
+                                        </TouchableOpacity>
+                                        <Text
+                                            style={[
+                                                styles.ButtonText,
+                                                {
+                                                    color:
+                                                        showwhat1 == 'Message'
+                                                            ? Color.headerIconBG
+                                                            : Color.headerIconBG,
+                                                },
+                                            ]}>
+                                            Gov. Payments
+                                        </Text>
+                                    </View>
+                                    {/* </View> */}
+                                </View>
+                            );
+                        } 
+                        else {
                             return (
                                 <View style={styles.moblieSec}>
                                     {/* <View style={{ flexDirection: "column", justifyContent: 'space-between' }}> */}
@@ -1336,7 +1601,7 @@ const HeadTabs = () => {
                                                             : Color.headerIconBG,
                                                 },
                                             ]}>
-                                            Orders4
+                                            Orders
                                         </Text>
                                     </View>
                                     <View style={styles.TabsContainer}>
@@ -1372,7 +1637,7 @@ const HeadTabs = () => {
                                                             : Color.headerIconBG,
                                                 },
                                             ]}>
-                                            Tax Returns4
+                                            Tax Returns
                                         </Text>
                                     </View>
                                     <View style={styles.TabsContainer}>
@@ -1419,7 +1684,7 @@ const HeadTabs = () => {
                                                     marginLeft: 5
                                                 },
                                             ]}>
-                                            BookKeeping4
+                                            BookKeeping
                                         </Text>
                                     </View>
                                     <View style={styles.TabsContainer}>
@@ -1454,7 +1719,7 @@ const HeadTabs = () => {
                                                             : Color.headerIconBG,
                                                 },
                                             ]}>
-                                            Gov. Payments4
+                                            Gov. Payments
                                         </Text>
                                     </View>
                                     {/* </View> */}
@@ -1467,11 +1732,10 @@ const HeadTabs = () => {
                     if (showwhat1 == 'Message') {
                         return (
                             <ScrollView>
-                                {/* <View style={styles.subContainer}> */}
-                                {/* <TouchableOpacity onPress={() => setshowwhat1('')}> */}
-                                {/* <View style={styles.part}></View> */}
+                              
                                 {TaxfilteredList && TaxfilteredList.length > 0 ? (
                                     TaxfilteredList.map(item => (
+
                                         <View key={item.id} style={{
                                             borderRadius:10,
                                             backgroundColor:"#f7f9fa",
@@ -1483,15 +1747,9 @@ const HeadTabs = () => {
                                                }}>
                                                 <View
                                                 style={{  width: wp(15),
-                                                   // flexDirection: 'row',
-                                                    //justifyContent: 'center',
-                                                   // alignItems: 'center',
+                                                 
                                                 }}
                                                 >
-                                                {/* <Image
-                                                    source={ require('../Assets/img/icons/Tax-Deadlines.png')}
-                                                    style={  [styles.icon,]}
-                              />  */}
                                 <Image source={require('../Assets/img/icons/bell-green.png')}
                                  style={{ 
                                     alignSelf: 'center',
@@ -1571,9 +1829,21 @@ const HeadTabs = () => {
                                         </View>
                                     ))
                                 ) : (
+                                    <View style={{
+                                        borderRadius:10,
+                                        backgroundColor:"#f7f9fa",
+                                     
+                                         marginTop: 10,
+                                       padding:10,
+                                          width: wp(90),
+                                        
+                                           }}>
+                                         
                                     <Text style={styles.subHead}>
                                         No Tax Deadlines
                                     </Text>
+                                   
+                                    </View>
                                 )}
 
 
@@ -1587,48 +1857,155 @@ const HeadTabs = () => {
                         return (
                             <ScrollView>
                                 <TouchableOpacity onPress={() => setshowwhat1('')}>
-                                    <View style={styles.part}></View>
+                                
 
                                     {dashboardMessageList && dashboardMessageList.length > 0 ? (
 
                                         dashboardMessageList.map(item => (
-                                            <View
-                                                key={item.id}
+                                            // <View
+                                            //     key={item.id}
+                                            //     style={{
+                                            //         alignSelf: "center", marginTop: 10, width: wp(80)
+                                            //     }}>
+                                            //     <Text
+                                            //         style={{
+                                            //             backgroundColor: '#23c6c8',
+                                            //             fontSize: 12,
+                                            //             width: wp(15),
+                                            //             padding: 3,
+                                            //             textAlign: 'center',
+                                            //         }}>
+                                            //         Action
+                                            //     </Text>
+                                            //     <Text
+                                            //         style={{
+                                            //             fontSize: 12,
+                                            //             fontWeight: '700',
+                                            //             padding: 3,
+                                            //         }}>
+                                            //         Notification:
+                                            //         <Text
+                                            //             style={{
+                                            //                 fontSize: 10,
+                                            //                 fontWeight: 'normal',
+                                            //                 padding: 3,
+                                            //             }}>
+                                            //             You have created new action #{item.id}
+                                            //         </Text>
+                                            //     </Text>
+                                            // </View>
+
+
+                                              <View key={item.id} style={{
+                                                borderRadius:10,
+                                                backgroundColor:"#f7f9fa",
+                                                 alignSelf: "center", 
+                                                 marginTop: 10,
+                                                 padding:10,
+                                                  width: wp(90),
+                                                  flexDirection:'row'
+                                                   }}>
+                                                    <View
+                                                    style={{  width: wp(15),
+                                                     
+                                                    }}
+                                                    >
+                                                  
+                                    <Image source={require('../Assets/img/icons/bell-green.png')}
+                                     style={{ 
+                                        alignSelf: 'center',
+                                        height:30,
+                                        resizeMode:'contain',
+                                        width:30,
+                                         }} />
+                                          <View
                                                 style={{
-                                                    alignSelf: "center", marginTop: 10, width: wp(80)
+                                                position: 'absolute',
+                                                top: -2,
+                                                right: 10,
+                                                height: 20,
+    
+                                                width: 20,
+                                                justifyContent: 'center',
+                                                borderWidth: 1,
+                                                borderColor: Color.white,
+                                                backgroundColor: 'red',
+                                                borderRadius: 50,
                                                 }}>
                                                 <Text
-                                                    style={{
-                                                        backgroundColor: '#23c6c8',
-                                                        fontSize: 12,
-                                                        width: wp(15),
-                                                        padding: 3,
-                                                        textAlign: 'center',
-                                                    }}>
-                                                    Action
+                                                style={{
+                                                    color: Color.white,
+                                                    alignSelf: 'center',
+                                                    fontFamily:'Poppins-SemiBold',
+                                                    fontSize: 10,
+                                                }}>
+                                                1
                                                 </Text>
+                                            </View>
+                                                    </View>
+                                                    <View
+                                                        style={{  width: wp(65),
+                                                      //  backgroundColor:'red'
+                                                        }}
+                                                    >
+    
+                                                    <Text
+                                                    style={{
+                                                        fontSize: 16,
+                                                        fontFamily:'Poppins-Bold',
+                                                        color:Color.headerIconBG,
+                                                        padding: 3,
+                                                      
+    
+                                                    }}>
+                                                  Action
+                                                </Text>
+                                             <View 
+                                             style={{
+                                                borderBottomWidth: 1,
+                                              
+                                                borderBottomColor: '#e4edee',
+                                             }}
+                                             ></View>
                                                 <Text
                                                     style={{
-                                                        fontSize: 12,
-                                                        fontWeight: '700',
+                                                        fontSize: 14,
+                                                       fontFamily:'Poppins-SemiBold',
+                                                       color:Color.headerIconBG,
                                                         padding: 3,
                                                     }}>
-                                                    Notification:
+                                                 Notification:
                                                     <Text
                                                         style={{
-                                                            fontSize: 10,
-                                                            fontWeight: 'normal',
+                                                            fontSize: 12,
+                                                       fontFamily:'Poppins-SemiBold',
+                                                       color:Color.headerIconBG,
                                                             padding: 3,
                                                         }}>
                                                         You have created new action #{item.id}
                                                     </Text>
                                                 </Text>
+                                                    </View>
+                                               
                                             </View>
                                         ))
                                     ) : (
-                                        <Text style={styles.subHead}>
+                                        <View style={{
+                                            borderRadius:10,
+                                            backgroundColor:"#f7f9fa",
+                                         
+                                             marginTop: 10,
+                                           padding:10,
+                                              width: wp(90),
+                                            
+                                               }}>
+                                             
+                                             <Text style={styles.subHead}>
                                             No Messages
                                         </Text>
+                                       
+                                        </View>
+                                     
                                     )}
 
 
@@ -1643,7 +2020,7 @@ const HeadTabs = () => {
                         return (
                             <ScrollView>
                                 {/* <TouchableOpacity onPress={() => setshowwhat1('')}> */}
-                                <View style={styles.part}></View>
+                             
 
                                 {EventsfilteredList && EventsfilteredList.length > 0 ? (
                                     EventsfilteredList.map(item => (
@@ -1675,9 +2052,22 @@ const HeadTabs = () => {
                                         </View>
                                     ))
                                 ) : (
-                                    <Text style={styles.subHead}>
+                                    <View style={{
+                                        borderRadius:10,
+                                        backgroundColor:"#f7f9fa",
+                                     
+                                         marginTop: 10,
+                                       padding:10,
+                                          width: wp(90),
+                                        
+                                           }}>
+                                         
+                                         <Text style={styles.subHead}>
                                         No Events
                                     </Text>
+                                   
+                                    </View>
+                                   
                                 )}
                                 {/* </TouchableOpacity> */}
                             </ScrollView>
@@ -1686,7 +2076,7 @@ const HeadTabs = () => {
                         return (
                             <TouchableOpacity onPress={() => setshowwhat1('')}>
                                 <View style={{}}>
-                                    <View style={styles.part}></View>
+                                   
                                     {HolidaysfilteredList && HolidaysfilteredList.length > 0 ? (
                                         HolidaysfilteredList.map(item => (
                                             <View key={item.id} style={{ alignSelf: "center", marginTop: 10, width: wp(80) }}>
@@ -1717,42 +2107,24 @@ const HeadTabs = () => {
                                             </View>
                                         ))
                                     ) : (
-                                        <Text style={styles.subHead}>
+                                        <View style={{
+                                            borderRadius:10,
+                                            backgroundColor:"#f7f9fa",
+                                         
+                                             marginTop: 10,
+                                           padding:10,
+                                              width: wp(90),
+                                            
+                                               }}>
+                                             
+                                             <Text style={styles.subHead}>
                                             No Holidays
                                         </Text>
+                                       
+                                        </View>
+                                       
                                     )}
-                                    {/* {filteredList &&
-                                        filteredList.map(item => (
-                                            <View key={item.id} style={{ height: 200, padding: 20 }}>
-                                                <Text
-                                                    style={{
-                                                        backgroundColor: '#23c6c8',
-                                                        fontSize: 12,
-                                                        padding: 3,
-                                                    }}>
-                                                    {item.subject}
-                                                </Text>
-                                                <Text
-                                                    style={{
-                                                        fontSize: 12,
-                                                        fontWeight: '700',
-                                                        padding: 3,
-                                                    }}>
-                                                    Message:
-                                                    <Text
-                                                        style={{
-                                                            fontSize: 10,
-                                                            fontWeight: 'normal',
-                                                            padding: 3,
-                                                        }}>
-                                                        {item.message}
-                                                    </Text>
-                                                </Text>
-                                            </View>
-                                        ))} */}
-                                    {/* <View style={styles.subContainer}> */}
-                                    {/* <Text style={styles.subHead}>Reminders Not Found1</Text> */}
-                                    {/* </View> */}
+                                   
                                 </View>
                             </TouchableOpacity>
                         );
@@ -1763,7 +2135,7 @@ const HeadTabs = () => {
                     if (showwhat2 == 'orders') {
                         return (
                             <TouchableOpacity onPress={() => setshowwhat2('')}>
-                                <View style={styles.part}></View>
+                               
                                 {orderfilteredList && orderfilteredList.length > 0 ? (
                                     orderfilteredList.map(item => (
                                         <View key={item.id} style={{ alignSelf: "center", marginTop: 10, width: wp(80) }}>
@@ -1794,9 +2166,22 @@ const HeadTabs = () => {
                                         </View>
                                     ))
                                 ) : (
-                                    <Text style={styles.subHead}>
+                                    <View style={{
+                                        borderRadius:10,
+                                        backgroundColor:"#f7f9fa",
+                                     
+                                         marginTop: 10,
+                                       padding:10,
+                                          width: wp(90),
+                                        
+                                           }}>
+                                         
+                                         <Text style={styles.subHead}>
                                         No Orders
                                     </Text>
+                                   
+                                    </View>
+                                   
                                 )}
 
 
@@ -1806,7 +2191,7 @@ const HeadTabs = () => {
                     } else if (showwhat2 == 'taxReturn') {
                         return (
                             <TouchableOpacity onPress={() => setshowwhat2('')}>
-                                <View style={styles.part}></View>
+                              
 
                                 {taxreturnfilteredList && taxreturnfilteredList.length > 0 ? (
                                     taxreturnfilteredList.map(item => (
@@ -1838,9 +2223,22 @@ const HeadTabs = () => {
                                         </View>
                                     ))
                                 ) : (
-                                    <Text style={styles.subHead}>
+                                    <View style={{
+                                        borderRadius:10,
+                                        backgroundColor:"#f7f9fa",
+                                     
+                                         marginTop: 10,
+                                       padding:10,
+                                          width: wp(90),
+                                        
+                                           }}>
+                                         
+                                         <Text style={styles.subHead}>
                                         No Tax Returns
                                     </Text>
+                                   
+                                    </View>
+                                   
                                 )}
 
 
@@ -1849,7 +2247,7 @@ const HeadTabs = () => {
                     } else if (showwhat2 == 'book') {
                         return (
                             <TouchableOpacity onPress={() => setshowwhat2('')}>
-                                <View style={styles.part}></View>
+                            
 
 
                                 {BookKeepingfilteredList && BookKeepingfilteredList.length > 0 ? (
@@ -1882,9 +2280,22 @@ const HeadTabs = () => {
                                         </View>
                                     ))
                                 ) : (
-                                    <Text style={styles.subHead}>
-                                        No Bookkeeping
+                                    <View style={{
+                                        borderRadius:10,
+                                        backgroundColor:"#f7f9fa",
+                                     
+                                         marginTop: 10,
+                                       padding:10,
+                                          width: wp(90),
+                                        
+                                           }}>
+                                         
+                                         <Text style={styles.subHead}>
+                                        No BookKeeping
                                     </Text>
+                                   
+                                    </View>
+                                   
                                 )}
 
                             </TouchableOpacity>
@@ -1892,7 +2303,7 @@ const HeadTabs = () => {
                     } else if (showwhat2 == 'Gov') {
                         return (
                             <TouchableOpacity onPress={() => setshowwhat2('')}>
-                                <View style={styles.part}></View>
+                              
 
                                 {GovfilteredList && GovfilteredList.length > 0 ? (
                                     GovfilteredList.map(item => (
@@ -1924,9 +2335,22 @@ const HeadTabs = () => {
                                         </View>
                                     ))
                                 ) : (
-                                    <Text style={styles.subHead}>
+                                    <View style={{
+                                        borderRadius:10,
+                                        backgroundColor:"#f7f9fa",
+                                     
+                                         marginTop: 10,
+                                       padding:10,
+                                          width: wp(90),
+                                        
+                                           }}>
+                                         
+                                         <Text style={styles.subHead}>
                                         No Gov. Payments
                                     </Text>
+                                   
+                                    </View>
+                                   
                                 )}
 
 
@@ -2042,7 +2466,9 @@ const styles = StyleSheet.create({
     },
     subHead: {
         //marginLeft: 30,
-        marginTop: 20,
+      //  marginTop: 20,
+      fontFamily:'Poppins-Bold',
+      color:Color.headerIconBG,
         textAlign: "center"
     },
     icon: {

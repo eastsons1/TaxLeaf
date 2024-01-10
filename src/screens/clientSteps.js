@@ -496,8 +496,91 @@ const handleCheckboxChange = () => {
                                         </View>
 
                                         <View style={styles.refContent}>
-                                            <Text style={{ fontSize: 20,fontFamily:'Poppins-SemiBold',color:"#243859",fontSize:16 }}>WE ARE GETTING YOU FROM </Text>
-                                            <Text style={{ backgroundColor: Color.green,fontFamily:'Poppins-SemiBold', color:"#243859",padding:5,fontSize:16 }}>Website</Text>
+                                            <Text style={{ fontSize: 20,fontFamily:'Poppins-SemiBold',color:"#243859",fontSize:16 }}>How did you hear about us?</Text>
+                                          
+                                            <View style={{
+                                            flexDirection:"row",
+                                            justifyContent:"center",
+                                            alignItems:"center"
+                                            }}> 
+                                          <View style={{
+                                            flexDirection:"row",
+                                            justifyContent:"center",
+                                            alignItems:"center"
+                                            }}>
+                                          <CheckBox
+                                       boxType='square'
+                                         style={{backgroundColor:"#d7eef1",marginLeft:15,height:15,width:15,}}
+                                         onCheckColor={Color.headerIconBG}
+                                            //         backgroundColor="#d7eef1"
+                                          onTintColor="#d7eef1"
+                                        value={isCheckboxChecked}
+                                        // onValueChange={() => {
+                                        // setIsCheckboxChecked(!isCheckboxChecked);
+                                        // handleCheckboxChange();
+                                        // }}
+                                    />
+                                      <Text style={{
+                                       //  backgroundColor: Color.green,
+                                         fontFamily:'Poppins-SemiBold',
+                                          color:"#243859",padding:5,fontSize:16
+                                           }}>
+                                            Website
+                                            </Text>
+
+                                          </View>
+                                          <View style={{
+                                            flexDirection:"row",
+                                            justifyContent:"center",
+                                            alignItems:"center"
+                                            }}>
+                                          <CheckBox
+                                       boxType='square'
+                                         style={{backgroundColor:"#d7eef1",marginLeft:15,height:15,width:15,}}
+                                         onCheckColor={Color.headerIconBG}
+                                            //         backgroundColor="#d7eef1"
+                                          onTintColor="#d7eef1"
+                                        value={isCheckboxChecked}
+                                        // onValueChange={() => {
+                                        // setIsCheckboxChecked(!isCheckboxChecked);
+                                        // handleCheckboxChange();
+                                        // }}
+                                    />
+                                          
+                                            <Text style={{
+                                               //  backgroundColor: Color.green,
+                                                 fontFamily:'Poppins-SemiBold', color:"#243859",padding:5,fontSize:16 }}>Other</Text>
+                                       </View>
+
+                                      </View> 
+
+                                      <View
+                                      
+                                      style={{
+                                        width: wp(60),
+                                        justifyContent: 'center',
+                                        alignSelf: 'center',
+                                         height: 50,
+                                        opacity: 2,
+                                        paddingBottom: 20,
+                                        borderRadius: 10,
+                                        marginTop: 20,
+                                        paddingLeft:10
+                                      }}
+                                      >
+                                      <TextInput
+                                        numberOfLines={5}
+                                        multiline={true}
+                                        placeholder="Notes"
+                                        // placeholderTextColor={'lightgrey'}
+                                        style={{color:Color.HeaderBackground,fontFamily:'Poppins-SemiBold',   fontSize:12,
+                                        paddingTop: 10,paddingLeft:10, height: 50, textAlignVertical: 'top',borderColor:Color.headerIconBG,borderWidth:1 }}
+                                        // value={descriptionText}
+                                        // onChangeText={text => {
+                                        // setDescriptionText(text);
+                                        // }}
+                                    />
+                                      </View>
                                         </View>
                                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                           

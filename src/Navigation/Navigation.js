@@ -375,13 +375,13 @@ function HomeScreenStack() {
         }}
       />
 
-{/* <Stack.Screen
+<Stack.Screen
         name="ClientSteps"
         component={ClientSteps}
         options={{
           headerShown: false,
         }}
-      /> */}
+      />
       <Stack.Screen
         name="MyInfo"
         component={MyInfo}
