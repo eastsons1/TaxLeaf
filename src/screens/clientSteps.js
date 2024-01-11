@@ -43,7 +43,32 @@ const ClientSteps = () => {
     const { MY_INFO } = useSelector(state => state.TaxLeafReducer);
     const { CLIENT_LIST } = useSelector(state => state.TaxLeafReducer);
     console.log(position, 'position')
+    const [selectedOption, setSelectedOption] = useState(0);
+    const [associationOption, setAssociationOption] = useState(0);
+    const [professionOption, setProfessionOption] = useState(0);
+    const [InterestOption, setInterestOption] = useState(0);
+    const [profession, setProffession] = useState(0);
+    const [interest, setInterest] = useState(0);
+ 
 
+
+
+    const [checkbox1, setCheckbox1] = useState(true);
+    const [checkbox2, setCheckbox2] = useState(false);    
+  
+
+
+    const handleCheckbox = (checkbox) => {
+        if (checkbox === 'checkbox1') {
+            setCheckbox1(true);
+            setCheckbox2(false);
+        } else if (checkbox === 'checkbox2') {
+            setCheckbox1(false);
+            setCheckbox2(true);
+        }
+      };
+   
+      
 
     console.log(CLIENT_LIST,'CLIENT_LISTCLIENT_LISTCLIENT_LISTCLIENT_LISTCLIENT_LISTCLIENT_LISTCLIENT_LIST')
    
@@ -58,8 +83,11 @@ const ClientSteps = () => {
     const [mobile, setMobile] = useState(false);
     const [whatnumber, setWhatNumber] = useState(false);
     const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
+    const [isProfessionChecked, setIsProfessionChecked] = useState(false);
+    const [isInterestChecked, setIsInterestChecked] = useState(false);
     const [value, setValue] = useState(null);
-    const [REFERREDBYSOURCE, setREFERREDBYSOURCE] = useState('Website');
+    const [REFERREDBYSOURCE, setREFERREDBYSOURCE] = useState('');
+    const [otherAsso, setOtherAsso] = useState('');
   
     const [bankname, setBankName] = useState(false);
     const [accountnum, setAccountNum] = useState(false);
@@ -247,6 +275,45 @@ const ClientSteps = () => {
     //     }
     //   };
 
+    const CustomRadioButton = ({ label, selected, onPress, selectedInnerColor, unselectedInnerColor }) => {
+        return (
+          <TouchableOpacity onPress={onPress} style={{ flexDirection: 'row', alignItems: 'center',margin:10 }}>
+            <View
+              style={{
+                width: 15,
+                height: 15,
+                borderRadius: 10,
+                borderWidth: 3,
+                backgroundColor:selected ? Color.headerIconBG: '#fff',
+                borderColor: Color.headerIconBG,
+               //  backgroundColor: selected ? selectedInnerColor : 'transparent',
+                marginRight: 5,
+              }}
+            />
+            <Text style={{color:Color.headerIconBG,fontSize:14,fontFamily:'Poppins-SemiBold'}}>{label}</Text>
+          </TouchableOpacity>
+        );
+      };
+      
+      
+      const handleRadioChange = (value) => {
+        setSelectedOption(value);
+      };
+
+      
+      const handleAssociationChange = (value) => {
+        setAssociationOption(value);
+      };
+        
+      const handleProfession = (value) => {
+        setProfessionOption(value);
+      };
+
+      console.log(professionOption,'KKKKKKKKKKKK')
+
+
+     
+
     const handleInterestCheckbox = (interestId) => {
         if (selectedInterest.includes(interestId)) {
           // If already selected, remove from the list
@@ -262,26 +329,29 @@ const ClientSteps = () => {
       const interestedAreas = selectedInterest.join(',');
 
     
-console.log(interestedAreas,'selectedInterestselectedInterestselectedInterest')
+      console.log(interestedAreas,'selectedInterestselectedInterestselectedInterest')
+      console.log(REFERREDBYSOURCE,'selectedInterestselectedInterestselectedInterest')
 
     
   const FinalConfirm = () => {
 
-    console.log('LLLL')
-    console.log(jsonData?.staffId,jsonData?.client,jsonData?.clientType,
-        firstname,lastname,email,mobile,whatnumber,REFERREDBYSOURCE,bankname,accountnum,value,routingnum,
-        associationList,
-        selectedProfessions,interestedAreas
+   // console.log('LLLL')
+      console.log(jsonData?.staffId,jsonData?.client,jsonData?.clientType,
+        firstname,lastname,email,mobile,whatnumber,selectedOption == 1 ? "website" : REFERREDBYSOURCE,bankname,accountnum,value,routingnum,
+        associationOption == 1 ? associationList : otherAsso,
+        professionOption != 2 ? selectedProfessions : profession,
+        InterestOption != 2 ? interestedAreas : interest
         )
 
 
-     dispatch(ConfirmClientSetup(
-        jsonData?.staffId,jsonData?.clientId,jsonData?.clientType,
-        firstname,lastname,email,mobile,whatnumber,REFERREDBYSOURCE,bankname,accountnum,value,routingnum,
-        associationList,
-        selectedProfessions,interestedAreas,navigation
+    //  dispatch(ConfirmClientSetup(
+    //     jsonData?.staffId,jsonData?.clientId,jsonData?.clientType,
+    //     firstname,lastname,email,mobile,whatnumber,selectedOption == 1 ? "website" : REFERREDBYSOURCE,bankname,accountnum,value,routingnum,
+    //     associationOption == 1 ? associationList : otherAsso,
+    //     professionOption == 1 ? selectedProfessions : profession,
+    //     InterestOption == 1 ? interestedAreas : interest
 
-     ))   
+    //  ))   
 } 
 
 
@@ -294,6 +364,31 @@ const handleCheckboxChange = () => {
       setWhatNumber(mobile);
     }
   };
+
+  const handleProfessionChange = () => {
+    // Copy or remove the phone number from input1 to input2 based on checkbox state
+    if (isProfessionChecked) {
+        setProfessionOption(0);
+    } else {
+      
+      setProfessionOption(2);
+    }
+  };
+
+
+  const handleInterestChange = () => {
+    // Copy or remove the phone number from input1 to input2 based on checkbox state
+    if (isInterestChecked) {
+        setInterestOption(0);
+    } else {
+      
+      setInterestOption(2);
+    }
+  };
+
+
+
+
     const renderStepIndicator = params => {
        // console.log(params,'pppppp')
 
@@ -496,91 +591,75 @@ const handleCheckboxChange = () => {
                                         </View>
 
                                         <View style={styles.refContent}>
-                                            <Text style={{ fontSize: 20,fontFamily:'Poppins-SemiBold',color:"#243859",fontSize:16 }}>How did you hear about us?</Text>
+                                            <Text style={{ fontSize: 20,fontFamily:'Poppins-SemiBold',color:Color.headerIconBG,fontSize:16 }}>How did you hear about us?</Text>
                                           
-                                            <View style={{
-                                            flexDirection:"row",
-                                            justifyContent:"center",
-                                            alignItems:"center"
-                                            }}> 
+                                           
                                           <View style={{
                                             flexDirection:"row",
                                             justifyContent:"center",
                                             alignItems:"center"
                                             }}>
-                                          <CheckBox
-                                       boxType='square'
-                                         style={{backgroundColor:"#d7eef1",marginLeft:15,height:15,width:15,}}
-                                         onCheckColor={Color.headerIconBG}
-                                            //         backgroundColor="#d7eef1"
-                                          onTintColor="#d7eef1"
-                                        value={isCheckboxChecked}
-                                        // onValueChange={() => {
-                                        // setIsCheckboxChecked(!isCheckboxChecked);
-                                        // handleCheckboxChange();
-                                        // }}
-                                    />
-                                      <Text style={{
-                                       //  backgroundColor: Color.green,
-                                         fontFamily:'Poppins-SemiBold',
-                                          color:"#243859",padding:5,fontSize:16
-                                           }}>
-                                            Website
-                                            </Text>
+                                                  <CustomRadioButton
+                                                    label={"Website"}
+                                                    
+                                                    selected={selectedOption === 1}
+                                                    onPress={() => handleRadioChange(1)}
+                                                    selectedInnerColor={Color.green}    // Set the inner color for the selected button
+                                                   unselectedInnerColor={Color.headerIconBG}  // Set the inner color for the unselected button
+                                                />
+                                                        <View style={{height:5,width:20}}></View>
+                                                        
+                                                        <CustomRadioButton
+                                                            label={"Other"}
+                                                          
+                                                            selected={selectedOption === 2}
+                                                            onPress={() => handleRadioChange(2)}
+                                                            selectedInnerColor={Color.green}  // Set the inner color for the selected button
+                                                            unselectedInnerColor={Color.headerIconBG}
+                                                            // Set the inner color for the unselected button
+                                                        />
+           
+                                       
+                                    
 
                                           </View>
-                                          <View style={{
-                                            flexDirection:"row",
-                                            justifyContent:"center",
-                                            alignItems:"center"
-                                            }}>
-                                          <CheckBox
-                                       boxType='square'
-                                         style={{backgroundColor:"#d7eef1",marginLeft:15,height:15,width:15,}}
-                                         onCheckColor={Color.headerIconBG}
-                                            //         backgroundColor="#d7eef1"
-                                          onTintColor="#d7eef1"
-                                        value={isCheckboxChecked}
-                                        // onValueChange={() => {
-                                        // setIsCheckboxChecked(!isCheckboxChecked);
-                                        // handleCheckboxChange();
-                                        // }}
-                                    />
-                                          
-                                            <Text style={{
-                                               //  backgroundColor: Color.green,
-                                                 fontFamily:'Poppins-SemiBold', color:"#243859",padding:5,fontSize:16 }}>Other</Text>
-                                       </View>
+                                       
 
-                                      </View> 
+                                   
 
-                                      <View
-                                      
-                                      style={{
-                                        width: wp(60),
-                                        justifyContent: 'center',
-                                        alignSelf: 'center',
-                                         height: 50,
-                                        opacity: 2,
-                                        paddingBottom: 20,
-                                        borderRadius: 10,
-                                        marginTop: 20,
-                                        paddingLeft:10
-                                      }}
-                                      >
-                                      <TextInput
-                                        numberOfLines={5}
-                                        multiline={true}
-                                        placeholder="Notes"
-                                        // placeholderTextColor={'lightgrey'}
-                                        style={{color:Color.HeaderBackground,fontFamily:'Poppins-SemiBold',   fontSize:12,
-                                        paddingTop: 10,paddingLeft:10, height: 50, textAlignVertical: 'top',borderColor:Color.headerIconBG,borderWidth:1 }}
-                                        // value={descriptionText}
-                                        // onChangeText={text => {
-                                        // setDescriptionText(text);
-                                        // }}
-                                    />
-                                      </View>
+                                     
+                                                {selectedOption == 2 ?
+                                                <View
+                                                                                    
+                                                style={{
+                                                    width: wp(60),
+                                                    justifyContent: 'center',
+                                                    alignSelf: 'center',
+                                                    height: 50,
+                                                    opacity: 2,
+                                                    paddingBottom: 20,
+                                                    borderRadius: 10,
+                                                    marginTop: 20,
+                                                    paddingLeft:10
+                                                }}
+                                                >
+                                                <TextInput
+                                                    numberOfLines={5}
+                                                    multiline={true}
+                                                    placeholder="Notes"
+                                                    // placeholderTextColor={'lightgrey'}
+                                                    style={{color:Color.HeaderBackground,fontFamily:'Poppins-SemiBold',   fontSize:12,
+                                                    paddingTop: 10,paddingLeft:10, height: 50, textAlignVertical: 'top',borderColor:Color.headerIconBG,borderWidth:1 }}
+                                                 value={REFERREDBYSOURCE}
+                                                    onChangeText={text => {
+                                                        setREFERREDBYSOURCE(text);
+                                                    }}
+                                                />
+                                                </View>
+                                                :null }
+                                                                                    
+
+
                                         </View>
                                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                           
@@ -736,15 +815,15 @@ const handleCheckboxChange = () => {
                                         /> */}
 
                                             <Image
-                          source={require('../Assets/img/icons/play.png')}
-                          style={{
-                            width: 30,
-                            height: 30,
+                                                source={require('../Assets/img/icons/play.png')}
+                                                style={{
+                                                    width: 30,
+                                                    height: 30,
 
-                          //  marginTop: 5,
-                        
-                          }}
-                        />                                
+                                                //  marginTop: 5,
+                                                
+                                                }}
+                                                />                                
                                 <Text style={styles.ConfirmButton}>Confirm</Text>
 
                                         </TouchableOpacity>
@@ -786,7 +865,67 @@ const handleCheckboxChange = () => {
 
                     </View>
                     )}/>
-                                          
+
+                                            <View style={{
+                                            flexDirection:"row",
+                                            justifyContent:"center",
+                                            alignItems:"center"
+                                            }}>
+                                                  <CustomRadioButton
+                                                    label={"Correct"}
+                                                    
+                                                    selected={associationOption === 1}
+                                                    onPress={() => handleAssociationChange(1)}
+                                                    selectedInnerColor={Color.green}    // Set the inner color for the selected button
+                                                   unselectedInnerColor={Color.headerIconBG}  // Set the inner color for the unselected button
+                                                />
+                                                        <View style={{height:5,width:20}}></View>
+                                                        
+                                                        <CustomRadioButton
+                                                            label={"Incorrect"}
+                                                          
+                                                            selected={associationOption === 2}
+                                                            onPress={() => handleAssociationChange(2)}
+                                                            selectedInnerColor={Color.green}  // Set the inner color for the selected button
+                                                            unselectedInnerColor={Color.headerIconBG}
+                                                            // Set the inner color for the unselected button
+                                                        />
+           
+                                       
+                                    
+
+                                          </View>    
+
+                                          {associationOption == 2 ?
+                                                <View
+                                                                                    
+                                                style={{
+                                                    width: wp(60),
+                                                    justifyContent: 'center',
+                                                    alignSelf: 'center',
+                                                    height: 50,
+                                                    opacity: 2,
+                                                    paddingBottom: 20,
+                                                    borderRadius: 10,
+                                                    marginTop: 20,
+                                                    paddingLeft:10
+                                                }}
+                                                >
+                                                <TextInput
+                                                    numberOfLines={5}
+                                                    multiline={true}
+                                                    placeholder="Notes"
+                                                    // placeholderTextColor={'lightgrey'}
+                                                    style={{color:Color.HeaderBackground,fontFamily:'Poppins-SemiBold',   fontSize:12,
+                                                    paddingTop: 10,paddingLeft:10, height: 50, textAlignVertical: 'top',borderColor:Color.headerIconBG,borderWidth:1 }}
+                                                 value={otherAsso}
+                                                    onChangeText={text => {
+                                                        setOtherAsso(text);
+                                                    }}
+                                                />
+                                                </View>
+                                                :null }      
+
                                             {/* <View style={styles.contentView}>
                                                 <Text style={styles.clientAssoc}>Client Name 1</Text>
 
@@ -880,9 +1019,11 @@ const handleCheckboxChange = () => {
                                             <Text style={styles.subHead}>Current Profession</Text>
                                             <Text style={styles.subHead}>STEP 5</Text>
                                         </View>
-                                        <View style={{height:hp(48),paddingBottom:15, backgroundColor: '#fff', borderBottomRightRadius: 10, borderBottomLeftRadius: 10 }}>
+                <View style={{height:hp(35),paddingBottom:15, backgroundColor: '#fff', borderBottomRightRadius: 10, borderBottomLeftRadius: 10 }}>
                                           
-                                        <FlatList
+                  
+                   {professionOption != 2 ?
+                    <FlatList
                     data={professionList}
                     showsVerticalScrollIndicator={false}
                     // numColumns={5}
@@ -892,24 +1033,19 @@ const handleCheckboxChange = () => {
                         <View style={styles.client}>
                      
                         <CheckBox
-              disabled={false}
-              boxType="square"
-             style={{backgroundColor:"#d7eef1", marginTop:8,marginLeft:10,height:15,width:15,alignSelf:"center",justifyContent:'center'}}
-             onCheckColor={Color.headerIconBG}
-                //         backgroundColor="#d7eef1"
-              onTintColor="#d7eef1"
+                        disabled={false}
+                        boxType="square"
+                        style={{backgroundColor:"#d7eef1", marginTop:8,marginLeft:10,height:15,width:15,alignSelf:"center",justifyContent:'center'}}
+                        onCheckColor={Color.headerIconBG}
+                        // backgroundColor="#d7eef1"
+                        onTintColor="#d7eef1"
             
-            // onTintColor="#d7eef1"
-           //tintColor="#d7eef1" 
-        // lineWidth={2.5}
-          
-           
-              value={selectedProfessions.includes(item.professionName)}
-           //   tintColors="red"
-              onValueChange={() => handleToggleCheckbox(item.professionName)}
-            //   style={{height:10,width:10}}
+                        value={selectedProfessions.includes(item.professionName)}
+                        // tintColors="red"
+                        onValueChange={() => handleToggleCheckbox(item.professionName)}
+                        //  style={{height:10,width:10}}
 
-            />
+                 />
            
                            <Text style={styles.ProfesstionList} >
 
@@ -922,8 +1058,107 @@ const handleCheckboxChange = () => {
 
                     )}
                     />
-                                           
-                                        </View>
+                    :
+                    <View
+                                                                                    
+                    style={{
+                        width: wp(90),
+                        justifyContent: 'center',
+                        alignSelf: 'center',
+                        height: 50,
+                        opacity: 2,
+                        paddingBottom: 20,
+                        borderRadius: 10,
+                        marginTop: 20,
+                        //paddingLeft:10
+                    }}
+                    >
+                    <TextInput
+                        numberOfLines={5}
+                        multiline={true}
+                        placeholder="Enter Your Profession"
+                        // placeholderTextColor={'lightgrey'}
+                        style={{color:Color.HeaderBackground,fontFamily:'Poppins-SemiBold',   fontSize:12,width:wp(85),
+                        alignSelf:'center',
+                        paddingTop: 10,paddingLeft:10, height: 50, textAlignVertical: 'top',borderColor:Color.headerIconBG,borderWidth:1 }}
+                     value={profession}
+                        onChangeText={text => {
+                            setProffession(text);
+                        }}
+                    />
+                    </View>
+                    }
+              
+            </View>
+
+                                      <View style={{
+                                                marginTop:10,
+                                            flexDirection:"row",
+                                            justifyContent:"center",
+                                            alignItems:"center"
+                                            }}>
+                                    
+                                         <CheckBox
+                                       boxType='square'
+                                         style={{backgroundColor:"#d7eef1",marginLeft:15,height:15,width:15,}}
+                                         onCheckColor={Color.headerIconBG}
+                                            //         backgroundColor="#d7eef1"
+                                          onTintColor="#d7eef1"
+                                        value={isProfessionChecked}
+                                        onValueChange={() => {
+                                        setIsProfessionChecked(!isProfessionChecked);
+                                        handleProfessionChange();
+                                        }}
+                                    />  
+
+                                    <Text
+                                    style={{color:Color.headerIconBG,
+                                       fontFamily:'Poppins-SemiBold',
+                                       fontSize:16 ,
+                                       marginLeft:5
+                                    }}
+                                    >
+                                        Other
+                                    </Text>
+   
+                                          </View>
+                                       
+
+                                   
+
+                                     
+                                                {/* {professionOption == 2 ?
+                                                <View
+                                                                                    
+                                                style={{
+                                                    width: wp(90),
+                                                    justifyContent: 'center',
+                                                    alignSelf: 'center',
+                                                    height: 50,
+                                                    opacity: 2,
+                                                    paddingBottom: 20,
+                                                    borderRadius: 10,
+                                                    marginTop: 20,
+                                                    //paddingLeft:10
+                                                }}
+                                                >
+                                                <TextInput
+                                                    numberOfLines={5}
+                                                    multiline={true}
+                                                    placeholder="Enter Your Profession"
+                                                    // placeholderTextColor={'lightgrey'}
+                                                    style={{color:Color.HeaderBackground,fontFamily:'Poppins-SemiBold',   fontSize:12,width:wp(85),
+                                                    alignSelf:'center',
+                                                    paddingTop: 10,paddingLeft:10, height: 50, textAlignVertical: 'top',borderColor:Color.headerIconBG,borderWidth:1 }}
+                                                 value={profession}
+                                                    onChangeText={text => {
+                                                        setProffession(text);
+                                                    }}
+                                                />
+                                                </View>
+                                                :null }   */}
+
+
                                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                           
                                             <TouchableOpacity style={styles.btn} onPress={() => { onPageChange(5) }}>
@@ -961,28 +1196,17 @@ const handleCheckboxChange = () => {
                                 <ScrollView>
                                     <View style={styles.subContainerInterest}>
                                     <View style={styles.HeadingContainer}>
-                                            {/* <Icon3
-                                            style={[
-                                                styles.icon,
-                                                {
-                                                    color: '#2F4050',
-                                                    marginLeft: 10,
-                                                    marginRight: 10,
-                                                    marginTop: 3
-                                                },
-                                            ]}
-                                            name="suitcase"
-                                            size={30}
-                                            color="#fff"
-                                        /> */}
+                                           
                                             <Text style={styles.subHead}>Interests</Text>
                                             <Text style={styles.subHead}>STEP 6</Text>
                                         </View>
 
 
-                                        <View style={{height:hp(48),paddingBottom:15, backgroundColor: '#fff', borderBottomRightRadius: 10, borderBottomLeftRadius: 10 }}>
+                                        <View style={{height:hp(35),paddingBottom:15, backgroundColor: '#fff', borderBottomRightRadius: 10, borderBottomLeftRadius: 10 }}>
                                         
-                                        <FlatList
+               
+                                        {InterestOption != 2 ?
+                 <FlatList
                     data={interestList}
                     // numColumns={5}
                     showsVerticalScrollIndicator={false}
@@ -1014,9 +1238,71 @@ const handleCheckboxChange = () => {
 
                     )}
                     />
-                                        
+                         :
+                         
+                         <View
+                                                                                    
+                         style={{
+                             width: wp(90),
+                             justifyContent: 'center',
+                             alignSelf: 'center',
+                             height: 50,
+                             opacity: 2,
+                             paddingBottom: 20,
+                             borderRadius: 10,
+                             marginTop: 20,
+                             //paddingLeft:10
+                         }}
+                         >
+                         <TextInput
+                             numberOfLines={5}
+                             multiline={true}
+                             placeholder="Enter Your Interest"
+                             // placeholderTextColor={'lightgrey'}
+                             style={{color:Color.HeaderBackground,fontFamily:'Poppins-SemiBold',   fontSize:12,width:wp(85),
+                             alignSelf:'center',
+                             paddingTop: 10,paddingLeft:10, height: 50, textAlignVertical: 'top',borderColor:Color.headerIconBG,borderWidth:1 }}
+                          value={interest}
+                             onChangeText={text => {
+                                 setInterest(text);
+                             }}
+                         />
+                         </View>
+                         }               
                                            
                                         </View>
+
+                                        <View style={{
+                                                marginTop:10,
+                                            flexDirection:"row",
+                                            justifyContent:"center",
+                                            alignItems:"center"
+                                            }}>
+                                    
+                                         <CheckBox
+                                       boxType='square'
+                                         style={{backgroundColor:"#d7eef1",marginLeft:15,height:15,width:15,}}
+                                         onCheckColor={Color.headerIconBG}
+                                            //         backgroundColor="#d7eef1"
+                                          onTintColor="#d7eef1"
+                                        value={isInterestChecked}
+                                        onValueChange={() => {
+                                        setIsInterestChecked(!isInterestChecked);
+                                        handleInterestChange();
+                                        }}
+                                    />  
+
+                                    <Text
+                                    style={{color:Color.headerIconBG,
+                                       fontFamily:'Poppins-SemiBold',
+                                       fontSize:16 ,
+                                       marginLeft:5
+                                    }}
+                                    >
+                                        Other
+                                    </Text>
+   
+                                          </View>  
                                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                            
                                             <TouchableOpacity style={styles.btn} onPress={() => FinalConfirm() }>

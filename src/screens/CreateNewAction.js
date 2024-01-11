@@ -319,7 +319,7 @@ const CreateNewAction = () => {
         labelStyle={{fontSize: 12, color: '#fff'}}
       /> */}
 
-<CustomRadioButton
+      <CustomRadioButton
         label={   managerInfo?.firstName +
           ' ' +
           managerInfo?.lastName +
@@ -331,6 +331,7 @@ const CreateNewAction = () => {
         unselectedInnerColor="#fff"  // Set the inner color for the unselected button
       />
       <View style={{height:5}}></View>
+      
       <CustomRadioButton
         label={ partnerInfo?.firstName +
           ' ' +

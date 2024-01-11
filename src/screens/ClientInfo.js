@@ -623,7 +623,7 @@ const ClientInfo = () => {
                   <View
                     style={{
                       width: wp(90),
-                      backgroundColor: '#fff',
+                      backgroundColor: Color.headerIconBG,
                       alignItems: 'center',
                       alignSelf: 'center',
                       elevation: 10,
@@ -641,7 +641,7 @@ const ClientInfo = () => {
                       }}>
                       <Text
                         numberOfLines={1}
-                        style={{ color: Color.darkGreen, fontSize: 10, fontFamily: 'Poppins-SemiBold' }}>
+                        style={{ color: Color.white, fontSize: 10, fontFamily: 'Poppins-SemiBold' }}>
                         {jsonData?.client}
                       </Text>
                     </View>
@@ -652,7 +652,7 @@ const ClientInfo = () => {
 
                         alignItems: 'center',
                       }}>
-                      <Text style={{ color: Color.darkGreen, fontSize: 10, fontFamily: 'Poppins-SemiBold' }}>
+                      <Text style={{ color: Color.white, fontSize: 10, fontFamily: 'Poppins-SemiBold' }}>
                       {companyInfo?.name} 
                       </Text>
                     </View>
@@ -665,7 +665,7 @@ const ClientInfo = () => {
 
                         alignItems: 'center',
                       }}>
-                      <Text style={{ color: Color.darkGreen, fontSize: 10, fontFamily: 'Poppins-SemiBold' }}>
+                      <Text style={{ color: Color.white, fontSize: 10, fontFamily: 'Poppins-SemiBold' }}>
                         {jsonData?.clientType == "company" ? "Business" : jsonData?.clientType}
                       </Text>
                     </View>
@@ -854,7 +854,7 @@ const ClientInfo = () => {
                       <View
                         style={{
                           width: wp(90),
-                          backgroundColor: '#fff',
+                          backgroundColor: Color.headerIconBG,
                           alignItems: 'center',
                           alignSelf: 'center',
                           elevation: 10,
@@ -872,7 +872,7 @@ const ClientInfo = () => {
                           }}>
                           <Text
                             numberOfLines={1}
-                            style={{ color: Color.darkGreen, fontSize: 10, fontFamily: 'Poppins-SemiBold' }}>
+                            style={{ color: Color.white, fontSize: 10, fontFamily: 'Poppins-SemiBold' }}>
                             {jsonData?.client}
                           </Text>
                         </View>
@@ -884,7 +884,7 @@ const ClientInfo = () => {
 
                             alignItems: 'center',
                           }}>
-                          <Text style={{ color: Color.darkGreen, fontSize: 10, fontFamily: 'Poppins-SemiBold' }}>
+                          <Text style={{ color: Color.white, fontSize: 10, fontFamily: 'Poppins-SemiBold' }}>
                           {companyInfo?.name}  
                             {/* {staffview?.firstName}  {staffview?.lastName}{staffview.length} */}
                           </Text>
@@ -896,7 +896,7 @@ const ClientInfo = () => {
 
                             alignItems: 'center',
                           }}>
-                          <Text style={{ color: Color.darkGreen, fontSize: 10, fontFamily: 'Poppins-SemiBold' }}>
+                          <Text style={{ color: Color.white, fontSize: 10, fontFamily: 'Poppins-SemiBold' }}>
                             {jsonData?.clientType == "company" ? "Business" : jsonData?.clientType}
                           </Text>
                         </View>
