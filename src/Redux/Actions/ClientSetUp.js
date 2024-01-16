@@ -151,6 +151,7 @@ import {
         });
   
         //   Alert.alert(response.response[0])
+        Alert.alert(response.massage);
         resolve(response);
         navigation.navigate('Auth');
   

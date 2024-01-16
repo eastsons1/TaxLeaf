@@ -1,11 +1,12 @@
 import { StyleSheet,FlatList, Button,
-    Text, View, ScrollView, TextInput, TouchableOpacity, ImageBackground, Image, SafeAreaView } from 'react-native'
+    Text, View, ScrollView, TextInput,Platform, TouchableOpacity,KeyboardAvoidingView, ImageBackground, Image, SafeAreaView, Alert } from 'react-native'
 import React, { useState, useEffect } from 'react';
 import StepIndicator from 'react-native-step-indicator';
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+import { Loader } from '../Component/Loader';
 // import { TextInput } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Icon1 from 'react-native-vector-icons/EvilIcons'
@@ -96,6 +97,10 @@ const ClientSteps = () => {
     const [routingnum, setRoutingNum] = useState(false);
     const [infoData, setInfoData] = useState({});
     const jsonData = MY_INFO?.guestInfo;
+    const staffview = MY_INFO?.staffview;
+    const officeInfo = MY_INFO?.officeInfo;
+    
+    
     console.log(jsonData?.clientId,'kkkkkkk')
 
     const data1 = [
@@ -168,6 +173,14 @@ const ClientSteps = () => {
     useEffect(() => {
         // setLoader(true);
         setInfoData(CLIENT_LIST);
+        setFirstName(staffview?.firstName)
+        setLastName(staffview?.lastName)
+        setEmail(staffview?.user)
+        setMobile(staffview?.phone)
+        setBankName(officeInfo?.bankName)
+        setAccountNum(officeInfo?.accNum)
+        setRoutingNum(officeInfo?.rountingNum)
+       
         // setTimeout(() => {
         //   setLoader(false);
         // }, 2000);
@@ -206,9 +219,75 @@ const ClientSteps = () => {
        
     }, [INTEREST_LIST,PROFESSION_LIST]);
 
+   const onPageChange1 = (position) => {
+    if(firstname == "" || lastname == "" || email == "" || mobile == "" || whatnumber == "")
+    {
+        Alert.alert('Please fill in all required fields')
+    }
+    else {
+        setPosition(position);
+    }
+
+   }
+
+   const onPageChange2 = (position) => {
+    if(selectedOption == 0 ){
+        Alert.alert('Kindly select one from them')
+    }
+    else {
+        setPosition(position);
+    }
+
+   }
+
+   const onPageChange3 = (position) => {
+    if(bankname == "" || accountnum == "" || routingnum == "" || value == null ){
+        Alert.alert('Please fill in all required fields')
+    }
+    else {
+        setPosition(position);
+    }
+
+   }
+
+   const onPageChange4 = (position) => {
+     if(associationOption == 0 ){
+        Alert.alert('Kindly select one from them')
+    }
+    else {
+        setPosition(position);
+    }
+
+   }
+
+   const onPageChange5 = (position) => {
+    if (selectedProfessions === '' && isProfessionChecked === false) {
+        console.log(selectedProfessions, isProfessionChecked); 
+        Alert.alert('Kindly select one from them');
+    }
+       else if (selectedProfessions === '' && isProfessionChecked === true) {
+            //console.log(selectedProfessions, isProfessionChecked);
+           // Alert.alert('Kindly select one from them111');
+            setPosition(position);
+          }    
+      else {
+        setPosition(position);
+      }
+
+   }
+
    
+
+   
+
+   
+
+   
+
+
    
     const onPageChange = (position) => {
+        console.log(position,'HHHHHHHHHH')
         setPosition(position);
     }
 
@@ -230,6 +309,7 @@ const ClientSteps = () => {
     ];
     const bgImage = require("../Assets/img/stepsBG.png")
     // let iconNm = require('../Assets/img/icons/msg.png');
+    
 
     const handleToggleCheckbox = (professionName) => {
         if (selectedProfessions.includes(professionName)) {
@@ -252,7 +332,7 @@ const ClientSteps = () => {
       };
     
 
-      console.log(selectedProfessions,'LLLLLLLLL')
+      console.log(selectedProfessions,'1111111111111')
 
 
     //   const handleInterestCheckbox = (professionName) => {
@@ -330,28 +410,74 @@ const ClientSteps = () => {
 
     
       console.log(interestedAreas,'selectedInterestselectedInterestselectedInterest')
-      console.log(REFERREDBYSOURCE,'selectedInterestselectedInterestselectedInterest')
+    //  console.log(REFERREDBYSOURCE,'selectedInterestselectedInterestselectedInterest')
 
     
   const FinalConfirm = () => {
+   
+    console.log(selectedInterest.length,'KKKKKK')
+
+    if (selectedInterest.length === 0 && isInterestChecked === false) {
+        console.log(selectedInterest, isInterestChecked); 
+        Alert.alert('Kindly select one from them');
+    }
+
+       else if (selectedInterest.length === 0 && isInterestChecked === true) {
+        console.log(selectedInterest, isInterestChecked); 
+        setLoader(true)
+            //console.log(selectedProfessions, isProfessionChecked);
+           // Alert.alert('Kindly select one from them111');
+            setPosition(position);
+            console.log(jsonData?.staffId,jsonData?.client,jsonData?.clientType,
+                firstname,lastname,email,mobile,whatnumber,selectedOption == 1 ? "website" : REFERREDBYSOURCE,bankname,accountnum,value,routingnum,
+                associationOption == 1 ? associationList : otherAsso,
+                professionOption != 2 ? selectedProfessions : profession,
+                InterestOption != 2 ? interestedAreas : interest
+                )
+        
+        
+             dispatch(ConfirmClientSetup(
+                jsonData?.staffId,jsonData?.clientId,jsonData?.clientType,
+                firstname,lastname,email,mobile,whatnumber,selectedOption == 1 ? "website" : REFERREDBYSOURCE,bankname,accountnum,value,routingnum,
+                associationOption == 1 ? associationList : otherAsso,
+                professionOption != 2 ? selectedProfessions : profession,
+                InterestOption != 2 ? interestedAreas : interest,
+                navigation
+        
+             ))   
+             setLoader(false)
+          //  Alert.alert('rrrrrrrr')
+          }    
+      else {
+        console.log(typeof(selectedInterest), isInterestChecked); 
+
+      //  Alert.alert('llllllll')
+        setPosition(position);
+setLoader(true)
+        console.log(jsonData?.staffId,jsonData?.client,jsonData?.clientType,
+            firstname,lastname,email,mobile,whatnumber,selectedOption == 1 ? "website" : REFERREDBYSOURCE,bankname,accountnum,value,routingnum,
+            associationOption == 1 ? associationList : otherAsso,
+            professionOption != 2 ? selectedProfessions : profession,
+            InterestOption != 2 ? interestedAreas : interest,
+          
+            )
+    
+    
+         dispatch(ConfirmClientSetup(
+            jsonData?.staffId,jsonData?.clientId,jsonData?.clientType,
+            firstname,lastname,email,mobile,whatnumber,selectedOption == 1 ? "website" : REFERREDBYSOURCE,bankname,accountnum,value,routingnum,
+            associationOption == 1 ? associationList : otherAsso,
+            professionOption != 2 ? selectedProfessions : profession,
+            InterestOption != 2 ? interestedAreas : interest,  navigation
+    
+         ))  
+    
+            setLoader(false)
 
    // console.log('LLLL')
-      console.log(jsonData?.staffId,jsonData?.client,jsonData?.clientType,
-        firstname,lastname,email,mobile,whatnumber,selectedOption == 1 ? "website" : REFERREDBYSOURCE,bankname,accountnum,value,routingnum,
-        associationOption == 1 ? associationList : otherAsso,
-        professionOption != 2 ? selectedProfessions : profession,
-        InterestOption != 2 ? interestedAreas : interest
-        )
+   
 
-
-    //  dispatch(ConfirmClientSetup(
-    //     jsonData?.staffId,jsonData?.clientId,jsonData?.clientType,
-    //     firstname,lastname,email,mobile,whatnumber,selectedOption == 1 ? "website" : REFERREDBYSOURCE,bankname,accountnum,value,routingnum,
-    //     associationOption == 1 ? associationList : otherAsso,
-    //     professionOption == 1 ? selectedProfessions : profession,
-    //     InterestOption == 1 ? interestedAreas : interest
-
-    //  ))   
+    }
 } 
 
 
@@ -364,7 +490,7 @@ const handleCheckboxChange = () => {
       setWhatNumber(mobile);
     }
   };
-
+console.log(isProfessionChecked)
   const handleProfessionChange = () => {
     // Copy or remove the phone number from input1 to input2 based on checkbox state
     if (isProfessionChecked) {
@@ -396,6 +522,7 @@ const handleCheckboxChange = () => {
             
 
             <View style={styles.customStep}>
+                  <Loader flag={loader} />
                 {
                     params.position == 0 && params.stepStatus == "current" ?
                         <Image source={icons[params?.position]} style={{ width: 60, height: 60 }} />
@@ -426,26 +553,34 @@ const handleCheckboxChange = () => {
         )
     };
     return (
+
         <SafeAreaView>
+           
         <ImageBackground source={bgImage} style={styles.bgImg} >
+        <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={{flex:1}}
+    >
+          <View style={{flex:1}}>
             <View style={styles.headBG}>
-                <Text style={{ textAlign: 'center', color: '#fff', fontFamily:'Poppins-SemiBold', marginVertical: 14 }}>PLEASE CONFIRM THE FOLLOWING INFORMATION IS CORRECT TO BEGIN</Text>
+                <Text style={{ textAlign: 'center', color: '#fff', fontFamily:'Poppins-SemiBold', marginVertical: 16, }}>PLEASE CONFIRM THE FOLLOWING INFORMATION IS CORRECT TO BEGIN</Text>
             </View>
-            <View style={{ width: wp(90), alignSelf: 'center',justifyContent:"center", }}>
-                <View style={styles.step}>
-                    <StepIndicator
+            <View style={{flex:1, width: wp(90),alignSelf: 'center',justifyContent:"center"}}>
+           
+         <StepIndicator
                         customStyles={customStyles}
                         currentPosition={position}
 
                         labels={position == 0 ? labels1 : position == 1 ? labels2 : position == 2 ? labels3 : position == 3 ? labels4 : position == 4 ? labels5 : position == 5 ? labels6 : labels}
-                        onPress={onPageChange}
+                       // onPress={onPageChange}
                         stepCount={6}
                         renderStepIndicator={renderStepIndicator}
                     />
                 </View>
+               
               
                 <View style={styles.subContainer}>
-                <ScrollView style={{height:hp(70),}}>
+                <ScrollView style={{}}>
 
                     {(() => {
                         if (position == 0) {
@@ -460,7 +595,7 @@ const handleCheckboxChange = () => {
                                         <Text style={styles.subHead}>Contact Information</Text>
                                         <Text style={styles.subHead}>STEP 1</Text>
                                     </View>
-                                    <View style={{ backgroundColor: '#f4f8f9', height: hp(37), width: '100%', alignItems: 'center', borderBottomLeftRadius: 10, borderBottomRightRadius: 10 }}>
+                                    <View style={{ backgroundColor: '#f4f8f9', height: hp(40), width: '100%', alignItems: 'center', borderBottomLeftRadius: 10, borderBottomRightRadius: 10 }}>
                                         <TextInput
                                             placeholder='First Name'
                                             value={firstname}
@@ -506,7 +641,11 @@ const handleCheckboxChange = () => {
 
                                         <CheckBox
                                        boxType='square'
-                                         style={{backgroundColor:"#d7eef1",marginLeft:15,height:15,width:15,}}
+                                         style={{
+                                        //    backgroundColor:"#d7eef1",
+                                        marginLeft:15,
+                                        //height:15,width:15,
+                                        }}
                                          onCheckColor={Color.headerIconBG}
                                             //         backgroundColor="#d7eef1"
                                           onTintColor="#d7eef1"
@@ -520,7 +659,7 @@ const handleCheckboxChange = () => {
                                         fontFamily:'Poppins-SemiBold',
                                         fontSize:12,
                                         color:Color.headerIconBG,
-                                        paddingLeft:10,
+                                        marginLeft:5,
                                       
                                         
 
@@ -539,18 +678,8 @@ const handleCheckboxChange = () => {
 
                                         />
                                     </View>
-                                    <TouchableOpacity style={styles.btn} onPress={() => { onPageChange(1) }}>
-                                        {/* <Icon
-                                            style={[
-                                                styles.icon,
-                                                {
-                                                    color: '#fff',
-                                                },
-                                            ]}
-                                            name="play"
-                                            size={25}
-                                            color="#fff"
-                                        /> */}
+                                    <TouchableOpacity style={styles.btn} onPress={() => { onPageChange1(1) }}>
+                                      
                                        <Image
                           source={require('../Assets/img/icons/play.png')}
                           style={{
@@ -661,30 +790,34 @@ const handleCheckboxChange = () => {
 
 
                                         </View>
-                                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                        <View style={{width:wp(80), flexDirection: 'row', justifyContent: 'space-between' }}>
                                           
-                                            <TouchableOpacity style={styles.btn} onPress={() => { onPageChange(2) }}>
-                                            {/* <Icon
-                                            style={[
-                                                styles.icon,
-                                                {
-                                                    color: '#fff',
-                                                },
-                                            ]}
-                                            name="play"
-                                            size={25}
-                                            color="#fff"
-                                        /> */}
-                                            <Image
-                          source={require('../Assets/img/icons/play.png')}
-                          style={{
-                            width: 30,
-                            height: 30,
+                                          
+                                        <TouchableOpacity style={styles.btn} onPress={() => { onPageChange(0) }}>
+                                           
+                                           <Image
+                                               source={require('../Assets/img/icons/play.png')}
+                                               style={{ width: 30,
+                                                marginTop:5,
+                                                height: 30, transform: [{ rotate: "180deg" }] }}
+                                              
+                                               />
+                                       <Text style={styles.ConfirmButton}>Back</Text>
 
-                          //  marginTop: 5,
-                        
-                          }}
-                        />
+                                           </TouchableOpacity>
+
+                                            <TouchableOpacity style={styles.btn} onPress={() => { onPageChange2(2) }}>
+                                           
+                                            <Image
+                                                source={require('../Assets/img/icons/play.png')}
+                                                style={{
+                                                    width: 30,
+                                                    height: 30,
+
+                                                //  marginTop: 5,
+                                                
+                                                }}
+                                                />
                                         <Text style={styles.ConfirmButton}>Confirm</Text>
 
                                             </TouchableOpacity>
@@ -714,7 +847,7 @@ const handleCheckboxChange = () => {
                                         <Text style={styles.subHead}>Payment Method</Text>
                                         <Text style={styles.subHead}>STEP 3</Text>
                                     </View>
-                                    <View style={{ backgroundColor: '#f4f8f9', height: hp(35), width: '100%', alignItems: 'center', borderBottomLeftRadius: 10, borderBottomRightRadius: 10 }}>
+                                    <View style={{ backgroundColor: '#f4f8f9', height: hp(30), width: '100%', alignItems: 'center', borderBottomLeftRadius: 10, borderBottomRightRadius: 10 }}>
                                         <TextInput
                                             placeholder='Bank Name'
                                             value={bankname}
@@ -759,7 +892,7 @@ const handleCheckboxChange = () => {
               {console.log(value,'LLL')}
               </View>
 
-                                        <TextInput
+                                        {/* <TextInput
                                             placeholder='Current Account'
                                             value={currentac}
                                             onChangeText={text => {
@@ -767,7 +900,7 @@ const handleCheckboxChange = () => {
                                             }}
                                             style={styles.input}
 
-                                        />
+                                        /> */}
                                     
                                         <TextInput
                                             placeholder='Routing Number'
@@ -784,7 +917,7 @@ const handleCheckboxChange = () => {
 
 
 
-                                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 10 }}>
+                                    <View style={{width:wp(80), flexDirection: 'row', justifyContent: 'space-between', marginTop: 10 }}>
                                         {/* <TouchableOpacity style={styles.btnPrev}
                                         onPress={() => { onPageChange(1) }}
                                     >
@@ -801,7 +934,20 @@ const handleCheckboxChange = () => {
                                         />
                                         <Text style={{ color: '#fff' }}>Previous</Text>
                                     </TouchableOpacity> */}
-                                        <TouchableOpacity style={styles.btn} onPress={() => { onPageChange(3) }}>
+                                      <TouchableOpacity style={styles.btn} onPress={() => { onPageChange(1) }}>
+                                           
+                                      <Image
+                                               source={require('../Assets/img/icons/play.png')}
+                                               style={{ width: 30,
+                                                marginTop:5,
+                                                height: 30, transform: [{ rotate: "180deg" }] }}
+                                              
+                                               />
+                                       <Text style={styles.ConfirmButton}>Back</Text>
+
+                                           </TouchableOpacity>
+                                           
+                                        <TouchableOpacity style={styles.btn} onPress={() => { onPageChange3(3) }}>
                                         {/* <Icon
                                             style={[
                                                 styles.icon,
@@ -866,9 +1012,42 @@ const handleCheckboxChange = () => {
                     </View>
                     )}/>
 
+
+
+{associationOption == 2 ?
+                                                <View
+                                                                                    
+                                                style={{
+                                                    width: wp(60),
+                                                    justifyContent: 'center',
+                                                    alignSelf: 'center',
+                                                    height: 50,
+                                                    opacity: 2,
+                                                    flex:1,
+                                                   // paddingBottom: 20,
+                                                    borderRadius: 10,
+                                                  //  marginTop: 20,
+                                                    paddingLeft:10
+                                                }}
+                                                >
+                                                <TextInput
+                                                    numberOfLines={5}
+                                                    multiline={true}
+                                                    placeholder="Notes"
+                                                    // placeholderTextColor={'lightgrey'}
+                                                    style={{color:Color.HeaderBackground,fontFamily:'Poppins-SemiBold',   fontSize:12,
+                                                    paddingTop: 10,paddingLeft:10, height: 50, textAlignVertical: 'top',borderColor:Color.headerIconBG,borderWidth:1 }}
+                                                 value={otherAsso}
+                                                    onChangeText={text => {
+                                                        setOtherAsso(text);
+                                                    }}
+                                                />
+                                                </View>
+                                                :null }  
                                             <View style={{
                                             flexDirection:"row",
                                             justifyContent:"center",
+                                          
                                             alignItems:"center"
                                             }}>
                                                   <CustomRadioButton
@@ -895,7 +1074,7 @@ const handleCheckboxChange = () => {
                                     
 
                                           </View>    
-
+{/* 
                                           {associationOption == 2 ?
                                                 <View
                                                                                     
@@ -924,7 +1103,7 @@ const handleCheckboxChange = () => {
                                                     }}
                                                 />
                                                 </View>
-                                                :null }      
+                                                :null }       */}
 
                                             {/* <View style={styles.contentView}>
                                                 <Text style={styles.clientAssoc}>Client Name 1</Text>
@@ -963,7 +1142,7 @@ const handleCheckboxChange = () => {
 
 
 
-                                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                        <View style={{width:wp(80), flexDirection: 'row', justifyContent: 'space-between' }}>
                                             {/* <TouchableOpacity style={styles.btnPrev}
                                             onPress={() => { onPageChange(2) }}
                                         >
@@ -980,7 +1159,20 @@ const handleCheckboxChange = () => {
                                             />
                                             <Text style={{ color: '#fff' }}>Previous</Text>
                                         </TouchableOpacity> */}
-                                            <TouchableOpacity style={styles.btn} onPress={() => { onPageChange(4) }}>
+                                          <TouchableOpacity style={styles.btn} onPress={() => { onPageChange(2) }}>
+                                           
+                                          <Image
+                                               source={require('../Assets/img/icons/play.png')}
+                                               style={{ width: 30,
+                                                marginTop:5,
+                                                height: 30, transform: [{ rotate: "180deg" }] }}
+                                              
+                                               />
+                                       <Text style={styles.ConfirmButton}>Back</Text>
+
+                                           </TouchableOpacity>
+                                           
+                                            <TouchableOpacity style={styles.btn} onPress={() => { onPageChange4(4) }}>
                                             {/* <Icon
                                             style={[
                                                 styles.icon,
@@ -1035,12 +1227,18 @@ const handleCheckboxChange = () => {
                         <CheckBox
                         disabled={false}
                         boxType="square"
-                        style={{backgroundColor:"#d7eef1", marginTop:8,marginLeft:10,height:15,width:15,alignSelf:"center",justifyContent:'center'}}
+                        style={{
+                           // backgroundColor:"#d7eef1",
+                            //  marginTop:8,
+                              marginLeft:10,
+                             //height:15,width:15,
+                             justifyContent:'center'}}
                         onCheckColor={Color.headerIconBG}
                         // backgroundColor="#d7eef1"
                         onTintColor="#d7eef1"
             
                         value={selectedProfessions.includes(item.professionName)}
+                        tintColors={{ true: 'white', false: 'white' }}
                         // tintColors="red"
                         onValueChange={() => handleToggleCheckbox(item.professionName)}
                         //  style={{height:10,width:10}}
@@ -1100,11 +1298,18 @@ const handleCheckboxChange = () => {
                                     
                                          <CheckBox
                                        boxType='square'
-                                         style={{backgroundColor:"#d7eef1",marginLeft:15,height:15,width:15,}}
+                                         style={{
+
+                                            //backgroundColor:"#d7eef1",
+                                           // marginLeft:15,
+                                        //    height:15,width:15,
+                                        }}
                                          onCheckColor={Color.headerIconBG}
+                                         
                                             //         backgroundColor="#d7eef1"
                                           onTintColor="#d7eef1"
                                         value={isProfessionChecked}
+                                        
                                         onValueChange={() => {
                                         setIsProfessionChecked(!isProfessionChecked);
                                         handleProfessionChange();
@@ -1159,9 +1364,22 @@ const handleCheckboxChange = () => {
                                                 :null }   */}
 
 
-                                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                        <View style={{width:wp(80), flexDirection: 'row', justifyContent: 'space-between' }}>
+                                        <TouchableOpacity style={styles.btn} onPress={() => { onPageChange(3) }}>
+                                           
+                                        <Image
+                                               source={require('../Assets/img/icons/play.png')}
+                                               style={{ width: 30,
+                                                marginTop:5,
+                                                height: 30, transform: [{ rotate: "180deg" }] }}
+                                              
+                                               />
+                                       <Text style={styles.ConfirmButton}>Back</Text>
+
+                                           </TouchableOpacity>
+                                           
                                           
-                                            <TouchableOpacity style={styles.btn} onPress={() => { onPageChange(5) }}>
+                                            <TouchableOpacity style={styles.btn} onPress={() => { onPageChange5(5) }}>
                                             {/* <Icon
                                             style={[
                                                 styles.icon,
@@ -1217,8 +1435,17 @@ const handleCheckboxChange = () => {
                         <CheckBox
             
                disabled={false}
-              boxType="square"
-              style={{backgroundColor:"#d7eef1", marginTop:8,marginLeft:10,height:15,width:15,alignSelf:"center",justifyContent:'center'}}
+               boxType="square"
+              style={{
+               // backgroundColor:"#d7eef1", 
+
+                // marginTop:8,
+                 marginLeft:10,
+                // height:15,
+                // width:15,
+                //alignSelf:"center",
+                //justifyContent:'center'
+               }}
               onCheckColor={Color.headerIconBG}
                 //         backgroundColor="#d7eef1"
               onTintColor="#d7eef1"
@@ -1227,6 +1454,7 @@ const handleCheckboxChange = () => {
               tintColors={{ true: 'white', false: 'white' }}
               onValueChange={() => handleInterestCheckbox(item.id)}
             />
+
                            <Text style={styles.ProfesstionList} >
 
                                {item.name}</Text>
@@ -1281,7 +1509,12 @@ const handleCheckboxChange = () => {
                                     
                                          <CheckBox
                                        boxType='square'
-                                         style={{backgroundColor:"#d7eef1",marginLeft:15,height:15,width:15,}}
+                                         style={{
+                                            //backgroundColor:"#d7eef1",
+                                            //marginLeft:15,
+                                         //   height:15,
+                                           // width:15,
+                                        }}
                                          onCheckColor={Color.headerIconBG}
                                             //         backgroundColor="#d7eef1"
                                           onTintColor="#d7eef1"
@@ -1296,14 +1529,27 @@ const handleCheckboxChange = () => {
                                     style={{color:Color.headerIconBG,
                                        fontFamily:'Poppins-SemiBold',
                                        fontSize:16 ,
-                                       marginLeft:5
+                                       marginLeft:15
                                     }}
                                     >
                                         Other
                                     </Text>
    
                                           </View>  
-                                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                        <View style={{width:wp(80), flexDirection: 'row', justifyContent: 'space-between' }}>
+                                        <TouchableOpacity style={styles.btn} onPress={() => { onPageChange(4) }}>
+                                           
+                                        <Image
+                                               source={require('../Assets/img/icons/play.png')}
+                                               style={{ width: 30,
+                                                marginTop:5,
+                                                height: 30, transform: [{ rotate: "180deg" }] }}
+                                              
+                                               />
+                                       <Text style={styles.ConfirmButton}>Back</Text>
+
+                                           </TouchableOpacity>
+                                           
                                            
                                             <TouchableOpacity style={styles.btn} onPress={() => FinalConfirm() }>
                                             {/* <Icon
@@ -1341,7 +1587,9 @@ const handleCheckboxChange = () => {
                 </View>
               
             </View>
+            </KeyboardAvoidingView>
         </ImageBackground>
+      
         </SafeAreaView>
 
     )
@@ -1352,11 +1600,12 @@ export default ClientSteps
 const styles = StyleSheet.create({
     subContainer: {
         // backgroundColor: '#fff',
+    
         width: wp(95),
       //  height: hp(80),
         alignSelf: 'center',
-        marginTop: 20,
-        alignItems: 'center',
+       // marginTop:wp(20),
+       // alignItems: 'center',
         // height: 250,
         borderRadius: 10,
         // shadowColor: "#000",
@@ -1423,13 +1672,15 @@ const styles = StyleSheet.create({
         marginTop: 5
     },
     subContainer1: {
-        // backgroundColor: 'red',
+     
+       //  backgroundColor: 'red',
         width: wp(95),
         // height:hp(10),
         alignSelf: 'center',
-      //  marginTop: 10,
+   //  marginTop: wp(15),
         alignItems: 'center',
         // height: 200,
+
         borderRadius: 10,
 
     },
@@ -1491,8 +1742,9 @@ const styles = StyleSheet.create({
        // marginRight: 10
     },
     ConfirmButton:{
-        color: '#fff',
+         color: '#fff',
          marginLeft: 10, 
+         marginTop:5,
          fontSize: 14,
          fontFamily:'Poppins-SemiBold'
     },
@@ -1546,14 +1798,14 @@ const styles = StyleSheet.create({
     },
 
     contentView: {
-        //  backgroundColor: '#fff',
+
+        // backgroundColor: '#fff',
         // marginTop: 10,
         // padding: 10,
-       // flexDirection: 'row',
-        marginTop:10,
-        width:wp(100),
+        // flexDirection: 'row',
+           marginTop:10,
+           width:wp(100),
        // alignItems:'center',
-
        // justifyContent:'center',
     },
 
@@ -1616,6 +1868,7 @@ const styles = StyleSheet.create({
     },
     step: {
         marginTop: 10,
+    //    flex:1
        
     },
     checkText: {
@@ -1632,7 +1885,8 @@ const styles = StyleSheet.create({
         borderBottomRightRadius: 10
     },
     headBG: {
-        backgroundColor: "#3d8087"
+        backgroundColor: "#3d8087",
+        //marginTop:10
     },
     checkboxContainer: {
         flexDirection: 'row',
@@ -1646,13 +1900,15 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    // customStep: {
-    //     width: 40,
-    //     height: 40,
-    //     borderRadius: 20,
-    //     backgroundColor: '#4aae4f',
-    //     justifyContent: 'center',
-    //     alignItems: 'center',
-    //   }
+    customStep: {
+        
+        // width: 40,
+        // height: 40,
+        // borderRadius: 20,
+        // backgroundColor: '#4aae4f',
+        // justifyContent: 'center',
+        // alignItems: 'center',
+       // flex:1
+      }
 
 })

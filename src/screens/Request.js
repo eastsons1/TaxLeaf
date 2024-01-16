@@ -183,7 +183,7 @@ const Request = () => {
         //style={styles.bgImg}
         > */}
             <View style={styles.mainTab}>
-              {(() => {
+              {/* {(() => {
                 if (showwhat1 == 'Message') {
                   return (
                     // <View style={styles.moblieSec}>
@@ -511,8 +511,8 @@ const Request = () => {
                     </View>
                   );
                 }
-              })()}
-              <View style={{ width: wp(30), marginTop: 20 }}>
+              })()} */}
+              <View style={{ width: wp(90), marginTop: 20 }}>
                 {(() => {
                   if (showwhat == 'Experience') {
                     return (

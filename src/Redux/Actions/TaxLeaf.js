@@ -50,7 +50,8 @@ export const LoginUser = (email, navigation) => dispatch => {
       });
 
      resolve(response);
-      navigation.navigate('Auth');
+     navigation.navigate('Auth');
+   //navigation.navigate('ClientSetup');
 
      
     } 

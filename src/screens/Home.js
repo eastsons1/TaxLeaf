@@ -5,6 +5,7 @@ import {
   Dimensions,
   StyleSheet,
   ScrollView,
+  Linking,
   TouchableOpacity,
   Image,
   ImageBackground,
@@ -171,7 +172,11 @@ const HomeScreen = () => {
                 />
           {/* </View> */}
 
-          <Text style={{marginLeft:10, color: '#fff',textAlign:"center", fontFamily: 'Poppins-SemiBold', fontSize: 12 }}>
+          <Text style={{marginLeft:10, color: '#fff',textAlign:"center", fontFamily: 'Poppins-SemiBold', fontSize: 12 }}
+            onPress={() =>
+              Linking.openURL(`tel:${manager?.phone}`)
+            }
+          >
             {/* 333-888-2345 */}
             {manager?.phone ? manager?.phone : 'N/A'}
             </Text>
@@ -240,10 +245,12 @@ const HomeScreen = () => {
                   source={ require('../Assets/img/icons/phone-icon.png')}
                   style={  [styles.icons,]}
                 />
-              <Text style={styles.ofcInfotxt1}>
-
-
-                {officeInfo?.phone}
+              <Text style={styles.ofcInfotxt1}
+                onPress={() =>
+                  Linking.openURL(`tel:${officeInfo?.phone}`)
+                }
+              >
+                 {officeInfo?.phone}
               </Text>
             </View>
 
@@ -254,7 +261,14 @@ const HomeScreen = () => {
                   source={ require('../Assets/img/icons/email-icon.png')}
                   style={  [styles.icons,]}
                 />
-              <Text style={styles.ofcInfotxt1}>
+              <Text style={styles.ofcInfotxt1}
+               onPress={() =>
+                Linking.openURL(
+                  `mailto:${officeInfo?.email}?subject=SendMail&body=Description`,
+                )
+              }
+              title={officeInfo?.email}
+              >
 
                 {officeInfo?.email}
               </Text>
@@ -275,7 +289,11 @@ const HomeScreen = () => {
                   source={ require('../Assets/img/icons/phone-icon.png')}
                   style={  [styles.icons,]}
                 />
-              <Text style={styles.ofcInfotxt1}>
+              <Text style={styles.ofcInfotxt1}
+               onPress={() =>
+                Linking.openURL(`tel:${manager?.phone}`)
+              }
+              >
 
 
                 {manager?.phone ? manager?.phone : 'N/A'}
@@ -287,7 +305,16 @@ const HomeScreen = () => {
                   source={ require('../Assets/img/icons/email-icon.png')}
                   style={  [styles.icons,]}
                 />
-              <Text style={styles.ofcInfotxt1}>
+              <Text style={styles.ofcInfotxt1}
+              
+              onPress={() =>
+                Linking.openURL(
+                  `mailto:${manager?.user}?subject=SendMail&body=Description`,
+                )
+              }
+              title={manager?.user}
+
+              >
 
                 {manager?.user}
               </Text>

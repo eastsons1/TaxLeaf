@@ -381,7 +381,7 @@ function HomeScreenStack() {
         options={{
           headerShown: false,
         }}
-      />
+  />
       <Stack.Screen
         name="MyInfo"
         component={MyInfo}

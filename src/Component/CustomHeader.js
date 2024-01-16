@@ -18,9 +18,9 @@ const CustomHeader = () => {
       style={{
         backgroundColor: Color.white,
         // backgroundColor: '',
-        //borderBottomWidth: 1,
+        borderBottomWidth: 1,
         
-        // borderBottomColor: 'orange',
+         borderBottomColor: 'orange',
         justifyContent: 'center',
        // alignItems:"center",
         padding: 15,

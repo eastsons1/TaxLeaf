@@ -254,7 +254,7 @@ const Drawer = () => {
 
           <Text style={styles.screenNameText}>Contact</Text>
         </TouchableOpacity>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={styles.screenName}
           onPress={() => {
             navigation.navigate('ClientSteps');
@@ -267,7 +267,7 @@ const Drawer = () => {
           />
 
           <Text style={styles.screenNameText}>Client Setup</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <View style={styles.part}></View>
       </View>
       <View>
