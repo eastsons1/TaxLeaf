@@ -541,7 +541,7 @@ const Login = () => {
             console.log('Navigation State:', navState);
           }}
         /> */}
-      </ImageBackground >
+      </ImageBackground>
       {/* <View>
         <Image
           source={require('../Assets/img/bigbubble.png')}

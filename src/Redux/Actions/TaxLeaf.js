@@ -30,6 +30,7 @@ export const LoginUser = (email, navigation) => dispatch => {
     let data = {
       staffview: {
         user: email,
+        "clientBrand": "TAXLEAF"
       },
     };
 

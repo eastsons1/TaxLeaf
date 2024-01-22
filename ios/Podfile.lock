@@ -9,6 +9,17 @@ PODS:
     - React
   - BEMCheckBox (1.4.1)
   - boost (1.76.0)
+  - Braintree (5.24.1):
+    - Braintree/Card (= 5.24.1)
+    - Braintree/Core (= 5.24.1)
+    - Braintree/PayPal (= 5.24.1)
+  - Braintree/Card (5.24.1):
+    - Braintree/Core
+  - Braintree/Core (5.24.1)
+  - Braintree/PayPal (5.24.1):
+    - Braintree/Core
+    - Braintree/PayPalDataCollector
+  - Braintree/PayPalDataCollector (5.24.1)
   - DoubleConversion (1.1.6)
   - FBLazyVector (0.72.8)
   - FBReactNativeSpec (0.72.8):
@@ -426,6 +437,9 @@ PODS:
   - RNGestureHandler (2.14.0):
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
+  - RNPaypal (4.1.0):
+    - Braintree
+    - React
   - RNPermissions (3.10.1):
     - React-Core
   - RNReanimated (3.6.1):
@@ -493,6 +507,7 @@ DEPENDENCIES:
   - "RNDateTimePicker (from `../node_modules/@react-native-community/datetimepicker`)"
   - RNFS (from `../node_modules/react-native-fs`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - RNPaypal (from `../node_modules/react-native-paypal`)
   - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
@@ -503,6 +518,7 @@ SPEC REPOS:
   trunk:
     - AppAuth
     - BEMCheckBox
+    - Braintree
     - fmt
     - SocketRocket
 
@@ -609,6 +625,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-fs"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
+  RNPaypal:
+    :path: "../node_modules/react-native-paypal"
   RNPermissions:
     :path: "../node_modules/react-native-permissions"
   RNReanimated:
@@ -625,6 +643,7 @@ SPEC CHECKSUMS:
   AzureAuth: 80f6e95c2b970ff05b37278099c70823c7b6f067
   BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
   boost: 57d2868c099736d80fcd648bf211b4431e51a558
+  Braintree: b6e1377bf862bbc26b8c0c0f89b8653d5e730214
   DoubleConversion: 5189b271737e1565bdce30deb4a08d647e3f5f54
   FBLazyVector: df077ae30c8148bcfdc8f886450eb2eefb94a5be
   FBReactNativeSpec: ca2f1cd161c72659f294fadd27b1517cab6728fb
@@ -675,6 +694,7 @@ SPEC CHECKSUMS:
   RNDateTimePicker: fc2e4f2795877d45e84d85659bebe627eba5c931
   RNFS: 4ac0f0ea233904cb798630b3c077808c06931688
   RNGestureHandler: 32a01c29ecc9bb0b5bf7bc0a33547f61b4dc2741
+  RNPaypal: 248d7a7d9f7b09c5988e7834d112bbe3c69de0dd
   RNPermissions: 4e3714e18afe7141d000beae3755e5b5fb2f5e05
   RNReanimated: fdbaa9c964bbab7fac50c90862b6cc5f041679b9
   RNScreens: 3c5b9f4a9dcde752466854b6109b79c0e205dad3

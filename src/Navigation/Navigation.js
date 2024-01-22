@@ -43,6 +43,7 @@ import SplashScreen from '../screens/SplashScreen';
 import InvoiceDetails from '../screens/InvoiceDetails';
 import MainClientDetails from '../screens/MainClientDetail';
 import ClientSteps from '../screens/ClientSteps'; 
+import Paypal from '../screens/Paypal';
 
 
 enableScreens();
@@ -487,6 +488,13 @@ function PaymentScreenStack() {
         options={{
           header: () => <CustomHeader />, // Include the custom header
         }}
+      />
+       <Stack.Screen
+        name="Paypal"
+        component={Paypal}
+        // options={{
+        //   header: () => <CustomHeader />, // Include the custom header
+        // }}
       />
       <Stack.Screen
         name="ViewOrder"

@@ -521,7 +521,7 @@ const HeadTabs = () => {
                                                             : Color.headerIconBG,
                                                 },
                                             ]}>
-                                            Messages3
+                                            Messages
                                         </Text>
                                     </View>
 
@@ -672,7 +672,7 @@ const HeadTabs = () => {
                                                         : Color.headerIconBG,
                                             },
                                         ]}>
-                                        Messages3
+                                        Messages
                                     </Text>
                                 </View>
                                 <View style={styles.TabsContainer}>
@@ -727,7 +727,7 @@ const HeadTabs = () => {
                                          <Image
                                                 source={ require('../Assets/img/icons/Events-Icon.png')}
                                                 style={  [styles.icon,]}
-                          />
+                                         />
 
 
 
@@ -1101,9 +1101,7 @@ const HeadTabs = () => {
                                              style={  styles.icon}
                                              />
 
-
-
-                                        </TouchableOpacity>
+                                         </TouchableOpacity>
                                         <Text
                                             style={[
                                                 styles.ButtonText,

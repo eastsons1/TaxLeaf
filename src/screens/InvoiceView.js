@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Loader } from '../Component/Loader';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import CustomBottomTab from '../Component/CustomBottomTab';
+
 import HeadTabs from './HeadTabs';
 
 export default InvoiceView = ({ route }) => {
@@ -30,6 +31,8 @@ export default InvoiceView = ({ route }) => {
     const [value, setValue] = useState(null);
     const [isFocus, setIsFocus] = useState(false);
     const [error, setError] = useState('');
+    const [paymentStatus, setPaymentStatus] = useState('');
+
 
     console.log(GET_ORDER_DETAILS, 'orderInfoInvoiceorderInfoInvoiceorderInfoInvoice')
     console.log(MANAGER_INFO, 'MANAGER_INFO')
@@ -47,9 +50,10 @@ export default InvoiceView = ({ route }) => {
     const officeInfo = OFFICE_INFO;
     const serviceList = GET_ORDER_DETAILS[0]?.serviceListModel;
 
-    //console.log(officeInfo, 'officeInfoofficeInfoofficeInfo')
+ //   console.log(serviceList.priceCharged, 'serviceListserviceListserviceList')
 
     console.log(value,'Selectionnnn')
+
 
     // Calculate the sum of "priceCharged" using reduce
     const totalPriceCharged = serviceList?.reduce((sum, service) => {
@@ -100,6 +104,8 @@ export default InvoiceView = ({ route }) => {
         setError(''); // Clear the error message when a value is selected
       };
     
+      console.log(value,'KKKKKKKKKKK')
+
       const handleBlur = () => {
         setIsFocus(false);
         handleValidation(); // Validate on blur
@@ -258,6 +264,7 @@ export default InvoiceView = ({ route }) => {
                         </Text>
                     </View>
                 </View>
+              
 
                 <View style={styles.slideContainerClient1}>
                     <View style={{ paddingLeft: 10, width: wp(90), alignSelf: 'center', marginBottom: 10 }}>
@@ -488,19 +495,27 @@ export default InvoiceView = ({ route }) => {
 
                 labelField="label"
                 valueField="value"
-                placeholder={!isFocus ? 'Priority' : '...'}
+                placeholder={!isFocus ? 'Select' : 'Select'}    
                 value={value}
                 onFocus={() => setIsFocus(true)}
               //  onBlur={() => setIsFocus(false)}
                 onBlur={handleBlur}
                 onChange={ (item) => handleDropdownChange(item)}
               />
-              <TextInput
+             
+              <Text  style={styles.input}>{totalPriceCharged}</Text>
+              {/* <TextInput
                 style={styles.input}
                 placeholder="Payment Amount"
+
               // onChangeText={onChangeText}
-              // value={text}
-              />
+               value={totalPriceCharged}
+              /> */}
+
+                 {value == 2 
+                 ?
+                 <>
+
                 <TextInput
                 style={styles.input}
                 placeholder="Card Number"
@@ -508,16 +523,7 @@ export default InvoiceView = ({ route }) => {
               // onChangeText={onChangeText}
               // value={text}
               />
-                {/* <TextInput
-                style={[styles.input, { Height: 50 }]}
-                placeholder="Messsage"
-                editable
-                multiline
-                numberOfLines={5}
-                maxLength={40}
-              // onChangeText={onChangeText}
-              // value={text}
-              /> */}
+               
                <TextInput
                 style={styles.input}
                 placeholder="Card Holder Name"
@@ -525,6 +531,11 @@ export default InvoiceView = ({ route }) => {
               // onChangeText={onChangeText}
               // value={text}
               />
+                 </>
+                  :
+                  null}    
+
+
                  <View style={styles.slideContainerEdit}>
               <TextInput
                numberOfLines={5}
@@ -546,6 +557,10 @@ export default InvoiceView = ({ route }) => {
               <TouchableOpacity
                 style={[styles.button, styles.buttonClose]}
               // onPress={() => setModalVisible(!modalVisible)}
+               onPress={() => navigation.navigate('Paypal',{
+                totalPriceCharged:totalPriceCharged
+
+               })}
               >
                 <Text style={styles.textStyle}>Proceed</Text>
               </TouchableOpacity>

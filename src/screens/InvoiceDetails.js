@@ -117,7 +117,7 @@ export default InvoiceDetails = ({ route }) => {
                             marginTop: 12,
                             marginRight:5,
                            // borderRadius: 50,
-                            //alignSelf: 'center',
+                            //alignSelf: 'center',{}
                           }}
                         />
                             <Text style={{ fontSize: 12, fontFamily: 'Poppins-Bold', marginTop: 13 }}>Back to Dashboard</Text>

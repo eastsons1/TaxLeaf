@@ -1553,9 +1553,9 @@ const Payments = () => {
                                       color="#8AB645"
                                     /> */}
                                      <Image
-                  source={ require('../Assets/img/icons/viewic.png')}
-                  style={  [styles.icons,]}
-                />
+                                      source={ require('../Assets/img/icons/viewic.png')}
+                                      style={  [styles.icons,]}
+                                    />
 
                                     <Text style={{
                                       color: "#000",
