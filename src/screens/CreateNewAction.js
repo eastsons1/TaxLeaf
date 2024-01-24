@@ -322,28 +322,40 @@ const CreateNewAction = () => {
       <CustomRadioButton
         label={   managerInfo?.firstName +
           ' ' +
-          managerInfo?.lastName +
-          ' ' +
-          '(Manager)'}
+          managerInfo?.lastName 
+          //+
+        //  ' ' +
+        //  '(Manager)'
+        }
         selected={selectedOption === 1}
         onPress={() => handleRadioChange(1)}
         selectedInnerColor={Color.green}    // Set the inner color for the selected button
         unselectedInnerColor="#fff"  // Set the inner color for the unselected button
       />
       <View style={{height:5}}></View>
+
+      { managerInfo?.firstName == partnerInfo?.firstName ? 
       
+      null
+      :
       <CustomRadioButton
-        label={ partnerInfo?.firstName +
-          ' ' +
-          partnerInfo?.lastName +
-          ' ' +
-          '(Partner)'}
-        selected={selectedOption === 2}
-        onPress={() => handleRadioChange(2)}
-        selectedInnerColor={Color.green}  // Set the inner color for the selected button
-        unselectedInnerColor="#fff"
-        // Set the inner color for the unselected button
-      />
+      label={ partnerInfo?.firstName +
+        ' ' +
+        partnerInfo?.lastName 
+        //+
+        //' ' +
+        //'(Partner)'
+      }
+      selected={selectedOption === 2}
+      onPress={() => handleRadioChange(2)}
+      selectedInnerColor={Color.green}  // Set the inner color for the selected button
+      unselectedInnerColor="#fff"
+      // Set the inner color for the unselected button
+    />
+      
+      }
+      
+    
              
             </View>
           </View>

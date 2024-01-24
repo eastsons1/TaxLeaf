@@ -140,6 +140,7 @@ const Drawer = () => {
 
       <View>
         <View style={styles.part}></View>
+        
         <TouchableOpacity
           style={styles.screenName}
           onPress={() => {
@@ -164,11 +165,12 @@ const Drawer = () => {
             navigation.navigate('Manager');
           }}>
           {/* <Icon2 style={styles.icon} name="person" size={20} color="#fff" /> */}
-          <Image
+               <Image
                   source={ require('../Assets/img/icons/userM.png')}
                   style={  [styles.icons,]}
                 />
           <Text style={styles.screenNameText}>Manager</Text>
+
         </TouchableOpacity>
 
         {/* <View style={styles.part}></View> */}
@@ -226,7 +228,7 @@ const Drawer = () => {
             size={20}
             color="#fff"
           /> */}
-            <Image
+                <Image
                   source={ require('../Assets/img/icons/product-request.png')}
                   style={  [styles.icons,]}
                 />
@@ -254,7 +256,8 @@ const Drawer = () => {
 
           <Text style={styles.screenNameText}>Contact</Text>
         </TouchableOpacity>
-        {/* <TouchableOpacity
+        {/* <View style={styles.part}></View>
+        <TouchableOpacity
           style={styles.screenName}
           onPress={() => {
             navigation.navigate('ClientSteps');
@@ -266,7 +269,7 @@ const Drawer = () => {
             color="#fff"
           />
 
-          <Text style={styles.screenNameText}>Client Setup</Text>
+          <Text style={styles.screenNameText}>Edit Profile</Text>
         </TouchableOpacity> */}
         <View style={styles.part}></View>
       </View>

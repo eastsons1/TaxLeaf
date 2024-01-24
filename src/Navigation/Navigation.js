@@ -123,6 +123,8 @@ function MyDrawer3({ navigation, route }) {
         navigation={navigation}
         name="PaymentsContain"
         component={PaymentScreenStack}
+        initialParams={{ screen: 'Payments' }}
+        
 
       />
       <Drawer3.Screen
@@ -297,6 +299,7 @@ function MainNavigation1() {
       <Tab.Screen
         name="Dashboard"
         component={HomeScreenStack}
+        initialParams={{ screen: 'HomeScreen' }}
         options={{
           header: () => <CustomHeader />, // Include the custom header
         }}
@@ -305,6 +308,7 @@ function MainNavigation1() {
       <Tab.Screen
         name="ClientInfo"
         component={ClientScreenStack}
+        initialParams={{ screen: 'ClientHome' }}
         options={{
           header: () => <CustomHeader />, // Include the custom header
         }}
@@ -319,6 +323,7 @@ function MainNavigation1() {
       <Tab.Screen
         name="Requests"
         component={RequestScreenStack}
+        initialParams={{ screen: 'Request' }}
         options={{
           header: () => <CustomHeader />, // Include the custom header
         }}

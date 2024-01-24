@@ -325,8 +325,8 @@ export default InvoiceView = ({ route }) => {
                     <Text style={styles.label}>Total:</Text>
                     <Text style={styles.total1}>${totalPriceCharged}</Text>
                 </View> */}
-                <View style={{ flexDirection: 'row', alignSelf: 'center', marginTop: 20 }}>
-                    <TouchableOpacity
+                <View style={{width:wp(80), flexDirection: 'row', alignSelf: 'center',justifyContent:"center", margin: 20 }}>
+                    {/* <TouchableOpacity
                         style={{
                             color: Color.darkGreen,
                             fontSize: 12,
@@ -353,7 +353,8 @@ export default InvoiceView = ({ route }) => {
                         >
                             Print
                         </Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
+
                     <TouchableOpacity
                         style={{
                             color: Color.white,
@@ -392,7 +393,7 @@ export default InvoiceView = ({ route }) => {
                             backgroundColor: '#fff',
                             padding: 5,
                             textAlign: 'center',
-                            width: wp(28),
+                            width: wp(30),
                             height: hp(5.5),
                             borderRadius: 20,
                             alignItems: 'center',

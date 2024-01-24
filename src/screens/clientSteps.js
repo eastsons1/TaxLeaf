@@ -555,19 +555,20 @@ console.log(isProfessionChecked)
     return (
 
         <SafeAreaView>
-           
+          
         <ImageBackground source={bgImage} style={styles.bgImg} >
         <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={{flex:1}}
     >
+         
           <View style={{flex:1}}>
             <View style={styles.headBG}>
-                <Text style={{ textAlign: 'center', color: '#fff', fontFamily:'Poppins-SemiBold', marginVertical: 16, }}>PLEASE CONFIRM THE FOLLOWING INFORMATION IS CORRECT TO BEGIN</Text>
+                <Text style={{ textAlign: 'center', color: '#fff', fontFamily:'Poppins-SemiBold', marginVertical: 15, }}>PLEASE CONFIRM THE FOLLOWING INFORMATION IS CORRECT TO BEGIN</Text>
             </View>
-            <View style={{flex:1, width: wp(90),alignSelf: 'center',justifyContent:"center"}}>
-           
-         <StepIndicator
+            <View style={{ width: wp(90),alignSelf: 'center'}}>
+           {/* <ScrollView> */}
+             <StepIndicator
                         customStyles={customStyles}
                         currentPosition={position}
 
@@ -576,26 +577,29 @@ console.log(isProfessionChecked)
                         stepCount={6}
                         renderStepIndicator={renderStepIndicator}
                     />
-                </View>
+        {/* </ScrollView> */}
+              
                
               
                 <View style={styles.subContainer}>
-                <ScrollView style={{}}>
+                {/* <ScrollView 
+                style={{height:wp(0)}}
+                > */}
 
                     {(() => {
                         if (position == 0) {
                             return (
                                 // <ScrollView>
+                              
                                 <View style={styles.subContainer1}>
-                                    <View style={styles.HeadingContainer
-                                       
-                                             
-                                             }>
+                                    <View style={styles.HeadingContainer}>
                                        
                                         <Text style={styles.subHead}>Contact Information</Text>
                                         <Text style={styles.subHead}>STEP 1</Text>
                                     </View>
-                                    <View style={{ backgroundColor: '#f4f8f9', height: hp(40), width: '100%', alignItems: 'center', borderBottomLeftRadius: 10, borderBottomRightRadius: 10 }}>
+                                 
+                                    <View style={{ backgroundColor: '#f4f8f9', height: hp(40), width: wp(100), alignItems: 'center', borderBottomLeftRadius: 10, borderBottomRightRadius: 10 }}>
+                                        
                                         <TextInput
                                             placeholder='First Name'
                                             value={firstname}
@@ -677,26 +681,29 @@ console.log(isProfessionChecked)
                                             style={styles.input}
 
                                         />
-                                    </View>
-                                    <TouchableOpacity style={styles.btn} onPress={() => { onPageChange1(1) }}>
+                                            <TouchableOpacity style={styles.btn} onPress={() => { onPageChange1(1) }}>
                                       
-                                       <Image
-                          source={require('../Assets/img/icons/play.png')}
-                          style={{
-                            width: 30,
-                            height: 30,
+                                      <Image
+                         source={require('../Assets/img/icons/play.png')}
+                         style={{
+                           width: 30,
+                           height: 30,
 
-                          //  marginTop: 5,
-                        
-                          }}
-                        />
-                                        <Text style={styles.ConfirmButton}>Confirm</Text>
+                         //  marginTop: 5,
+                       
+                         }}
+                       />
+                                       <Text style={styles.ConfirmButton}>Confirm</Text>
 
 
-                                    </TouchableOpacity>
-
+                                   </TouchableOpacity>
+                                    </View>
+                                
+                                  
+                                  
                                 </View>
-                                // </ScrollView>
+                              
+                            //  </ScrollView>
                             );
                         } else if (position == 1) {
                             return (
@@ -1583,10 +1590,11 @@ console.log(isProfessionChecked)
                             );
                         }
                     })()}
-                 </ScrollView>
+                 {/* </ScrollView> */}
                 </View>
-              
+                </View>
             </View>
+          
             </KeyboardAvoidingView>
         </ImageBackground>
       
@@ -1600,7 +1608,7 @@ export default ClientSteps
 const styles = StyleSheet.create({
     subContainer: {
         // backgroundColor: '#fff',
-    
+      //  flex:1,
         width: wp(95),
       //  height: hp(80),
         alignSelf: 'center',
@@ -1671,15 +1679,16 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         marginTop: 5
     },
+
     subContainer1: {
-     
-       //  backgroundColor: 'red',
+       
+         //backgroundColor: 'red',
         width: wp(95),
         // height:hp(10),
         alignSelf: 'center',
-   //  marginTop: wp(15),
+     //marginTop: wp(-15), 
         alignItems: 'center',
-        // height: 200,
+         //height: hp(70),
 
         borderRadius: 10,
 
@@ -1692,7 +1701,7 @@ const styles = StyleSheet.create({
          alignItems:"center",
          height:40, 
          backgroundColor: Color.green,
-          width: '100%',
+          width: wp(100),
             paddingHorizontal: 10
     },
     subContainerProf: {
@@ -1886,7 +1895,7 @@ const styles = StyleSheet.create({
     },
     headBG: {
         backgroundColor: "#3d8087",
-        //marginTop:10
+        marginBottom:10
     },
     checkboxContainer: {
         flexDirection: 'row',

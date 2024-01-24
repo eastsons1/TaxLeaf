@@ -137,7 +137,15 @@ const HomeScreen = () => {
 
   const [loader, setLoader] = useState(false);
 
+  const formatPhoneNumber = (phoneNumber) => {
+    // Remove non-digit characters from the phone number
+    const cleanedPhoneNumber = phoneNumber.replace(/\D/g, '');
 
+    // Format the phone number (assuming it's a 10-digit number)
+    const formattedPhoneNumber = `(${cleanedPhoneNumber.substring(0, 3)})-${cleanedPhoneNumber.substring(3, 6)}-${cleanedPhoneNumber.substring(6, 10)}`;
+
+    return formattedPhoneNumber;
+  };
 
 
   const renderItem = ({ item }) => (
@@ -178,7 +186,7 @@ const HomeScreen = () => {
             }
           >
             {/* 333-888-2345 */}
-            {manager?.phone ? manager?.phone : 'N/A'}
+            {manager?.phone ? manager?.phone && formatPhoneNumber(manager.phone) : 'N/A'}
             </Text>
         </TouchableOpacity>
       </View>
@@ -250,7 +258,8 @@ const HomeScreen = () => {
                   Linking.openURL(`tel:${officeInfo?.phone}`)
                 }
               >
-                 {officeInfo?.phone}
+                 {officeInfo?.phone && formatPhoneNumber(officeInfo.phone)}
+                 {/* {officeInfo?.phone} */}
               </Text>
             </View>
 
@@ -296,7 +305,8 @@ const HomeScreen = () => {
               >
 
 
-                {manager?.phone ? manager?.phone : 'N/A'}
+                {manager?.phone ? manager?.phone && formatPhoneNumber(manager.phone): 'N/A'}
+                {/* {manager?.phone ? manager?.phone : 'N/A'} */}
               </Text>
             </View>
             <View style={{ flexDirection: "row", width: wp(80), alignSelf: "center" }}>

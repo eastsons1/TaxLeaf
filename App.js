@@ -28,7 +28,7 @@ import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   View,
-  Text, Linking,
+  Text, Linking,Alert,
   TouchableHighlight,
 } from 'react-native';
 
@@ -38,6 +38,12 @@ import { authorize } from 'react-native-app-auth';
 //     tenant: '9728fcf8-f04b-4271-b352-022a33fbfcc4', // your app tenant ID
 //     // redirectUrl: 'msauth://com.taxleaf/VzSiQcXRmi2kyjzcA%2BmYLEtbGVs%3D',
 //     redirectUrl: 'https://stagingclientportal.taxleaf.com/MicrosoftConnect',
+
+// const appPackage = 'com.taxleaf.taxleaf'; // Replace with the actual package name
+
+// //const appDeepLink = `market://details?id=${appPackage}`;
+// const appDeepLink = `market://details?id=${appPackage}`;
+// const playStoreLink = `https://play.google.com/store/apps/details?id=${appPackage}`;
 
 
 
@@ -127,21 +133,42 @@ const App = () => {
 
     scopes: AuthConfig.appScopes,
   };
+
+
+
+  // const openAppOrPlayStore = async () => {
+  //   try {
+  //     // Try opening the app using a deep link
+  //     await Linking.openURL(appDeepLink);
+  //   } catch (error) {
+  //     // If the deep link fails, open the Play Store link
+  //     Alert.alert('App not installed', 'Do you want to install it from the Play Store?', [
+  //       { text: 'Cancel', style: 'cancel' },
+  //       { text: 'OK', onPress: () => Linking.openURL(playStoreLink) },
+  //     ]);
+  //   }
+  // };
+
   // useEffect(() => {
-  //   // Add event listener to handle deep links
-  //   const handleDeepLink = (event) => {
-  //     // Extract the path or query parameters from the deep link
-  //     const { path, queryParams } = Linking.parse(event.url);
 
-  //     // Use path and queryParams to navigate or perform actions
-  //     // For example, navigate to a specific screen based on the path
-  //   };
+  //   openAppOrPlayStore();
 
-  //   // Add event listener for deep linking
-  //   Linking.addEventListener('url', handleDeepLink);
 
-  //   // Clean up the event listener when component unmounts
-  //   return () => Linking.removeEventListener('url', handleDeepLink);
+    
+   
+  //     const handleDeepLink = (event) => {
+  //       // Extract the path or query parameters from the deep link
+  //       const { path, queryParams } = Linking.parse(event.url);
+
+  //       // Use path and queryParams to navigate or perform actions
+  //       // For example, navigate to a specific screen based on the path
+  //     };
+
+  //     // Add event listener for deep linking
+  //     Linking.addEventListener('url', handleDeepLink);
+
+  //     // Clean up the event listener when component unmounts
+  //     return () => Linking.removeEventListener('url', handleDeepLink);
   // }, []);
 
 
