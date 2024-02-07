@@ -7,6 +7,7 @@ import {
   import { Alert } from 'react-native';
   import { useDispatch, useSelector } from 'react-redux';
   import { logistical } from '../../utils';
+  import { CustomAlertWithImage } from '../../Component/CustomAlertWithImage';
 
 
 
@@ -152,8 +153,17 @@ import {
   
         //   Alert.alert(response.response[0])
         Alert.alert(response.massage);
-        resolve(response);
+        resolve(response);  
         navigation.navigate('Auth');
+
+        // CustomAlertWithImage({
+        //   visible: true,
+        //   onClose: () => {
+        //     navigation.navigate('Auth');
+        //     resolve(response);
+        //   },
+        //   message: "Saved", // Assuming `massage` is the correct property to show the message
+        // });
   
       } else {
         // Alert.alert(response.message)

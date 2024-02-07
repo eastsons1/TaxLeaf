@@ -343,7 +343,7 @@ const ClientInfo = () => {
                 />
                     </View>
 
-                    <Text style={showwhat == 'My Schools' ? styles.ButtonTextW : styles.ButtonText1}>Bussiness1 ({companyCount + countBusiness})</Text>
+                    <Text style={showwhat == 'My Schools' ? styles.ButtonTextW : styles.ButtonText1}>Bussiness ({companyCount + countBusiness})</Text>
                   </TouchableOpacity>
                   <TouchableOpacity
                     style={[
@@ -653,7 +653,8 @@ const ClientInfo = () => {
                         alignItems: 'center',
                       }}>
                       <Text style={{ color: Color.white, fontSize: 10, fontFamily: 'Poppins-SemiBold' }}>
-                      {companyInfo?.name} 
+                      {/* {companyInfo?.name} */}
+                      {staffview?.firstName}  {staffview?.lastName}{staffview.length}
                       </Text>
                     </View>
 
