@@ -39,6 +39,16 @@
 	<string/>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Photo used for create user profile</string>
+	<key>LSApplicationQueriesSchemes</key> 
+	<array> 
+  		<string>tel</string> 
+  		<string>telprompt</string> 
+	</array>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>mailto</string>
+	</array>
+
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>

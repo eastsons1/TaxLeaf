@@ -209,9 +209,30 @@ const MainClientDetails = ({ route }) => {
               }}
             />
 
-            <Text style={{ margin: 5, fontSize: 14, fontFamily: 'Poppins-SemiBold', color: '#fff' }}>
+            <Text style={{ margin: 5,width:wp(70), fontSize: 14, fontFamily: 'Poppins-SemiBold', color: '#fff' }}>
               Personal Info
             </Text>
+
+            <TouchableOpacity
+            onPress={() =>  navigation.navigate('AssoFileCabinet', {
+              clientID : ClientData?.clientdetail,
+              clientType:  ClientData?.clientType,
+              client:  ClientData?.client,
+           })}
+            >
+            <Image
+              source={require('../Assets/img/icons/files-white.png')}
+              style={{
+                width: 20,
+                height: 20,
+             
+                marginLeft: 5,
+                marginRight: 5,
+                //  borderRadius: 50,
+                //alignSelf: 'center',
+              }}
+            />
+            </TouchableOpacity>
 
           </View>
 
@@ -390,37 +411,86 @@ const MainClientDetails = ({ route }) => {
 
           </View>
           <View style={styles.partition1}></View>
-          <View style={{ height: 40, padding: 10, flexDirection: 'row', backgroundColor: Color.greenback }}>
-            <Text style={styles.LIstText3}>
 
-            {/* <Text style={{ fontSize: 14, fontFamily: 'Poppins-Bold' }}>Company Name:</Text>{' '} */}
-              <Text style={{ fontSize: 14, fontFamily: 'Poppins-Bold' }}>Individual Name:</Text>{' '}
-         
-            </Text>
-            <Text style={styles.LIstText4}>
 
-              {/* {ClientData.subClientInfo.subClientPracticeId} */}
-              {infoData?.individualInfo?.lastName+", "+infoData?.individualInfo?.firstName}
-            </Text>
+               {infoData?.companyInfo?.name ? 
+          <View style={{padding: 10, flexDirection: 'row', padding: 10, backgroundColor: Color.greenback }}>
 
+             <Text style={styles.LIstText3}>Company Name:</Text>
+              <Text style={[styles.LIstText4]}>
+              {infoData?.companyInfo?.name}
+              </Text>
           </View>
-          <View style={styles.partition1}></View>
-          <View style={{ height: 40, flexDirection: 'row', padding: 10, backgroundColor: Color.greenback }}>
-            <Text style={styles.LIstText3}>
-            {/* <Text style={{ fontSize: 14, fontFamily: 'Poppins-Bold' }}>Type Of Company:</Text>{' '} */}
-              <Text style={{ fontSize: 14, fontFamily: 'Poppins-Bold' }}>SSN/ITIN:</Text>{' '}
-            </Text>
-
-            <Text style={styles.LIstText4}>
-              {/* {ClientData.officeInfo.name} */}
-              {infoData?.individualInfo?.ssnItin}
-
-            </Text>
-          </View>
-          <View style={styles.partition1}></View>
+            :
           <View style={{ height: 40, padding: 10, flexDirection: 'row', padding: 10, backgroundColor: Color.greenback }}>
 
-          {/* <Text style={styles.LIstText3}>Fiscal Year End:</Text> */}
+            <Text style={styles.LIstText3}>Individual Name:</Text>
+            <Text style={[styles.LIstText4]}>
+
+          {infoData?.individualInfo?.lastName+", "+infoData?.individualInfo?.firstName}
+          </Text>
+        </View>
+          }
+
+
+       
+
+<View style={styles.partition1}></View>
+          {infoData?.companyInfo?.name ? 
+          <View style={{ height: 40, flexDirection: 'row', padding: 10, backgroundColor: Color.greenback }}>
+            <Text style={styles.LIstText3}>Type Of Company:</Text>
+
+            <Text style={styles.LIstText4}>
+             
+              {infoData?.companyTypeInfo?.type}
+
+            </Text>
+          </View>
+          :
+          <View style={{ height: 40, flexDirection: 'row', padding: 10, backgroundColor: Color.greenback }}>
+          <Text style={styles.LIstText3}> SSN/ITIN:  </Text>
+
+          <Text style={styles.LIstText4}>
+           
+            {infoData?.individualInfo?.ssnItin}
+
+          </Text>
+        </View>
+      }
+
+
+
+          <View style={styles.partition1}></View>
+          {infoData?.companyInfo?.name ? 
+
+          <View style={{ height: 40, padding: 10, flexDirection: 'row', padding: 10, backgroundColor: Color.greenback }}>
+
+          <Text style={styles.LIstText3}>Fiscal Year End:</Text>
+           
+
+            <Text style={styles.LIstText4}>
+            
+            {
+              infoData?.companyInfo?.fye === 1 ? 'January' :
+              infoData?.companyInfo?.fye === 2 ? 'February' :
+              infoData?.companyInfo?.fye === 3 ? 'March' :
+              infoData?.companyInfo?.fye === 4 ? 'April' :
+              infoData?.companyInfo?.fye === 5 ? 'May' :
+              infoData?.companyInfo?.fye === 6 ? 'June' :
+              infoData?.companyInfo?.fye === 7 ? 'July' :
+              infoData?.companyInfo?.fye === 8 ? 'August' :
+              infoData?.companyInfo?.fye === 9 ? 'September' :
+              infoData?.companyInfo?.fye === 10 ? 'October' :
+              infoData?.companyInfo?.fye === 11 ? 'November' :
+              'December'
+            }
+
+            </Text>
+          </View>
+          :
+          <View style={{ height: 40, padding: 10, flexDirection: 'row', padding: 10, backgroundColor: Color.greenback }}>
+
+       
             <Text style={styles.LIstText3}>Date of Birth:</Text>
 
             <Text style={styles.LIstText4}>
@@ -428,7 +498,25 @@ const MainClientDetails = ({ route }) => {
 
             </Text>
           </View>
+        }
+
+
           <View style={styles.partition1}></View>
+          {infoData?.companyInfo?.name ?
+          <View style={{  padding: 10, flexDirection: 'row', padding: 10, backgroundColor: Color.greenback }}>
+
+          <Text style={styles.LIstText3}>Federal ID:</Text>
+          
+
+            <Text style={styles.LIstText4}>
+              {/* {ClientData.managerInfo.firstName}{' '}
+              {ClientData.managerInfo.lastName} */}
+               {infoData?.companyInfo?.fein}
+            </Text>
+          </View>
+
+          :
+
           <View style={{  padding: 10, flexDirection: 'row', padding: 10, backgroundColor: Color.greenback }}>
 
           {/* <Text style={styles.LIstText3}>Federal ID:</Text> */}
@@ -437,34 +525,63 @@ const MainClientDetails = ({ route }) => {
             <Text style={styles.LIstText4}>
               {/* {ClientData.managerInfo.firstName}{' '}
               {ClientData.managerInfo.lastName} */}
-              {infoData?.languageInfo?.language1}
+               {infoData?.languageInfo?.language1}
             </Text>
           </View>
+
+            }
+
+
           <View style={styles.partition1}></View>
+          {infoData?.companyInfo?.name ?
           <View style={{  padding: 10, flexDirection: 'row', backgroundColor: Color.greenback }}>
-            <Text style={styles.LIstText4}>
-            {/* <Text style={{ fontSize: 14, fontFamily: 'Poppins-Bold' }}>State of Corporation:</Text> */}
-              <Text style={{ fontSize: 14, fontFamily: 'Poppins-Bold' }}>Residency:</Text>
-            </Text>
+            <Text style={styles.LIstText3}>State of Corporation:</Text>
             <Text style={styles.LIstText4}>
               {/* {ClientData.managerInfo.firstName}{' '}
               {ClientData.managerInfo.lastName} */}
-               {infoData?.residenseInfo?.countryName}
+               {infoData?.stateInfo?.stateName}
 
             </Text>
           </View>
+          :
+          <View style={{  padding: 10, flexDirection: 'row', backgroundColor: Color.greenback }}>
+          <Text style={styles.LIstText3}>Residency:</Text>
+          <Text style={styles.LIstText4}>
+            {/* {ClientData.managerInfo.firstName}{' '}
+            {ClientData.managerInfo.lastName} */}
+             {infoData?.residenseInfo?.countryName}
+
+          </Text>
+        </View>
+      }
+
           <View style={styles.partition1}></View>
+          {infoData?.companyInfo?.name ?
+
           <View style={{  padding: 10, flexDirection: 'row', backgroundColor: Color.greenback }}>
 
-            <Text style={styles.LIstText3}>Citizenship:</Text>
+            <Text style={styles.LIstText3}>Business Description:</Text>
 
             <Text style={styles.LIstText4}>
               {/* {ClientData.managerInfo.firstName}{' '}
               {ClientData.managerInfo.lastName} */}
-              {infoData?.citizenInfo?.countryName}
+               {infoData?.companyInfo?.businessDescription}
 
             </Text>
-            </View>
+          </View>
+          :
+          <View style={{  padding: 10, flexDirection: 'row', backgroundColor: Color.greenback }}>
+
+          <Text style={styles.LIstText3}>Citizenship:</Text>
+
+          <Text style={styles.LIstText4}>
+            {/* {ClientData.managerInfo.firstName}{' '}
+            {ClientData.managerInfo.lastName} */}
+             {infoData?.citizenInfo?.countryName}
+
+          </Text>
+        </View>
+      }
 
         </View>
 
